@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
+<!-- Apply installer $Id: -->
+<!--For security purposes, please check: http
+://www.phpbb.com/mods/ for the latest version of this MOD. 
+Although MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems 
+within the MOD. No support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.5.xsd">
+  <header>
+    <license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
+    <title lang="en">bbDKP Application plugin 1.2.3</title>
+    <description lang="en"><![CDATA[
+   It makes a post in a forum specified in the ACP with the answers to the questions that can be added in the ACP. Supports Textbox, Inputbox, Radiobuttons, Selectbox, Checkboxes.
+	Gets Information from the Blizzard Armory like 3d model race, class, talents, professions and Achievements and displays it in a jquery popup. 
+]]></description>
+
+    <author-notes lang="en"><![CDATA[
+needs bbdkp 1.1.0 or higher, (needs bbdkp.css, jquery, bbdkp connect class)
+Preparation : make two forums, one for Silent applications, one for public applications.
+1) Press Install to let Automod copy the files and do the core edits. 
+2) Browse to install/installapply.php and run the Database installer/updater. 
+    ]]></author-notes>
+    <author-group>
+	<author>
+		<realname>Kapli</realname>
+		 <email>kapli@last-wish.org</email>
+		<username>Kapli</username>
+    	<homepage>http://www.bbdkp.com</homepage>
+    	<contributions-group>
+    	<contributions status="current" from="2008-08-01" position="Creator" />
+    	</contributions-group>			    				
+	</author>
+	<author>
+		<username>Hroar</username>
+		<email>morten.boegeskov@gmail.com</email>
+		<homepage>http://www.bbdkp.com</homepage>
+		<realname>Morten Boegeskov</realname>
+		<contributions-group>
+		<contributions status="current" from="2009-05-01" position="Developer"/>
+		</contributions-group>			    				
+	</author>
+	<author>
+       <realname>Malfate</realname>
+        <email>cs.krushin@gmail.com</email>
+        <username>Malfate</username>
+        <homepage>http://www.bbdkp.com</homepage>
+        <contributions-group>
+      	<contributions status="current" from="2009-01-01" position="Community Manager/Supporter"/>
+      	<contributions status="past" from="2007-12-01" to="2009-01-01"  position="Project Leader"/>
+      	</contributions-group>	
+    </author>
+    <author>
+		<realname>Twizted</realname>
+		 <email></email>
+		<username>Twizted</username>
+    	<homepage>http://www.stormmedivh.com</homepage>
+    	<contributions-group>
+    	<contributions status="current" from="2010-03-01" position="Contributor" />
+    	</contributions-group>			    				
+	</author>
+	<author>
+		<realname>Blazeflack</realname>
+		 <email></email>
+		<username>Blazeflack</username>
+    	<homepage>http://aegis-guild.dk</homepage>
+    	<contributions-group>
+    	<contributions status="current" from="2010-03-01" position="Contributor" />
+    	</contributions-group>			    				
+	</author>
+	<author>
+       <realname>Sajaki</realname>
+        <email>sajaki9@gmail.com</email>
+        <username>Sajaki</username>
+        <homepage>http://www.bbdkp.com</homepage>
+        <contributions-group>
+      	<contributions status="current" from="2009-01-01" position="Project leader"/>
+      	<contributions status="past" from="2008-04-04" to="2009-01-01"  position="Developer"/>
+      	</contributions-group>	
+    </author>
+    </author-group>
+	<mod-version>1.2.3</mod-version>
+    <installation>
+      <level>easy</level>
+      <time>300</time>
+	<target-version>3.0.7-PL1</target-version>
+    </installation>
+    <history>
+	<entry>
+		<date>2010-06-06</date>
+		<rev-version>1.2.3</rev-version>
+		<changelog lang="en">
+		
+		<change>[chg] removed Armory overlay (moved to bbTips), now posts bbcode to achieve same result, makes posting editable.</change>
+		<change>[chg] moved header edits to /dkp/dkpheader.html</change>
+		<change>[chg] requires bbDKP 1.1.0 or higher</change>
+		<change>[fix] fixed captcha if invalid response given</change>
+		<change>[fix] fixed checkbox names, multibyte</change>
+		</changelog>
+	</entry>
+	
+	<entry>
+		<date>2010-04-26</date>
+		<rev-version>1.2.2</rev-version>
+		<changelog lang="en">
+		<change>[new] added setting to allow or deny user to choose Private or public forum</change>
+		<change>[new] when posting to private forum, apply will redirect to the portal, or else to the public recruitment forum</change>
+		<change>[upd] added language entries, redesign of the ACP, split armory setting and privacy settings.</change>
+		<change>[fix] Simplepie syntax error</change>
+		<change>[fix] fixed Mage Mana display</change>
+		</changelog>
+	</entry>
+	<entry>
+		<date>2010-04-25</date>
+		<rev-version>1.2.1</rev-version>
+		<changelog lang="en">
+		<change>[new] private or public application option</change>
+		<change>[fix] added jquery changes to Automod, is now futureproof for bbdkp RC4</change>
+		<change>[fix] subsilver2 css support</change>
+		</changelog>
+	</entry>
+	<entry>
+		<date>2010-04-24</date>
+		<rev-version>1.2.0</rev-version>
+		<changelog lang="en">
+		<change>[NEW] popup with armory 3d model, Gearlist from Armory, Achievements from Armory Feed</change>
+		<change>[NEW] Radioboxes, selectboxes, Check boxes added</change>
+		<change>[NEW] Core apply class added</change>
+		<change>[CHG] hardcoded strings moved to language file, can easily be translated now.</change>		
+		<change>[CHG] writes constants to bbdkp_constants file</change>
+		<change>[NEW] Demo questions added</change>
+		<change>[UPDATED] Now works with bbDKP 1.1 RC3</change>
+		</changelog>
+	</entry>
+	<entry>
+		<date>2009-05-26</date>
+		<rev-version>1.1.1</rev-version>
+		<changelog lang="en">
+		<change>[CHANGE] now uses Umil db installer</change>
+		</changelog>
+	</entry>
+	<entry>
+	    <date>2009-05-17</date>
+		<rev-version>1.1.0</rev-version>
+        <changelog lang="en">
+		  <change>[NEW] Added Classbased Templates</change>
+		  <change>[NEW] Added Gearsheet</change>
+		  <change>[NEW] redesigned gear layout and added glyphs</change>
+		  <change>[NEW] Added Level to Title</change>
+		  <change>[NEW] Remove Race from Title</change>
+		  <change>[NEW] Added Dual Talent Support</change>
+          <change>[NEW] acp module </change>
+		  <change>[NEW] Armory online check, new acp $config</change>
+          <change>[FIX] phpbb code-compliant</change>
+        </changelog>
+      </entry>
+	  <entry>
+	    <date>2009-01-17</date>
+		<rev-version>1.0.2 Kapli</rev-version>
+        <changelog lang="en">
+          <change>Fixed some bugs, renamed `order` to `qorder` and added fields if the armory is down.</change>
+        </changelog>
+      </entry>
+	  <entry>
+	    <date>2008-12-20</date>
+		<rev-version>1.0.1 Kapli</rev-version>
+        <changelog lang="en">
+          <change>Added checkbox and radio and checkbox types</change>
+        </changelog>
+      </entry>
+	  <entry>
+	    <date>2008-12-17</date>
+		<rev-version>1.0.0b1 Dimtauren</rev-version>
+        <changelog lang="en">
+          <change>Updated Subsilver template</change>
+        </changelog>
+      </entry>
+	  <entry>
+	    <date>2008-12-15</date>
+		<rev-version>1.0.0 first release Kapli</rev-version>
+        <changelog lang="en">
+          <change>Added loads of checks in the ACP and fixed some bugs</change>
+          <change>Todo: Keep working on functionality</change>
+        </changelog>
+      </entry>
+	  <entry>
+	    <date>2008-12-10</date>
+		<rev-version>0.0.4 Kapli </rev-version>
+        <changelog lang="en">
+          <change>Added application template</change>
+          <change>Todo: Keep working on functionality</change>
+        </changelog>
+      </entry>
+	  <entry>
+	    <date>2008-12-06</date>
+		<rev-version>0.0.3 Kapli </rev-version>
+        <changelog lang="en">
+          <change>Rewrote the whole script</change>
+          <change>todo : Application template edit in the ACP</change>
+        </changelog>
+      </entry>
+	  <entry>
+	    <date>2008-12-06</date>
+		<rev-version>0.0.2 Kapli </rev-version>
+        <changelog lang="en">
+          <change>Rewrote the whole script</change>
+          <change>todo : Application template edit in the ACP</change>
+        </changelog>
+      </entry>   
+      <entry>
+	    <date>2008-11-08</date>
+		<rev-version>0.0.1 Ok initial commit today, tested and works. Kapli </rev-version>
+        <changelog lang="en">
+          <change>todo: Application template edit in the ACP, subsilver template</change>
+        </changelog>
+      </entry>
+    </history>
+    <meta name="generator" content="Phpbb.ModTeam.Tools (c#)" />
+    
+	<link-group>
+
+		<link type="dependency" lang="en-gb" href="http://www.bbdkp.com/viewtopic.php?f=2&amp;t=1320">bbDKP 1.1.0</link>
+
+		<link type="dependency" lang="en-gb" href="http://www.bbdkp.com/viewtopic.php?f=2&amp;t=1306">bbTips 0.3.5</link>
+		<link type="template" lang="en-gb" href="contrib/subsilver2.xml">Manual for subsilver2 Style</link>
+	</link-group>	
+
+  </header>
+  <action-group>
+    <copy>
+     <file from="root/apply.php" to="apply.php" />
+     <file from="root/images/apply_icon/*.*" to="images/apply_icon/*.*" />
+     <file from="root/adm/style/dkp/*.*" to="adm/style/dkp/*.*" />
+     <file from="root/includes/bbdkp/apply/*.*" to="includes/bbdkp/apply/*.*" /> 
+     <file from="root/includes/acp/*.*" to="includes/acp/*.*" />
+     <file from="root/includes/acp/info/*.*" to="includes/acp/info/*.*" />
+     <file from="root/language/en/mods/*.*" to="language/en/mods/*.*" />
+     <file from="root/styles/prosilver/template/dkp/*.*" to="styles/prosilver/template/dkp/*.*" />
+     <file from="root/install/*.*" to="install/*.*" />  
+     <file from="root/umil/*.*" to="umil/*.*" /> 
+    </copy>
+
+	<open src="includes/bbdkp/constants_bbdkp.php">
+	      <edit>
+	       <comment lang="en">adding required constants to bbdkp constants</comment>
+	       
+	        <find><![CDATA[// APPLY]]></find>
+	        <action type="after-add"><![CDATA[ 
+	define('APPTEMPLATE_TABLE', $bbdkp_table_prefixx . 'apptemplate');
+	]]></action>
+	      </edit>
+	</open>
+
+    <diy-instructions lang="en"><![CDATA[ 
+    Database installation 
+	------------------------
+	Browse to install/installapply.php and run and the apply plugin table installer/updater.
+    ]]></diy-instructions>
+	
+  </action-group>
+</mod>

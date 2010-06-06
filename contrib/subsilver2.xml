@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
+<!-- $Id: subsilver2.xml 554 2009-09-30 12:31:21Z Sajaki $ -->
+<!--For security purposes, please check: http
+://www.phpbb.com/mods/ for the latest version of this MOD. Although MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD. No support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.5.xsd">
+  <header>
+    <license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
+    <title lang="en">>bbDkp Application plugin 1.2.3 - subsilver2 style</title>
+    <description lang="en">
+    <![CDATA[subsilver2 edits ]]>
+</description>
+
+<author-notes lang="en"><![CDATA[Press Install to let Automod copy the files and do the core edits, then browse to install/index.php and run the UMIL table installer. then delete the install folder.
+]]>
+</author-notes>
+
+<author-group>
+	<author>
+		<realname>Kapli</realname>
+		 <email>kapli@last-wish.org</email>
+		<username>Kapli</username>
+    	<homepage>http://www.bbdkp.com</homepage>
+    	<contributions-group>
+    	<contributions status="current" from="2008-08-01" position="Creator" />
+    	</contributions-group>			    				
+	</author>
+	<author>
+		<username>Hroar</username>
+		<email>morten.boegeskov@gmail.com</email>
+		<homepage>http://www.bbdkp.com</homepage>
+		<realname>Morten Boegeskov</realname>
+		<contributions-group>
+		<contributions status="current" from="2009-05-01" position="Developer"/>
+		</contributions-group>			    				
+	</author>
+	<author>
+       <realname>Malfate</realname>
+        <email>cs.krushin@gmail.com</email>
+        <username>Malfate</username>
+        <homepage>http://www.bbdkp.com</homepage>
+        <contributions-group>
+      	<contributions status="current" from="2009-01-01" position="Community Manager/Supporter"/>
+      	<contributions status="past" from="2007-12-01" to="2009-01-01"  position="Project Leader"/>
+      	</contributions-group>	
+    </author>
+    <author>
+		<realname>Twizted</realname>
+		 <email></email>
+		<username>Twizted</username>
+    	<homepage>http://www.stormmedivh.com</homepage>
+    	<contributions-group>
+    	<contributions status="current" from="2010-03-01" position="Contributor" />
+    	</contributions-group>			    				
+	</author>
+	<author>
+		<realname>Blazeflack</realname>
+		 <email></email>
+		<username>Blazeflack</username>
+    	<homepage>http://aegis-guild.dk</homepage>
+    	<contributions-group>
+    	<contributions status="current" from="2010-03-01" position="Contributor" />
+    	</contributions-group>			    				
+	</author>
+	<author>
+       <realname>Sajaki</realname>
+        <email>sajaki9@gmail.com</email>
+        <username>Sajaki</username>
+        <homepage>http://www.bbdkp.com</homepage>
+        <contributions-group>
+      	<contributions status="current" from="2009-01-01" position="Project leader"/>
+      	<contributions status="past" from="2008-04-04" to="2009-01-01"  position="Developer"/>
+      	</contributions-group>	
+    </author>
+    </author-group>
+
+<mod-version>1.2.3</mod-version>
+
+<installation>
+      <level>easy</level>
+      <time>600</time>
+	<target-version>3.0.7-PL1</target-version>
+</installation>
+
+<link-group>
+	<link type="parent" lang="en-gb" href="../install.xml">Manual</link>
+</link-group>
+</header>
+
+<action-group>
+<copy>
+   <file from="root/styles/subsilver2/template/dkp/*.*" to="styles/subsilver2/template/dkp/*.*"/> 
+</copy>
+
+<diy-instructions lang="en-gb">See general install.xml file</diy-instructions>
+
+</action-group>
+</mod>

@@ -1,0 +1,152 @@
+<!-- INCLUDE overall_header.html -->
+<!--
+		Integrated by bbDKP
+		http://code.google.com/p/bbdkp/
+		$Id$
+//-->
+<table width="100%" class="tablebg" cellpadding="0" cellspacing="1">
+	<tr>
+		<td class="row1">
+		<h2><font color="#dfc065">{L_APPLY_TITLE}&nbsp;</font></h2>
+		</td>
+	</tr>
+</table>
+
+<form name="postform" action="{S_POST_ACTION}" method="post" name="postform"{S_FORM_ENCTYPE}>
+
+<table width="100%" align="center" cellpadding="3" cellspacing="1">
+	
+	<tr>
+		<th class="smalltitle"></th>
+	</tr>
+	<tr>
+		<td class="row1" align="center">
+
+		<table width="800" align="center" class="tablebg" cellpadding="0" cellspacing="1">
+			<tr>
+				<td colspan="2" class="row1">
+				<!-- IF ERROR --><center><span class="genmed1 error">{ERROR}</span></center><!-- ENDIF --> 
+				<div style="text-align:center;"><b>{L_APPLY_INFO}</b></div>
+				</td>
+			</tr>
+			
+			<!-- BEGIN templatestart -->
+			<tr>
+				<td class="row1" width="30%"><b class="genmed1">{templatestart.QUESTION}</b></td>
+				<td class="row2" >{templatestart.TYPE} <span style="color:red">{templatestart.MANDATORY}</span></td>
+			</tr>
+			<!-- END templatestart -->
+		
+		
+			<!-- IF S_SHOW_FORUMCHOICE -->
+			<tr>
+				<td class="row1" width="30%"><b class="genmed1">{L_APPLY_PUBLICQUESTION}</b></td>
+    			<td class="row2" >
+    				<input type="radio" name="publ" value="1"{PUBLIC_YES_CHECKED} />&nbsp;{L_APPLY_ACP_PUBLIC}&nbsp;
+    				<input type="radio" name="publ" value="0"{PUBLIC_NO_CHECKED} />&nbsp;{L_APPLY_ACP_PRIVATE}
+    				<span style="color:red">{L_MANDATORY}</span>
+    			</td>
+    		</tr>
+    		<!-- ENDIF -->
+    	
+			<!-- IF S_ARMORY_DOWN -->
+			<input type="hidden" name="gethidden" value="1"/>
+			
+			<tr>
+				<td class="row1" width="30%"><b class="genmed1">{L_APPLY_LEVEL}</b></td>
+				<td class="row2" width="50%"><input class="inputbox" style="width: 150px;" type="text" name="level" size="20" maxlength="60" /></td>
+				
+			</tr>
+
+			<tr>
+				<td class="row1" width="30%"><b class="genmed1">{L_APPLY_CLASS}</b></td>
+				<td class="row2" width="50%"><select name="class">
+					<option value="BLANK" selected></option>
+					&#32;
+					<option value="SR_DK">Death Knight</option>
+					&#32;
+					<option value="SR_DRUID">Druid</option>
+					&#32;
+					<option value="SR_HUNTER">Hunter</option>
+					&#32;
+					<option value="SR_MAGE">Mage</option>
+					&#32;
+					<option value="SR_PALADIN">Paladin</option>
+					&#32;
+					<option value="SR_PRIEST">Priest</option>
+					&#32;
+					<option value="SR_ROGUE">Rogue</option>
+					&#32;
+					<option value="SR_SHAMAN">Shaman</option>
+					&#32;
+					<option value="SR_WARLOCK">Warlock</option>
+					&#32;
+					<option value="SR_WARRIOR">Warrior</option>
+					&#32;
+				</select>
+				</td>
+				
+			</tr>
+
+			<tr>
+				<td class="row1" width="30%"><b class="genmed1">{L_APPLY_TALENT}</b></td>
+				<td class="row2" width="50%"><input class="inputbox"
+					style="width: 150px;" type="text" name="talents" size="20"
+					maxlength="60" /></td>
+				
+			</tr>
+
+			<tr>
+				<td class="row1" width="30%"><b class="genmed1">{L_APPLY_PROFF}</b></td>
+				<td class="row2" width="50%"><textarea class="inputbox"
+					name="professions" rows="5" cols="76" onselect="storeCaret(this);"
+					onclick="storeCaret(this);" onkeyup="storeCaret(this);"
+					style="width: 450px;"></textarea></td>
+				
+			</tr>
+
+			<!-- ENDIF -->
+
+			<!-- BEGIN template -->
+			<tr>
+				<td class="row1" width="20%"><b>{template.QUESTION}</b></td>
+				<td class="row2" width="80%">{template.TYPE}{template.MANDATORY}</td>
+			</tr>
+			<!-- END template -->
+			
+		</table>
+		</td>
+	</tr>
+
+</table>
+
+<!-- IF CAPTCHA_TEMPLATE and S_CONFIRM_CODE -->
+<table width="100%" align="center" cellpadding="3" cellspacing="1">
+	<tr>
+		<td  colspan="1" class="row1" align="center">
+
+		<table width="800" align="center" cellpadding="0" cellspacing="1">
+			<tr>
+				<td colspan="1" class="row1">
+				<!-- INCLUDE {CAPTCHA_TEMPLATE} -->			
+			</tr>
+
+		
+		</table>
+		</td>
+	</tr>
+</table>
+<!-- ENDIF -->
+
+<table width="100%" align="center" cellpadding="3" cellspacing="1">
+	<tr>
+		<td class="row1" align="center">
+		{S_FORM_TOKEN}
+		<b><input class="btnmain" type="submit" accesskey="s" tabindex="23" name="post" value="{L_SUBMIT}" /></b>				
+		</td>
+	</tr>
+</table>
+
+</form>
+
+<!-- INCLUDE overall_footer.html -->

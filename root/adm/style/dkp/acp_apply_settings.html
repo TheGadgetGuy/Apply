@@ -1,0 +1,172 @@
+<!-- INCLUDE overall_header.html -->
+   
+<a name="maincontent"></a>
+
+<h1>{L_ACP_DKP_APPLY}&nbsp;{APPLY_VERS}</h1>
+
+<p>{L_ACP_DKP_APPLY_EXPLAIN}</p>
+
+<form method="post" action="{F_ADD_CONFIG}" name="post" onsubmit="return check_form(this)">
+
+<fieldset>
+<legend>{L_APPLY_ACP_PRISETTING}</legend>
+<br />
+
+ <dl>
+    <dt><label>{L_APPLY_ACP_FORUM_PUB}</label></dt>
+    <dd>
+    <select name="app_id_pub" class="input" id="app_id_pub">
+       <!-- BEGIN app_id_pub -->
+      		<option value="{app_id_pub.VALUE}"{app_id_pub.SELECTED}>{app_id_pub.OPTION}</option>
+      <!-- END app_id_pub -->
+     </select>
+     </dd>
+  </dl> 
+
+ <dl>
+    <dt><label>{L_APPLY_ACP_FORUM_PRI}</label><br/>{L_APPLY_ACP_FORUM_PRI_EXPLAIN}</dt>
+    <dd>
+    <select name="app_id_pri" class="input" id="app_id_pri">
+       <!-- BEGIN app_id_pri -->
+	       <option value="{app_id_pri.VALUE}"{app_id_pri.SELECTED}>{app_id_pri.OPTION}</option>
+      <!-- END app_id_pri -->
+     </select>
+     </dd>
+  </dl> 
+  
+   <dl>
+    <dt><label>{L_APPLY_ACP_FORUM_PREF}</label><br />{L_APPLY_ACP_FORUM_PREF_EXPLAIN}</dt>
+    <dd>
+    	<input type="radio" name="priv" value="1"{PUBLIC_YES_CHECKED} >&nbsp;{L_APPLY_ACP_PUBLIC}&nbsp;
+    	<input type="radio" name="priv" value="0"{PUBLIC_NO_CHECKED}>&nbsp;{L_APPLY_ACP_PRIVATE}
+     </dd>
+  </dl>
+  
+   <dl>
+    <dt><label>{L_APPLY_ACP_FORUM_CHOICE}</label><br />{L_APPLY_ACP_FORUM_CHOICE_EXPLAIN}</dt>
+    <dd> 
+    	<input type="radio" name="forumchoice" value="1"{FORUM_CHOICE_YES_CHECKED} >&nbsp;{L_YES}&nbsp;
+    	<input type="radio" name="forumchoice" value="0"{FORUM_CHOICE_NO_CHECKED}>&nbsp;{L_NO}
+     </dd>
+   </dl>
+   
+   <dl>
+    <dt><label>{L_APPLY_ACP_GUESTPOST}</label><br/>{L_APPLY_ACP_GUESTPOST_EXPLAIN}</dt>
+    <dd>
+    <select name="guests" class="input" id="guests">
+       <!-- BEGIN guests -->
+      <option value="{guests.VALUE}"{guests.SELECTED}>{guests.OPTION}</option>
+      <!-- END guests -->
+     </select>
+     </dd>
+  </dl>
+  	
+  	<p class="quick">
+	<input type="submit" name="savepri" value="save" class="button1" />
+	</p>
+	
+</fieldset>
+
+<fieldset>
+<legend>{L_APPLY_ACP_ARMSETTING}</legend>
+<br />  
+
+
+   <dl>
+    <dt><label>{L_APPLY_ACP_SIMPLERECRUIT}</label><br />{L_APPLY_ACP_SIMPLERECRUIT_EXPLAIN}</dt>
+    <dd>
+    <select name="simplerecruit" class="input" id="simplerecruit">
+       <!-- BEGIN simplerecruit -->
+      <option value="{simplerecruit.VALUE}"{simplerecruit.SELECTED}>{simplerecruit.OPTION}</option>
+      <!-- END simplerecruit -->
+     </select>
+     </dd>
+  </dl>
+
+	  <dl>
+	    <dt><label for="realm">{L_APPLY_REALM1}</label></dt>
+	    <dd><input type="text" name="realm" id="realm" size="20" maxlength="30" value="{REALM}" class="input" /></dd>
+	  </dl>
+	  
+	   <dl>
+	    <dt><label>{L_APPLY_ACP_REGION}</label></dt>
+	    <dd>
+	    <select name="region" class="input" id="region">
+	       <!-- BEGIN region-->
+	      <option value="{region.VALUE}"{region.SELECTED}>{region.OPTION}</option>
+	      <!-- END region -->
+	     </select>
+	     </dd>
+	  </dl> 
+	  <dl>
+	    <dt><label>{L_APPLY_ACP_ARMORYONLINENAME}</label><br />{L_APPLY_ACP_ARMORYONLINENAME_EXPLAIN}</dt>
+	    <dd><input type="text" name="charconnectcheck" id="charconnectcheck" size="20" maxlength="30" value="{CHECKCHAR}" class="input" /></dd>
+	  </dl>
+
+	<p class="quick">
+	<input type="submit" name="savearm" value="save" class="button1" />
+	</p>
+
+</fieldset>
+
+
+<fieldset>
+<legend>{L_APPLY_ACP_APPTEMPLATEUPD}</legend>
+	<dl>
+		<dt style= "width: 100%"><label>{L_APPLY_CHGMAND}</label><br/>{L_APPLY_CHGMAND_EXPLAIN}</dt>
+	</dl>
+	<dl>
+		<dd style= "margin:0 0 0 0;">
+			<!-- BEGIN template -->
+			<input type="checkbox" name="{template.QORDER}mandatory" value="True" {template.DISABLED} {template.CHECKED}>
+			<input type="txt" name="{template.QORDER}" value="{template.QORDER}" size="2" maxlength="2" {template.DISABLED}>
+			<input type="txt" name="{template.QORDER}question" value="{template.QUESTION}" size="45" {template.DISABLED}>
+			<input type="txt" name="{template.QORDER}options" value="{template.OPTIONS}" size="25" {template.DISABLED}>
+			<select name="{template.QORDER}type" class="input" id="app_type" {template.DISABLED}>
+				<!-- BEGIN template_type -->
+				<option value="{template_type.TYPE}"{template_type.SELECTED}>{template_type.TYPE}</option>
+				<!-- END template_type -->
+			</select>
+			<input type="submit" name="{template.QORDER}delete" value="Delete" class="button1" {template.DISABLED}><br />
+			<!-- END template -->
+		</dd>
+	</dl>
+
+<p class="quick">
+<input type="submit" name="update" value="Update" class="button1" />
+</p>
+
+</fieldset>
+
+<fieldset>
+<legend>{L_APPLY_ACP_APPTEMPLATENEW}</legend>
+	<dl>
+		<dt style= "width: 100%"><label>{L_APPLY_ACP_NEWQUESTION}</label><br />{L_APPLY_ACP_NEWQUESTION_EXPLAIN}</dt>
+	</dl>
+	
+	<dl>
+		<dd style= "margin:0 0 0 0%;">
+			<input type="checkbox" name="app_add_mandatory" value="True">
+			<input type="txt" name="app_add_order" size="2" maxlength="3">
+ 			<input type="txt" name="app_add_question" value="Question" onclick="this.value ='';" onblur="if(this.value == '') { this.value = 'Question' };" size="45">
+         	<input type="txt" name="app_add_options" value="Options i.e. 1,2,3,4,5" onclick="this.value ='';" onblur="if(this.value == '') { this.value = 'Options i.e. 1,2,3,4,5' };" size="25">
+			<select name="app_add_type" class="input" id="app_add_type">
+				<option value="Inputbox">{L_APPLY_ACP_INPUTBOX}</option>
+				<option value="Textbox">{L_APPLY_ACP_TXTBOX}</option>
+				<option value="Selectbox">{L_APPLY_ACP_SELECTBOX}</option>
+                <option value="Radiobuttons">{L_APPLY_ACP_RADIOBOX}</option>
+                <option value="Checkboxes">{L_APPLY_ACP_CHECKBOX}</option>
+         	</select>
+	    
+		</dd>
+	</dl>
+
+	<p class="quick">
+	<input type="submit" name="add" value="Add" class="button1" />
+	</p>
+</fieldset>
+
+</form>
+
+<!-- INCLUDE dkp/overall_footer.html -->
+
