@@ -89,9 +89,7 @@ Preparation : make two forums, one for Silent applications, one for public appli
 		<date>2010-06-06</date>
 		<rev-version>1.2.3</rev-version>
 		<changelog lang="en">
-		
 		<change>[chg] removed Armory overlay (moved to bbTips), now posts bbcode to achieve same result, makes posting editable.</change>
-		<change>[chg] moved header edits to /dkp/dkpheader.html</change>
 		<change>[chg] requires bbDKP 1.1.0 or higher</change>
 		<change>[fix] fixed captcha if invalid response given</change>
 		<change>[fix] fixed checkbox names, multibyte</change>

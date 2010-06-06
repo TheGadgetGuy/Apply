@@ -284,17 +284,17 @@ if ($submit && !sizeof($error) && check_form_key('applyposting') )
 			{
 					
 				case 'Checkboxes':
-					 $cb_countis = count( request_var('qorder', array(0 => 0)) );
+					 $cb_countis = count( request_var($row['qorder'], array(0 => 0)) );  
                      $cb_count = 0;
                                            
                         $apply_post .= '[color=#105289][b]' . $row['question'] . ': [/b][/color]';
                        
-                        foreach(request_var($row['qorder'], array(0 => '')) as $value) 
+                        foreach(  utf8_normalize_nfc( request_var($row['qorder'], array(0 => '') , true)) as $value) 
                         {
                             $apply_post .= $value;
                             if ($cb_count < $cb_countis-1)
                             {
-                                $apply_post .= ', ';
+                                $apply_post .= ',  ';
                             }
                             $cb_count++;
                         }
