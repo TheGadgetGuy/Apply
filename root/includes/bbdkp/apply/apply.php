@@ -310,7 +310,7 @@ class dkp_character
 	 */
 	private function _getFormattedPost()
 	{
-		global $common, $user, $phpbb_root_path;
+		global $common, $user, $phpbb_root_path, $config;
 		
 		// get the posting templates
 		$opendir = @opendir($phpbb_root_path . 'includes/bbdkp/apply/patterns/'); 
