@@ -198,7 +198,7 @@ if ($submit && !sizeof($error) && check_form_key('applyposting') )
 	if ( $candidate->realm == '')
 	{
 		//get from $config
-		$candidate->realm = str_replace(" ", "+", $config['bbdkp_apply_realm']);
+		$candidate->realm = $config['bbdkp_apply_realm'];
 	}
 
 	// build post
@@ -259,7 +259,7 @@ if ($submit && !sizeof($error) && check_form_key('applyposting') )
 	else 
 	{
 		// get data from Blizz armory
-		if ($candidate->GetChar1($candidate->name, $candidate->realm) == true )
+		if ($candidate->GetChar1($candidate->name, urlencode($candidate->realm)) == true )
 		{
 			//if this returns true then the modeltemplate property of candidate is filled and we add it to apply post. 
 			$apply_post = $candidate->modeltemplate; 

@@ -121,6 +121,7 @@ class dkp_character
 		$base_url = ($config['bbdkp_apply_region'] == "US") ? "http://www.wowarmory.com" : "http://eu.wowarmory.com"; 
 		$charurl   = $base_url . "/character-sheet.xml?r=" . $realm . "&n=" . $name;
 		$this->url = $base_url . "/character-sheet.xml?r=" . urlencode($realm) . "&n=" . urlencode($name);
+		$this->realm = str_replace(" ", "_", $this->realm);
 		
 		//calling static bbdkp urlreader function. 
 		$xml_data = bbDkp_Admin::read_php ( $this->url,false,false );
@@ -174,7 +175,8 @@ class dkp_character
 		}	
 		else 
 		{
-			return false;
+			$this->professions .=" NONE";
+	
 		}
 				
 		$talent = $xml->xpath('characterInfo/characterTab/talentSpecs/talentSpec');
@@ -327,7 +329,6 @@ class dkp_character
 		$innerdiv = $filecontents['innerdiv'];
 		
 		// replace placeholders with content	
-		
 		$innerdiv = str_replace('{CANDIDATE}', $this->name , $innerdiv);
 		$innerdiv = str_replace('{REALM}', (string) $this->realm , $innerdiv);
 		$innerdiv = str_replace('{REGION}', $config['bbdkp_apply_region'] , $innerdiv);
