@@ -175,7 +175,7 @@ class dkp_character
 		}	
 		else 
 		{
-			$this->professions .=" NONE";
+			return false;
 	
 		}
 				
