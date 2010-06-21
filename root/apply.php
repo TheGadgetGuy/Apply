@@ -259,7 +259,7 @@ if ($submit && !sizeof($error) && check_form_key('applyposting') )
 	else 
 	{
 		// get data from Blizz armory
-		if ($candidate->GetChar1($candidate->name, urlencode($candidate->realm)) == true )
+		if ($candidate->GetChar1($candidate->name, urldecode($candidate->realm)) == true )
 		{
 			//if this returns true then the modeltemplate property of candidate is filled and we add it to apply post. 
 			$apply_post = $candidate->modeltemplate; 
