@@ -103,7 +103,27 @@ $versions = array(
 
 		// do this first
 		'custom' => array('applyupdater120'), 
-			
+	
+		'module_add' => array(
+				array('acp', 'ACP_DKP_MEMBER', array(
+	           		'module_basename'	=> 'dkp_apply',
+					'modes'				=> array('apply_settings')),
+	           	 )
+	           ),
+            
+		'table_add' => array(
+			array($bbdkp_table_prefix . 'apptemplate', array(
+						'COLUMNS'		=> array(
+							'qorder'	=> array('UINT', 0),
+							'question'	=> array('VCHAR:255', ''),
+							'type'		=> array('VCHAR:255', ''),
+							'mandatory'	=> array('VCHAR:255', ''),
+							'options'	=> array('MTEXT_UNI', ''),
+						),
+						'PRIMARY_KEY'	=> 'qorder',),
+					),
+			), 
+		
 		'config_add' => array(
 				array('bbdkp_apply_forum_id', '2', true),
 				array('bbdkp_apply_realm', 'Lightbringer', true),
@@ -113,7 +133,6 @@ $versions = array(
 				array('bbdkp_apply_simplerecruit', 'True', true),
 				), 	
 			
-
 		'table_row_insert' => array(
 			array($bbdkp_table_prefix . 'apptemplate', 
 				array(
@@ -287,6 +306,13 @@ $versions = array(
 			
 
 	),		
+
+		'1.2.4' => array(
+	
+		// do this first
+		'custom' => array('applyupdater', 'bbdkp_caches'), 
+	),
+	
 	
 );
 
@@ -370,32 +396,12 @@ function applyupdater120($action, $version)
 				'bbdkp_copyright'  => 'bbDKP Team', 				
 				),
 			));
-			
+
+			//remove old module
 		    $umil->table_row_remove($table_prefix . 'modules',
                 array('module_basename'  => 'dkp_apply')
             );
 
-            $umil->module_add(array(
-            array('acp', 'ACP_DKP_MEMBER', array(
-            		'module_basename'	=> 'dkp_apply',
-					'modes'				=> array('apply_settings'),
-					),
-				),
-			));
-			
-			$umil->table_add(array(
-			array($bbdkp_table_prefix . 'apptemplate', array(
-					'COLUMNS'		=> array(
-						'qorder'	=> array('UINT', 0),
-						'question'	=> array('VCHAR:255', ''),
-						'type'		=> array('VCHAR:255', ''),
-						'mandatory'	=> array('VCHAR:255', ''),
-						'options'	=> array('MTEXT_UNI', ''),
-					),
-					'PRIMARY_KEY'	=> 'qorder',),
-				),
-			));
-		
 		return array('command' => sprintf($user->lang['APPLY_UPD_MOD'], $version) , 'result' => 'SUCCESS');
 		
 		break;
@@ -419,15 +425,6 @@ function applyupdater120($action, $version)
 		    $umil->table_row_remove($bbdkp_table_prefix . 'plugins',
                 array('name'  => 'apply')
                 );
-                
-                
-			 $umil->module_remove(array(
-                    array('acp', 'ACP_DKP_MEMBER', array(
-                            'module_basename'       => 'dkp_apply',
-                            'modes'                 => array('apply'),
-                            ),
-                         ),
-                     ));
 		
 			return array(
 					'command' => sprintf($user->lang['APPLY_UNINSTALL_MOD'], $version)  , 

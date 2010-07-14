@@ -8,7 +8,7 @@ within the MOD. No support will be given for MODs not found within the MODs Data
 <mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.5.xsd">
   <header>
     <license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
-    <title lang="en">bbDKP Application plugin 1.2.3</title>
+    <title lang="en">bbDKP Application plugin 1.2.4</title>
     <description lang="en"><![CDATA[
    It makes a post in a forum specified in the ACP with the answers to the questions that can be added in the ACP. Supports Textbox, Inputbox, Radiobuttons, Selectbox, Checkboxes.
 	Gets Information from the Blizzard Armory like 3d model race, class, talents, professions and Achievements and displays it in a jquery popup. 
@@ -78,13 +78,23 @@ Preparation : make two forums, one for Silent applications, one for public appli
       	</contributions-group>	
     </author>
     </author-group>
-	<mod-version>1.2.3</mod-version>
+	<mod-version>1.2.4</mod-version>
     <installation>
       <level>easy</level>
       <time>300</time>
 	<target-version>3.0.7-PL1</target-version>
     </installation>
     <history>
+    
+    
+    <entry>
+    	<date>2010-07-30</date>
+    	<rev-version>1.2.4</rev-version>
+    	<changelog lang="en">
+    	<change>[fix] installer now correctly uninstalls module</change>
+    	</changelog>
+    </entry>
+    
 	<entry>
 		<date>2010-06-06</date>
 		<rev-version>1.2.3</rev-version>
@@ -215,10 +225,8 @@ Preparation : make two forums, one for Silent applications, one for public appli
     <meta name="generator" content="Phpbb.ModTeam.Tools (c#)" />
     
 	<link-group>
-
-		<link type="dependency" lang="en-gb" href="http://www.bbdkp.com/viewtopic.php?f=2&amp;t=1320">bbDKP 1.1.0</link>
-
-		<link type="dependency" lang="en-gb" href="http://www.bbdkp.com/viewtopic.php?f=2&amp;t=1306">bbTips 0.3.5</link>
+		<link type="dependency" lang="en-gb" href="http://www.bbdkp.com/viewtopic.php?f=2&amp;t=1320">bbDKP 1.1</link>
+		<link type="dependency" lang="en-gb" href="http://www.bbdkp.com/viewtopic.php?f=2&amp;t=1306">bbTips 0.3.6</link>
 		<link type="template" lang="en-gb" href="contrib/subsilver2.xml">Manual for subsilver2 Style</link>
 	</link-group>	
 
