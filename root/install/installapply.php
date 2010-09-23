@@ -313,6 +313,12 @@ $versions = array(
 		'custom' => array('applyupdater', 'bbdkp_caches'), 
 	),
 	
+	    '1.2.5' => array(
+	
+		// do this first
+		'custom' => array('applyupdater', 'bbdkp_caches'), 
+	),
+	
 	
 );
 
