@@ -91,17 +91,17 @@ Um uns mit deiner Bewerbung zu untersützen, beantworte bitte die unten aufgefü
 'APPLY_ACP_GUESTPOST' 		=> 'Können Gäste schreiben? :',
 'APPLY_ACP_GUESTPOST_EXPLAIN' 	=> 'Wenn die Option aktiviert ist, vergiss nicht die Option "Aktiviere visuelle Bestätigung für Gast Postings:" auf "Ja" zu setzen.' ,  
 
-/***** ACP Privacy settings *****/
+/***** ACP Armory settings *****/
 'APPLY_ACP_CHARNAME' 		=> 'Charakter Name',
-'APPLY_ACP_ARMSETTING'		=> 'Armory Einstellung',
-'APPLY_ACP_SIMPLERECRUIT'   => 'einfache Bewerbung oder mit Armory Prüfung', 
-'APPLY_ACP_SIMPLERECRUIT_EXPLAIN'   => 'Armory Prüfung ermittelt will fetch character information from Blizzard. Simplerecruit will not check the Armory. Use this for other games than Wow', 
-'APPLY_ACP_ARMORYONLINENAME' => 'Character name to check the Armory connection ',
-'APPLY_ACP_ARMORYONLINENAME_EXPLAIN' => 'Put here the name of a random character to test the Armory connection. This char will be checked when Apply loads and Simplerecruit will be activated when Armory is down.', 
+'APPLY_ACP_ARMSETTING'		=> 'Arsenal Einstellung',
+'APPLY_ACP_SIMPLERECRUIT'   => 'einfache Bewerbung oder Arsenal Prüfung', 
+'APPLY_ACP_SIMPLERECRUIT_EXPLAIN'   => 'Arsenalprüfung ruft Charakterinformationen vom Blizzard Arsenal auf, Simplerecruit nicht. ', 
+'APPLY_ACP_ARMORYONLINENAME' => 'Charakter Name zum testen',
+'APPLY_ACP_ARMORYONLINENAME_EXPLAIN' => 'Zufallsname zum testen ob das Arsenal online ist. Beim aufrufen des Bewerbungsbogen wird dieser Test ausgeführt und Simplerecruit wird aktiviert falls er fehlt.', 
 
 'APPLY_ACP_REALM' 			=> 'Realm',
 'APPLY_ACP_REGION' 			=> 'Region',
-'APPLY_ACP_APPTEMPLATEUPD'	=> 'Update Application template', 
+'APPLY_ACP_APPTEMPLATEUPD'	=> 'Aktualisiere Bewerbungsbogen', 
 
 /***** ACP template settings *****/
 'ACP_DKP_APPLY_EXPLAIN'  => 'Hier kannst du alle Einstellungen zum Bewerbungsformular vornehmen.',
@@ -117,9 +117,9 @@ Um uns mit deiner Bewerbung zu untersützen, beantworte bitte die unten aufgefü
 'APPLY_ACP_CHECKBOX' 		=> 'Kontrollkästchen (checkbox)',
 
 //warnings
-'APPLY_ACP_RETURN' 			=> '<h3>Zurück zum Bewerbungskonfiguration.</h3>',
-'APPLY_ACP_REALMBLANKWARN' 	=> 'Server Feld kann nicht leer sein.', 
-'APPLY_ACP_SETTINGSAVED' 	=> 'Bewerbungsformular allgemeine Einstellungen gespeichert',
+'APPLY_ACP_RETURN' 			=> '<h3>Zurück zur Bewerbungskonfiguration.</h3>',
+'APPLY_ACP_REALMBLANKWARN' 	=> 'Server Feld darf nicht leer sein.', 
+'APPLY_ACP_SETTINGSAVED' 	=> 'allgemeine Bewerbungseinstellungen gespeichert',
 //upd
 'APPLY_ACP_ORDQU_NOTEMPTY' 	=> 'Ordnungszahl und/oder Frage kann nicht leer sein.',
 'APPLY_ACP_ORDQU_NUMB' 		=> 'Ordnungszahl kann nur eine Zahl größer 2 sein.',
@@ -127,10 +127,10 @@ Um uns mit deiner Bewerbung zu untersützen, beantworte bitte die unten aufgefü
 'APPLY_ACP_TWOREALM' 		=> 'Du kannst keine 2 Server oder Charakternamen einrichten.', 
 'APPLY_ACP_QUESTUPD' 		=> 'Bewerbungsfragen aktualisiert',
 //addnew
-'APPLY_ACP_ORDQUEST' 		=> 'You need to fill out order, question and options before adding.',
-'APPLY_ACP_QUESTNOTADD' 	=> 'ERROR : New question not saved !', 
-'APPLY_ACP_QUESTNADD' 		=> 'New question Saved !',   
-'APPLY_ACP_EXPLAINOPTIONS' 	=> 'Seperate Options with a comma "," with no spaces.',  
+'APPLY_ACP_ORDQUEST' 		=> 'Du musst die Reihenfolge, Fragen und Optionen ausfüllen bevor die Frage gespeichert werden darf.',
+'APPLY_ACP_QUESTNOTADD' 	=> 'Fehler : Frage wurde nicht gespeichert !', 
+'APPLY_ACP_QUESTNADD' 		=> 'Neue Frage wurde gespeichert !',   
+'APPLY_ACP_EXPLAINOPTIONS' 	=> 'Einzelne Option begrenazt durch komma "," ohne Leerzeichen.',  
 
 
 /** posting template **/
