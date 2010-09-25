@@ -289,13 +289,11 @@ $versions = array(
 
 	'1.2.2' => array(
 	
-		// do this first
-		'custom' => array('applyupdater', 'bbdkp_caches'), 
-
 		 'config_add' => array(
           array('bbdkp_apply_forumchoice', '1', true),
 			),
 			
+		'custom' => array('applyupdater', 'bbdkp_caches'), 			
 
 	),		
 	
@@ -315,8 +313,15 @@ $versions = array(
 	
 	    '1.2.5' => array(
 	
-		// do this first
+		// adding color settings
+		'config_add' => array(
+          array('bbdkp_apply_pqcolor', '#68f3f8', true),
+          array('bbdkp_apply_pacolor', '#FFFFFF', true),
+          array('bbdkp_apply_fqcolor', '#68f3f8', true),
+			),
+
 		'custom' => array('applyupdater', 'bbdkp_caches'), 
+
 	),
 	
 	
