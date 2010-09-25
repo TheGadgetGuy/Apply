@@ -1,5 +1,4 @@
 <!-- INCLUDE overall_header.html -->
-   
 <a name="maincontent"></a>
 
 <h1>{L_ACP_DKP_APPLY}&nbsp;{APPLY_VERS}</h1>
@@ -165,6 +164,13 @@
 	<input type="submit" name="add" value="{L_ADD}" class="button1" />
 	</p>
 </fieldset>
+
+<script type="text/javascript" charset="utf-8">
+ $(document).ready(function() {
+   $('#nojquery').hide();
+   $('#picker').farbtastic('#applyquestioncolor');
+ });
+</script>
 
 <fieldset>
 <legend>{L_APPLY_COLORSETTINGS}</legend>
