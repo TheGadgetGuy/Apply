@@ -386,7 +386,11 @@ if ($submit && !sizeof($error) && check_form_key('applyposting') )
 
 }
 
-	// build form 
+	/**********************************
+	 * 
+	 *  build Application form 
+	 * 
+	 **********************************/ 
 	
 	// Page title & action URL, include session_id for security purpose
 	$s_action = append_sid("{$phpbb_root_path}apply.$phpEx", "", true, $user->session_id);
@@ -515,6 +519,7 @@ if ($submit && !sizeof($error) && check_form_key('applyposting') )
 	
 	add_form_key('applyposting');
 	
+	// assign global template vars to questionnaire
 	$template->assign_vars(array(
 		'S_SHOW_FORUMCHOICE'	=> ( $config['bbdkp_apply_forumchoice'] == '1' ) ? TRUE : FALSE,
 		'PUBLIC_YES_CHECKED' 	=> ( $config['bbdkp_apply_visibilitypref'] == '1' ) ? ' checked="checked"' : '',
@@ -524,7 +529,9 @@ if ($submit && !sizeof($error) && check_form_key('applyposting') )
 		'ERROR'					=> (sizeof($error)) ? implode('<br />', $error) : '',
 		'S_POST_ACTION'     	=> $s_action,
 		'S_HIDDEN_FIELDS'   	=> $s_hidden_fields,
-		'APPLY_REALM'			=> str_replace("+", " ", $config['bbdkp_apply_realm']))
+		'APPLY_REALM'			=> str_replace("+", " ", $config['bbdkp_apply_realm']), 
+		'FORMQCOLOR'			=> $config['bbdkp_apply_fqcolor']
+		)
 	);
 		
 	// Output application form
