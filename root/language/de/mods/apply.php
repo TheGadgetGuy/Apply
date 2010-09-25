@@ -133,7 +133,6 @@ Um uns mit deiner Bewerbung zu untersützen, beantworte bitte die unten aufgefü
 'APPLY_ACP_EXPLAINOPTIONS' 	=> 'Einzelne Option begrenazt durch komma "," ohne Leerzeichen.',  
 
 /** ACP settings for posting template **/
-'JQUERY_MISSING'		=> 'jquery.js fehlt. Diese Datei muss sich im ordner adm/style/dkp befinden damit der Farbenzirkel angezeigt wird.', 
 'APPLY_COLORSETTINGS' 		=> 'Farbinstellungen',
 'APPLY_POST_ANSWERCOLOR' 	=> 'Antwortfarbe',
 'APPLY_POST_QUESTIONCOLOR' 	=> 'Fragenfarbe',

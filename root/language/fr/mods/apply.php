@@ -132,7 +132,6 @@ $lang = array_merge($lang, array(
 'APPLY_ACP_EXPLAINOPTIONS' 	=> 'Sépare les options avec une virgule "," sans espaces.',  
 
 /** ACP settings for posting template **/
-'JQUERY_MISSING'		=> 'jquery.js n’est pas présent. Vous devez installer jquery.js dans adm/style/dkp pour le cercle de couleurs à apparaitre.', 
 'APPLY_COLORSETTINGS' 		=> 'Règlages Couleurs',
 'APPLY_POST_ANSWERCOLOR' 	=> 'Couleur Réponses',
 'APPLY_POST_QUESTIONCOLOR' 	=> 'Couleur Questions',

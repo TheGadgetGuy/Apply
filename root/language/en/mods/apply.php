@@ -133,7 +133,6 @@ To help us with your application please answer the questions below. Enter your c
 'APPLY_ACP_EXPLAINOPTIONS' 	=> 'Seperate Options with a comma "," with no spaces.',  
 
 /** ACP settings for posting template **/
-'JQUERY_MISSING'		=> 'jquery.js is not present. You must install jquery.js in adm/style/dkp for the colorwheel to work.', 
 'APPLY_COLORSETTINGS' 		=> 'Apply Color Settings',
 'APPLY_POST_ANSWERCOLOR' 	=> 'Posting Answers color',
 'APPLY_POST_QUESTIONCOLOR' 	=> 'Posting Questions color',
