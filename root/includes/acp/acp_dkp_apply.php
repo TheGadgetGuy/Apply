@@ -43,120 +43,13 @@ class acp_dkp_apply extends bbDkp_Admin
              */
             case 'apply_settings' :
                 $link = '<br /><a href="' . append_sid("index.$phpEx", "i=dkp_apply&amp;mode=apply_settings") . '">' . $user->lang['APPLY_ACP_RETURN'] . '</a>';
-				/*
-				 * loading config
-				 */
 
-				// loading forumlist
-                $sql = 'SELECT * FROM ' . FORUMS_TABLE . '';
-                $result = $db->sql_query($sql);
-                while ($row = $db->sql_fetchrow($result)) 
-                {
-                    $forum_ids[$row['forum_name']] = $row['forum_id'];
-                }
-                $db->sql_freeresult($result);
-				
-                // populate forum lists
-                foreach ($forum_ids as $d_name => $d_value) 
-                {
-                    $template->assign_block_vars('app_id_pub', array(
-                    	'VALUE' => $d_value , 
-                    	'SELECTED' => ($d_value == $config['bbdkp_apply_forum_id_public']) ? ' selected="selected"' : '' , 
-                    	'OPTION' => $d_name));
-                    
-                    $template->assign_block_vars('app_id_pri', array(
-                    	'VALUE' => $d_value , 
-                    	'SELECTED' => ($d_value == $config['bbdkp_apply_forum_id_private']) ? ' selected="selected"' : '' , 
-                    	'OPTION' => $d_name));
-                }
-
-                $template->assign_vars(array(
-                	'REALM'        			=> str_replace("+", " ", $config['bbdkp_apply_realm']), 
-                    'CHECKCHAR'    			=> $config['bbdkp_apply_charconnectcheck'],
-                	'PUBLIC_YES_CHECKED' 	=> ( $config['bbdkp_apply_visibilitypref'] == '1' ) ? ' checked="checked"' : '',
-    				'PUBLIC_NO_CHECKED'  	=> ( $config['bbdkp_apply_visibilitypref'] == '0' ) ? ' checked="checked"' : '', 
-                	'FORUM_CHOICE_YES_CHECKED' 	=> ( $config['bbdkp_apply_forumchoice'] == '1' ) ? ' checked="checked"' : '',
-    				'FORUM_CHOICE_NO_CHECKED' 	=> ( $config['bbdkp_apply_forumchoice'] == '0' ) ? ' checked="checked"' : '',                 
-                	'APPLY_VERS' 		 	=> $config['bbdkp_apply_version'], 
-                ));
-                
-                //region
-                $template->assign_block_vars('region', array(
-                	'VALUE' 	=> 'EU' , 
-                	'SELECTED' 	=> ('EU' == $config['bbdkp_apply_region']) ? ' selected="selected"' : '' , 
-                	'OPTION' 	=> 'EU'));
-                
-                $template->assign_block_vars('region', array(
-                	'VALUE' 	=> 'US' , 
-                	'SELECTED' 	=> ('US' == $config['bbdkp_apply_region']) ? ' selected="selected"' : '' , 
-                	'OPTION' 	=> 'US'));
-                
-                //guests
-				$template->assign_block_vars('guests', array(
-                	'VALUE' 	=> 'True' , 
-                	'SELECTED' 	=> ('True' == $config['bbdkp_apply_guests']) ? ' selected="selected"' : '' , 
-                	'OPTION' 	=> 'True'));
-                
-                $template->assign_block_vars('guests', array(
-                	'VALUE' 	=> 'False' , 
-                	'SELECTED' 	=> ('False' == $config['bbdkp_apply_guests']) ? ' selected="selected"' : '' , 
-                	'OPTION' 	=> 'False'));
-
-                //simplerecruit                
-                $template->assign_block_vars('simplerecruit', array(
-                	'VALUE' 	=> 'True' , 
-                	'SELECTED' 	=> ('True' == $config['bbdkp_apply_simplerecruit']) ? ' selected="selected"' : '' , 
-                	'OPTION' 	=> 'Simplerecruit'));
-                
-                $template->assign_block_vars('simplerecruit', array(
-                	'VALUE' 	=> 'False' , 
-                	'SELECTED' 	=> ('False' == $config['bbdkp_apply_simplerecruit']) ? ' selected="selected"' : '' , 
-                	'OPTION' 	=> 'Armory'));
-                
-               /*
-                * loading questions
-                */
-                $sql = 'SELECT * FROM ' . APPTEMPLATE_TABLE . ' ORDER BY qorder';
-                
-                $result = $db->sql_query($sql);
-                while ($row = $db->sql_fetchrow($result)) 
-                {
-                    $disabled = '';
-                    if ($row['question'] == $user->lang['APPLY_ACP_CHARNAME'] or $row['question'] == $user->lang['APPLY_ACP_REALM']) 
-                    {
-                        $disabled = 'disabled="disabled"';
-                    }
-                    
-                    $checked = '';
-                    if ($row['mandatory'] == 'True') 
-                    {
-                        $checked = 'checked="checked"';
-                    }
-                    
-                    $template->assign_block_vars('template', array(
-                    	'QORDER'         => $row['qorder'] , 
-                    	'QUESTION'       => $row['question'] , 
-                    	'DISABLED'       => $disabled , 
-                    	'MANDATORY'      => $row['mandatory'] , 
-                        'OPTIONS'        => $row['options'] ,
-                    	'CHECKED'        => $checked));
-                    
-                    $type = array('Inputbox' , 'Textbox', 'Selectbox', 'Radiobuttons', 'Checkboxes');
-                    foreach ($type as $t_name => $t_value) 
-                    {
-                        $template->assign_block_vars('template.template_type', array(
-                        	'TYPE' => $t_value , 
-                        	'SELECTED' => ($t_value == $row['type']) ? ' selected="selected"' : '' , 
-                        	'DISABLED' => $disabled));
-                    }
-                }
-                $db->sql_freeresult($result);
                 
                 $armsettings = (isset($_POST['savearm'])) ? true : false;
                 $prisettings = (isset($_POST['savepri'])) ? true : false; 
                 $update = (isset($_POST['update'])) ? true : false;
                 $addnew = (isset($_POST['add'])) ? true : false;
-
+				$colorsettings = (isset($_POST['updatecolor'])) ? true : false;
                 /*
                  * privacy settings handler
                  */
@@ -306,6 +199,27 @@ class acp_dkp_apply extends bbDkp_Admin
                     
                 }
                 
+         		/*
+                 * color settings handler
+                 */
+               if($colorsettings)
+               {
+					$colorid = request_var('app_textcolors', ''); 
+					switch 	($colorid)
+					{
+						case 'postqcolor':
+		               		set_config('bbdkp_apply_pqcolor', request_var('applyquestioncolor', ''), true );	
+							break;
+						case 'postacolor':
+		               		set_config('bbdkp_apply_pacolor', request_var('applyquestioncolor', ''), true );	
+		               		break;
+						case 'formqcolor':
+		               		set_config('bbdkp_apply_fqcolor', request_var('applyquestioncolor', ''), true );	
+							break;
+					}
+                    $cache->destroy('config');
+               }
+                
                 /* delete question handler */
                 $sql = "SELECT * FROM " . APPTEMPLATE_TABLE . ' ORDER BY qorder';
                 $result = $db->sql_query($sql);
@@ -321,7 +235,121 @@ class acp_dkp_apply extends bbDkp_Admin
                 unset($row); 
                 $db->sql_freeresult($result);
 
+                
+                				/*
+				 * loading config
+				 */
 
+				// loading forumlist
+                $sql = 'SELECT * FROM ' . FORUMS_TABLE . '';
+                $result = $db->sql_query($sql);
+                while ($row = $db->sql_fetchrow($result)) 
+                {
+                    $forum_ids[$row['forum_name']] = $row['forum_id'];
+                }
+                $db->sql_freeresult($result);
+				
+                // populate forum lists
+                foreach ($forum_ids as $d_name => $d_value) 
+                {
+                    $template->assign_block_vars('app_id_pub', array(
+                    	'VALUE' => $d_value , 
+                    	'SELECTED' => ($d_value == $config['bbdkp_apply_forum_id_public']) ? ' selected="selected"' : '' , 
+                    	'OPTION' => $d_name));
+                    
+                    $template->assign_block_vars('app_id_pri', array(
+                    	'VALUE' => $d_value , 
+                    	'SELECTED' => ($d_value == $config['bbdkp_apply_forum_id_private']) ? ' selected="selected"' : '' , 
+                    	'OPTION' => $d_name));
+                }
+
+                $template->assign_vars(array(
+                	'REALM'        			=> str_replace("+", " ", $config['bbdkp_apply_realm']), 
+                    'CHECKCHAR'    			=> $config['bbdkp_apply_charconnectcheck'],
+                	'PUBLIC_YES_CHECKED' 	=> ( $config['bbdkp_apply_visibilitypref'] == '1' ) ? ' checked="checked"' : '',
+    				'PUBLIC_NO_CHECKED'  	=> ( $config['bbdkp_apply_visibilitypref'] == '0' ) ? ' checked="checked"' : '', 
+                	'FORUM_CHOICE_YES_CHECKED' 	=> ( $config['bbdkp_apply_forumchoice'] == '1' ) ? ' checked="checked"' : '',
+    				'FORUM_CHOICE_NO_CHECKED' 	=> ( $config['bbdkp_apply_forumchoice'] == '0' ) ? ' checked="checked"' : '',                 
+                	'APPLY_VERS' 		 	=> $config['bbdkp_apply_version'], 
+      				'POSTQCOLOR'			=> $config['bbdkp_apply_pqcolor'],
+	                'POSTACOLOR'			=> $config['bbdkp_apply_pacolor'],
+	                'FORMQCOLOR'			=> $config['bbdkp_apply_fqcolor'], 
+                
+                ));
+                
+                //region
+                $template->assign_block_vars('region', array(
+                	'VALUE' 	=> 'EU' , 
+                	'SELECTED' 	=> ('EU' == $config['bbdkp_apply_region']) ? ' selected="selected"' : '' , 
+                	'OPTION' 	=> 'EU'));
+                
+                $template->assign_block_vars('region', array(
+                	'VALUE' 	=> 'US' , 
+                	'SELECTED' 	=> ('US' == $config['bbdkp_apply_region']) ? ' selected="selected"' : '' , 
+                	'OPTION' 	=> 'US'));
+                
+                //guests
+				$template->assign_block_vars('guests', array(
+                	'VALUE' 	=> 'True' , 
+                	'SELECTED' 	=> ('True' == $config['bbdkp_apply_guests']) ? ' selected="selected"' : '' , 
+                	'OPTION' 	=> 'True'));
+                
+                $template->assign_block_vars('guests', array(
+                	'VALUE' 	=> 'False' , 
+                	'SELECTED' 	=> ('False' == $config['bbdkp_apply_guests']) ? ' selected="selected"' : '' , 
+                	'OPTION' 	=> 'False'));
+
+                //simplerecruit                
+                $template->assign_block_vars('simplerecruit', array(
+                	'VALUE' 	=> 'True' , 
+                	'SELECTED' 	=> ('True' == $config['bbdkp_apply_simplerecruit']) ? ' selected="selected"' : '' , 
+                	'OPTION' 	=> 'Simplerecruit'));
+                
+                $template->assign_block_vars('simplerecruit', array(
+                	'VALUE' 	=> 'False' , 
+                	'SELECTED' 	=> ('False' == $config['bbdkp_apply_simplerecruit']) ? ' selected="selected"' : '' , 
+                	'OPTION' 	=> 'Armory'));
+                
+               /*
+                * loading questions
+                */
+                $sql = 'SELECT * FROM ' . APPTEMPLATE_TABLE . ' ORDER BY qorder';
+                
+                $result = $db->sql_query($sql);
+                while ($row = $db->sql_fetchrow($result)) 
+                {
+                    $disabled = '';
+                    if ($row['question'] == $user->lang['APPLY_ACP_CHARNAME'] or $row['question'] == $user->lang['APPLY_ACP_REALM']) 
+                    {
+                        $disabled = 'disabled="disabled"';
+                    }
+                    
+                    $checked = '';
+                    if ($row['mandatory'] == 'True') 
+                    {
+                        $checked = 'checked="checked"';
+                    }
+                    
+                    $template->assign_block_vars('template', array(
+                    	'QORDER'         => $row['qorder'] , 
+                    	'QUESTION'       => $row['question'] , 
+                    	'DISABLED'       => $disabled , 
+                    	'MANDATORY'      => $row['mandatory'] , 
+                        'OPTIONS'        => $row['options'] ,
+                    	'CHECKED'        => $checked));
+                    
+                    $type = array('Inputbox' , 'Textbox', 'Selectbox', 'Radiobuttons', 'Checkboxes');
+                    foreach ($type as $t_name => $t_value) 
+                    {
+                        $template->assign_block_vars('template.template_type', array(
+                        	'TYPE' => $t_value , 
+                        	'SELECTED' => ($t_value == $row['type']) ? ' selected="selected"' : '' , 
+                        	'DISABLED' => $disabled));
+                    }
+                }
+                $db->sql_freeresult($result);
+                
+                
                 $this->page_title = $user->lang['ACP_DKP_APPLY']; 
                 $this->tpl_name = 'dkp/acp_' . $mode;
                 break;

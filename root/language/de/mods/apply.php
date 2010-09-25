@@ -1,7 +1,7 @@
 <?php
 /**
 * language file Application form German
-* 
+* @author Sheeper, Sajaki
 * @package bbDkp
 * @copyright (c) 2009 bbDkp <http://code.google.com/p/bbdkp/>
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
@@ -143,59 +143,59 @@ Um uns mit deiner Bewerbung zu untersützen, beantworte bitte die unten aufgefü
 
 /** posting template **/
 
-'APPLY_CHAR_NAME' 	=> '[color=#105289][b]Character Name : [/b][/color]%s',
-'APPLY_CHAR_LEVEL' 	=> '[color=#105289]Character Level : [/color]%s',  
-'APPLY_CHAR_CLASS' 	=> '[color=#105289]Character Klasse : [/color]%s' ,
-'APPLY_CHAR_PROFF' 	=> '[color=#105289][u]Berufe :[/u][/color]
+'APPLY_CHAR_NAME' 	=> '[color=%s][b]Character Name : [/b][/color]%s',
+'APPLY_CHAR_LEVEL' 	=> '[color=%s]Character Level : [/color]%s',  
+'APPLY_CHAR_CLASS' 	=> '[color=%s]Character Klasse : [/color]%s' ,
+'APPLY_CHAR_PROFF' 	=> '[color=%s][u]Berufe :[/u][/color]
 %s',
-'APPLY_CHAR_BUILD' 	=> '[color=#105289][u]Talent Verteilungen : [/u][/color]%s',
+'APPLY_CHAR_BUILD' 	=> '[color=%s][u]Talent Verteilungen : [/u][/color]%s',
 
-'APPLY_CHAR_MANA' 	=> '[color=#105289]Mana : [/color]%s' ,
-'APPLY_CHAR_SP' 	=> '[color=#105289]Zaubermacht : [/color]%s' ,
-'APPLY_CHAR_ACRIT' 	=> '[color=#105289]Arkan Krit : [/color]%s %%',
-'APPLY_CHAR_FCRIT' 	=> '[color=#105289]Feuer Krit : [/color]%s %%',
-'APPLY_CHAR_FROST' 	=> '[color=#105289]Frost Krit : [/color]%s %%',
-'APPLY_CHAR_SPHIT' 	=> '[color=#105289]Trefferwertung : [/color]%s %%', 
-'APPLY_CHAR_SPHAS' 	=> '[color=#105289]Tempo : [/color]%s' , 
-'APPLY_CHAR_HCRIT' 	=> '[color=#105289]Heilig Krit : [/color]%s %%',
-'APPLY_CHAR_SHCRIT' => '[color=#105289]Schatten Krit : [/color]%s %%',
-'APPLY_CHAR_MREG' 	=> '[color=#105289]Mana Regeneration (zaubernd) : [/color]%s ',
+'APPLY_CHAR_MANA' 	=> '[color=%s]Mana : [/color]%s' ,
+'APPLY_CHAR_SP' 	=> '[color=%s]Zaubermacht : [/color]%s' ,
+'APPLY_CHAR_ACRIT' 	=> '[color=%s]Arkan Krit : [/color]%s %%',
+'APPLY_CHAR_FCRIT' 	=> '[color=%s]Feuer Krit : [/color]%s %%',
+'APPLY_CHAR_FROST' 	=> '[color=%s]Frost Krit : [/color]%s %%',
+'APPLY_CHAR_SPHIT' 	=> '[color=%s]Trefferwertung : [/color]%s %%', 
+'APPLY_CHAR_SPHAS' 	=> '[color=%s]Tempo : [/color]%s' , 
+'APPLY_CHAR_HCRIT' 	=> '[color=%s]Heilig Krit : [/color]%s %%',
+'APPLY_CHAR_SHCRIT' => '[color=%s]Schatten Krit : [/color]%s %%',
+'APPLY_CHAR_MREG' 	=> '[color=%s]Mana Regeneration (zaubernd) : [/color]%s ',
 
-'APPLY_CHAR_RANGEDPS' 	=> '[color=#105289]DPS : [/color]%s',
-'APPLY_CHAR_RANGEDAP' 	=> '[color=#105289]Distanz Angriffskraft : [/color]%s',
-'APPLY_CHAR_RANGEDCRIT' => '[color=#105289]Distanz Krit : [/color]%s %%',
-'APPLY_CHAR_RANGEHIT' 	=> '[color=#105289]Trefferwertung : [/color]%s %%',
-'APPLY_CHAR_RANGEHAS' 	=> '[color=#105289]Tempo : [/color]%s %%',
+'APPLY_CHAR_RANGEDPS' 	=> '[color=%s]DPS : [/color]%s',
+'APPLY_CHAR_RANGEDAP' 	=> '[color=%s]Distanz Angriffskraft : [/color]%s',
+'APPLY_CHAR_RANGEDCRIT' => '[color=%s]Distanz Krit : [/color]%s %%',
+'APPLY_CHAR_RANGEHIT' 	=> '[color=%s]Trefferwertung : [/color]%s %%',
+'APPLY_CHAR_RANGEHAS' 	=> '[color=%s]Tempo : [/color]%s %%',
 
-'APPLY_CHAR_MELEEDPS' 	=> '[color=#105289]DPS Haupt/Neben-Hand : [/color]%s %%',
-'APPLY_CHAR_MELEEAP' 	=> '[color=#105289]Nahkampf Angriffskraft : [/color]%s',
-'APPLY_CHAR_MELEECRIT' 	=> '[color=#105289]Nahkampf Crit : [/color]%s %%',
-'APPLY_CHAR_MELEEHIT' 	=> '[color=#105289]Nahkampf Hit : [/color]%s %%',
-'APPLY_CHAR_MELEEHAS' 	=> '[color=#105289]Tempo : [/color]%s %%',
-'APPLY_CHAR_EXPERTISE' 	=> '[color=#105289]Waffenkunde : [/color]%s %%',
+'APPLY_CHAR_MELEEDPS' 	=> '[color=%s]DPS Haupt/Neben-Hand : [/color]%s %%',
+'APPLY_CHAR_MELEEAP' 	=> '[color=%s]Nahkampf Angriffskraft : [/color]%s',
+'APPLY_CHAR_MELEECRIT' 	=> '[color=%s]Nahkampf Crit : [/color]%s %%',
+'APPLY_CHAR_MELEEHIT' 	=> '[color=%s]Nahkampf Hit : [/color]%s %%',
+'APPLY_CHAR_MELEEHAS' 	=> '[color=%s]Tempo : [/color]%s %%',
+'APPLY_CHAR_EXPERTISE' 	=> '[color=%s]Waffenkunde : [/color]%s %%',
 
-'APPLY_CHAR_PALHO' 		=> '[color=#105289][u]Heilig[/u][/color]',
-'APPLY_CHAR_PALRE' 		=> '[color=#105289][u]Vergeltung[/u][/color]',
-'APPLY_CHAR_PALPR' 		=> '[color=#105289][u]Schutz[/u][/color]',
+'APPLY_CHAR_PALHO' 		=> '[color=%s][u]Heilig[/u][/color]',
+'APPLY_CHAR_PALRE' 		=> '[color=%s][u]Vergeltung[/u][/color]',
+'APPLY_CHAR_PALPR' 		=> '[color=%s][u]Schutz[/u][/color]',
 
-'APPLY_CHAR_WARRARM' 	=> '[color=#105289][u]Waffen/Furor[/u][/color]',
-'APPLY_CHAR_WARRPRO' 	=> '[color=#105289][u]Schutz[/u][/color]',
-'APPLY_CHAR_HP' 		=> '[color=#105289]Leben : [/color]%s',
-'APPLY_CHAR_ARMOR' 		=> '[color=#105289]Rüstung : [/color]%s',
-'APPLY_CHAR_DEF' 		=> '[color=#105289]Verteidigung : [/color]%s',
-'APPLY_CHAR_DODGE' 		=> '[color=#105289]Ausweichen : [/color]%s %%',
-'APPLY_CHAR_PARRY' 		=> '[color=#105289]Parrieren : [/color]%s %%',
-'APPLY_CHAR_BLOCK' 		=> '[color=#105289]Blocken : [/color]%s %%',
+'APPLY_CHAR_WARRARM' 	=> '[color=%s][u]Waffen/Furor[/u][/color]',
+'APPLY_CHAR_WARRPRO' 	=> '[color=%s][u]Schutz[/u][/color]',
+'APPLY_CHAR_HP' 		=> '[color=%s]Leben : [/color]%s',
+'APPLY_CHAR_ARMOR' 		=> '[color=%s]Rüstung : [/color]%s',
+'APPLY_CHAR_DEF' 		=> '[color=%s]Verteidigung : [/color]%s',
+'APPLY_CHAR_DODGE' 		=> '[color=%s]Ausweichen : [/color]%s %%',
+'APPLY_CHAR_PARRY' 		=> '[color=%s]Parrieren : [/color]%s %%',
+'APPLY_CHAR_BLOCK' 		=> '[color=%s]Blocken : [/color]%s %%',
 
-'APPLY_CHAR_DRUFER' 	=> '[color=#105289][u]Wilder Kampf[/u][/color]',
-'APPLY_CHAR_RESTO' 		=> '[color=#105289][u]Gleichgewicht/Wiederherstellung[/u][/color]', 
-'APPLY_CHAR_NATCRIT' 	=> '[color=#105289]Natur Krit : [/color]%s %%',
+'APPLY_CHAR_DRUFER' 	=> '[color=%s][u]Wilder Kampf[/u][/color]',
+'APPLY_CHAR_RESTO' 		=> '[color=%s][u]Gleichgewicht/Wiederherstellung[/u][/color]', 
+'APPLY_CHAR_NATCRIT' 	=> '[color=%s]Natur Krit : [/color]%s %%',
 
-'APPLY_CHAR_SHAEN' 		=> '[color=#105289][u]Verstärkung[/u][/color]',
-'APPLY_CHAR_SHAEL' 		=> '[color=#105289][u]Elementar[/u][/color]',
-'APPLY_CHAR_SHARE' 		=> '[color=#105289][u]Wiederherstellung[/u][/color]', 
+'APPLY_CHAR_SHAEN' 		=> '[color=%s][u]Verstärkung[/u][/color]',
+'APPLY_CHAR_SHAEL' 		=> '[color=%s][u]Elementar[/u][/color]',
+'APPLY_CHAR_SHARE' 		=> '[color=%s][u]Wiederherstellung[/u][/color]', 
 
-'APPLY_CHAR_URL' => '[color=#105289][/color][url=%s]WoW Armory Link[/url]', 
+'APPLY_CHAR_URL' => '[color=%s][/color][url=%s]WoW Armory Link[/url]', 
 
 ));
 

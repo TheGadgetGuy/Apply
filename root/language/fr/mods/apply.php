@@ -1,7 +1,7 @@
 <?php
 /**
 * language file Wow Application form French
-* 
+* @author Sajaki
 * @package bbDkp
 * @copyright (c) 2009 bbDkp <http://code.google.com/p/bbdkp/>
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
@@ -141,59 +141,59 @@ $lang = array_merge($lang, array(
 'APPLY_POSTCOLOR_EXPLAIN' 	=> 'Couleur des textes utilisées dans le formulaire et dans les messages. Donc si vous utilisez un style sombre, vous pourrez choisir une couleur qui contraste.',
 
 /** posting template **/
-'APPLY_CHAR_NAME' 	=> '[color=#105289][b]Nom de Caractère : [/b][/color]%s',
-'APPLY_CHAR_LEVEL' 	=> '[color=#105289]Niveau : [/color]%s',  
-'APPLY_CHAR_CLASS' 	=> '[color=#105289]Classe: [/color]%s' ,
-'APPLY_CHAR_PROFF' 	=> '[color=#105289][u]Proffessions :[/u][/color]
+'APPLY_CHAR_NAME' 	=> '[color=%s][b]Nom de Caractère : [/b][/color]%s',
+'APPLY_CHAR_LEVEL' 	=> '[color=%s]Niveau : [/color]%s',  
+'APPLY_CHAR_CLASS' 	=> '[color=%s]Classe: [/color]%s' ,
+'APPLY_CHAR_PROFF' 	=> '[color=%s][u]Proffessions :[/u][/color]
 %s',
-'APPLY_CHAR_BUILD' 	=> '[color=#105289][u]Spécialisation de talents : [/u][/color]%s',
+'APPLY_CHAR_BUILD' 	=> '[color=%s][u]Spécialisation de talents : [/u][/color]%s',
 
-'APPLY_CHAR_MANA' 	=> '[color=#105289]Mana : [/color]%s' ,
-'APPLY_CHAR_SP' 	=> '[color=#105289]Bonus dégats : [/color]%s' ,
-'APPLY_CHAR_ACRIT' 	=> '[color=#105289]Crit Arcane : [/color]%s %%',
-'APPLY_CHAR_FCRIT' 	=> '[color=#105289]Crit Feux: [/color]%s %%',
-'APPLY_CHAR_FROST' 	=> '[color=#105289]Crit Froid : [/color]%s %%',
-'APPLY_CHAR_SPHIT' 	=> '[color=#105289]Sc. Toucher : [/color]%s %%', 
-'APPLY_CHAR_SPHAS' 	=> '[color=#105289]Hâte : [/color]%s' , 
-'APPLY_CHAR_HCRIT' 	=> '[color=#105289]Crit sacré : [/color]%s %%',
-'APPLY_CHAR_SHCRIT' => '[color=#105289]Crit ombre : [/color]%s %%',
-'APPLY_CHAR_MREG' 	=> '[color=#105289]Régen mana pendant incantation : [/color]%s ',
+'APPLY_CHAR_MANA' 	=> '[color=%s]Mana : [/color]%s' ,
+'APPLY_CHAR_SP' 	=> '[color=%s]Bonus dégats : [/color]%s' ,
+'APPLY_CHAR_ACRIT' 	=> '[color=%s]Crit Arcane : [/color]%s %%',
+'APPLY_CHAR_FCRIT' 	=> '[color=%s]Crit Feux: [/color]%s %%',
+'APPLY_CHAR_FROST' 	=> '[color=%s]Crit Froid : [/color]%s %%',
+'APPLY_CHAR_SPHIT' 	=> '[color=%s]Sc. Toucher : [/color]%s %%', 
+'APPLY_CHAR_SPHAS' 	=> '[color=%s]Hâte : [/color]%s' , 
+'APPLY_CHAR_HCRIT' 	=> '[color=%s]Crit sacré : [/color]%s %%',
+'APPLY_CHAR_SHCRIT' => '[color=%s]Crit ombre : [/color]%s %%',
+'APPLY_CHAR_MREG' 	=> '[color=%s]Régen mana pendant incantation : [/color]%s ',
 
-'APPLY_CHAR_RANGEDPS' 	=> '[color=#105289]DPS : [/color]%s',
-'APPLY_CHAR_RANGEDAP' 	=> '[color=#105289]Dégats à distance : [/color]%s',
-'APPLY_CHAR_RANGEDCRIT' => '[color=#105289]Critique : [/color]%s %%',
-'APPLY_CHAR_RANGEHIT' 	=> '[color=#105289]Toucher : [/color]%s %%',
-'APPLY_CHAR_RANGEHAS' 	=> '[color=#105289]Vitesse : [/color]%s %%',
+'APPLY_CHAR_RANGEDPS' 	=> '[color=%s]DPS : [/color]%s',
+'APPLY_CHAR_RANGEDAP' 	=> '[color=%s]Dégats à distance : [/color]%s',
+'APPLY_CHAR_RANGEDCRIT' => '[color=%s]Critique : [/color]%s %%',
+'APPLY_CHAR_RANGEHIT' 	=> '[color=%s]Toucher : [/color]%s %%',
+'APPLY_CHAR_RANGEHAS' 	=> '[color=%s]Vitesse : [/color]%s %%',
 
-'APPLY_CHAR_MELEEDPS' 	=> '[color=#105289]DPS melée : [/color]%s %%',
-'APPLY_CHAR_MELEEAP' 	=> '[color=#105289]Force : [/color]%s',
-'APPLY_CHAR_MELEECRIT' 	=> '[color=#105289]Critique : [/color]%s %%',
-'APPLY_CHAR_MELEEHIT' 	=> '[color=#105289]toucher : [/color]%s %%',
-'APPLY_CHAR_MELEEHAS' 	=> '[color=#105289]Vitesse : [/color]%s %%',
-'APPLY_CHAR_EXPERTISE' 	=> '[color=#105289]pouvoirs d’armes : [/color]%s %%',
+'APPLY_CHAR_MELEEDPS' 	=> '[color=%s]DPS melée : [/color]%s %%',
+'APPLY_CHAR_MELEEAP' 	=> '[color=%s]Force : [/color]%s',
+'APPLY_CHAR_MELEECRIT' 	=> '[color=%s]Critique : [/color]%s %%',
+'APPLY_CHAR_MELEEHIT' 	=> '[color=%s]toucher : [/color]%s %%',
+'APPLY_CHAR_MELEEHAS' 	=> '[color=%s]Vitesse : [/color]%s %%',
+'APPLY_CHAR_EXPERTISE' 	=> '[color=%s]pouvoirs d’armes : [/color]%s %%',
 
-'APPLY_CHAR_PALHO' 		=> '[color=#105289][u]Sacré[/u][/color]',
-'APPLY_CHAR_PALRE' 		=> '[color=#105289][u]Vindicte[/u][/color]',
-'APPLY_CHAR_PALPR' 		=> '[color=#105289][u]Protection[/u][/color]',
+'APPLY_CHAR_PALHO' 		=> '[color=%s][u]Sacré[/u][/color]',
+'APPLY_CHAR_PALRE' 		=> '[color=%s][u]Vindicte[/u][/color]',
+'APPLY_CHAR_PALPR' 		=> '[color=%s][u]Protection[/u][/color]',
 
-'APPLY_CHAR_WARRARM' 	=> '[color=#105289][u]Armes/Fureur[/u][/color]',
-'APPLY_CHAR_WARRPRO' 	=> '[color=#105289][u]Défense[/u][/color]',
-'APPLY_CHAR_HP' 		=> '[color=#105289]Vie : [/color]%s',
-'APPLY_CHAR_ARMOR' 		=> '[color=#105289]Armure : [/color]%s',
-'APPLY_CHAR_DEF' 		=> '[color=#105289]Défense : [/color]%s',
-'APPLY_CHAR_DODGE' 		=> '[color=#105289]Esquisse : [/color]%s %%',
-'APPLY_CHAR_PARRY' 		=> '[color=#105289]Parade : [/color]%s %%',
-'APPLY_CHAR_BLOCK' 		=> '[color=#105289]Blocage : [/color]%s %%',
+'APPLY_CHAR_WARRARM' 	=> '[color=%s][u]Armes/Fureur[/u][/color]',
+'APPLY_CHAR_WARRPRO' 	=> '[color=%s][u]Défense[/u][/color]',
+'APPLY_CHAR_HP' 		=> '[color=%s]Vie : [/color]%s',
+'APPLY_CHAR_ARMOR' 		=> '[color=%s]Armure : [/color]%s',
+'APPLY_CHAR_DEF' 		=> '[color=%s]Défense : [/color]%s',
+'APPLY_CHAR_DODGE' 		=> '[color=%s]Esquisse : [/color]%s %%',
+'APPLY_CHAR_PARRY' 		=> '[color=%s]Parade : [/color]%s %%',
+'APPLY_CHAR_BLOCK' 		=> '[color=%s]Blocage : [/color]%s %%',
 
-'APPLY_CHAR_DRUFER' 	=> '[color=#105289][u]Combat farouche[/u][/color]',
-'APPLY_CHAR_RESTO' 		=> '[color=#105289][u]Equilibre/Restauration[/u][/color]', 
-'APPLY_CHAR_NATCRIT' 	=> '[color=#105289]Crit naturel: [/color]%s %%',
+'APPLY_CHAR_DRUFER' 	=> '[color=%s][u]Combat farouche[/u][/color]',
+'APPLY_CHAR_RESTO' 		=> '[color=%s][u]Equilibre/Restauration[/u][/color]', 
+'APPLY_CHAR_NATCRIT' 	=> '[color=%s]Crit naturel: [/color]%s %%',
 
-'APPLY_CHAR_SHAEN' 		=> '[color=#105289][u]Amélioration[/u][/color]',
-'APPLY_CHAR_SHAEL' 		=> '[color=#105289][u]Elementaire[/u][/color]',
-'APPLY_CHAR_SHARE' 		=> '[color=#105289][u]Restauration[/u][/color]', 
+'APPLY_CHAR_SHAEN' 		=> '[color=%s][u]Amélioration[/u][/color]',
+'APPLY_CHAR_SHAEL' 		=> '[color=%s][u]Elementaire[/u][/color]',
+'APPLY_CHAR_SHARE' 		=> '[color=%s][u]Restauration[/u][/color]', 
 
-'APPLY_CHAR_URL' => '[color=#105289][/color][url=%s]Lien Armurerie[/url]', 
+'APPLY_CHAR_URL' => '[color=%s][/color][url=%s]Lien Armurerie[/url]', 
 
 ));
 

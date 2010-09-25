@@ -6,7 +6,7 @@
 * @version $Id$
 * @copyright (c) 2010 bbDkp <http://code.google.com/p/bbdkp/>
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
-* @author Kapli, Malfate, Sajaki, Blazeflack, Twizted
+* @author Kapli, Malfate, Sajaki, Blazeflack, Twizted, Ethereal
 *
 *
 **/
@@ -150,8 +150,6 @@ class dkp_character
 			return false;
 		}
 		
-		
-		
 	}
 	
 	/**
@@ -161,7 +159,7 @@ class dkp_character
 	private function _Getchar2($xml) 
 	{
 		
-		global $phpbb_root_path, $phpEx;  
+		global $phpbb_root_path, $phpEx, $config;  
 		
 		$skills = $xml->xpath('characterInfo/characterTab/professions/skill');
 		if (!empty($skills)) 
@@ -170,7 +168,7 @@ class dkp_character
 			foreach ($skills as $k => $v) 
 			{
 			    $skills[$k] = $v->attributes();
-				$this->professions .='<img src="'.$phpbb_root_path.'images/apply_icon/Trade_'.$skills[$k]['name'] . '.jpg" width="20" height="20" alt="'.$skills[$k]['name'] . '">[color=#105289] '.$skills[$k]['name'] . '[/color] '. $skills[$k]['value'] . '/'. $skills[$k]['max'] .'<br/>';
+				$this->professions .='<img src="'.$phpbb_root_path.'images/apply_icon/Trade_'.$skills[$k]['name'] . '.jpg" width="20" height="20" alt="'.$skills[$k]['name'] . '">  [color='. $config['bbdkp_apply_pacolor'] . '] '.$skills[$k]['name'] . ' (' . $skills[$k]['value'] . '/'. $skills[$k]['max'] . ')[/color] '.'<br/>';
 			}
 		}	
 		else 
@@ -302,7 +300,6 @@ class dkp_character
 		}
 		
 		return true; 
-		
 	}
 	
 	/**
@@ -332,185 +329,182 @@ class dkp_character
 		$innerdiv = str_replace('{CANDIDATE}', $this->name , $innerdiv);
 		$innerdiv = str_replace('{REALM}', (string) $this->realm , $innerdiv);
 		$innerdiv = str_replace('{REGION}', $config['bbdkp_apply_region'] , $innerdiv);
-		
-		$innerdiv = str_replace('{MEMBERURL}', $memberportraiturl , $innerdiv);
-		$innerdiv = str_replace('{APPLY_CHAR_URL}' , sprintf( $user->lang['APPLY_CHAR_URL'], $this->url), $innerdiv);
-		
+	 	
 		//get left td classpanes
 		switch ($this->class)
 		{
 			case 'Mage':
 				$leftpane = $filecontents['class_mage'];
-				$leftpane = str_replace('{APPLY_CHAR_MANA}'  , sprintf( $user->lang['APPLY_CHAR_MANA'], $this->mana), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_ACRIT}' , sprintf( $user->lang['APPLY_CHAR_ACRIT'], $this->arcanecrit), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_FCRIT}' , sprintf( $user->lang['APPLY_CHAR_FCRIT'], $this->firecrit), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_FROST}' , sprintf( $user->lang['APPLY_CHAR_FROST'], $this->frostcrit), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_SP}' 	 , sprintf( $user->lang['APPLY_CHAR_SP'], $this->spellpower), $leftpane);
-				$leftpane = str_replace('{APPLY_CHAR_SPHIT}' , sprintf( $user->lang['APPLY_CHAR_SPHIT'], $this->spellhit), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_SPHAS}' , sprintf( $user->lang['APPLY_CHAR_SPHAS'], $this->spellhaste), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_HCRIT}' , sprintf( $user->lang['APPLY_CHAR_HCRIT'], $this->holycrit), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_MANA}'  , sprintf( $user->lang['APPLY_CHAR_MANA'], $config['bbdkp_apply_pqcolor'],  '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->mana . '[/color]'  ), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_ACRIT}' , sprintf( $user->lang['APPLY_CHAR_ACRIT'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->arcanecrit . '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_FCRIT}' , sprintf( $user->lang['APPLY_CHAR_FCRIT'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->firecrit. '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_FROST}' , sprintf( $user->lang['APPLY_CHAR_FROST'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->frostcrit. '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_SP}' 	 , sprintf( $user->lang['APPLY_CHAR_SP'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->spellpower. '[/color]'), $leftpane);
+				$leftpane = str_replace('{APPLY_CHAR_SPHIT}' , sprintf( $user->lang['APPLY_CHAR_SPHIT'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->spellhit. '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_SPHAS}' , sprintf( $user->lang['APPLY_CHAR_SPHAS'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->spellhaste. '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_HCRIT}' , sprintf( $user->lang['APPLY_CHAR_HCRIT'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->holycrit. '[/color]'), $leftpane); 
 				
 				break;
 			case 'Priest':
 				$leftpane = $filecontents['class_priest'];
-				$leftpane = str_replace('{APPLY_CHAR_MANA}'  , sprintf( $user->lang['APPLY_CHAR_MANA'], $this->mana), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_SP}' 	 , sprintf( $user->lang['APPLY_CHAR_SP'], $this->spellpower), $leftpane);
-				$leftpane = str_replace('{APPLY_CHAR_SPHIT}' , sprintf( $user->lang['APPLY_CHAR_SPHIT'], $this->spellhit), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_SPHAS}' , sprintf( $user->lang['APPLY_CHAR_SPHAS'], $this->spellhaste), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_HCRIT}' , sprintf( $user->lang['APPLY_CHAR_HCRIT'], $this->holycrit), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_SHCRIT}' , sprintf( $user->lang['APPLY_CHAR_SHCRIT'], $this->shadowcrit), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_MREG}' , sprintf( $user->lang['APPLY_CHAR_MREG'], $this->mrcast), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_MANA}'  , sprintf( $user->lang['APPLY_CHAR_MANA'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->mana. '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_SP}' 	 , sprintf( $user->lang['APPLY_CHAR_SP'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->spellpower. '[/color]'), $leftpane);
+				$leftpane = str_replace('{APPLY_CHAR_SPHIT}' , sprintf( $user->lang['APPLY_CHAR_SPHIT'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->spellhit. '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_SPHAS}' , sprintf( $user->lang['APPLY_CHAR_SPHAS'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->spellhaste. '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_HCRIT}' , sprintf( $user->lang['APPLY_CHAR_HCRIT'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->holycrit. '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_SHCRIT}' , sprintf( $user->lang['APPLY_CHAR_SHCRIT'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->shadowcrit. '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_MREG}' , sprintf( $user->lang['APPLY_CHAR_MREG'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->mrcast. '[/color]'), $leftpane); 
 				break;
 
 			case 'Warlock':
 				$leftpane = $filecontents['class_warlock'];
-				$leftpane = str_replace('{APPLY_CHAR_FCRIT}' , sprintf( $user->lang['APPLY_CHAR_FCRIT'], $this->firecrit), $leftpane);
-				$leftpane = str_replace('{APPLY_CHAR_MANA}'  , sprintf( $user->lang['APPLY_CHAR_MANA'], $this->mana), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_SP}' 	 , sprintf( $user->lang['APPLY_CHAR_SP'], $this->spellpower), $leftpane);
-				$leftpane = str_replace('{APPLY_CHAR_SPHIT}' , sprintf( $user->lang['APPLY_CHAR_SPHIT'], $this->spellhit), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_SPHAS}' , sprintf( $user->lang['APPLY_CHAR_SPHAS'], $this->spellhaste), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_HCRIT}' , sprintf( $user->lang['APPLY_CHAR_HCRIT'], $this->holycrit), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_SHCRIT}' , sprintf( $user->lang['APPLY_CHAR_SHCRIT'], $this->shadowcrit), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_FCRIT}' , sprintf( $user->lang['APPLY_CHAR_FCRIT'],$config['bbdkp_apply_pqcolor'],  '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->firecrit. '[/color]'), $leftpane);
+				$leftpane = str_replace('{APPLY_CHAR_MANA}'  , sprintf( $user->lang['APPLY_CHAR_MANA'],$config['bbdkp_apply_pqcolor'],  '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->mana. '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_SP}' 	 , sprintf( $user->lang['APPLY_CHAR_SP'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->spellpower. '[/color]'), $leftpane);
+				$leftpane = str_replace('{APPLY_CHAR_SPHIT}' , sprintf( $user->lang['APPLY_CHAR_SPHIT'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->spellhit. '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_SPHAS}' , sprintf( $user->lang['APPLY_CHAR_SPHAS'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->spellhaste. '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_HCRIT}' , sprintf( $user->lang['APPLY_CHAR_HCRIT'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->holycrit. '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_SHCRIT}' , sprintf( $user->lang['APPLY_CHAR_SHCRIT'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->shadowcrit. '[/color]'), $leftpane); 
 				
 				break;
 			case 'Hunter':
 				$leftpane = $filecontents['class_hunter'];
-				$leftpane = str_replace('{APPLY_CHAR_RANGEDPS}' , sprintf( $user->lang['APPLY_CHAR_RANGEDPS'], $this->rdps), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_RANGEDAP}' , sprintf( $user->lang['APPLY_CHAR_RANGEDAP'], $this->rap), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_RANGEDCRIT}' , sprintf( $user->lang['APPLY_CHAR_RANGEDCRIT'], $this->rcr), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_RANGEHIT}' , sprintf( $user->lang['APPLY_CHAR_RANGEHIT'], $this->rhr), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_RANGEHAS}' , sprintf( $user->lang['APPLY_CHAR_RANGEHAS'], $this->rspeed), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_MELEEHIT}' , sprintf( $user->lang['APPLY_CHAR_MELEEHIT'], $this->mhr), $leftpane);
-				$leftpane = str_replace('{APPLY_CHAR_MELEEDPS}' , sprintf( $user->lang['APPLY_CHAR_MELEEDPS'], $this->mhdps), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_MELEEAP}' , sprintf( $user->lang['APPLY_CHAR_MELEEAP'], $this->map), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_MELEECRIT}' , sprintf( $user->lang['APPLY_CHAR_MELEECRIT'], $this->mcr), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_MELEEHAS}' , sprintf( $user->lang['APPLY_CHAR_MELEEHAS'], $this->mspeed), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_EXPERTISE}' , sprintf( $user->lang['APPLY_CHAR_EXPERTISE'], $this->expertise), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_RANGEDPS}' , sprintf( $user->lang['APPLY_CHAR_RANGEDPS'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->rdps. '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_RANGEDAP}' , sprintf( $user->lang['APPLY_CHAR_RANGEDAP'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->rap. '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_RANGEDCRIT}' , sprintf( $user->lang['APPLY_CHAR_RANGEDCRIT'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->rcr. '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_RANGEHIT}' , sprintf( $user->lang['APPLY_CHAR_RANGEHIT'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->rhr. '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_RANGEHAS}' , sprintf( $user->lang['APPLY_CHAR_RANGEHAS'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->rspeed. '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_MELEEHIT}' , sprintf( $user->lang['APPLY_CHAR_MELEEHIT'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->mhr. '[/color]'), $leftpane);
+				$leftpane = str_replace('{APPLY_CHAR_MELEEDPS}' , sprintf( $user->lang['APPLY_CHAR_MELEEDPS'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->mhdps), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_MELEEAP}' , sprintf( $user->lang['APPLY_CHAR_MELEEAP'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->map . '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_MELEECRIT}' , sprintf( $user->lang['APPLY_CHAR_MELEECRIT'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->mcr . '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_MELEEHAS}' , sprintf( $user->lang['APPLY_CHAR_MELEEHAS'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->mspeed . '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_EXPERTISE}' , sprintf( $user->lang['APPLY_CHAR_EXPERTISE'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->expertise . '[/color]'), $leftpane); 
 				break;
 			case 'Rogue':
 				$leftpane = $filecontents['class_rogue'];
 				
-				$leftpane = str_replace('{APPLY_CHAR_MELEEDPS}' , sprintf( $user->lang['APPLY_CHAR_MELEEDPS'], $this->mhdps), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_MELEEAP}' , sprintf( $user->lang['APPLY_CHAR_MELEEAP'], $this->map), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_MELEECRIT}' , sprintf( $user->lang['APPLY_CHAR_MELEECRIT'], $this->mcr), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_MELEEHIT}' , sprintf( $user->lang['APPLY_CHAR_MELEEHIT'], $this->mhr), $leftpane);
-				$leftpane = str_replace('{APPLY_CHAR_MELEEHAS}' , sprintf( $user->lang['APPLY_CHAR_MELEEHAS'], $this->mspeed), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_EXPERTISE}' , sprintf( $user->lang['APPLY_CHAR_EXPERTISE'], $this->expertise), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_MELEEDPS}' , sprintf( $user->lang['APPLY_CHAR_MELEEDPS'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->mhdps . '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_MELEEAP}' , sprintf( $user->lang['APPLY_CHAR_MELEEAP'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->map . '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_MELEECRIT}' , sprintf( $user->lang['APPLY_CHAR_MELEECRIT'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->mcr . '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_MELEEHIT}' , sprintf( $user->lang['APPLY_CHAR_MELEEHIT'], $config['bbdkp_apply_pqcolor'],'[color='. $config['bbdkp_apply_pacolor'] . ']' .  $this->mhr . '[/color]'), $leftpane);
+				$leftpane = str_replace('{APPLY_CHAR_MELEEHAS}' , sprintf( $user->lang['APPLY_CHAR_MELEEHAS'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->mspeed . '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_EXPERTISE}' , sprintf( $user->lang['APPLY_CHAR_EXPERTISE'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->expertise . '[/color]'), $leftpane); 
 				break;
 			case 'Warrior':
 				$leftpane = $filecontents['class_warrior'];
-				$leftpane = str_replace('{APPLY_CHAR_WARRARM}' , $user->lang['APPLY_CHAR_WARRARM'], $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_WARRPRO}' , $user->lang['APPLY_CHAR_WARRPRO'], $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_WARRARM}' , sprintf( $user->lang['APPLY_CHAR_WARRARM'],$config['bbdkp_apply_pqcolor']), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_WARRPRO}' , sprintf($user->lang['APPLY_CHAR_WARRPRO'], $config['bbdkp_apply_pqcolor']), $leftpane); 
 				
 				
-				$leftpane = str_replace('{APPLY_CHAR_ARMOR}' , sprintf( $user->lang['APPLY_CHAR_ARMOR'], $this->armor), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_DEF}' , sprintf( $user->lang['APPLY_CHAR_DEF'], $this->defense), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_DODGE}' , sprintf( $user->lang['APPLY_CHAR_DODGE'], $this->dodge), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_PARRY}' , sprintf( $user->lang['APPLY_CHAR_PARRY'], $this->parry), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_BLOCK}' , sprintf( $user->lang['APPLY_CHAR_BLOCK'], $this->block), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_ARMOR}' , sprintf( $user->lang['APPLY_CHAR_ARMOR'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->armor . '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_DEF}' , sprintf( $user->lang['APPLY_CHAR_DEF'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->defense . '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_DODGE}' , sprintf( $user->lang['APPLY_CHAR_DODGE'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->dodge  . '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_PARRY}' , sprintf( $user->lang['APPLY_CHAR_PARRY'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->parry . '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_BLOCK}' , sprintf( $user->lang['APPLY_CHAR_BLOCK'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->block . '[/color]'), $leftpane); 
 								
-				$leftpane = str_replace('{APPLY_CHAR_MELEEDPS}' , sprintf( $user->lang['APPLY_CHAR_MELEEDPS'], $this->mhdps), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_MELEEAP}' , sprintf( $user->lang['APPLY_CHAR_MELEEAP'], $this->map), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_MELEEHIT}' , sprintf( $user->lang['APPLY_CHAR_MELEEHIT'], $this->mhr), $leftpane);
-				$leftpane = str_replace('{APPLY_CHAR_MELEECRIT}' , sprintf( $user->lang['APPLY_CHAR_MELEECRIT'], $this->mcr), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_MELEEHAS}' , sprintf( $user->lang['APPLY_CHAR_MELEEHAS'], $this->mspeed), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_EXPERTISE}' , sprintf( $user->lang['APPLY_CHAR_EXPERTISE'], $this->expertise), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_MELEEDPS}' , sprintf( $user->lang['APPLY_CHAR_MELEEDPS'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->mhdps . '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_MELEEAP}' , sprintf( $user->lang['APPLY_CHAR_MELEEAP'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->map . '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_MELEEHIT}' , sprintf( $user->lang['APPLY_CHAR_MELEEHIT'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->mhr . '[/color]'), $leftpane);
+				$leftpane = str_replace('{APPLY_CHAR_MELEECRIT}' , sprintf( $user->lang['APPLY_CHAR_MELEECRIT'],$config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->mcr . '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_MELEEHAS}' , sprintf( $user->lang['APPLY_CHAR_MELEEHAS'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->mspeed . '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_EXPERTISE}' , sprintf( $user->lang['APPLY_CHAR_EXPERTISE'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->expertise . '[/color]'), $leftpane); 
 								
 				break;
 			case 'Paladin':
-				$leftpane = $filecontents['class_paladin'];
-				$leftpane = str_replace('{APPLY_CHAR_PALHO}' , $user->lang['APPLY_CHAR_PALHO'], $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_PALRE}' , $user->lang['APPLY_CHAR_PALRE'], $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_PALPR}' , $user->lang['APPLY_CHAR_PALPR'], $leftpane); 
+				$leftpane = $filecontents['class_paladin'];    
+				$leftpane = str_replace('{APPLY_CHAR_PALHO}' , sprintf($user->lang['APPLY_CHAR_PALHO'], $config['bbdkp_apply_pqcolor']), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_PALRE}' , sprintf($user->lang['APPLY_CHAR_PALRE'],$config['bbdkp_apply_pqcolor']), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_PALPR}' , sprintf($user->lang['APPLY_CHAR_PALPR'],$config['bbdkp_apply_pqcolor']), $leftpane); 
 				
 				
-				$leftpane = str_replace('{APPLY_CHAR_ARMOR}' , sprintf( $user->lang['APPLY_CHAR_ARMOR'], $this->armor), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_DEF}' , sprintf( $user->lang['APPLY_CHAR_DEF'], $this->defense), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_DODGE}' , sprintf( $user->lang['APPLY_CHAR_DODGE'], $this->dodge), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_PARRY}' , sprintf( $user->lang['APPLY_CHAR_PARRY'], $this->parry), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_BLOCK}' , sprintf( $user->lang['APPLY_CHAR_BLOCK'], $this->block), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_ARMOR}' , sprintf( $user->lang['APPLY_CHAR_ARMOR'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->armor . '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_DEF}' , sprintf( $user->lang['APPLY_CHAR_DEF'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->defense . '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_DODGE}' , sprintf( $user->lang['APPLY_CHAR_DODGE'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->dodge . '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_PARRY}' , sprintf( $user->lang['APPLY_CHAR_PARRY'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->parry . '[/color]') , $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_BLOCK}' , sprintf( $user->lang['APPLY_CHAR_BLOCK'],$config['bbdkp_apply_pqcolor'],  '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->block . '[/color]'), $leftpane); 
 
-				$leftpane = str_replace('{APPLY_CHAR_MELEEDPS}' , sprintf( $user->lang['APPLY_CHAR_MELEEDPS'], $this->mhdps), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_MELEEAP}' , sprintf( $user->lang['APPLY_CHAR_MELEEAP'], $this->map), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_MELEECRIT}' , sprintf( $user->lang['APPLY_CHAR_MELEECRIT'], $this->mcr), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_MELEEHIT}' , sprintf( $user->lang['APPLY_CHAR_MELEEHIT'], $this->mhr), $leftpane);
-				$leftpane = str_replace('{APPLY_CHAR_MELEEHAS}' , sprintf( $user->lang['APPLY_CHAR_MELEEHAS'], $this->mspeed), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_EXPERTISE}' , sprintf( $user->lang['APPLY_CHAR_EXPERTISE'], $this->expertise), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_MELEEDPS}' , sprintf( $user->lang['APPLY_CHAR_MELEEDPS'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->mhdps . '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_MELEEAP}' , sprintf( $user->lang['APPLY_CHAR_MELEEAP'],$config['bbdkp_apply_pqcolor'],  '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->map . '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_MELEECRIT}' , sprintf( $user->lang['APPLY_CHAR_MELEECRIT'],$config['bbdkp_apply_pqcolor'],  '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->mcr . '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_MELEEHIT}' , sprintf( $user->lang['APPLY_CHAR_MELEEHIT'],$config['bbdkp_apply_pqcolor'],  '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->mhr . '[/color]'), $leftpane);
+				$leftpane = str_replace('{APPLY_CHAR_MELEEHAS}' , sprintf( $user->lang['APPLY_CHAR_MELEEHAS'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->mspeed . '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_EXPERTISE}' , sprintf( $user->lang['APPLY_CHAR_EXPERTISE'], $config['bbdkp_apply_pqcolor'],'[color='. $config['bbdkp_apply_pacolor'] . ']' .  $this->expertise . '[/color]'), $leftpane); 
 
-				$leftpane = str_replace('{APPLY_CHAR_MANA}'  , sprintf( $user->lang['APPLY_CHAR_MANA'], $this->mana), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_SP}' 	 , sprintf( $user->lang['APPLY_CHAR_SP'], $this->spellpower), $leftpane);
-				$leftpane = str_replace('{APPLY_CHAR_SPHIT}' , sprintf( $user->lang['APPLY_CHAR_SPHIT'], $this->spellhit), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_SPHAS}' , sprintf( $user->lang['APPLY_CHAR_SPHAS'], $this->spellhaste), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_HCRIT}' , sprintf( $user->lang['APPLY_CHAR_HCRIT'], $this->holycrit), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_MREG}' , sprintf( $user->lang['APPLY_CHAR_MREG'], $this->mrcast), $leftpane); 				
+				$leftpane = str_replace('{APPLY_CHAR_MANA}'  , sprintf( $user->lang['APPLY_CHAR_MANA'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->mana . '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_SP}' 	 , sprintf( $user->lang['APPLY_CHAR_SP'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->spellpower . '[/color]'), $leftpane);
+				$leftpane = str_replace('{APPLY_CHAR_SPHIT}' , sprintf( $user->lang['APPLY_CHAR_SPHIT'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->spellhit . '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_SPHAS}' , sprintf( $user->lang['APPLY_CHAR_SPHAS'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->spellhaste . '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_HCRIT}' , sprintf( $user->lang['APPLY_CHAR_HCRIT'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->holycrit . '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_MREG}' , sprintf( $user->lang['APPLY_CHAR_MREG'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->mrcast . '[/color]'), $leftpane); 				
 				
 				break;
 			case 'Druid':
 				$leftpane = $filecontents['class_druid'];
-				$leftpane = str_replace('{APPLY_CHAR_DRUFER}' , $user->lang['APPLY_CHAR_DRUFER'], $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_RESTO}' , $user->lang['APPLY_CHAR_RESTO'], $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_DRUFER}' , sprintf( $user->lang['APPLY_CHAR_DRUFER'], $config['bbdkp_apply_pqcolor']) , $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_RESTO}' , sprintf( $user->lang['APPLY_CHAR_RESTO'], $config['bbdkp_apply_pqcolor']) , $leftpane); 
 
 				
-				$leftpane = str_replace('{APPLY_CHAR_ARMOR}' , sprintf( $user->lang['APPLY_CHAR_ARMOR'], $this->armor), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_DEF}' , sprintf( $user->lang['APPLY_CHAR_DEF'], $this->defense), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_DODGE}' , sprintf( $user->lang['APPLY_CHAR_DODGE'], $this->dodge), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_MELEEHIT}' , sprintf( $user->lang['APPLY_CHAR_MELEEHIT'], $this->mhr), $leftpane);
-				$leftpane = str_replace('{APPLY_CHAR_MELEEDPS}' , sprintf( $user->lang['APPLY_CHAR_MELEEDPS'], $this->mhdps), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_MELEEAP}' , sprintf( $user->lang['APPLY_CHAR_MELEEAP'], $this->map), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_MELEECRIT}' , sprintf( $user->lang['APPLY_CHAR_MELEECRIT'], $this->mcr), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_MELEEHAS}' , sprintf( $user->lang['APPLY_CHAR_MELEEHAS'], $this->mspeed), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_EXPERTISE}' , sprintf( $user->lang['APPLY_CHAR_EXPERTISE'], $this->expertise), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_ARMOR}' , sprintf( $user->lang['APPLY_CHAR_ARMOR'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->armor . '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_DEF}' , sprintf( $user->lang['APPLY_CHAR_DEF'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->defense . '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_DODGE}' , sprintf( $user->lang['APPLY_CHAR_DODGE'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->dodge . '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_MELEEHIT}' , sprintf( $user->lang['APPLY_CHAR_MELEEHIT'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->mhr . '[/color]'), $leftpane);
+				$leftpane = str_replace('{APPLY_CHAR_MELEEDPS}' , sprintf( $user->lang['APPLY_CHAR_MELEEDPS'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->mhdps . '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_MELEEAP}' , sprintf( $user->lang['APPLY_CHAR_MELEEAP'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->map . '[/color]') , $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_MELEECRIT}' , sprintf( $user->lang['APPLY_CHAR_MELEECRIT'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->mcr . '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_MELEEHAS}' , sprintf( $user->lang['APPLY_CHAR_MELEEHAS'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->mspeed . '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_EXPERTISE}' , sprintf( $user->lang['APPLY_CHAR_EXPERTISE'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->expertise . '[/color]'), $leftpane); 
 				
-				$leftpane = str_replace('{APPLY_CHAR_SP}' 	 , sprintf( $user->lang['APPLY_CHAR_SP'], $this->spellpower), $leftpane);
-				$leftpane = str_replace('{APPLY_CHAR_MANA}'  , sprintf( $user->lang['APPLY_CHAR_MANA'], $this->mana), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_NATCRIT}' , sprintf( $user->lang['APPLY_CHAR_NATCRIT'], $this->naturecrit), $leftpane);
-				$leftpane = str_replace('{APPLY_CHAR_SPHIT}' , sprintf( $user->lang['APPLY_CHAR_SPHIT'], $this->spellhit), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_SPHAS}' , sprintf( $user->lang['APPLY_CHAR_SPHAS'], $this->spellhaste), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_MREG}' , sprintf( $user->lang['APPLY_CHAR_MREG'], $this->mrcast), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_SP}' 	 , sprintf( $user->lang['APPLY_CHAR_SP'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->spellpower . '[/color]'), $leftpane);
+				$leftpane = str_replace('{APPLY_CHAR_MANA}'  , sprintf( $user->lang['APPLY_CHAR_MANA'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->mana . '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_NATCRIT}' , sprintf( $user->lang['APPLY_CHAR_NATCRIT'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->naturecrit. '[/color]'), $leftpane);
+				$leftpane = str_replace('{APPLY_CHAR_SPHIT}' , sprintf( $user->lang['APPLY_CHAR_SPHIT'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->spellhit. '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_SPHAS}' , sprintf( $user->lang['APPLY_CHAR_SPHAS'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->spellhaste. '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_MREG}' , sprintf( $user->lang['APPLY_CHAR_MREG'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->mrcast. '[/color]'), $leftpane); 
 				
 				break;
 			case 'Shaman':
 				$leftpane = $filecontents['class_shaman'];
-				$leftpane = str_replace('{APPLY_CHAR_SHAEN}' , $user->lang['APPLY_CHAR_SHAEN'], $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_SHAEL}' , $user->lang['APPLY_CHAR_SHAEL'], $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_SHARE}' , $user->lang['APPLY_CHAR_SHARE'], $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_SHAEN}' , sprintf( $user->lang['APPLY_CHAR_SHAEN'], $config['bbdkp_apply_pqcolor']), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_SHAEL}' , sprintf( $user->lang['APPLY_CHAR_SHAEL'], $config['bbdkp_apply_pqcolor']), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_SHARE}' , sprintf( $user->lang['APPLY_CHAR_SHARE'], $config['bbdkp_apply_pqcolor']), $leftpane); 
 				
-				$leftpane = str_replace('{APPLY_CHAR_MELEEDPS}' , sprintf( $user->lang['APPLY_CHAR_MELEEDPS'], $this->mhdps), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_MELEEAP}' , sprintf( $user->lang['APPLY_CHAR_MELEEAP'], $this->map), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_MELEECRIT}' , sprintf( $user->lang['APPLY_CHAR_MELEECRIT'], $this->mcr), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_MELEEHAS}' , sprintf( $user->lang['APPLY_CHAR_MELEEHAS'], $this->mspeed), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_EXPERTISE}' , sprintf( $user->lang['APPLY_CHAR_EXPERTISE'], $this->expertise), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_MELEEDPS}' , sprintf( $user->lang['APPLY_CHAR_MELEEDPS'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->mhdps. '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_MELEEAP}' , sprintf( $user->lang['APPLY_CHAR_MELEEAP'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->map. '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_MELEECRIT}' , sprintf( $user->lang['APPLY_CHAR_MELEECRIT'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->mcr. '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_MELEEHAS}' , sprintf( $user->lang['APPLY_CHAR_MELEEHAS'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->mspeed. '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_EXPERTISE}' , sprintf( $user->lang['APPLY_CHAR_EXPERTISE'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->expertise. '[/color]'), $leftpane); 
 				
-				$leftpane = str_replace('{APPLY_CHAR_SP}' 	 , sprintf( $user->lang['APPLY_CHAR_SP'], $this->spellpower), $leftpane);
-				$leftpane = str_replace('{APPLY_CHAR_MANA}'  , sprintf( $user->lang['APPLY_CHAR_MANA'], $this->mana), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_NATCRIT}' , sprintf( $user->lang['APPLY_CHAR_NATCRIT'], $this->naturecrit), $leftpane);
-				$leftpane = str_replace('{APPLY_CHAR_FCRIT}' , sprintf( $user->lang['APPLY_CHAR_FCRIT'], $this->firecrit), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_SPHIT}' , sprintf( $user->lang['APPLY_CHAR_SPHIT'], $this->spellhit), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_SPHAS}' , sprintf( $user->lang['APPLY_CHAR_SPHAS'], $this->spellhaste), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_MREG}' , sprintf( $user->lang['APPLY_CHAR_MREG'], $this->mrcast), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_SP}' 	 , sprintf( $user->lang['APPLY_CHAR_SP'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->spellpower. '[/color]'), $leftpane);
+				$leftpane = str_replace('{APPLY_CHAR_MANA}'  , sprintf( $user->lang['APPLY_CHAR_MANA'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' .  $this->mana. '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_NATCRIT}' , sprintf( $user->lang['APPLY_CHAR_NATCRIT'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->naturecrit. '[/color]'), $leftpane);
+				$leftpane = str_replace('{APPLY_CHAR_FCRIT}' , sprintf( $user->lang['APPLY_CHAR_FCRIT'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->firecrit. '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_SPHIT}' , sprintf( $user->lang['APPLY_CHAR_SPHIT'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->spellhit. '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_SPHAS}' , sprintf( $user->lang['APPLY_CHAR_SPHAS'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->spellhaste. '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_MREG}' , sprintf( $user->lang['APPLY_CHAR_MREG'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->mrcast. '[/color]'), $leftpane); 
 								
 				break;
 			 default:
 			 	$leftpane = $filecontents['class_dk'];
 				
-				$leftpane = str_replace('{APPLY_CHAR_ARMOR}' , sprintf( $user->lang['APPLY_CHAR_ARMOR'], $this->armor), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_DEF}' , sprintf( $user->lang['APPLY_CHAR_DEF'], $this->defense), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_DODGE}' , sprintf( $user->lang['APPLY_CHAR_DODGE'], $this->dodge), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_MELEEHIT}' , sprintf( $user->lang['APPLY_CHAR_MELEEHIT'], $this->mhr), $leftpane);
-				$leftpane = str_replace('{APPLY_CHAR_MELEEDPS}' , sprintf( $user->lang['APPLY_CHAR_MELEEDPS'], $this->mhdps), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_MELEEAP}' , sprintf( $user->lang['APPLY_CHAR_MELEEAP'], $this->map), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_MELEECRIT}' , sprintf( $user->lang['APPLY_CHAR_MELEECRIT'], $this->mcr), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_MELEEHAS}' , sprintf( $user->lang['APPLY_CHAR_MELEEHAS'], $this->mspeed), $leftpane); 
-				$leftpane = str_replace('{APPLY_CHAR_EXPERTISE}' , sprintf( $user->lang['APPLY_CHAR_EXPERTISE'], $this->expertise), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_ARMOR}' , sprintf( $user->lang['APPLY_CHAR_ARMOR'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->armor. '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_DEF}' , sprintf( $user->lang['APPLY_CHAR_DEF'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->defense. '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_DODGE}' , sprintf( $user->lang['APPLY_CHAR_DODGE'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->dodge. '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_MELEEHIT}' , sprintf( $user->lang['APPLY_CHAR_MELEEHIT'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->mhr. '[/color]'), $leftpane);
+				$leftpane = str_replace('{APPLY_CHAR_MELEEDPS}' , sprintf( $user->lang['APPLY_CHAR_MELEEDPS'],$config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' .  $this->mhdps. '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_MELEEAP}' , sprintf( $user->lang['APPLY_CHAR_MELEEAP'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' .  $this->map. '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_MELEECRIT}' , sprintf( $user->lang['APPLY_CHAR_MELEECRIT'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->mcr. '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_MELEEHAS}' , sprintf( $user->lang['APPLY_CHAR_MELEEHAS'], $config['bbdkp_apply_pqcolor'],  '[color='. $config['bbdkp_apply_pacolor'] . ']' . $this->mspeed. '[/color]'), $leftpane); 
+				$leftpane = str_replace('{APPLY_CHAR_EXPERTISE}' , sprintf( $user->lang['APPLY_CHAR_EXPERTISE'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' .  $this->expertise. '[/color]'), $leftpane); 
 							 	
 				break;
 		}
-		$leftpane = str_replace('{APPLY_CHAR_HP}' , sprintf( $user->lang['APPLY_CHAR_HP'], $this->hp), $leftpane); 
-		$leftpane = str_replace('{APPLY_CHAR_LEVEL}'  , sprintf( $user->lang['APPLY_CHAR_LEVEL'], $this->level),  $leftpane);
-		$leftpane = str_replace('{APPLY_CHAR_NAME}'  , sprintf( $user->lang['APPLY_CHAR_NAME'], $this->name),  $leftpane); 
-		$leftpane = str_replace('{APPLY_CHAR_CLASS}' , sprintf( $user->lang['APPLY_CHAR_CLASS'], $this->class), $leftpane); 
-		$leftpane = str_replace('{APPLY_CHAR_PROFF}' , sprintf( $user->lang['APPLY_CHAR_PROFF'], $this->professions), $leftpane); 
-		$leftpane = str_replace('{APPLY_CHAR_BUILD}' , sprintf( $user->lang['APPLY_CHAR_BUILD'], $this->talents), $leftpane); 
+		$leftpane = str_replace('{APPLY_CHAR_HP}' , sprintf( $user->lang['APPLY_CHAR_HP'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' .  $this->hp. '[/color]'), $leftpane); 
+		$leftpane = str_replace('{APPLY_CHAR_LEVEL}'  , sprintf( $user->lang['APPLY_CHAR_LEVEL'],$config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' .  $this->level. '[/color]'),  $leftpane);
+		$leftpane = str_replace('{APPLY_CHAR_NAME}'  , sprintf( $user->lang['APPLY_CHAR_NAME'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' .  $this->name. '[/color]'),  $leftpane); 
+		$leftpane = str_replace('{APPLY_CHAR_CLASS}' , sprintf( $user->lang['APPLY_CHAR_CLASS'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' .  $this->class. '[/color]'), $leftpane); 
+		$leftpane = str_replace('{APPLY_CHAR_PROFF}' , sprintf( $user->lang['APPLY_CHAR_PROFF'], $config['bbdkp_apply_pqcolor'],  $this->professions), $leftpane); 
+		$leftpane = str_replace('{APPLY_CHAR_BUILD}' , sprintf( $user->lang['APPLY_CHAR_BUILD'], $config['bbdkp_apply_pqcolor'], '[color='. $config['bbdkp_apply_pacolor'] . ']' .  $this->talents. '[/color]'), $leftpane); 
 		
 		//place left td in main div
 		$innerdiv = str_replace('{CLASSTD}', $leftpane , $innerdiv);

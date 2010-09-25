@@ -1,7 +1,7 @@
 <?php
 /**
 * language file Application form English
-* 
+* @author Sajaki
 * @package bbDkp
 * @copyright (c) 2009 bbDkp <http://code.google.com/p/bbdkp/>
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License

@@ -129,7 +129,6 @@ if (($post_data['forum_status'] == ITEM_LOCKED || (isset($post_data['topic_statu
 	trigger_error(($post_data['forum_status'] == ITEM_LOCKED) ? 'FORUM_LOCKED' : 'TOPIC_LOCKED');
 }
 
-
 if ($submit)
 {
 	// validate captcha 
@@ -201,23 +200,27 @@ if ($submit && !sizeof($error) && check_form_key('applyposting') )
 		$candidate->realm = $config['bbdkp_apply_realm'];
 	}
 
-	// build post
+	/*****************************
+	 * 
+	 * build forum post
+	 * 
+	 ******************************/ 
 	$apply_post = '';
 	
 	// if armory is down or simplerecruit mode is 'on' then get data from apply form
 	if (request_var('gethidden', '') == '1' or $config['bbdkp_apply_simplerecruit'] == 'True' )
 	{
 		//character name
-		$apply_post .= '[color=#105289]' . $user->lang['APPLY_NAME'] . '[/color]' .  $candidate->name ;
+		$apply_post .= '[color='. $config['bbdkp_apply_pqcolor'] .']' . $user->lang['APPLY_NAME'] . '[/color]' . '[color='. $config['bbdkp_apply_pacolor'] .']' . $candidate->name . '[/color]' ;
 		$apply_post .= '<br />'; 
 		
 		$candidate->level = utf8_normalize_nfc(request_var('level', ' ', true));
 		//character level
-		$apply_post .= '[color=#105289]' . $user->lang['APPLY_LEVEL'] . '[/color]' .  $candidate->level ;
+		$apply_post .= '[color='. $config['bbdkp_apply_pqcolor'] .']' . $user->lang['APPLY_LEVEL'] . '[/color]' . '[color='. $config['bbdkp_apply_pacolor'] .']' . $candidate->level . '[/color]' ;
 		$apply_post .= '<br />'; 
 
 		//character Realm
-		$apply_post .= '[color=#105289]' . $user->lang['APPLY_REALM1'] . '[/color]' .  $candidate->realm ;
+		$apply_post .= '[color='. $config['bbdkp_apply_pqcolor'] .']' . $user->lang['APPLY_REALM1'] . '[/color]' . '[color='. $config['bbdkp_apply_pacolor'] .']' . $candidate->realm . '[/color]' ;
 		$apply_post .= '<br />'; 
 		
 		//character class
@@ -245,15 +248,15 @@ if ($submit && !sizeof($error) && check_form_key('applyposting') )
 			case 'SR_WARRIOR': $candidate->class = $user->lang['SR_WARRIOR'];
 				break;								
 		}
-		$apply_post .= '[color=#105289]' . $user->lang['APPLY_CLASS'] . '[/color] ' .  $candidate->class ;
+		$apply_post .= '[color='. $config['bbdkp_apply_pqcolor'] .']' . $user->lang['APPLY_CLASS'] . '[/color] ' . '[color='. $config['bbdkp_apply_pacolor'] .']' . $candidate->class . '[/color]' ;
 		$apply_post .= '<br />'; 
 	
 		$candidate->professions = utf8_normalize_nfc(request_var('professions', ' ', true));
-		$apply_post .= '[color=#105289]' . $user->lang['APPLY_PROFF'] . '[/color] ' .  $candidate->professions ;
+		$apply_post .= '[color='. $config['bbdkp_apply_pqcolor'] .']' . $user->lang['APPLY_PROFF'] . '[/color] ' . '[color='. $config['bbdkp_apply_pacolor'] .']' . $candidate->professions . '[/color]';
 		$apply_post .= '<br />'; 
 		
 		$candidate->talents = utf8_normalize_nfc(request_var('talents', ' ', true));
-		$apply_post .= '[color=#105289]' . $user->lang['APPLY_TALENT'] . '[/color] ' .  $candidate->talents ;
+		$apply_post .= '[color='. $config['bbdkp_apply_pqcolor'] .']' . $user->lang['APPLY_TALENT'] . '[/color] ' . '[color='. $config['bbdkp_apply_pacolor'] .']' . $candidate->talents . '[/color]' ;
 		$apply_post .= '<br /><br />'; 
 	}
 	else 
@@ -270,9 +273,9 @@ if ($submit && !sizeof($error) && check_form_key('applyposting') )
 		}
 	}
 	
-	$apply_post .= '<br /><br />';
+	$apply_post .= '<br />';
 	
-	// complete with questions
+	// complete with formatted questions and answers
 	$sql = "SELECT * FROM " . APPTEMPLATE_TABLE . ' ORDER BY qorder' ;
 	$result = $db->sql_query_limit($sql, 100, 2);
 	while ( $row = $db->sql_fetchrow($result) )
@@ -287,11 +290,11 @@ if ($submit && !sizeof($error) && check_form_key('applyposting') )
 					 $cb_countis = count( request_var($row['qorder'], array(0 => 0)) );  
                      $cb_count = 0;
                                            
-                        $apply_post .= '[color=#105289][b]' . $row['question'] . ': [/b][/color]';
+                        $apply_post .= '[color='. $config['bbdkp_apply_pqcolor'] .'][b]' . $row['question'] . ': [/b][/color]';
                        
                         foreach(  utf8_normalize_nfc( request_var($row['qorder'], array(0 => '') , true)) as $value) 
                         {
-                            $apply_post .= $value;
+                            $apply_post .=  '[color='. $config['bbdkp_apply_pacolor'] .']' . $value . '[/color]' ;
                             if ($cb_count < $cb_countis-1)
                             {
                                 $apply_post .= ',  ';
@@ -305,7 +308,7 @@ if ($submit && !sizeof($error) && check_form_key('applyposting') )
 				case 'Textbox':
 				case 'Selectbox':					
 				case 'Radiobuttons':					
-					$apply_post .= '[color=#105289][b]' . $row['question'] . ': [/b][/color]<br />' . utf8_normalize_nfc(request_var($row['qorder'], ' ', true));
+					$apply_post .= '[color='. $config['bbdkp_apply_pqcolor'] .'][b]' . $row['question'] . ': [/b][/color]<br />' . '[color='. $config['bbdkp_apply_pacolor'] .']' . utf8_normalize_nfc(request_var($row['qorder'], ' ', true)) . '[/color]';
 					$apply_post .= '<br /><br />'; 
 					break;
 					
