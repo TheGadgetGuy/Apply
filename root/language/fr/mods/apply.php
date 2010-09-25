@@ -131,9 +131,16 @@ $lang = array_merge($lang, array(
 'APPLY_ACP_QUESTNADD' 		=> 'Nouvelle question sauvegardée !',   
 'APPLY_ACP_EXPLAINOPTIONS' 	=> 'Sépare les options avec une virgule "," sans espaces.',  
 
+/** ACP settings for posting template **/
+'JQUERY_MISSING'		=> 'jquery.js n’est pas présent. Vous devez installer jquery.js dans adm/style/dkp pour le cercle de couleurs à apparaitre.', 
+'APPLY_COLORSETTINGS' 		=> 'Règlages Couleurs',
+'APPLY_POST_ANSWERCOLOR' 	=> 'Couleur Réponses',
+'APPLY_POST_QUESTIONCOLOR' 	=> 'Couleur Questions',
+'APPLY_FORMCOLOR'			=> 'Couleur Questions du Formulaire',
+'APPLY_POSTCOLOR'			=> 'Couleurs formulaire et messages de recrutement',
+'APPLY_POSTCOLOR_EXPLAIN' 	=> 'Couleur des textes utilisées dans le formulaire et dans les messages. Donc si vous utilisez un style sombre, vous pourrez choisir une couleur qui contraste.',
 
 /** posting template **/
-
 'APPLY_CHAR_NAME' 	=> '[color=#105289][b]Nom de Caractère : [/b][/color]%s',
 'APPLY_CHAR_LEVEL' 	=> '[color=#105289]Niveau : [/color]%s',  
 'APPLY_CHAR_CLASS' 	=> '[color=#105289]Classe: [/color]%s' ,

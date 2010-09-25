@@ -20,7 +20,7 @@ if (!defined('IN_PHPBB'))
 }
 if (! defined('EMED_BBDKP')) 
 {
-    trigger_error('bbDkp is currently disabled.', E_USER_WARNING);
+    trigger_error($user->lang['BBDKPDISABLED'], E_USER_WARNING);
 }
 
 class acp_dkp_apply extends bbDkp_Admin
@@ -30,7 +30,7 @@ class acp_dkp_apply extends bbDkp_Admin
    {
       global $db, $user, $auth, $template,  $sid, $cache;
       global $config, $phpbb_root_path, $phpbb_admin_path, $phpEx; 
-     
+      $user->add_lang(array('common'));
 	  $user->add_lang(array('mods/dkp_admin'));
 	  $user->add_lang(array('mods/dkp_common'));
 	  $user->add_lang(array('mods/apply'));

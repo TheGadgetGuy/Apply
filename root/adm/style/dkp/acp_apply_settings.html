@@ -62,7 +62,7 @@
   </dl>
   	
   	<p class="quick">
-	<input type="submit" name="savepri" value="save" class="button1" />
+	<input type="submit" name="savepri" value="{L_UPDATE}" class="button1" />
 	</p>
 	
 </fieldset>
@@ -104,7 +104,7 @@
 	  </dl>
 
 	<p class="quick">
-	<input type="submit" name="savearm" value="save" class="button1" />
+	<input type="submit" name="savearm" value="{L_UPDATE}" class="button1" />
 	</p>
 
 </fieldset>
@@ -133,7 +133,7 @@
 	</dl>
 
 <p class="quick">
-<input type="submit" name="update" value="Update" class="button1" />
+<input type="submit" name="update" value="{L_UPDATE}" class="button1" />
 </p>
 
 </fieldset>
@@ -162,8 +162,36 @@
 	</dl>
 
 	<p class="quick">
-	<input type="submit" name="add" value="Add" class="button1" />
+	<input type="submit" name="add" value="{L_ADD}" class="button1" />
 	</p>
+</fieldset>
+
+<fieldset>
+<legend>{L_APPLY_COLORSETTINGS}</legend>
+<dl>
+	<dt><label>{L_APPLY_POSTCOLOR}</label><br /><br />{L_APPLY_POSTCOLOR_EXPLAIN}</dt>
+	<dd>
+		<table style=" border-width: 0px;"> 
+		<tr>
+			<td >
+			<span id="nojquery" style="color: red; font-size: 1.4em">{L_JQUERY_MISSING}</span>
+			  <span id="picker"></span>
+	       	</td>
+       		<td><p>
+			<select name="app_textcolors" class="input" id="app_textcolors">
+                <option value="templtext">{L_APPLY_POST_QUESTIONCOLOR}</option>
+                <option value="posttext">{L_APPLY_POST_ANSWERCOLOR}</option>
+                <option value="posttext">{L_APPLY_FORMCOLOR}</option>
+         	</select></p>
+			<span class="form-item"><input type="text" id="applyquestioncolor" name="applyquestioncolor" value="#123456" /></span>
+    	 	</td>
+	     </tr>
+		</table>
+	</dd>
+</dl>
+<p class="quick">
+	<input type="submit" name="updatecolor" value="{L_UPDATE}" class="button1" />
+</p>
 </fieldset>
 
 </form>
