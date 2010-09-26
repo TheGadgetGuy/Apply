@@ -181,17 +181,27 @@ if ($submit && !sizeof($error) && check_form_key('applyposting') )
 				$db->sql_freeresult($result);
 				trigger_error($message);		 
 			}
-		}
 		
+		}
 		
 	}
 	$db->sql_freeresult($result);
-	
+
+		   
 	// retrieve parameters
 	// declare class
 	$candidate = new dkp_character();
 	$candidate->name = utf8_normalize_nfc(request_var('1', ' ', true));
 	
+	// check for valid input. name can only be alphanumeric without spaces or special characters
+	//if this preg_match returns true then there is something other than letters
+   if (preg_match('/[^a-zA-ZàäåâÅÂçÇéèëËêÊïÏîÎæŒæÆÅóòÓÒöÖôÔøØüÜ\s]+/', $candidate->name  ))
+   {
+	  $message = $user->lang['ERROR_NAME']. $candidate->name . ' ';  ///$user->lang['APPLY_REQUIRED'];
+	  $message = $message . '<br /><br />' . sprintf($user->lang['RETURN_APPLY'], '<a href="' . append_sid("{$phpbb_root_path}apply.$phpEx") . '">', '</a>');
+   	  trigger_error($message);	
+   }
+   
 	//get realm (replace this with dropdown ??)
 	$candidate->realm = trim(utf8_normalize_nfc(request_var('2', $config['bbdkp_apply_realm'], true))); 
 	if ( $candidate->realm == '')

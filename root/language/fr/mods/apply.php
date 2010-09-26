@@ -193,7 +193,8 @@ $lang = array_merge($lang, array(
 'APPLY_CHAR_SHARE' 		=> '[color=%s][u]Restauration[/u][/color]', 
 
 'APPLY_CHAR_URL' => '[color=%s][/color][url=%s]Lien Armurerie[/url]', 
-
+'ERROR_NAME'  =>  'Erreur : Nom doit être alphabetique (a-zA-ZàäåâÅÂçÇéèëêïÏîÎæŒæÆÅóòÓÒöÖôÔøØüÜ sont permis). ',
+'RETURN_APPLY'  =>  'Retourne au formulaire.',
 ));
 
 ?>

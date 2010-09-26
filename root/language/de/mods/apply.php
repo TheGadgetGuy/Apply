@@ -104,7 +104,7 @@ Um uns mit deiner Bewerbung zu untersützen, beantworte bitte die unten aufgefü
 'APPLY_ACP_APPTEMPLATEUPD'	=> 'Aktualisiere Bewerbungsbogen', 
 
 /***** ACP template settings *****/
-'ACP_DKP_APPLY_EXPLAIN'  => 'Hier kannst du alle Einstellungen zum Bewerbungsformular vornehmen.',
+'ACP_DKP_APPLY_EXPLAIN'  	=> 'Hier kannst du alle Einstellungen zum Bewerbungsformular vornehmen.',
 'APPLY_ACP_APPTEMPLATENEW'  => 'Bewerbungsvorlage neue Frage', 
 'APPLY_CHGMAND' 			=> 'Ändere bestehende Fragen hier. ',
 'APPLY_CHGMAND_EXPLAIN' 	=> 'Ändere die Pflichtprüfung, Reihenfolge, Frage und Art der Eingabe. Grenze verschiedene Optionen durch Komma "," ohne Leerzeichen voneinander ab. Die ersten beiden Fragen sind reserviert.',
@@ -195,6 +195,9 @@ Um uns mit deiner Bewerbung zu untersützen, beantworte bitte die unten aufgefü
 'APPLY_CHAR_SHARE' 		=> '[color=%s][u]Wiederherstellung[/u][/color]', 
 
 'APPLY_CHAR_URL' => '[color=%s][/color][url=%s]WoW Armory Link[/url]', 
+'ERROR_NAME'  =>  'Fehler : Name muss alphabetisch (a-zA-ZàäåâÅÂçÇéèëêïÏîÎæŒæÆÅóòÓÒöÖôÔøØüÜ sind erlaubt). ',
+'RETURN_APPLY'  =>  'Gehe zurück zum Fragebogen.',
+
 
 ));
 

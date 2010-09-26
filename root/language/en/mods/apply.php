@@ -105,6 +105,7 @@ To help us with your application please answer the questions below. Enter your c
 'APPLY_ACP_APPTEMPLATEUPD'	=> 'Update Application template', 
 
 /***** ACP template settings *****/
+'ACP_DKP_APPLY_EXPLAIN'  	=> 'Here you can set all preferences of the Recruitment Mod',
 'APPLY_ACP_APPTEMPLATENEW'  => 'Application template New item', 
 'APPLY_CHGMAND' 			=> 'Change Questionnaire here. ',
 'APPLY_CHGMAND_EXPLAIN' 	=> 'Change the mandatory check, order, question and type. Separate the options with a comma "," with no spaces. The two first questions are reserved.',
@@ -131,6 +132,8 @@ To help us with your application please answer the questions below. Enter your c
 'APPLY_ACP_QUESTNOTADD' 	=> 'ERROR : New question not saved !', 
 'APPLY_ACP_QUESTNADD' 		=> 'New question Saved !',   
 'APPLY_ACP_EXPLAINOPTIONS' 	=> 'Seperate Options with a comma "," with no spaces.',  
+
+
 
 /** ACP settings for posting template **/
 'APPLY_COLORSETTINGS' 		=> 'Apply Color Settings',
@@ -194,6 +197,9 @@ To help us with your application please answer the questions below. Enter your c
 'APPLY_CHAR_SHARE' 		=> '[color=%s][u]Restoration[/u][/color]', 
 
 'APPLY_CHAR_URL' => '[color=%s][/color][url=%s]WoW Armory Link[/url]', 
+
+'ERROR_NAME'  =>  'Error : Name must be Alphabetic (a-zA-ZàäåâÅÂçÇéèëêïÏîÎæŒæÆÅóòÓÒöÖôÔøØüÜ are allowed). ',
+'RETURN_APPLY'  =>  'Return to Application',
 
 ));
 
