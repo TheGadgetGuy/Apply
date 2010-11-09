@@ -43,8 +43,6 @@ class acp_dkp_apply extends bbDkp_Admin
              */
             case 'apply_settings' :
                 $link = '<br /><a href="' . append_sid("index.$phpEx", "i=dkp_apply&amp;mode=apply_settings") . '">' . $user->lang['APPLY_ACP_RETURN'] . '</a>';
-
-                
                 $armsettings = (isset($_POST['savearm'])) ? true : false;
                 $prisettings = (isset($_POST['savepri'])) ? true : false; 
                 $update = (isset($_POST['update'])) ? true : false;
@@ -63,7 +61,6 @@ class acp_dkp_apply extends bbDkp_Admin
                     $cache->destroy('config');
                     trigger_error($user->lang['APPLY_ACP_SETTINGSAVED'] . $link);
                }
-               
                 /*
                  * armory settings handler
                  */
@@ -205,16 +202,17 @@ class acp_dkp_apply extends bbDkp_Admin
                if($colorsettings)
                {
 					$colorid = request_var('app_textcolors', ''); 
+					$newcolor = request_var('applyquestioncolor', '');
 					switch 	($colorid)
 					{
-						case 'postqcolor':
-		               		set_config('bbdkp_apply_pqcolor', request_var('applyquestioncolor', ''), true );	
+						case 'templtext':
+		               		set_config('bbdkp_apply_pqcolor', $newcolor, true );	
 							break;
-						case 'postacolor':
-		               		set_config('bbdkp_apply_pacolor', request_var('applyquestioncolor', ''), true );	
+						case 'answertext':
+		               		set_config('bbdkp_apply_pacolor', $newcolor, true );	
 		               		break;
-						case 'formqcolor':
-		               		set_config('bbdkp_apply_fqcolor', request_var('applyquestioncolor', ''), true );	
+						case 'posttext':
+		               		set_config('bbdkp_apply_fqcolor', $newcolor, true );	
 							break;
 					}
                     $cache->destroy('config');
@@ -236,7 +234,7 @@ class acp_dkp_apply extends bbDkp_Admin
                 $db->sql_freeresult($result);
 
                 
-                				/*
+                /*
 				 * loading config
 				 */
 

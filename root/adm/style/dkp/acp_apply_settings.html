@@ -183,12 +183,7 @@
 			<span id="nojquery" style="color: red; font-size: 1.4em">{L_JQUERY_MISSING}</span>
 			  <span id="picker"></span>
 	       	</td>
-       		<td><p>
-			<select name="app_textcolors" class="input" id="app_textcolors">
-                <option value="postqcolor">{L_APPLY_POST_QUESTIONCOLOR}</option>
-                <option value="postacolor">{L_APPLY_POST_ANSWERCOLOR}</option>
-                <option value="formqcolor">{L_APPLY_FORMCOLOR}</option>
-         	</select></p>
+       		<td>
 			<span class="form-item"><input type="text" id="applyquestioncolor" name="applyquestioncolor" value="#123456" /></span>
     	 	</td>
 	     </tr>
@@ -196,7 +191,12 @@
 	</dd>
 </dl>
 <p class="quick">
-	<input type="submit" name="updatecolor" value="{L_UPDATE}" class="button1" />
+    <select name="app_textcolors" class="input" id="app_textcolors">
+             <option value="postqcolor">{L_APPLY_POST_QUESTIONCOLOR}</option>
+             <option value="postacolor">{L_APPLY_POST_ANSWERCOLOR}</option>
+             <option value="formqcolor">{L_APPLY_FORMCOLOR}</option>
+    </select>
+    <input type="submit" name="updatecolor" value="{L_UPDATE}" class="button1" />
 </p>
 </fieldset>
 
