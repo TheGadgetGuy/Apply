@@ -205,13 +205,13 @@ class acp_dkp_apply extends bbDkp_Admin
 					$newcolor = request_var('applyquestioncolor', '');
 					switch 	($colorid)
 					{
-						case 'templtext':
+						case 'postqcolor':
 		               		set_config('bbdkp_apply_pqcolor', $newcolor, true );	
 							break;
-						case 'answertext':
+						case 'postacolor':
 		               		set_config('bbdkp_apply_pacolor', $newcolor, true );	
 		               		break;
-						case 'posttext':
+						case 'formqcolor':
 		               		set_config('bbdkp_apply_fqcolor', $newcolor, true );	
 							break;
 					}

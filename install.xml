@@ -7,7 +7,7 @@
 		<meta name="generator" content="MODX file generated with PP MODX Creator by tumba25 (online version)"/>
 		<meta name="generator" content="Phpbb.ModTeam.Tools (c#)"/>
 		<license><![CDATA[http://opensource.org/licenses/gpl-license.php GNU General Public License v2]]></license>
-		<title lang="en"><![CDATA[bbDKP Application plugin 1.2.5]]></title>
+		<title lang="en"><![CDATA[bbDKP Application plugin 1.2.6]]></title>
 		<description lang="en"><![CDATA[This MOD makes a post in a forum specified in the ACP containing answers to ACP userdefined questions. it Supports the HTML tags Textbox, Inputbox, Radiobutton, Selectbox, Checkbox.
 It the post it integrates statistics from the Blizzard Armory like 3d model race, statistics, class and talents, professions and recent achievements and displays it in a jquery popup.]]></description>
 		<description lang="fr"><![CDATA[Ce MOD crée un message dans un forum spécifié dans le PCA selon le format des questions déterminées dans le PCA. Il supporte les balises HTML Textbox, Inputbox, Radiobutton, Selectbox, et Checkbox. Il se connecte à l'Armurerie de Blizzard afin de rapatrier le modèle 3D et le profil du candidat. race, class, talents, professions and Achievements. Ceci est integré dans le message de recrutement.]]></description>
@@ -71,13 +71,21 @@ It the post it integrates statistics from the Blizzard Armory like 3d model race
 				</contributions-group>
 			</author>
 		</author-group>
-		<mod-version>1.2.5</mod-version>
+		<mod-version>1.2.6</mod-version>
 		<installation>
 			<level>easy</level>
 			<time>300</time>
 			<target-version>3.0.7-PL1</target-version>
 		</installation>
 		<history>
+			<entry>
+				<date>2010-11-18</date>
+				<rev-version>1.2.6</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[[FIX] Bug #88 : New global link and language variable for portal in functions.php]]></change>
+					<change><![CDATA[[FIX] Bug #77 : Apply questionnaire Color wheel fixed]]></change>					
+				</changelog>
+			</entry>
 			<entry>
 				<date>2010-09-25</date>
 				<rev-version>1.2.5</rev-version>
@@ -245,6 +253,18 @@ It the post it integrates statistics from the Blizzard Armory like 3d model race
 			<file from="root/install/*.*" to="install/*.*"/>
 			<file from="root/umil/*.*" to="umil/*.*"/>
 		</copy>
+		
+		<open src="includes/functions.php">
+			<edit>
+				<comment lang="en"><![CDATA[ adding Apply link in functions.php]]></comment>
+				<comment lang="fr"><![CDATA[ ajouter lien vers apply dans fonctions.php ]]></comment>
+				<comment lang="de"><![CDATA[ link nach Apply in functions.php]]></comment>								
+				<find><![CDATA[		'U_FEED'				=> generate_board_url() . "/feed.$phpEx",]]></find>
+				<action type="after-add"><![CDATA[		'U_APPLY'            => append_sid("{$phpbb_root_path}apply.$phpEx"),
+				]]></action>
+			</edit>
+		</open>
+		
 		<open src="includes/bbdkp/constants_bbdkp.php">
 			<edit>
 				<comment lang="en"><![CDATA[adding tablename to constants file]]></comment>
@@ -255,6 +275,18 @@ It the post it integrates statistics from the Blizzard Armory like 3d model race
 	]]></action>
 			</edit>
 		</open>
+
+		<open src="language/en/common.php">
+			<edit>
+				<comment lang="en"><![CDATA[new language variable to Apply in portal]]></comment>
+				<comment lang="fr"><![CDATA[Ajout nom recrutement pour portail]]></comment>
+				<comment lang="de"><![CDATA[Zufügung name]]></comment>
+				<find><![CDATA[	'TRANSLATION_INFO'	=> '',]]></find>
+				<action type="after-add"><![CDATA[	'APPLY'                     => 'Apply',
+				]]></action>
+			</edit>
+		</open>
+
 		<php-installer><![CDATA[install/installapply.php]]></php-installer>
 		<diy-instructions lang="en"><![CDATA[Browse to install/installapply.php and run and the apply plugin table installer/updater.]]></diy-instructions>
 		<diy-instructions lang="de"><![CDATA[Rufe install/installapply.php auf und führe den Installer aus. Dies macht entweder eine Vollinstallation 

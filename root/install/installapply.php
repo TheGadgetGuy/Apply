@@ -323,7 +323,11 @@ $versions = array(
 		'custom' => array('applyupdater', 'bbdkp_caches'), 
 
 	),
+		'1.2.6' => array(
 	
+		// do this first
+		'custom' => array('applyupdater', 'bbdkp_caches'), 
+	),	
 	
 );
 
@@ -402,7 +406,7 @@ function applyupdater120($action, $version)
 				array( 
 				'name'  => 'apply', 
 				'value'  => '1', 
-				'version'  => '1.2.0', 								
+				'version'  => '1.2.6', 								
 				'orginal_copyright'  => 'Kapli, Malfate', 				
 				'bbdkp_copyright'  => 'bbDKP Team', 				
 				),
