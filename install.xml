@@ -12,9 +12,9 @@
 It the post it integrates statistics from the Blizzard Armory like 3d model race, statistics, class and talents, professions and recent achievements and displays it in a jquery popup.]]></description>
 		<description lang="fr"><![CDATA[Ce MOD crée un message dans un forum spécifié dans le PCA selon le format des questions déterminées dans le PCA. Il supporte les balises HTML Textbox, Inputbox, Radiobutton, Selectbox, et Checkbox. Il se connecte à l'Armurerie de Blizzard afin de rapatrier le modèle 3D et le profil du candidat. race, class, talents, professions and Achievements. Ceci est integré dans le message de recrutement.]]></description>
 		<description lang="de"><![CDATA[Dieser MOD schafft eine Mitteilung in einem Forum, das im PCA nach dem Format der Fragen spezifiert wurde, die im PCA bestimmt sind. Er trägt die Markierungszeichen HTML Textbox, Inputbox, Radiobutton, Selectbox und Checkbox. Blizzards Arsenal wird aufgerufen, um das 3D Modell, die Basiswerte, die Klasse und Talente, Berufe und Erfolge dann im beitrag zu integrieren.]]></description>
-		<author-notes lang="en"><![CDATA[Requirements : bbDKP 1.1.2 and bbTips.]]></author-notes>
-		<author-notes lang="de"><![CDATA[Voraussetzungen : bbDKP 1.1.2 sowie bbTips.]]></author-notes>
-		<author-notes lang="fr"><![CDATA[Ce mod a comme prérequis bbDKP 1.1.2 ainsi que bbTips.]]></author-notes>
+		<author-notes lang="en"><![CDATA[Requirements : bbDKP 1.2.3 and bbTips.]]></author-notes>
+		<author-notes lang="de"><![CDATA[Voraussetzungen : bbDKP 1.2.3 sowie bbTips.]]></author-notes>
+		<author-notes lang="fr"><![CDATA[Ce mod a comme prérequis bbDKP 1.2.3 ainsi que bbTips.]]></author-notes>
 		<author-group>
 			<author>
 				<realname><![CDATA[Kapli]]></realname>
@@ -71,13 +71,22 @@ It the post it integrates statistics from the Blizzard Armory like 3d model race
 				</contributions-group>
 			</author>
 		</author-group>
-		<mod-version>1.2.6</mod-version>
+		<mod-version>1.3.0</mod-version>
 		<installation>
 			<level>easy</level>
 			<time>300</time>
-			<target-version>3.0.7-PL1</target-version>
+			<target-version>3.0.8</target-version>
 		</installation>
 		<history>
+			<entry>
+				<date>2011-06-15</date>
+				<rev-version>1.3.0</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[[CHG] now uses standard phpbb table prefix]]></change>
+					<change><![CDATA[[CHG] rewrite, removed wow armory link.]]></change>
+					<change><![CDATA[[CHG] is multigame compatible]]></change>
+				</changelog>
+			</entry>
 			<entry>
 				<date>2010-11-18</date>
 				<rev-version>1.2.6</rev-version>
@@ -227,8 +236,8 @@ It the post it integrates statistics from the Blizzard Armory like 3d model race
 			</entry>
 		</history>
 		<link-group>
-			<link type="dependency" href="http://www.bbdkp.com/downloads.php" lang="en">bbDKP 1.1.2</link>
-			<link type="dependency" href="http://www.bbdkp.com/downloads.php" lang="en">bbTips 0.3.7</link>
+			<link type="dependency" href="http://www.bbdkp.com/downloads.php" lang="en">bbDKP 1.2.3</link>
+			<link type="dependency" href="http://www.bbdkp.com/downloads.php" lang="en">bbTips 0.4.0</link>
 			<link type="template" href="contrib/subsilver2.xml" lang="en">subsilver2 Style</link>
 			<link type="template" href="contrib/subsilver2.xml" lang="de">subsilver2 Style</link>
 			<link type="template" href="contrib/subsilver2.xml" lang="fr">Style subsilver2</link>

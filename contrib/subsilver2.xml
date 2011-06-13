@@ -6,9 +6,9 @@
 	<header>
 		<meta name="generator" content="MODX file generated with PP MODX Creator by tumba25 (online version)"/>
 		<license><![CDATA[http://opensource.org/licenses/gpl-license.php GNU General Public License v2]]></license>
-		<title lang="en"><![CDATA[bbDkp Application plugin 1.2.5 - subsilver2 style]]></title>
-		<title lang="fr"><![CDATA[bbDkp Application plugin 1.2.5 - Style subsilver2]]></title>
-		<title lang="de"><![CDATA[bbDkp Application plugin 1.2.5 - subsilver2 Style]]></title>
+		<title lang="en"><![CDATA[bbDkp Application plugin 1.3.0 - subsilver2 style]]></title>
+		<title lang="fr"><![CDATA[bbDkp Application plugin 1.3.0 - Style subsilver2]]></title>
+		<title lang="de"><![CDATA[bbDkp Application plugin 1.3.0 - subsilver2 Style]]></title>
 		<description lang="en"><![CDATA[subsilver2 edits]]></description>
 		<description lang="fr"><![CDATA[éditions à faire pour subsilver2]]></description>
 		<description lang="de"><![CDATA[subsilver2 edits zu machen]]></description>
@@ -68,11 +68,11 @@
 				</contributions-group>
 			</author>
 		</author-group>
-		<mod-version>1.2.5</mod-version>
+		<mod-version>1.3.0</mod-version>
 		<installation>
 			<level>easy</level>
 			<time>60</time>
-			<target-version>3.0.7-PL1</target-version>
+			<target-version>3.0.8</target-version>
 		</installation>
 		<link-group>
 			<link type="parent" href="../install.xml" lang="en">Manual</link>
