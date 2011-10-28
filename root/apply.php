@@ -24,7 +24,7 @@ include($phpbb_root_path . 'includes/message_parser.' . $phpEx);
 // Start session management
 $user->session_begin();
 $auth->acl($user->data);
-include($phpbb_root_path . 'includes/bbdkp/apply/apply.' . $phpEx);
+//include($phpbb_root_path . 'includes/bbdkp/apply/apply.' . $phpEx);
 
 $mode = 'post';
 $error = $post_data = array();
