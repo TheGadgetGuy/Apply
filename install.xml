@@ -76,8 +76,8 @@
 		</installation>
 		<history>
 			<entry>
-				<date>2011-10-15</date>
-				<rev-version>1.3.0s</rev-version>
+				<date>2011-10-28</date>
+				<rev-version>1.3.0</rev-version>
 				<changelog lang="en">
 					<change><![CDATA[[CHG] now uses standard phpbb table prefix]]></change>
 					<change><![CDATA[[CHG] rewrite, removed wow armory link. (standard multigame version)]]></change>
@@ -291,8 +291,8 @@
 		</open>
 
 		<php-installer><![CDATA[install/installapply.php]]></php-installer>
-		<diy-instructions lang="en"><![CDATA[Browse to install/installapply.php and run and the apply plugin table installer/updater.]]></diy-instructions>
-		<diy-instructions lang="de"><![CDATA[Rufe install/installapply.php auf und führe den Installer aus. Dies macht entweder eine Vollinstallation 
+		<diy-instructions lang="en"><![CDATA[Browse to install/index.php and run and the apply plugin table installer/updater.]]></diy-instructions>
+		<diy-instructions lang="de"><![CDATA[Rufe install/index.php auf und führe den Installer aus. Dies macht entweder eine Vollinstallation 
 oder eine Aktualisierung.]]></diy-instructions>
 		<diy-instructions lang="fr"><![CDATA[Surfez vers install/index.php et lancez l’installateur/mise à jour]]></diy-instructions>
 	</action-group>

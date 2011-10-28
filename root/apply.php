@@ -20,10 +20,6 @@ include($phpbb_root_path . 'common.' . $phpEx);
 include($phpbb_root_path . 'includes/functions_posting.' . $phpEx);
 include($phpbb_root_path . 'includes/functions_display.' . $phpEx);
 include($phpbb_root_path . 'includes/message_parser.' . $phpEx);
-if(!defined("EMED_BBDKP"))
-{
-    trigger_error('bbDkp is currently disabled.', E_USER_WARNING); 
-}
 
 // Start session management
 $user->session_begin();
