@@ -1,10 +1,7 @@
 <?php
 /**
-* bbdkp Apply plugin Installer
-* Powered by bbDkp (c) 2009 The bbDkp Project Team 
-* @version $Id$
-* @package umil
-* @copyright (c) 2008 phpBB Group
+* Apply Installer
+* Powered by bbDkp (c) 2009 www.bbdkp.com
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
@@ -22,29 +19,13 @@ $user->session_begin();
 $auth->acl($user->data);
 $user->setup();
 
-// We only allow a founder install this MOD
-if ($user->data['user_type'] != USER_FOUNDER)
-{
-    if ($user->data['user_id'] == ANONYMOUS)
-    {
-        login_box('', 'LOGIN');
-    }
-    trigger_error('NOT_AUTHORISED');
-}
-
-if(!defined("EMED_BBDKP"))
-{
-    trigger_error('Cannot launch Application plugin Installer because bbDKP is not installed. 
-    This mod depends on the ACP from bbdkp, you need to install bbDkp first. ', E_USER_WARNING); 
-}
-
 if (!file_exists($phpbb_root_path . 'umil/umil_auto.' . $phpEx))
 {
 	trigger_error('Please download the latest UMIL (Unified MOD Install Library) from: <a href="http://www.phpbb.com/mods/umil/">phpBB.com/mods/umil</a>', E_USER_ERROR);
 }
 
 // The name of the mod to be displayed during installation.
-$mod_name = 'bbDKP Recruitment Application Plugin';
+$mod_name = 'Recruitment Application';
 
 /*
 * The name of the config variable which will hold the currently installed version
@@ -90,20 +71,24 @@ $options = array(
 * The version numbering must otherwise be compatible with the version_compare function - http://php.net/manual/en/function.version-compare.php
 */
 
-$bbdkp_table_prefix = "bbeqdkp_";
 $versions = array(
-	
+		'1.2.6' => array(
 			
-	'1.1.1' =>array(
-		//no db changes
-	),
-	
-	
-	'1.2.0' => array(
-
-		// do this first
-		'custom' => array('applyupdater120'), 
-	
+		// adding configs
+		'config_add' => array(
+			 array('bbdkp_apply_realm', 'Realmname', true),
+			 array('bbdkp_apply_region', 'eu'),
+			 array('bbdkp_apply_guests', 'True', true),
+			 array('bbdkp_apply_simplerecruit', 'True', true),			
+	         array('bbdkp_apply_forum_id_private', '2', true),
+	         array('bbdkp_apply_forum_id_public', '2', true),
+	         array('bbdkp_apply_visibilitypref', '1', true),	
+	         array('bbdkp_apply_pqcolor', '#68f3f8', true),
+	         array('bbdkp_apply_pacolor', '#FFFFFF', true),
+	         array('bbdkp_apply_fqcolor', '#68f3f8', true),
+	         array('bbdkp_apply_forumchoice', '1', true),
+			),
+			
 		'module_add' => array(
 				array('acp', 'ACP_DKP_MEMBER', array(
 	           		'module_basename'	=> 'dkp_apply',
@@ -112,7 +97,7 @@ $versions = array(
 	           ),
             
 		'table_add' => array(
-			array($bbdkp_table_prefix . 'apptemplate', array(
+			array($table_prefix . 'bbdkp_apply', array(
 						'COLUMNS'		=> array(
 							'qorder'	=> array('UINT', 0),
 							'question'	=> array('VCHAR:255', ''),
@@ -122,17 +107,8 @@ $versions = array(
 						),
 						'PRIMARY_KEY'	=> 'qorder',),
 					),
-			), 
-		
-		'config_add' => array(
-				array('bbdkp_apply_forum_id', '2', true),
-				array('bbdkp_apply_realm', 'Lightbringer', true),
-				array('bbdkp_apply_region', 'EU'),
-				array('bbdkp_apply_charconnectcheck', 'Tenarae'),
-				array('bbdkp_apply_guests', 'True', true),
-				array('bbdkp_apply_simplerecruit', 'True', true),
-				), 	
-			
+ 		),
+ 		
 		'table_row_insert' => array(
 			array($bbdkp_table_prefix . 'apptemplate', 
 				array(
@@ -216,14 +192,6 @@ $versions = array(
 	
 					array(
 						'qorder'		=> 10,
-						'question'		=> 'Are you a true Raider ? ',
-						'type'			=> 'Radiobuttons',
-						'mandatory'		=> 'True',
-						'options'		=> 'Yes,No,Maybe',
-					),	
-		
-					array(
-						'qorder'		=> 11,
 						'question'		=> 'Do you have any raid experience? If yes, what instances and what role did you play ? ',
 						'type'			=> 'Textbox',
 						'mandatory'		=> 'True',
@@ -231,23 +199,23 @@ $versions = array(
 					),
 	
 					array(
-						'qorder'		=> 12,
-						'question'		=> 'What days do you play ? ',
+						'qorder'		=> 11,
+						'question'		=> 'What days can you play ? ',
 						'type'			=> 'Checkboxes',
 						'mandatory'		=> 'True',
 						'options'		=> 'monday,tuesday,wednesday,thursday,friday,saturday,sunday',
 					),	
 	
 					array(
-						'qorder'		=> 13,
-						'question'		=> 'We raid from 9pm to midnight. Please describe your evening Raiding availability. ',
+						'qorder'		=> 12,
+						'question'		=> 'We raid from 7:30pm to 11pm UTC. Please describe your evening Raiding availability. ',
 						'type'			=> 'Textbox',
 						'mandatory'		=> 'True',
 						'options'		=> ' ',
 					),	
 	
 					array(
-						'qorder'		=> 14,
+						'qorder'		=> 13,
 						'question'		=> 'Tell us a bit about yourself ',
 						'type'			=> 'Textbox',
 						'mandatory'		=> 'False',
@@ -255,7 +223,7 @@ $versions = array(
 					),	
 									
 					array(
-						'qorder'		=> 15,
+						'qorder'		=> 14,
 						'question'		=> 'Are you older than 18 ? ',
 						'type'			=> 'Radiobuttons',
 						'mandatory'		=> 'False',
@@ -266,7 +234,6 @@ $versions = array(
 				
 	), 
 	),
-			
 			
 	'1.2.1' => array(
 	
@@ -293,15 +260,15 @@ $versions = array(
 			),
 	),		
 	
-		'1.2.3' => array(
+	'1.2.3' => array(
 		//
 	),		
 
-		'1.2.4' => array(	
+	'1.2.4' => array(	
 		//
 	),
 	
-	    '1.2.5' => array(
+	'1.2.5' => array(
 	
 		// adding color settings
 		'config_add' => array(
@@ -312,16 +279,18 @@ $versions = array(
 
 
 	),
-		'1.2.6' => array(
+	'1.2.6' => array(
 		//
 
 	),	
-
-		'1.3.0' => array(
+	
+	'1.3.0' => array(
 		// do this first
 		'custom' => array('applyupdater', 'bbdkp_caches'), 
-	),	
-	
+		),
+	), 	
+	),		
+
 );
 
 // We include the UMIF Auto file and everything else will be handled automatically.
@@ -442,12 +411,11 @@ function applyupdater120($action, $version)
 	}
 }
 
+
 /**************************************
- *  
  * global function for clearing cache
- * 
  */
-function bbdkp_caches($action, $version)
+function clearcaches($action, $version)
 {
     global $db, $table_prefix, $umil, $bbdkp_table_prefix;
     
@@ -459,6 +427,5 @@ function bbdkp_caches($action, $version)
     
     return 'UMIL_CACHECLEARED';
 }
-
 
 ?>
