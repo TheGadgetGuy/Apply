@@ -288,27 +288,17 @@ $versions = array(
 	),	
 
 	'1.2.2' => array(
-	
 		 'config_add' => array(
           array('bbdkp_apply_forumchoice', '1', true),
 			),
-			
-		'custom' => array('applyupdater', 'bbdkp_caches'), 			
-
 	),		
 	
 		'1.2.3' => array(
-	
-		// do this first
-		'custom' => array('applyupdater', 'bbdkp_caches'), 
-			
-
+		//
 	),		
 
-		'1.2.4' => array(
-	
-		// do this first
-		'custom' => array('applyupdater', 'bbdkp_caches'), 
+		'1.2.4' => array(	
+		//
 	),
 	
 	    '1.2.5' => array(
@@ -320,11 +310,14 @@ $versions = array(
           array('bbdkp_apply_fqcolor', '#68f3f8', true),
 			),
 
-		'custom' => array('applyupdater', 'bbdkp_caches'), 
 
 	),
 		'1.2.6' => array(
-	
+		//
+
+	),	
+
+		'1.3.0' => array(
 		// do this first
 		'custom' => array('applyupdater', 'bbdkp_caches'), 
 	),	
@@ -406,7 +399,7 @@ function applyupdater120($action, $version)
 				array( 
 				'name'  => 'apply', 
 				'value'  => '1', 
-				'version'  => '1.2.6', 								
+				'version'  => '1.3.0', 								
 				'orginal_copyright'  => 'Kapli, Malfate', 				
 				'bbdkp_copyright'  => 'bbDKP Team', 				
 				),
