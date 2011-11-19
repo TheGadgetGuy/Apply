@@ -24,116 +24,43 @@ include($phpbb_root_path . 'includes/message_parser.' . $phpEx);
 // Start session management
 $user->session_begin();
 $auth->acl($user->data);
-//include($phpbb_root_path . 'includes/bbdkp/apply/apply.' . $phpEx);
 
-$mode = 'post';
-$error = $post_data = array();
+$error = array();
 $current_time = $user->time_now; 
-//set up language vars
-$user->setup(array('posting', 'mcp', 'viewtopic', 'mods/apply'), false);
 
-// if "enable visual confirmation for guest postings" is set to "ON"
-// and the user is not registered 
-// then set up captcha  
-if ($config['enable_post_confirm'] && !$user->data['is_registered'])  
+$user->setup(array('posting', 'mcp', 'viewtopic', 'mods/apply', 'mods/dkp_common', 'mods/dkp_admin'), false);
+
+// declare captcha class
+if (!class_exists('phpbb_captcha_factory'))
 {
 	include($phpbb_root_path . 'includes/captcha/captcha_factory.' . $phpEx);
-	$captcha =& phpbb_captcha_factory::get_instance($config['captcha_plugin']);
+}
+
+// make captcha object
+$captcha =& phpbb_captcha_factory::get_instance($config['captcha_plugin']);
+
+// if "enable visual confirmation for guest postings" is set to "ON"
+// and the user is not registered then set up captcha  
+if ($config['enable_post_confirm'] && !$user->data['is_registered'])  
+{
 	$captcha->init(CONFIRM_POST);
 }
+
+//check if visitor can access the form
+$post_data = check_apply_form_access();
 
 //request variables
 $submit	= (isset($_POST['post'])) ? true : false;
 
-//find out which forum we will be posting to
-if($config['bbdkp_apply_forumchoice'] == '1')
-{
-	//fetch forum from user input
-	if(request_var('publ', 1) == 1 )
-	{
-		$forum_id = $config['bbdkp_apply_forum_id_public'];
-	}
-	else 
-	{
-		$forum_id = $config['bbdkp_apply_forum_id_private'];
-	}
-}
-else
-{
-	//fetch forum from $config
-	if($config['bbdkp_apply_visibilitypref'] == '1')  
-	{
-		$forum_id = $config['bbdkp_apply_forum_id_public'];
-	}
-	else 
-	{
-		$forum_id = $config['bbdkp_apply_forum_id_private'];
-	}
-}
-$sql = 'SELECT * FROM ' . FORUMS_TABLE . ' WHERE forum_id = ' . $forum_id;
-$result = $db->sql_query($sql);
-$post_data = $db->sql_fetchrow($result);
-$db->sql_freeresult($result);
-
-// Check permissions
-if ($user->data['is_bot'])
-{
-	redirect(append_sid("{$phpbb_root_path}index.$phpEx"));
-}
-	
-//set up style vars
-$user->setup(false, $post_data['forum_style']);	
-
-
-// check authorisations
-$is_authed = false;
-// user has posting permission to the forum ?  
-if ($auth->acl_get('f_post', $forum_id))
-{
-	//user is authorised for the forum
-	$is_authed = true;
-}
-else
-{
-	//user has no posting rights in the recruitment forum
-
-	if ($user->data['is_registered'])
-	{
-		trigger_error('USER_CANNOT_' . strtoupper($check_auth));
-	}
-	
-	//it's a guest and theres no guest access for the forum so ask for a valid login
-	login_box('', $user->lang['LOGIN_EXPLAIN_' . strtoupper($mode)]);
-}
-
-// even if guest user has posting rights, we still want to check in our config 
-// if he actually may use the application
-if ($config['bbdkp_apply_guests'] == 'False' && !$user->data['is_registered'])
-{
-	$is_authed = false;
-}
-
-// Is the user able to post within this forum? (i.e it's a category)
-if ($post_data['forum_type'] != FORUM_POST)
-{
-	trigger_error('USER_CANNOT_FORUM_POST');
-}
-
-// is Forum locked ?
-if (($post_data['forum_status'] == ITEM_LOCKED || (isset($post_data['topic_status']) && $post_data['topic_status'] == ITEM_LOCKED)) && !$auth->acl_get('m_edit', $forum_id))
-{
-	trigger_error(($post_data['forum_status'] == ITEM_LOCKED) ? 'FORUM_LOCKED' : 'TOPIC_LOCKED');
-}
-
 if ($submit)
 {
-	// validate captcha 
+	// first validate captcha 
 	
 	// if "enable visual confirmation for guest postings" is set to "ON"
 	// and mode is set to posting 
 	// and the user is not registered 
 	// then captcha will be validated
-	if ($config['enable_post_confirm'] && in_array($mode, array('post')) && !$user->data['is_registered'] )
+	if ($config['enable_post_confirm'] && in_array('post', array('post')) && !$user->data['is_registered'] )
 	{
 		$vc_response = $captcha->validate();
 		if ($vc_response)
@@ -142,20 +69,28 @@ if ($submit)
 		}
 	}
 	
+	if(!sizeof($error) && check_form_key('applyposting'))
+	{
+		make_apply_posting($post_data, $current_time);
+	}
+	
 }
 
+fill_application_form($post_data, $submit, $error, $captcha);
 
-if ($submit && !sizeof($error) && check_form_key('applyposting') )
+/**
+ * post application on forum
+ *
+ */
+function make_apply_posting($post_data, $current_time)
 {
-
-	//check if user forgot to enter a required field
-	$empty = FALSE;
-	//select all required fields
+	global $db, $user, $phpbb_root_path, $phpEx;
+	
+	//check if user forgot to enter a required field other than those covered with js
 	$sql = "SELECT * FROM " . APPTEMPLATE_TABLE . " where mandatory = 'True' ORDER BY qorder   ";
 	$result = $db->sql_query_limit($sql, 100, 1);
-	while ( $row = $db->sql_fetchrow($result) )
+	while ( $row = $db->sql_fetchrow($result))
 	{
-		
 		if ($row['type']=='Checkboxes')
 		{
 			if ( request_var($row['qorder'],  array('' => '')) == '') 
@@ -183,12 +118,6 @@ if ($submit && !sizeof($error) && check_form_key('applyposting') )
 	}
 	$db->sql_freeresult($result);
 
-		   
-	// retrieve parameters
-	// declare class
-	$candidate = new dkp_character();
-	$candidate->name = utf8_normalize_nfc(request_var('1', ' ', true));
-	
 	// check for valid input. name can only be alphanumeric without spaces or special characters
 	//if this preg_match returns true then there is something other than letters
    if (preg_match('/[^a-zA-ZàäåâÅÂçÇéèëËêÊïÏîÎæŒæÆÅóòÓÒöÖôÔøØüÜ\s]+/', $candidate->name  ))
@@ -198,6 +127,16 @@ if ($submit && !sizeof($error) && check_form_key('applyposting') )
    	  trigger_error($message);	
    }
    
+	// declare class
+	if (!class_exists('dkp_character'))
+	{
+		require("{$phpbb_root_path}includes/bbdkp/apply/dkp_character.$phpEx");
+	}
+	
+	$candidate = new dkp_character();
+	$candidate->name = utf8_normalize_nfc(request_var('1', ' ', true));
+	
+	
 	//get realm (replace this with dropdown ??)
 	$candidate->realm = trim(utf8_normalize_nfc(request_var('2', $config['bbdkp_apply_realm'], true))); 
 	if ( $candidate->realm == '')
@@ -339,7 +278,7 @@ if ($submit && !sizeof($error) && check_form_key('applyposting') )
 
 	
 		$data = array( 
-		'forum_id'			=> (int)$forum_id,
+		'forum_id'			=> (int)$post_data['forum_id'],
 		'topic_first_post_id'	=> 0,
 		'topic_last_post_id'	=> 0,
 		'topic_attachment'		=> 0,		
@@ -367,17 +306,17 @@ if ($submit && !sizeof($error) && check_form_key('applyposting') )
 		
 		//submit post
 		//if we're posting to private forum then redirect to portal, else redirect to post
-		if($forum_id == $config['bbdkp_apply_forum_id_private'])
+		if($post_data['forum_id'] == $config['bbdkp_apply_forum_id_private'])
 		{
 			$redirect_url = append_sid("{$phpbb_root_path}portal.$phpEx"); 
-			submit_post($mode, $post_data['post_subject'], $post_data['username'], POST_NORMAL, $poll, $data);
+			submit_post('post', $post_data['post_subject'], $post_data['username'], POST_NORMAL, $poll, $data);
 		}
 		else
 		{
-			$redirect_url = submit_post($mode, $post_data['post_subject'], $post_data['username'], POST_NORMAL, $poll, $data);
+			$redirect_url = submit_post('post', $post_data['post_subject'], $post_data['username'], POST_NORMAL, $poll, $data);
 		}
 			
-		if ($config['enable_post_confirm'] && (isset($captcha) && $captcha->is_solved() === true) && ($mode == 'post'))
+		if ($config['enable_post_confirm'] && (isset($captcha) && $captcha->is_solved() === true))
 		{
 			$captcha->reset();
 		}
@@ -392,11 +331,14 @@ if ($submit && !sizeof($error) && check_form_key('applyposting') )
 
 }
 
-	/**********************************
-	 * 
-	 *  build Application form 
-	 * 
-	 **********************************/ 
+
+/**
+ *  build Application form 
+ *
+ */
+function fill_application_form($post_data, $submit, $error, $captcha)
+{
+	global $user, $template, $config, $phpbb_root_path, $phpEx, $auth, $db;
 	
 	// Page title & action URL, include session_id for security purpose
 	$s_action = append_sid("{$phpbb_root_path}apply.$phpEx", "", true, $user->session_id);
@@ -417,10 +359,133 @@ if ($submit && !sizeof($error) && check_form_key('applyposting') )
 	
 	$s_hidden_fields =array(); 
 	// Add the confirm id/code pair to the hidden fields, else an error is displayed on next submit/preview
-	if (isset($captcha) && $captcha->is_solved() !== false)
+	if (isset($captcha))
 	{
-		$s_hidden_fields .= build_hidden_fields($captcha->get_hidden_fields());
+		if ($captcha->is_solved() !== false)
+		{
+			$s_hidden_fields .= build_hidden_fields($captcha->get_hidden_fields());
+		}
 	}
+	
+	//get the hightest guildid with members
+	$sql_array = array(
+	    'SELECT'    => 'a.id, a.name, a.realm, a.region ',
+	    'FROM'      => array(
+	        GUILD_TABLE => 'a',
+	        MEMBER_LIST_TABLE => 'b'
+	    ),
+	    'WHERE'     =>  'a.id = b.member_guild_id ',
+	    'GROUP_BY'  =>  'a.id, a.name, a.realm, a.region', 
+	    'ORDER_BY'	=>  'a.id DESC'
+	);
+	$sql = $db->sql_build_query('SELECT', $sql_array);
+	$result = $db->sql_query($sql);
+
+	$i=0;
+	$guild_id = 0;
+	while ( $row = $db->sql_fetchrow($result) )
+	{
+		if ($i==0)
+		{
+			$guild_id = (int) $row['id']; 
+			break;
+		}
+		$i+=1;
+	}
+	$db->sql_freeresult($result);
+	
+	//game
+	$games = array(
+		'aion'       => $user->lang['AION'],
+		'daoc'       => $user->lang['DAOC'], 
+		'eq'         => $user->lang['EQ'], 
+		'eq2'        => $user->lang['EQ2'],
+		'FFXI'       => $user->lang['FFXI'],
+		'lotro'      => $user->lang['LOTRO'], 
+		'rift'       => $user->lang['RIFT'],
+		'swtor'      => $user->lang['SWTOR'], 
+		'vanguard' 	 => $user->lang['VANGUARD'],
+		'warhammer'  => $user->lang['WARHAMMER'],
+		'wow'        => $user->lang['WOW'], 
+      );
+    $installed_games = array();
+    foreach($games as $gameid => $gamename)
+    {
+     	//add value to dropdown when the game config value is 1
+     	if ($config['bbdkp_games_' . $gameid] == 1)
+     	{
+     		$template->assign_block_vars('game_row', array(
+				'VALUE' => $gameid,
+				'SELECTED' => ( (isset($member['game_id']) ? $member['game_id'] : '') == $gameid ) ? ' selected="selected"' : '',
+				'OPTION'   => $gamename, 
+		));
+      		$installed_games[] = $gameid; 
+    	} 
+    }
+     
+	// Race dropdown
+	// reloading is done from ajax to prevent redraw
+    $gamepreset = $installed_games[0];
+	$sql_array = array(
+	'SELECT'	=>	'  r.race_id, l.name as race_name ', 
+	'FROM'		=> array(
+			RACE_TABLE		=> 'r',
+			BB_LANGUAGE		=> 'l',
+				),
+	'WHERE'		=> " r.race_id = l.attribute_id 
+					AND r.game_id = '" . $gamepreset . "' 
+					AND l.attribute='race' 
+					AND l.game_id = r.game_id 
+					AND l.language= '" . $config['bbdkp_lang'] ."'",
+	);
+	$sql = $db->sql_build_query('SELECT', $sql_array);
+	$result = $db->sql_query($sql);
+	while ( $row = $db->sql_fetchrow($result) )
+	{
+		$template->assign_block_vars('race_row', array(
+		'VALUE' => $row['race_id'],
+		'SELECTED' =>  '',
+		'OPTION'   => ( !empty($row['race_name']) ) ? $row['race_name'] : '(None)')
+		);
+	}
+
+	// Class dropdown
+	// reloading is done from ajax to prevent redraw
+	$sql_array = array(
+		'SELECT'	=>	' c.class_id, l.name as class_name, c.class_hide,
+						  c.class_min_level, class_max_level, c.class_armor_type , c.imagename ', 
+		'FROM'		=> array(
+			CLASS_TABLE		=> 'c',
+			BB_LANGUAGE		=> 'l', 
+			),
+		'WHERE'		=> " l.game_id = c.game_id  AND c.game_id = '" . $gamepreset . "' 
+		AND l.attribute_id = c.class_id  AND l.language= '" . $config['bbdkp_lang'] . "' AND l.attribute = 'class' ",					 
+	);
+	
+	$sql = $db->sql_build_query('SELECT', $sql_array);					
+	$result = $db->sql_query($sql);
+	while ( $row = $db->sql_fetchrow($result) )
+	{
+		if ( $row['class_min_level'] <= 1  ) 
+		{
+			 $option = ( !empty($row['class_name']) ) ? $row['class_name'] . " 
+			 Level (". $row['class_min_level'] . " - ".$row['class_max_level'].")" : '(None)';
+		}
+		else
+		{
+			 $option = ( !empty($row['class_name']) ) ? $row['class_name'] . " 
+			 Level ". $row['class_min_level'] . "+" : '(None)';
+		}
+		
+		$template->assign_block_vars('class_row', array(
+		'VALUE' => $row['class_id'],
+		'SELECTED' => '',
+		'OPTION'   => $option ));
+		
+	}
+	$db->sql_freeresult($result);
+             	
+	
 	
 	// Start assigning vars for main posting page ...
 	// main questionnaire 
@@ -509,20 +574,7 @@ if ($submit && !sizeof($error) && check_form_key('applyposting') )
 	}
 	$db->sql_freeresult($result);
 	
-	/*
-	 * simplerecruit or initial armory down check
-	 */
-	$simplemode = true;
-	if( $config['bbdkp_apply_simplerecruit'] == 'False')
-	{
-		//check if Armory is online
-		$applyclass = new applycore();
-		if($applyclass->armoryonline == true)
-		{
-			$simplemode = false;
-		}
-	}
-	
+	$form_enctype = (@ini_get('file_uploads') == '0' || strtolower(@ini_get('file_uploads')) == 'off' || !$config['allow_attachments'] || !$auth->acl_get('u_attach') || !$auth->acl_get('f_attach', $post_data['forum_id'])) ? '' : ' enctype="multipart/form-data"';
 	add_form_key('applyposting');
 	
 	// assign global template vars to questionnaire
@@ -530,13 +582,19 @@ if ($submit && !sizeof($error) && check_form_key('applyposting') )
 		'S_SHOW_FORUMCHOICE'	=> ( $config['bbdkp_apply_forumchoice'] == '1' ) ? TRUE : FALSE,
 		'PUBLIC_YES_CHECKED' 	=> ( $config['bbdkp_apply_visibilitypref'] == '1' ) ? ' checked="checked"' : '',
 		'PUBLIC_NO_CHECKED'  	=> ( $config['bbdkp_apply_visibilitypref'] == '0' ) ? ' checked="checked"' : '', 
-     	'S_ARMORY_DOWN'			=> $simplemode,
 		'L_POST_A'				=> $page_title,
 		'ERROR'					=> (sizeof($error)) ? implode('<br />', $error) : '',
 		'S_POST_ACTION'     	=> $s_action,
 		'S_HIDDEN_FIELDS'   	=> $s_hidden_fields,
 		'APPLY_REALM'			=> str_replace("+", " ", $config['bbdkp_apply_realm']), 
-		'FORMQCOLOR'			=> $config['bbdkp_apply_fqcolor']
+		'FORMQCOLOR'			=> $config['bbdkp_apply_fqcolor'], 
+		'S_FORM_ENCTYPE'		=> $form_enctype,
+		// javascript
+		'LA_ALERT_AJAX'		  => $user->lang['ALERT_AJAX'],
+		'LA_ALERT_OLDBROWSER' => $user->lang['ALERT_OLDBROWSER'],
+		'LA_MSG_NAME_EMPTY'	  => $user->lang['FV_REQUIRED_NAME'],
+		'LA_MSG_LEVEL_EMPTY'  => $user->lang['FV_REQUIRED_LEVEL'],	
+		
 		)
 	);
 		
@@ -548,5 +606,102 @@ if ($submit && !sizeof($error) && check_form_key('applyposting') )
 	);
 	
 	page_footer();
-
-
+	
+	
+}
+	
+/**
+ * check form access before even posting. 
+ *
+ * @return array $post_data
+ */
+function check_apply_form_access()
+{
+	global $auth, $db, $config, $user;		
+	
+	$user->add_lang(array('posting'));
+	//find out which forum we will be posting to
+	if($config['bbdkp_apply_forumchoice'] == '1')
+	{
+		//user can choose
+		
+		if(request_var('publ', (int) $config['bbdkp_apply_forum_id_public']) == (int) $config['bbdkp_apply_forum_id_public'] )
+		{
+			// if user made choice for public or if it is a guest then get public forumid 
+			$forum_id = $config['bbdkp_apply_forum_id_public'];
+		}
+		else 
+		{
+			$forum_id = $config['bbdkp_apply_forum_id_private'];
+		}
+	}
+	else
+	{
+		//fetch forum from $config
+		if($config['bbdkp_apply_visibilitypref'] == '1')  
+		{
+			$forum_id = $config['bbdkp_apply_forum_id_public'];
+		}
+		else 
+		{
+			$forum_id = $config['bbdkp_apply_forum_id_private'];
+		}
+	}
+	
+	$sql = 'SELECT * FROM ' . FORUMS_TABLE . ' WHERE forum_id = ' . $forum_id;
+	$result = $db->sql_query($sql);
+	$post_data = $db->sql_fetchrow($result);
+	$db->sql_freeresult($result);
+	
+	// Check permissions
+	if ($user->data['is_bot'])
+	{
+		redirect(append_sid("{$phpbb_root_path}index.$phpEx"));
+	}
+		
+	//set up style vars
+	$user->setup(false, $post_data['forum_style']);	
+	
+	// check authorisations
+	$is_authed = false;
+	// user has posting permission to the forum ?  
+	if ($auth->acl_get('f_post', $forum_id))
+	{
+		//user is authorised for the forum
+		$is_authed = true;
+	}
+	else
+	{
+		//user has no posting rights in the requested forum
+		if ($user->data['is_registered'])
+		{
+			trigger_error('USER_CANNOT_' . strtoupper($check_auth));
+		}
+		
+		//it's a guest and theres no guest access for the forum so ask for a valid login
+		login_box('', $user->lang['LOGIN_EXPLAIN_POST']);
+	}
+	
+	// even if guest user has posting rights, we still want to check in our config 
+	// if he actually may use the application
+	if ($config['bbdkp_apply_guests'] == 'False' && !$user->data['is_registered'])
+	{
+		$is_authed = false;
+	}
+	
+	// Is the user able to post within this forum? (i.e it's a category)
+	if ($post_data['forum_type'] != FORUM_POST)
+	{
+		trigger_error('USER_CANNOT_FORUM_POST');
+	}
+	
+	// is Forum locked ?
+	if (($post_data['forum_status'] == ITEM_LOCKED || (isset($post_data['topic_status']) && $post_data['topic_status'] == ITEM_LOCKED)) && !$auth->acl_get('m_edit', $forum_id))
+	{
+		trigger_error(($post_data['forum_status'] == ITEM_LOCKED) ? 'FORUM_LOCKED' : 'TOPIC_LOCKED');
+	}
+	
+	return $post_data;
+		
+	
+}

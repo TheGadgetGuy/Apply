@@ -1,120 +1,268 @@
 <!-- INCLUDE overall_header.html -->
-<!--
-		Integrated by bbDKP
-		http://code.google.com/p/bbdkp/
-		$Id$
-//-->
-<div class="panel bg2">
-   <div class="inner"  >
-   <span class="corners-top"><span></span></span>
-	<center><h3><span style="color: {FORMQCOLOR}">{L_APPLY_TITLE}</span></h3></center>
-	
-   <div class="content">
-    <br />
-    <strong><span style="color: {FORMQCOLOR}">{L_APPLY_INFO}</span></strong><br/>
-    <br />
-	<form action="{S_POST_ACTION}" method="post" name="postform"{S_FORM_ENCTYPE}>
 
-	<!-- IF ERROR -->
-		<center><span class="genmed1 error">{ERROR}</span></center><br/>
-	<!-- ENDIF -->
-	
-	<table class="table1" width ="100%">
-	    <tr >
-	        <td style="text-align: right; width: 30em;" class="bg1" ><strong><span style="color: {FORMQCOLOR}">{L_APPLY_QUESTION}</span></strong></td>
-	        <td class="bg2"  ><strong>{L_APPLY_ANSWER}</strong></td>
-	    </tr>
+<h2>{L_APPLY_TITLE}</h2>
+<div class="panel bg1" >
+<div class="inner"  >
+<span class="corners-top"><span></span></span>
 
-		<!-- BEGIN templatestart -->
-		<tr class="bg1">
-			<td style="text-align: right; width: 30em;" class="bg1" ><strong><span style="color: {FORMQCOLOR}">{templatestart.QUESTION}</span></strong></td>
-			<td class="bg2" >{templatestart.TYPE} <span style="color:red">{templatestart.MANDATORY}</span></td>
-		</tr>
-		<!-- END templatestart -->
+<h2>{L_APPLY_INFO}</h2>
 
-		<!-- IF S_SHOW_FORUMCHOICE -->
-		<tr class="bg1">
-    		<td style="text-align: right; width: 30em;" class="bg1" ><strong><span style="color: {FORMQCOLOR}">{L_APPLY_PUBLICQUESTION}</span></strong></td>
-    		<td class="bg2" >
+<!-- IF ERROR -->
+<fieldset class="fields1">
+<center><span class="genmed1 error">{ERROR}</span></center><br/>
+</fieldset>
+<!-- ENDIF -->
+
+<span class="corners-bottom"><span></span></span>
+</div>
+</div>
+<form action="{S_POST_ACTION}" method="post" name="applyform" onsubmit="return check_form(this)" {S_FORM_ENCTYPE}>
+
+<!-- IF S_SHOW_FORUMCHOICE -->
+<div class="panel bg2" >
+<div class="inner"  >
+<span class="corners-top"><span></span></span>
+<fieldset>		
+<dl>
+	<dt><h4><span style="color: {FORMQCOLOR}">{L_APPLY_PUBLICQUESTION}</span></h4></dt>
+    		<dd>
     			<input type="radio" name="publ" value="1"{PUBLIC_YES_CHECKED} />&nbsp;{L_APPLY_ACP_PUBLIC}&nbsp;
     			<input type="radio" name="publ" value="0"{PUBLIC_NO_CHECKED} />&nbsp;{L_APPLY_ACP_PRIVATE}
     			<span style="color:red">{L_MANDATORY}</span>
-    		</td>
-    	</tr>
-		<!-- ENDIF -->
-		
-		<!-- IF S_ARMORY_DOWN -->
-		 <input type="hidden" name="gethidden" value="1"/>
-		
-		<tr class="bg1">
-			<td style="text-align: right; width: 30em;" class="bg1" ><strong><span style="color: {FORMQCOLOR}">{L_APPLY_LEVEL} </span></strong></td>
-			<td class="bg2" ><input class="inputbox" style="width:300px;" type="text" name="level" size="20" maxlength="60" />&nbsp;<span style="color:red">{L_MANDATORY}</span></td>
-			
-		</tr>
-		
-		<tr class="bg1">
-			<td style="text-align: right; width: 30em;" class="bg1" ><strong><span style="color: {FORMQCOLOR}">{L_APPLY_CLASS}</span></strong></td>
-			<td class="bg2" >			
-				<select name="class">
-					<option value="BLANK" selected></option>&#32;  
-    				<option value="SR_DK">{L_SR_DK}</option>&#32;  
-    				<option value="SR_DRUID">{L_SR_DRUID}</option>&#32;  
-    				<option value="SR_HUNTER">{L_SR_HUNTER}</option>&#32;  
-    				<option value="SR_MAGE">{L_SR_MAGE}</option>&#32;  
-    				<option value="SR_PALADIN">{L_SR_PALADIN}</option>&#32;  
-    				<option value="SR_PRIEST">{L_SR_PRIEST}</option>&#32;  
-    				<option value="SR_ROGUE">{L_SR_ROGUE}</option>&#32;  
-    				<option value="SR_SHAMAN">{L_SR_SHAMAN}</option>&#32;  
-    				<option value="SR_WARLOCK">{L_SR_WARLOCK}</option>&#32;  
-    				<option value="SR_WARRIOR">{L_SR_WARRIOR}</option>&#32;  
-    			</select>
-    			&nbsp;<span style="color:red">{L_MANDATORY}</span>
-			</td>
-			
-		</tr>
-		
-		<tr class="bg1">
-			<td style="text-align: right; width: 30em;" class="bg1" ><strong><span style="color: {FORMQCOLOR}">{L_APPLY_TALENT}</span></strong></td>
-			<td class="bg2" ><input class="inputbox" style="width:300px;" type="text" name="talents" size="20" maxlength="60" />&nbsp;<span style="color:red">{L_MANDATORY}</span></td>
-		</tr>
-		
-		<tr class="bg1">
-			<td style="text-align: right; width: 30em;" class="bg1" ><strong><span style="color: {FORMQCOLOR}">{L_APPLY_PROFF}</span></strong></td>
-			<td class="bg2" ><textarea class="inputbox" name="professions" rows="5" cols="76" onselect="storeCaret(this);" onclick="storeCaret(this);" onkeyup="storeCaret(this);" style="width: 450px;"></textarea></td>
-		</tr>
-		
-		<!-- ENDIF -->
-		
-		<!-- BEGIN template -->
-		<tr class="bg1">
-			<td style="text-align: right; width: 30em;" class="bg1" ><strong><span style="color: {FORMQCOLOR}">{template.QUESTION}</span></strong></td>
-			<td class="bg2" >{template.TYPE}{template.MANDATORY}</td>
-		</tr>
-		<!-- END template -->
-	</table>
+    		</dd>
+</dl>
+</fieldset>
+	
+<span class="corners-bottom"><span></span></span>
+</div>
+</div>	
+<!-- ENDIF -->
 
+<div class="panel bg2" >
+<div class="inner"  >
+<span class="corners-top"><span></span></span>
 
-	 <center> 	
-	<!-- IF CAPTCHA_TEMPLATE and S_CONFIRM_CODE -->
-			<!-- DEFINE $CAPTCHA_TAB_INDEX = 3 -->
-			<!-- INCLUDE {CAPTCHA_TEMPLATE} -->
-		<!-- ENDIF --> 
-	</center>
-	<br />
+<fieldset>	
+<span style="color: {FORMQCOLOR}"> </span>
+<dl>
+    <dt><h4>{L_NAME}:</h4></dt>
+    <dd><input type="text" name="member_name" id="member_name" size="20" maxlength="30"  value="{MEMBER_NAME}" class="input" /> <span style="color:red">{L_MANDATORY}</span> </dd>
+</dl>
 
-	<table width ="100%" align="center">
-	<tr>
-		<td class="cat" align="center">
+<dl>
+    <dt><h4>{L_APPLY_LEVEL}</h4></dt>
+	<dd><input type="text" name="member_level" size="3" maxlength="3" value="{MEMBER_LEVEL}" class="input" /> <span style="color:red">{L_MANDATORY}</span> </dd>
+</dl> 
+ 
+<dl>
+    <dt><h4>{L_GAME}:</h4></dt>
+  	 <dd>
+  	  <div>
+  		<select name="game_id" class="input" onchange="return GetClassRace(this.value)">
+       <!-- BEGIN game_row -->
+       <option value="{game_row.VALUE}"{game_row.SELECTED}>{game_row.OPTION}</option>
+        <!-- END game_row -->
+      </select>
+      <label for="member_race_id">{L_RACE}:</label>
+  	  <select id="raceselect" name="member_race_id" class="input">
+       <!-- BEGIN race_row -->
+       <option value="{race_row.VALUE}"{race_row.SELECTED}>{race_row.OPTION}</option>
+        <!-- END race_row -->
+        </select>
+   		<!-- IF S_RACE_IMAGE_EXISTS --> <br/><img src="{RACE_IMAGE}" alt="" />&nbsp;<!-- ELSE -->&nbsp;<!-- ENDIF -->
+	  <label for="member_class_id">{L_CLASS}:</label>
+	  <select id="classselect" name="member_class_id" class="input">
+       <!-- BEGIN class_row -->
+        <option value="{class_row.VALUE}"{class_row.SELECTED}>{class_row.OPTION}</option>
+        <!-- END class_row -->
+        </select>
+	    <!-- IF S_CLASS_IMAGE_EXISTS --><br/><img src="{CLASS_IMAGE}" alt="" /><!-- ELSE -->&nbsp;<!-- ENDIF --> &nbsp;<span style="color:red">{L_MANDATORY}</span>
+	</div>
+	</dd>
+</dl>
+
+<dl>
+    <dt><h4>{L_GENDER}:</h4></dt>
+    <dd>
+    <input type="radio" name="gender"  value="0"{MALE_CHECKED} /> {L_MALE}&nbsp;&nbsp;
+    <input type="radio" name="gender"  value="1"{FEMALE_CHECKED} /> {L_FEMALE}
+   </dd>
+ </dl>
+</fieldset>
+
+<span class="corners-bottom"><span></span></span>
+</div>
+</div>
+
+<hr />
+
+<div class="post bg2" >
+<div class="inner"  >
+<span class="corners-top"><span></span></span>
+<div class="postbody" style="width:90%; font-size=1.2em;">
+<div class="content">
+<fieldset>	
+<!-- BEGIN template -->
+<dl>
+	<dt><span>{template.QUESTION}</span></dt>
+	<dd>{template.TYPE}{template.MANDATORY}</dd>
+</dl>
+<!-- END template -->
+</fieldset>
+</div>
+</div>
+<span class="corners-bottom"><span></span></span>
+</div>
+</div>
+
+<div class="panel" id="postingbox">
+<div class="inner">
+<span class="corners-top"><span></span></span>
+			<!-- IF CAPTCHA_TEMPLATE and S_CONFIRM_CODE -->
+			 <center> 	
+					<!-- DEFINE $CAPTCHA_TAB_INDEX = 3 -->
+					<!-- INCLUDE {CAPTCHA_TEMPLATE} -->
+			</center>
+			<!-- ENDIF --> 
+			<br />
+			<fieldset class="submit-buttons">
+			<input type="submit" accesskey="s" name="post" value="{L_SUBMIT}" class="button1 default-submit-action" />&nbsp;
+			<input type="reset" name="reset" value="{L_RESET}" class="button1" />
 			{S_FORM_TOKEN}
-			<input class="button1" type="submit" accesskey="s" tabindex="23" name="post" value="{L_SUBMIT}" />
-		</td>
-	</tr>
-	</table>
+			</fieldset>
+<span class="corners-bottom"><span></span></span>
+</div>
+</div>
+	
 
 </form>
 
-</div>
-   <span class="corners-bottom"><span></span></span></div>
-</div>
+
+<script type="text/javascript">
+// <![CDATA[
+function check_form()
+{
+    if (document.applyform.member_name.value.length < 3)
+    {
+        alert('{LA_MSG_NAME_EMPTY}');
+        return false;
+    }
+    
+    if (document.applyform.member_level.value.length < 1 )
+    {
+        alert('{LA_MSG_LEVEL_EMPTY}');
+        return false;
+    }
+    
+    return true;
+}
+
+/*  make a XMLHTTP Request object */
+function GetXmlHttpObject() 
+{ 
+	var xmlhttp=false;	
+	
+	try
+	{ 
+		//  IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}
+	catch(e)	
+	{	// activex code for IE6, IE5
+		try
+		{			
+			xmlhttp= new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		catch(e)
+		{
+			try
+			{
+				xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+			}
+			catch(e1)
+			{
+				xmlhttp=false;
+			}
+		}
+	}
+	return xmlhttp;
+}
+
+/* ajax function to find class and race array based on game */ 
+function GetClassRace(game_id)
+{
+   xmlhttp = GetXmlHttpObject();
+   if (xmlhttp == null)
+   {
+	   alert("{LA_ALERT_OLDBROWSER}");
+	   return;  
+   }
+    var strURL="{T_TEMPLATE_PATH}/dkp/findclassrace.php?game_id="+game_id;
+    xmlhttp.onreadystatechange=classracestateChanged;
+    xmlhttp.open("GET", strURL, true);
+    // send to server
+    xmlhttp.send(null);
+}
+
+
+
+/* called from GetClassRace when state changed */
+function classracestateChanged()
+{
+	if (xmlhttp.readyState==4) //request complete
+	{
+		if (xmlhttp.status == 200)
+		{
+			//receive xml
+			xmlDoc=xmlhttp.responseXML;
+			var racelist = xmlDoc.getElementsByTagName('racelist')[0];
+			var classlist = xmlDoc.getElementsByTagName("classlist")[0];
+
+			var species = racelist.getElementsByTagName("race");
+			var classes = classlist.getElementsByTagName("class");
+			
+			//now modify html : first remove old select options
+			var rsel = document.getElementById('raceselect'); 
+			rsel.options.length = 0; 
+
+			
+			for (var i = 0; i < species.length; i++)
+			{
+				var spec = species[i]; 
+				var raceid = spec.getElementsByTagName("race_id")[0].firstChild.nodeValue;
+				var racename = spec.getElementsByTagName("race_name")[0].firstChild.nodeValue;
+			    // add the options
+			    rsel.options[i] = new Option(racename,raceid, true, false); 
+			}
+			
+			var csel = document.getElementById('classselect'); 
+			csel.options.length = 0; 
+
+			
+			for (var j = 0; j < classes.length; j++)
+			{
+				
+				var cla = classes[j]; 
+				var classid = cla.getElementsByTagName("class_id")[0].firstChild.nodeValue;
+				var classname = cla.getElementsByTagName("class_name")[0].firstChild.nodeValue;
+			    // add the options
+			    csel.options[j] = new Option(classname,classid, true, false); 
+			}
+			
+			
+			
+		}
+		else 
+		{
+   	   		alert("{LA_ALERT_AJAX}:\n" + xmlhttp.statusText);
+	 	}
+	}
+}
+
+
+
+
+// ]]>
+</script>
 
 <!-- INCLUDE overall_footer.html -->

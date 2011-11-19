@@ -236,29 +236,6 @@ class acp_dkp_apply extends bbDkp_Admin
 				 * loading config
 				 */
 
-				// loading forumlist
-                $sql = 'SELECT * FROM ' . FORUMS_TABLE . '';
-                $result = $db->sql_query($sql);
-                while ($row = $db->sql_fetchrow($result)) 
-                {
-                    $forum_ids[$row['forum_name']] = $row['forum_id'];
-                }
-                $db->sql_freeresult($result);
-				
-                // populate forum lists
-                foreach ($forum_ids as $d_name => $d_value) 
-                {
-                    $template->assign_block_vars('app_id_pub', array(
-                    	'VALUE' => $d_value , 
-                    	'SELECTED' => ($d_value == $config['bbdkp_apply_forum_id_public']) ? ' selected="selected"' : '' , 
-                    	'OPTION' => $d_name));
-                    
-                    $template->assign_block_vars('app_id_pri', array(
-                    	'VALUE' => $d_value , 
-                    	'SELECTED' => ($d_value == $config['bbdkp_apply_forum_id_private']) ? ' selected="selected"' : '' , 
-                    	'OPTION' => $d_name));
-                }
-
                 $template->assign_vars(array(
                 	'REALM'        			=> str_replace("+", " ", $config['bbdkp_apply_realm']), 
                 	'PUBLIC_YES_CHECKED' 	=> ( $config['bbdkp_apply_visibilitypref'] == '1' ) ? ' checked="checked"' : '',
@@ -269,6 +246,9 @@ class acp_dkp_apply extends bbDkp_Admin
       				'POSTQCOLOR'			=> $config['bbdkp_apply_pqcolor'],
 	                'POSTACOLOR'			=> $config['bbdkp_apply_pacolor'],
 	                'FORMQCOLOR'			=> $config['bbdkp_apply_fqcolor'], 
+					// loading forumlist
+					'APPLY_FORUM_PUB_OPTIONS' => make_forum_select($config['bbdkp_apply_forum_id_public'],false, false, true),
+					'APPLY_FORUM_PRIV_OPTIONS' => make_forum_select($config['bbdkp_apply_forum_id_private'],false, false, true),
                 
                 ));
                 
