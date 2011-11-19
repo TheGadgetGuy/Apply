@@ -25,7 +25,6 @@ if (!defined('IN_PHPBB'))
 class dkp_character
 {
 	// character definition
-	
 	public $name ='';
 	public $realm = '';
 	public $ModelViewURL;

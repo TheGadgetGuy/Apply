@@ -72,8 +72,8 @@ $options = array(
 */
 
 $versions = array(
-		'1.2.6' => array(
-			
+		'1.3.0' => array(
+
 		// adding configs
 		'config_add' => array(
 			 array('bbdkp_apply_realm', 'Realmname', true),
@@ -88,7 +88,7 @@ $versions = array(
 	         array('bbdkp_apply_fqcolor', '#68f3f8', true),
 	         array('bbdkp_apply_forumchoice', '1', true),
 			),
-			
+          			
 		'module_add' => array(
 				array('acp', 'ACP_DKP_MEMBER', array(
 	           		'module_basename'	=> 'dkp_apply',
@@ -97,7 +97,7 @@ $versions = array(
 	           ),
             
 		'table_add' => array(
-			array($table_prefix . 'bbdkp_apply', array(
+			array($table_prefix . 'bbdkp_apptemplate', array(
 						'COLUMNS'		=> array(
 							'qorder'	=> array('UINT', 0),
 							'question'	=> array('VCHAR:255', ''),
@@ -110,7 +110,7 @@ $versions = array(
  		),
  		
 		'table_row_insert' => array(
-			array($bbdkp_table_prefix . 'apptemplate', 
+			array($table_prefix . 'bbdkp_apptemplate', 
 				array(
 					//MANDATORY - do not remove	or change		
 					array(
@@ -158,7 +158,7 @@ $versions = array(
 	
 					array(
 						'qorder'		=> 6,
-						'question'		=> 'Do you have any alts and if you do who are they ? Do you play with any characters other than the one you\'re applying with ?',
+						'question'		=> 'Do you have any alts and if you do who are they ? Do you play with any characters other than the one you’re applying with ?',
 						'type'			=> 'Textbox',
 						'mandatory'		=> 'True',
 						'options'		=> ' ',
@@ -166,15 +166,6 @@ $versions = array(
 					
 					array(
 						'qorder'		=> 7,
-						'question'		=> 'What is your total playtime for your main and alts? 
-						(To get this log on your character and do /played for each character.)',
-						'type'			=> 'Inputbox',
-						'mandatory'		=> 'True',
-						'options'		=> ' ',
-					),
-								
-					array(
-						'qorder'		=> 8,
 						'question'		=> 'Why did you choose our Guild ? Do you know anyone in the guild ? 
 						Why do you think you will fit in with our guild, and what can you bring to us ?',
 						'type'			=> 'Textbox',
@@ -183,7 +174,7 @@ $versions = array(
 					),
 	
 					array(
-						'qorder'		=> 9,
+						'qorder'		=> 8,
 						'question'		=> 'What are your previous guilds, (name classleader and GM) and why are you no longer a part of them.',
 						'type'			=> 'Textbox',
 						'mandatory'		=> 'True',
@@ -191,7 +182,7 @@ $versions = array(
 					),
 	
 					array(
-						'qorder'		=> 10,
+						'qorder'		=> 9,
 						'question'		=> 'Do you have any raid experience? If yes, what instances and what role did you play ? ',
 						'type'			=> 'Textbox',
 						'mandatory'		=> 'True',
@@ -199,7 +190,7 @@ $versions = array(
 					),
 	
 					array(
-						'qorder'		=> 11,
+						'qorder'		=> 10,
 						'question'		=> 'What days can you play ? ',
 						'type'			=> 'Checkboxes',
 						'mandatory'		=> 'True',
@@ -207,15 +198,15 @@ $versions = array(
 					),	
 	
 					array(
-						'qorder'		=> 12,
-						'question'		=> 'We raid from 7:30pm to 11pm UTC. Please describe your evening Raiding availability. ',
+						'qorder'		=> 11,
+						'question'		=> 'We raid from 7:30pm to 11pm Server time (UTC+1). Please describe your evening Raiding availability. ',
 						'type'			=> 'Textbox',
 						'mandatory'		=> 'True',
 						'options'		=> ' ',
 					),	
 	
 					array(
-						'qorder'		=> 13,
+						'qorder'		=> 12,
 						'question'		=> 'Tell us a bit about yourself ',
 						'type'			=> 'Textbox',
 						'mandatory'		=> 'False',
@@ -223,7 +214,7 @@ $versions = array(
 					),	
 									
 					array(
-						'qorder'		=> 14,
+						'qorder'		=> 13,
 						'question'		=> 'Are you older than 18 ? ',
 						'type'			=> 'Radiobuttons',
 						'mandatory'		=> 'False',
@@ -231,71 +222,26 @@ $versions = array(
 					),	
 				
 				))
-				
-	), 
-	),
-			
-	'1.2.1' => array(
-	
-		// do this first
-		'custom' => array('applyupdater'), 
-
-		//remove single forum selection
-		'config_remove' => array('bbdkp_apply_forum_id'), 
+		), 
 		
-		//add multiple forum selection
-		// set to same id -> dont forget to change this in your ACP !
-		 'config_add' => array(
-          array('bbdkp_apply_forum_id_private', '2', true),
-          array('bbdkp_apply_forum_id_public', '2', true),
-          array('bbdkp_apply_visibilitypref', '1', true),
-			),
-			
-
-	),	
-
-	'1.2.2' => array(
-		 'config_add' => array(
-          array('bbdkp_apply_forumchoice', '1', true),
-			),
-	),		
-	
-	'1.2.3' => array(
-		//
-	),		
-
-	'1.2.4' => array(	
-		//
-	),
-	
-	'1.2.5' => array(
-	
-		// adding color settings
-		'config_add' => array(
-          array('bbdkp_apply_pqcolor', '#68f3f8', true),
-          array('bbdkp_apply_pacolor', '#FFFFFF', true),
-          array('bbdkp_apply_fqcolor', '#68f3f8', true),
-			),
-
-
-	),
-	'1.2.6' => array(
-		//
-
-	),	
-	
-	'1.3.0' => array(
-		// do this first
 		'custom' => array('applyupdater', 'bbdkp_caches'), 
-		),
-	), 	
-	),		
+	),
+			
+			
 
 );
 
 // We include the UMIF Auto file and everything else will be handled automatically.
 include($phpbb_root_path . 'umil/umil_auto.' . $phpEx);
 
+
+/**
+ * this function fills the plugin table.
+ *
+ * @param string $action
+ * @param string $version
+ * @return string
+ */
 function applyupdater($action, $version)
 {
 	global $db, $table_prefix, $user, $umil, $bbdkp_table_prefix, $phpbb_root_path, $phpEx;
@@ -303,13 +249,9 @@ function applyupdater($action, $version)
 	{
 		case 'install' :
 		case 'update' :
-
-			$umil->table_row_remove($bbdkp_table_prefix . 'plugins',
-	            array('name'  => 'apply')
-			);	
 				
 			// We insert new data in the plugin table
-			$umil->table_row_insert($bbdkp_table_prefix . 'plugins',
+			$umil->table_row_insert($table_prefix . 'bbdkp_plugins',
 			array(
 				array( 
 					'name'  => 'apply', 
@@ -333,84 +275,6 @@ function applyupdater($action, $version)
 	
 	}
 }
-
-
-function applyupdater120($action, $version)
-{
-	global $db, $table_prefix, $umil, $user, $bbdkp_table_prefix, $phpbb_root_path, $phpEx;
-	switch ($action)
-	{
-		case 'install' :
-		case 'update' :
-
-		    // If there are tables from the old apply module then delete them
-		    if ($umil->table_exists($bbdkp_table_prefix . 'appconfig'))
-		    {
-		        // drop it, config is done with phpbb $config
-		        $umil->table_remove($bbdkp_table_prefix . 'appconfig');
-		    }
-		    
-			if ($umil->table_exists($bbdkp_table_prefix . 'apptemplate'))
-		    {
-		        // drop it
-		        $umil->table_remove($bbdkp_table_prefix . 'apptemplate');
-		    }
-
-			
-            $umil->table_row_remove($bbdkp_table_prefix . 'plugins',
-                array('name'  => 'apply')
-			);
-			
-			
-			// We insert new data in the plugin table
-			$umil->table_row_insert($bbdkp_table_prefix . 'plugins',
-		    array(
-				array( 
-				'name'  => 'apply', 
-				'value'  => '1', 
-				'version'  => '1.3.0', 								
-				'orginal_copyright'  => 'Kapli, Malfate', 				
-				'bbdkp_copyright'  => 'bbDKP Team', 				
-				),
-			));
-
-			//remove old module
-		    $umil->table_row_remove($table_prefix . 'modules',
-                array('module_basename'  => 'dkp_apply')
-            );
-
-		return array('command' => sprintf($user->lang['APPLY_UPD_MOD'], $version) , 'result' => 'SUCCESS');
-		
-		break;
-		
-		case 'uninstall' :
-			// Run this when uninstalling
-			
-			// If there are tables from the old apply module then delete them
-		    if ($umil->table_exists($bbdkp_table_prefix . 'appconfig'))
-		    {
-		        // drop it, config is done with phpbb $config
-		        $umil->table_remove($bbdkp_table_prefix . 'appconfig');
-		    }
-		    
-			if ($umil->table_exists($bbdkp_table_prefix . 'apptemplate'))
-		    {
-		        // drop it
-		        $umil->table_remove($bbdkp_table_prefix . 'apptemplate');
-		    }
-			
-		    $umil->table_row_remove($bbdkp_table_prefix . 'plugins',
-                array('name'  => 'apply')
-                );
-		
-			return array(
-					'command' => sprintf($user->lang['APPLY_UNINSTALL_MOD'], $version)  , 
-					'result' => 'SUCCESS');
-			break;
-	
-	}
-}
-
 
 /**************************************
  * global function for clearing cache
