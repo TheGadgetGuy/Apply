@@ -77,7 +77,7 @@ $versions = array(
 		// adding configs
 		'config_add' => array(
 			 array('bbdkp_apply_realm', 'Realmname', true),
-			 array('bbdkp_apply_region', 'eu'),
+			 array('bbdkp_apply_region', 'us'),
 			 array('bbdkp_apply_guests', 'True', true),
 			 array('bbdkp_apply_simplerecruit', 'True', true),			
 	         array('bbdkp_apply_forum_id_private', '2', true),

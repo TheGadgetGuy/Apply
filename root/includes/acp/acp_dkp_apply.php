@@ -72,8 +72,6 @@ class acp_dkp_apply extends bbDkp_Admin
                     }
                     set_config('bbdkp_apply_realm', utf8_normalize_nfc(str_replace(" ", "+", request_var('realm','', true)))  , true );	
                     set_config('bbdkp_apply_region', request_var('region', ''), true );	
-                    set_config('bbdkp_apply_charconnectcheck', request_var('charconnectcheck', ''), true );	
-                    set_config('bbdkp_apply_simplerecruit', request_var('simplerecruit',''), true );
                     $cache->destroy('config');
                     trigger_error($user->lang['APPLY_ACP_SETTINGSAVED'] . $link);
                }
@@ -263,7 +261,6 @@ class acp_dkp_apply extends bbDkp_Admin
 
                 $template->assign_vars(array(
                 	'REALM'        			=> str_replace("+", " ", $config['bbdkp_apply_realm']), 
-                    'CHECKCHAR'    			=> $config['bbdkp_apply_charconnectcheck'],
                 	'PUBLIC_YES_CHECKED' 	=> ( $config['bbdkp_apply_visibilitypref'] == '1' ) ? ' checked="checked"' : '',
     				'PUBLIC_NO_CHECKED'  	=> ( $config['bbdkp_apply_visibilitypref'] == '0' ) ? ' checked="checked"' : '', 
                 	'FORUM_CHOICE_YES_CHECKED' 	=> ( $config['bbdkp_apply_forumchoice'] == '1' ) ? ' checked="checked"' : '',
