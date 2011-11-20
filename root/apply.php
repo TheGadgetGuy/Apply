@@ -202,7 +202,7 @@ function make_apply_posting($post_data, $current_time)
 		$candidate->classid = $candidate_classid;
 		register_bbdkp($candidate);
 	}
-	
+		
 	// build post
 	$apply_post = '';
 	
@@ -210,6 +210,7 @@ function make_apply_posting($post_data, $current_time)
 	'; 
 	$apply_post .= '<br />';
 	
+	// name
 	$apply_post .= '[color='. $config['bbdkp_apply_pqcolor'] .']' . $user->lang['APPLY_NAME'] . '[/color]';
 	if($class_color_exists)
 	{
@@ -219,22 +220,22 @@ function make_apply_posting($post_data, $current_time)
 	{
 		$apply_post .= '[b]' . $candidate_name . '[/b]' ;
 	}
-	
 	$apply_post .= '<br />'; 
 
-	//character Realm
+	//Realm
 	$apply_post .= '[color='. $config['bbdkp_apply_pqcolor'] .']' . $user->lang['APPLY_REALM1'] . '[/color]' . '[color='. $config['bbdkp_apply_pacolor'] .']' . $candidate_realm . '[/color]' ;
 	$apply_post .= '<br />'; 
 
+	// level
 	$apply_post .= '[color='. $config['bbdkp_apply_pqcolor'] .']' . $user->lang['APPLY_LEVEL'] . '[/color]' . '[color='. $config['bbdkp_apply_pacolor'] .']' . $candidate_level. '[/color]' ;
 	$apply_post .= '<br />'; 
 	
+	// class
 	$apply_post .= '[color='. $config['bbdkp_apply_pqcolor'] .']' . $user->lang['APPLY_CLASS'] . '[/color] ';
 	if($class_image_exists )
 	{
 		$apply_post .= '[img]' .$class_image . '[/img] ';
 	}
-	
 	if($class_color_exists)
 	{
 		$apply_post .= ' [color='. $class_color .']' . $class_name . '[/color]' ;
@@ -243,16 +244,14 @@ function make_apply_posting($post_data, $current_time)
 	{
 		$apply_post .= $class_name;
 	}
-	
-	
 	$apply_post .= '<br />'; 
-	
+
+	//race
 	$apply_post .= '[color='. $config['bbdkp_apply_pqcolor'] .']' . $user->lang['APPLY_RACE'] . '[/color] ';
 	if($race_image_exists )
 	{
 		$apply_post .= '[img]' .$race_image . '[/img] ';
 	}
-	
 	if($class_color_exists)
 	{
 		$apply_post .= ' [color='. $class_color .']' . $race_name . '[/color]' ;
@@ -261,10 +260,11 @@ function make_apply_posting($post_data, $current_time)
 	{
 		$apply_post .= $race_name;
 	}
-	
 	$apply_post .= '<br />';
 	$apply_post .= '<br />';
+
 	
+	// Motivation	
 	$apply_post .= '[size=150][b]' .$user->lang['APPLY_CHAR_MOTIVATION'] . '[/b][/size]';
 	$apply_post .= '<br />';
 	$apply_post .= '<br />';
@@ -285,13 +285,13 @@ function make_apply_posting($post_data, $current_time)
 					 $cb_countis = count( request_var('templatefield_' . $row['qorder'], array(0 => 0)) );  
                      $cb_count = 0;
 						                                           
-                        $apply_post .= '[color='. $config['bbdkp_apply_pqcolor'] .'][b]' . $row['question'] . ': [/b][/color]
+                        $apply_post .= '[size=120][color='. $config['bbdkp_apply_pqcolor'] .'][b]' . $row['question'] . ': [/b][/color][/size]
                         ';
                         
                         $checkboxes = utf8_normalize_nfc( request_var('templatefield_' . $row['qorder'], array(0 => '') , true));
                         foreach($checkboxes as $value) 
                         {
-                            $apply_post .=  '[color='. $config['bbdkp_apply_pacolor'] .']' . $value . '[/color]' ;
+                            $apply_post .= $value;
                             if ($cb_count < $cb_countis-1)
                             {
                                 $apply_post .= ',  ';
@@ -305,10 +305,13 @@ function make_apply_posting($post_data, $current_time)
 				case 'Textbox':
 				case 'Selectbox':					
 				case 'Radiobuttons':			
-					$fieldcontents = utf8_normalize_nfc(request_var('templatefield_' . $row['qorder'], ' ', true));		
-					$apply_post .= '[color='. $config['bbdkp_apply_pqcolor'] .'][b]' . $row['question'] . ': [/b][/color]
-					' . 
-						'[color='. $config['bbdkp_apply_pacolor'] .']' . $fieldcontents . '[/color]';
+					$fieldcontents = utf8_normalize_nfc(request_var('templatefield_' . $row['qorder'], ' ', true));	
+						
+					$apply_post .= '[size=120][color='. $config['bbdkp_apply_pqcolor'] .'][b]' . $row['question'] . ': [/b][/color][/size]
+					';
+					 
+					$apply_post .=	$fieldcontents;
+					
 					$apply_post .= '<br /><br />'; 
 					break;
 					
@@ -671,6 +674,7 @@ function fill_application_form($post_data, $submit, $error, $captcha)
 			$template->assign_block_vars('templatestart', array(
 				'QORDER'		=> $row['qorder'],
 				'QUESTION'		=> $row['question'],
+				'EXPLAIN'		=> $row['explainstr'],
 				'OPTIONS'   	=> $row['options'],
 				'TYPE'			=> $type,
 				'MANDATORY' 	=> $mandatory)
@@ -680,9 +684,10 @@ function fill_application_form($post_data, $submit, $error, $captcha)
 		else 
 		{
 			// main questionnaire put below
-			$template->assign_block_vars('template', array(
+			$template->assign_block_vars('apptemplate', array(
 				'QORDER'		=> $row['qorder'],
 				'QUESTION'		=> $row['question'],
+				'EXPLAINSTR'		=> $row['explainstr'],
 				'OPTIONS'   	=> $row['options'],
 				'TYPE'			=> $type,
 				'MANDATORY' 	=> $mandatory)

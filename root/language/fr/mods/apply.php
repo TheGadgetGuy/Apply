@@ -85,8 +85,11 @@ $lang = array_merge($lang, array(
 'APPLY_ACP_REALM' 			=> 'Royaume',
 'APPLY_ACP_REGION' 			=> 'Region',
 'APPLY_ACP_APPTEMPLATEUPD'	=> 'Mise à jour du modèle', 
-
-/***** ACP template settings *****/
+/***** ACP template settings *****
+'ACP_APPLY_MANDATORY'  		=> 'Obligatoire',
+'ACP_APPLY_HEADER'  		=> 'Entête',
+'ACP_APPLY_EXPLAIN'  		=> 'Explanation',
+'ACP_APPLY_CONTENTS'  		=> 'Contenu',
 'ACP_DKP_APPLY_EXPLAIN'  => 'Ici tu peux saisir toutes les configurations du formulaire de recrutement.',
 'APPLY_ACP_APPTEMPLATENEW'  => 'Nouvelle question', 
 'APPLY_CHGMAND' 			=> 'Autres questions existantes ici. ',

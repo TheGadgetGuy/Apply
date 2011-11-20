@@ -88,12 +88,17 @@ To help us with your application please answer the questions below. Enter your c
 'APPLY_ACP_APPTEMPLATEUPD'	=> 'Update Application template', 
 
 /***** ACP template settings *****/
+'ACP_APPLY_MANDATORY'  		=> 'Mandatory',
+'ACP_APPLY_HEADER'  		=> 'Header',
+'ACP_APPLY_EXPLAIN'  		=> 'Explain',
+'ACP_APPLY_CONTENTS'  		=> 'Contents',
+
 'ACP_DKP_APPLY_EXPLAIN'  	=> 'Here you can set all preferences of the Recruitment Mod',
 'APPLY_ACP_APPTEMPLATENEW'  => 'Application template New item', 
 'APPLY_CHGMAND' 			=> 'Change Questionnaire here. ',
-'APPLY_CHGMAND_EXPLAIN' 	=> 'Change the mandatory check, order, question and type. Separate the options with a comma "," with no spaces. The two first questions are reserved.',
+'APPLY_CHGMAND_EXPLAIN' 	=> 'Change the mandatory check, order, question and type. Separate the selectbox options with a comma "," with no spaces. The two first questions are reserved.',
 'APPLY_ACP_NEWQUESTION' 	=> 'Enter new questions here.',
-'APPLY_ACP_NEWQUESTION_EXPLAIN' => 'Check if mandatory, enter the order, question and type. Separate the options with a comma "," with no spaces.', 
+'APPLY_ACP_NEWQUESTION_EXPLAIN' => 'Check if mandatory, enter the order, question and type. Separate the selectbox options with a comma "," with no spaces.', 
 'APPLY_ACP_INPUTBOX' 		=> 'Inputbox',	
 'APPLY_ACP_TXTBOX' 			=> 'Textbox', 
 'APPLY_ACP_SELECTBOX' 		=> 'Selectbox',
@@ -116,8 +121,6 @@ To help us with your application please answer the questions below. Enter your c
 'APPLY_ACP_QUESTNADD' 		=> 'New question Saved !',   
 'APPLY_ACP_EXPLAINOPTIONS' 	=> 'Seperate Options with a comma "," with no spaces.',  
 
-
-
 /** ACP settings for posting template **/
 'APPLY_COLORSETTINGS' 		=> 'Apply Color Settings',
 'APPLY_POST_ANSWERCOLOR' 	=> 'Posting Answers color',
@@ -127,7 +130,7 @@ To help us with your application please answer the questions below. Enter your c
 'APPLY_POSTCOLOR_EXPLAIN' 	=> 'Color of texts used in the Form and Recruitment post. If you use a dark Style, you can vary the text color to be used here.',
 
 /** posting template **/
-'APPLY_CHAR_OVERVIEW' 		=> 'Character details',
+'APPLY_CHAR_OVERVIEW' 		=> 'Character',
 'APPLY_CHAR_MOTIVATION' 	=> 'Motivation',
 
 'APPLY_CHAR_NAME' 	=> '[color=%s][b]Character name : [/b][/color]%s',

@@ -16,15 +16,15 @@
 <span class="corners-bottom"><span></span></span>
 </div>
 </div>
-<form action="{S_POST_ACTION}" method="post" id="applyform" onsubmit="return check_form(this)" {S_FORM_ENCTYPE}>
 
+<form action="{S_POST_ACTION}" method="post" id="applyform" onsubmit="return check_form(this)" {S_FORM_ENCTYPE}>
 <!-- IF S_SHOW_FORUMCHOICE -->
 <div class="panel bg2" >
 <div class="inner"  >
 <span class="corners-top"><span></span></span>
-<fieldset>		
+<fieldset class="fields3">		
 <dl>
-	<dt><strong><span style="color: {FORMQCOLOR}">{L_APPLY_PUBLICQUESTION}</span></strong></dt>
+	<dt>{L_APPLY_PUBLICQUESTION}</dt>
     		<dd>
     			<input type="radio" name="publ" value="1"{PUBLIC_YES_CHECKED} />&nbsp;{L_APPLY_ACP_PUBLIC}&nbsp;
     			<input type="radio" name="publ" value="0"{PUBLIC_NO_CHECKED} />&nbsp;{L_APPLY_ACP_PRIVATE}
@@ -38,27 +38,26 @@
 </div>	
 <!-- ENDIF -->
 
-<div class="panel bg2" >
+<div class="post bg2" >
 <div class="inner"  >
 <span class="corners-top"><span></span></span>
 
-<fieldset>	
-<span style="color: {FORMQCOLOR}"> </span>
+<fieldset class="fields2">	
 
 <!-- BEGIN templatestart -->
 <dl>
-	<dt><strong>{templatestart.QUESTION}</strong></dt>
+	<dt><p><strong>{templatestart.QUESTION}</strong></p></dt>
 	<dd>{templatestart.TYPE}{templatestart.MANDATORY}</dd>
 </dl>
 <!-- END templatestart -->
 
 <dl>
-    <dt><strong>{L_APPLY_LEVEL}</strong></dt>
+    <dt><p><strong>{L_APPLY_LEVEL}</strong></p></dt>
 	<dd><input type="text" name="candidate_level" size="3" maxlength="3" value="{MEMBER_LEVEL}" class="input" /> <span style="color:red">{L_MANDATORY}</span> </dd>
 </dl> 
  
 <dl>
-    <dt><strong>{L_GAME}:</strong></dt>
+    <dt><p><strong>{L_GAME}:</strong></p></dt>
   	 <dd>
   	  <div>
   		<select name="game_id" class="input" onchange="return GetClassRace(this.value)">
@@ -102,18 +101,18 @@
 <div class="post bg2" >
 <div class="inner"  >
 <span class="corners-top"><span></span></span>
-<div class="postbody" style="width:100%; font-size=1.2em;">
-<div class="content">
-<fieldset>	
-<!-- BEGIN template -->
+
+<fieldset class="fields2">	
+<!-- BEGIN apptemplate -->
 <dl>
-	<dt><span>{template.QUESTION}</span></dt>
-	<dd>{template.TYPE}{template.MANDATORY}</dd>
+	<dt><p><strong>{apptemplate.QUESTION}</strong></p></dt>
+		
+	<dd>{apptemplate.EXPLAINSTR}
+	<br/>{apptemplate.TYPE}{apptemplate.MANDATORY}</dd>
 </dl>
-<!-- END template -->
+<!-- END apptemplate -->
 </fieldset>
-</div>
-</div>
+
 <span class="corners-bottom"><span></span></span>
 </div>
 </div>

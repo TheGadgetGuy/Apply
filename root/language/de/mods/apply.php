@@ -89,6 +89,10 @@ Um uns mit deiner Bewerbung zu untersützen, beantworte bitte die unten aufgefü
 'APPLY_ACP_APPTEMPLATEUPD'	=> 'Aktualisiere Bewerbungsbogen', 
 
 /***** ACP template settings *****/
+'ACP_APPLY_MANDATORY'  		=> 'erforderlich',
+'ACP_APPLY_HEADER'  		=> 'Kopfzeile',
+'ACP_APPLY_EXPLAIN'  		=> 'Erklärung',
+'ACP_APPLY_CONTENTS'  		=> 'Inhalt selectbox',
 'ACP_DKP_APPLY_EXPLAIN'  	=> 'Hier kannst du alle Einstellungen zum Bewerbungsformular vornehmen.',
 'APPLY_ACP_APPTEMPLATENEW'  => 'Bewerbungsvorlage neue Frage', 
 'APPLY_CHGMAND' 			=> 'Ändere bestehende Fragen hier. ',
@@ -126,6 +130,8 @@ Um uns mit deiner Bewerbung zu untersützen, beantworte bitte die unten aufgefü
 'APPLY_POSTCOLOR_EXPLAIN' 	=> 'Farben angezeigt im Fragebogen und in den Beitragen. Wenn du einen eher dunkler Style gebrauchst, kann hier eine Kontrastierende Farbe gewählt werden.',
 
 /** posting template **/
+'APPLY_CHAR_OVERVIEW' 		=> 'Charakter',
+'APPLY_CHAR_MOTIVATION' 	=> 'Motivation',
 
 'APPLY_CHAR_NAME' 	=> '[color=%s][b]Character Name : [/b][/color]%s',
 'APPLY_CHAR_LEVEL' 	=> '[color=%s]Character Level : [/color]%s',  
