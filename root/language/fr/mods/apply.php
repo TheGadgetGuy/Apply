@@ -59,22 +59,11 @@ $lang = array_merge($lang, array(
 'APPLY_NAME' => ' Nom de caractère: ',
 'APPLY_QUESTION'  => 'Question ',
 'APPLY_ANSWER'  => 'Réponse ',
-'APPLY_LEVEL'  => 'Niveau (1-80): ',
+'APPLY_LEVEL'  => 'Niveau: ',
 'APPLY_CLASS'  => 'Classe: ',
+'APPLY_RACE'  => 'Race: ',
 'APPLY_TALENT'  => 'Talents: ',
 'APPLY_PROFF'  =>  'Proffessions: ',
-
-// classes for simplerecruit
-'SR_DK' => 'Chevalier de la Mort', 
-'SR_DRUID' => 'Druide', 
-'SR_HUNTER' => 'Chasseur', 
-'SR_MAGE' => 'Mage', 
-'SR_PALADIN' => 'Paladin', 
-'SR_PRIEST' => 'Prêtre', 
-'SR_ROGUE' => 'Voleur', 
-'SR_SHAMAN'=> 'Chaman',
-'SR_WARLOCK'=> 'Démoniste',
-'SR_WARRIOR'=> 'Guerrier',
 
 /***** ACP Privacy settings *****/
 'APPLY_ACP_PRISETTING'		=> 'Règlages vie privée',
@@ -93,11 +82,6 @@ $lang = array_merge($lang, array(
 /***** ACP Privacy settings *****/
 'APPLY_ACP_CHARNAME' 		=> 'Nom de Caractère',
 'APPLY_ACP_ARMSETTING'		=> 'Règlages Armurerie',
-'APPLY_ACP_SIMPLERECRUIT'   => 'Candidature Simple ou Candidature Armurerie', 
-'APPLY_ACP_SIMPLERECRUIT_EXPLAIN'   => 'La candidature Armurerie cherche d’informations chez Blizzard tandis que la candidature simple ne le fait pas.', 
-'APPLY_ACP_ARMORYONLINENAME' => 'Nom de caractère Armurerie',
-'APPLY_ACP_ARMORYONLINENAME_EXPLAIN' => 'Saisier le nom d’un caractère aléatoire servant à vérifier la connection à l’Armurerie. Un essai de connection à ce caractère sera effectué au chargement du formulaire et le mode Simple sera choisi lorsque ce check échoue.', 
-
 'APPLY_ACP_REALM' 			=> 'Royaume',
 'APPLY_ACP_REGION' 			=> 'Region',
 'APPLY_ACP_APPTEMPLATEUPD'	=> 'Mise à jour du modèle', 
@@ -140,58 +124,14 @@ $lang = array_merge($lang, array(
 'APPLY_POSTCOLOR_EXPLAIN' 	=> 'Couleur des textes utilisées dans le formulaire et dans les messages. Donc si vous utilisez un style sombre, vous pourrez choisir une couleur qui contraste.',
 
 /** posting template **/
+'APPLY_CHAR_OVERVIEW' 		=> 'Application',
+'APPLY_CHAR_MOTIVATION' 	=> 'Motivation',
 'APPLY_CHAR_NAME' 	=> '[color=%s][b]Nom de Caractère : [/b][/color]%s',
 'APPLY_CHAR_LEVEL' 	=> '[color=%s]Niveau : [/color]%s',  
 'APPLY_CHAR_CLASS' 	=> '[color=%s]Classe: [/color]%s' ,
 'APPLY_CHAR_PROFF' 	=> '[color=%s][u]Proffessions :[/u][/color]
 %s',
 'APPLY_CHAR_BUILD' 	=> '[color=%s][u]Spécialisation de talents : [/u][/color]%s',
-
-'APPLY_CHAR_MANA' 	=> '[color=%s]Mana : [/color]%s' ,
-'APPLY_CHAR_SP' 	=> '[color=%s]Bonus dégats : [/color]%s' ,
-'APPLY_CHAR_ACRIT' 	=> '[color=%s]Crit Arcane : [/color]%s %%',
-'APPLY_CHAR_FCRIT' 	=> '[color=%s]Crit Feux: [/color]%s %%',
-'APPLY_CHAR_FROST' 	=> '[color=%s]Crit Froid : [/color]%s %%',
-'APPLY_CHAR_SPHIT' 	=> '[color=%s]Sc. Toucher : [/color]%s %%', 
-'APPLY_CHAR_SPHAS' 	=> '[color=%s]Hâte : [/color]%s' , 
-'APPLY_CHAR_HCRIT' 	=> '[color=%s]Crit sacré : [/color]%s %%',
-'APPLY_CHAR_SHCRIT' => '[color=%s]Crit ombre : [/color]%s %%',
-'APPLY_CHAR_MREG' 	=> '[color=%s]Régen mana pendant incantation : [/color]%s ',
-
-'APPLY_CHAR_RANGEDPS' 	=> '[color=%s]DPS : [/color]%s',
-'APPLY_CHAR_RANGEDAP' 	=> '[color=%s]Dégats à distance : [/color]%s',
-'APPLY_CHAR_RANGEDCRIT' => '[color=%s]Critique : [/color]%s %%',
-'APPLY_CHAR_RANGEHIT' 	=> '[color=%s]Toucher : [/color]%s %%',
-'APPLY_CHAR_RANGEHAS' 	=> '[color=%s]Vitesse : [/color]%s %%',
-
-'APPLY_CHAR_MELEEDPS' 	=> '[color=%s]DPS melée : [/color]%s %%',
-'APPLY_CHAR_MELEEAP' 	=> '[color=%s]Force : [/color]%s',
-'APPLY_CHAR_MELEECRIT' 	=> '[color=%s]Critique : [/color]%s %%',
-'APPLY_CHAR_MELEEHIT' 	=> '[color=%s]toucher : [/color]%s %%',
-'APPLY_CHAR_MELEEHAS' 	=> '[color=%s]Vitesse : [/color]%s %%',
-'APPLY_CHAR_EXPERTISE' 	=> '[color=%s]pouvoirs d’armes : [/color]%s %%',
-
-'APPLY_CHAR_PALHO' 		=> '[color=%s][u]Sacré[/u][/color]',
-'APPLY_CHAR_PALRE' 		=> '[color=%s][u]Vindicte[/u][/color]',
-'APPLY_CHAR_PALPR' 		=> '[color=%s][u]Protection[/u][/color]',
-
-'APPLY_CHAR_WARRARM' 	=> '[color=%s][u]Armes/Fureur[/u][/color]',
-'APPLY_CHAR_WARRPRO' 	=> '[color=%s][u]Défense[/u][/color]',
-'APPLY_CHAR_HP' 		=> '[color=%s]Vie : [/color]%s',
-'APPLY_CHAR_ARMOR' 		=> '[color=%s]Armure : [/color]%s',
-'APPLY_CHAR_DEF' 		=> '[color=%s]Défense : [/color]%s',
-'APPLY_CHAR_DODGE' 		=> '[color=%s]Esquisse : [/color]%s %%',
-'APPLY_CHAR_PARRY' 		=> '[color=%s]Parade : [/color]%s %%',
-'APPLY_CHAR_BLOCK' 		=> '[color=%s]Blocage : [/color]%s %%',
-
-'APPLY_CHAR_DRUFER' 	=> '[color=%s][u]Combat farouche[/u][/color]',
-'APPLY_CHAR_RESTO' 		=> '[color=%s][u]Equilibre/Restauration[/u][/color]', 
-'APPLY_CHAR_NATCRIT' 	=> '[color=%s]Crit naturel: [/color]%s %%',
-
-'APPLY_CHAR_SHAEN' 		=> '[color=%s][u]Amélioration[/u][/color]',
-'APPLY_CHAR_SHAEL' 		=> '[color=%s][u]Elementaire[/u][/color]',
-'APPLY_CHAR_SHARE' 		=> '[color=%s][u]Restauration[/u][/color]', 
-
 'APPLY_CHAR_URL' => '[color=%s][/color][url=%s]Lien Armurerie[/url]', 
 'ERROR_NAME'  =>  'Erreur : Nom doit être alphabetique (a-zA-ZàäåâÅÂçÇéèëêïÏîÎæŒæÆÅóòÓÒöÖôÔøØüÜ sont permis). ',
 'RETURN_APPLY'  =>  'Retourne au formulaire.',

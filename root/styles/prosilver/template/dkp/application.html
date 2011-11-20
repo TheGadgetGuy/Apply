@@ -16,7 +16,7 @@
 <span class="corners-bottom"><span></span></span>
 </div>
 </div>
-<form action="{S_POST_ACTION}" method="post" name="applyform" onsubmit="return check_form(this)" {S_FORM_ENCTYPE}>
+<form action="{S_POST_ACTION}" method="post" id="applyform" onsubmit="return check_form(this)" {S_FORM_ENCTYPE}>
 
 <!-- IF S_SHOW_FORUMCHOICE -->
 <div class="panel bg2" >
@@ -24,7 +24,7 @@
 <span class="corners-top"><span></span></span>
 <fieldset>		
 <dl>
-	<dt><h4><span style="color: {FORMQCOLOR}">{L_APPLY_PUBLICQUESTION}</span></h4></dt>
+	<dt><strong><span style="color: {FORMQCOLOR}">{L_APPLY_PUBLICQUESTION}</span></strong></dt>
     		<dd>
     			<input type="radio" name="publ" value="1"{PUBLIC_YES_CHECKED} />&nbsp;{L_APPLY_ACP_PUBLIC}&nbsp;
     			<input type="radio" name="publ" value="0"{PUBLIC_NO_CHECKED} />&nbsp;{L_APPLY_ACP_PRIVATE}
@@ -44,18 +44,21 @@
 
 <fieldset>	
 <span style="color: {FORMQCOLOR}"> </span>
+
+<!-- BEGIN templatestart -->
 <dl>
-    <dt><h4>{L_NAME}:</h4></dt>
-    <dd><input type="text" name="member_name" id="member_name" size="20" maxlength="30"  value="{MEMBER_NAME}" class="input" /> <span style="color:red">{L_MANDATORY}</span> </dd>
+	<dt><strong>{templatestart.QUESTION}</strong></dt>
+	<dd>{templatestart.TYPE}{templatestart.MANDATORY}</dd>
 </dl>
+<!-- END templatestart -->
 
 <dl>
-    <dt><h4>{L_APPLY_LEVEL}</h4></dt>
-	<dd><input type="text" name="member_level" size="3" maxlength="3" value="{MEMBER_LEVEL}" class="input" /> <span style="color:red">{L_MANDATORY}</span> </dd>
+    <dt><strong>{L_APPLY_LEVEL}</strong></dt>
+	<dd><input type="text" name="candidate_level" size="3" maxlength="3" value="{MEMBER_LEVEL}" class="input" /> <span style="color:red">{L_MANDATORY}</span> </dd>
 </dl> 
  
 <dl>
-    <dt><h4>{L_GAME}:</h4></dt>
+    <dt><strong>{L_GAME}:</strong></dt>
   	 <dd>
   	  <div>
   		<select name="game_id" class="input" onchange="return GetClassRace(this.value)">
@@ -63,15 +66,15 @@
        <option value="{game_row.VALUE}"{game_row.SELECTED}>{game_row.OPTION}</option>
         <!-- END game_row -->
       </select>
-      <label for="member_race_id">{L_RACE}:</label>
-  	  <select id="raceselect" name="member_race_id" class="input">
+      <label for="candidate_race_id">{L_RACE}:</label>
+  	  <select id="candidate_race_id" name="candidate_race_id" class="input">
        <!-- BEGIN race_row -->
        <option value="{race_row.VALUE}"{race_row.SELECTED}>{race_row.OPTION}</option>
         <!-- END race_row -->
         </select>
    		<!-- IF S_RACE_IMAGE_EXISTS --> <br/><img src="{RACE_IMAGE}" alt="" />&nbsp;<!-- ELSE -->&nbsp;<!-- ENDIF -->
-	  <label for="member_class_id">{L_CLASS}:</label>
-	  <select id="classselect" name="member_class_id" class="input">
+	  <label for="candidate_class_id">{L_CLASS}:</label>
+	  <select id="candidate_class_id" name="candidate_class_id" class="input">
        <!-- BEGIN class_row -->
         <option value="{class_row.VALUE}"{class_row.SELECTED}>{class_row.OPTION}</option>
         <!-- END class_row -->
@@ -82,10 +85,10 @@
 </dl>
 
 <dl>
-    <dt><h4>{L_GENDER}:</h4></dt>
+    <dt><strong>{L_GENDER}:</strong></dt>
     <dd>
-    <input type="radio" name="gender"  value="0"{MALE_CHECKED} /> {L_MALE}&nbsp;&nbsp;
-    <input type="radio" name="gender"  value="1"{FEMALE_CHECKED} /> {L_FEMALE}
+    <input type="radio" name="candidate_gender"  value="0"{MALE_CHECKED} /> {L_MALE}&nbsp;&nbsp;
+    <input type="radio" name="candidate_gender"  value="1"{FEMALE_CHECKED} /> {L_FEMALE}
    </dd>
  </dl>
 </fieldset>
@@ -99,7 +102,7 @@
 <div class="post bg2" >
 <div class="inner"  >
 <span class="corners-top"><span></span></span>
-<div class="postbody" style="width:90%; font-size=1.2em;">
+<div class="postbody" style="width:100%; font-size=1.2em;">
 <div class="content">
 <fieldset>	
 <!-- BEGIN template -->
@@ -222,7 +225,7 @@ function classracestateChanged()
 			var classes = classlist.getElementsByTagName("class");
 			
 			//now modify html : first remove old select options
-			var rsel = document.getElementById('raceselect'); 
+			var rsel = document.getElementById('candidate_race_id'); 
 			rsel.options.length = 0; 
 
 			
@@ -235,7 +238,7 @@ function classracestateChanged()
 			    rsel.options[i] = new Option(racename,raceid, true, false); 
 			}
 			
-			var csel = document.getElementById('classselect'); 
+			var csel = document.getElementById('candidate_class_id'); 
 			csel.options.length = 0; 
 
 			

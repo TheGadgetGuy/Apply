@@ -26,7 +26,7 @@ if (empty($lang) || !is_array($lang))
 // Merge the following language entries into the lang array
 $lang = array_merge($lang, array(
 	'ACP_DKP_APPLY'	=> 'Apply',
-	'ACP_DKP_APPLY_EXPLAIN'	=> 'Here you can change the Apply configuration', 
+	'ACP_DKP_APPLY_EXPLAIN'	=> 'Here you can change the Recruitment template and forum settings. ', 
 
 
 

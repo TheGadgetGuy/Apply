@@ -62,20 +62,9 @@ Um uns mit deiner Bewerbung zu untersützen, beantworte bitte die unten aufgefü
 'APPLY_ANSWER'  => 'Antwort ',
 'APPLY_LEVEL'  => 'Level (1-80): ',
 'APPLY_CLASS'  => 'Klasse: ',
+'APPLY_RACE'  => 'Race: ',
 'APPLY_TALENT'  => 'Talente: ',
 'APPLY_PROFF'  =>  'Berufe: ',
-
-// classes for simplerecruit
-'SR_DK' => 'Todesritter', 
-'SR_DRUID' => 'Druide', 
-'SR_HUNTER' => 'Jäger', 
-'SR_MAGE' => 'Magier', 
-'SR_PALADIN' => 'Paladin', 
-'SR_PRIEST' => 'Priester', 
-'SR_ROGUE' => 'Schurke', 
-'SR_SHAMAN'=> 'Schamane',
-'SR_WARLOCK'=> 'Hexenmeister',
-'SR_WARRIOR'=> 'Krieger',
 
 /***** ACP Privacy settings *****/
 'APPLY_ACP_PRISETTING'		=> 'Privatsphäre Einstellung',
@@ -94,10 +83,6 @@ Um uns mit deiner Bewerbung zu untersützen, beantworte bitte die unten aufgefü
 /***** ACP Armory settings *****/
 'APPLY_ACP_CHARNAME' 		=> 'Charakter Name',
 'APPLY_ACP_ARMSETTING'		=> 'Arsenal Einstellung',
-'APPLY_ACP_SIMPLERECRUIT'   => 'einfache Bewerbung oder Arsenal Prüfung', 
-'APPLY_ACP_SIMPLERECRUIT_EXPLAIN'   => 'Arsenalprüfung ruft Charakterinformationen vom Blizzard Arsenal auf, Simplerecruit nicht. ', 
-'APPLY_ACP_ARMORYONLINENAME' => 'Charakter Name zum testen',
-'APPLY_ACP_ARMORYONLINENAME_EXPLAIN' => 'Zufallsname zum testen ob das Arsenal online ist. Beim aufrufen des Bewerbungsbogen wird dieser Test ausgeführt und Simplerecruit wird aktiviert falls er fehlt.', 
 
 'APPLY_ACP_REALM' 			=> 'Realm',
 'APPLY_ACP_REGION' 			=> 'Region',
@@ -148,52 +133,6 @@ Um uns mit deiner Bewerbung zu untersützen, beantworte bitte die unten aufgefü
 'APPLY_CHAR_PROFF' 	=> '[color=%s][u]Berufe :[/u][/color]
 %s',
 'APPLY_CHAR_BUILD' 	=> '[color=%s][u]Talent Verteilungen : [/u][/color]%s',
-
-'APPLY_CHAR_MANA' 	=> '[color=%s]Mana : [/color]%s' ,
-'APPLY_CHAR_SP' 	=> '[color=%s]Zaubermacht : [/color]%s' ,
-'APPLY_CHAR_ACRIT' 	=> '[color=%s]Arkan Krit : [/color]%s %%',
-'APPLY_CHAR_FCRIT' 	=> '[color=%s]Feuer Krit : [/color]%s %%',
-'APPLY_CHAR_FROST' 	=> '[color=%s]Frost Krit : [/color]%s %%',
-'APPLY_CHAR_SPHIT' 	=> '[color=%s]Trefferwertung : [/color]%s %%', 
-'APPLY_CHAR_SPHAS' 	=> '[color=%s]Tempo : [/color]%s' , 
-'APPLY_CHAR_HCRIT' 	=> '[color=%s]Heilig Krit : [/color]%s %%',
-'APPLY_CHAR_SHCRIT' => '[color=%s]Schatten Krit : [/color]%s %%',
-'APPLY_CHAR_MREG' 	=> '[color=%s]Mana Regeneration (zaubernd) : [/color]%s ',
-
-'APPLY_CHAR_RANGEDPS' 	=> '[color=%s]DPS : [/color]%s',
-'APPLY_CHAR_RANGEDAP' 	=> '[color=%s]Distanz Angriffskraft : [/color]%s',
-'APPLY_CHAR_RANGEDCRIT' => '[color=%s]Distanz Krit : [/color]%s %%',
-'APPLY_CHAR_RANGEHIT' 	=> '[color=%s]Trefferwertung : [/color]%s %%',
-'APPLY_CHAR_RANGEHAS' 	=> '[color=%s]Tempo : [/color]%s %%',
-
-'APPLY_CHAR_MELEEDPS' 	=> '[color=%s]DPS Haupt/Neben-Hand : [/color]%s %%',
-'APPLY_CHAR_MELEEAP' 	=> '[color=%s]Nahkampf Angriffskraft : [/color]%s',
-'APPLY_CHAR_MELEECRIT' 	=> '[color=%s]Nahkampf Crit : [/color]%s %%',
-'APPLY_CHAR_MELEEHIT' 	=> '[color=%s]Nahkampf Hit : [/color]%s %%',
-'APPLY_CHAR_MELEEHAS' 	=> '[color=%s]Tempo : [/color]%s %%',
-'APPLY_CHAR_EXPERTISE' 	=> '[color=%s]Waffenkunde : [/color]%s %%',
-
-'APPLY_CHAR_PALHO' 		=> '[color=%s][u]Heilig[/u][/color]',
-'APPLY_CHAR_PALRE' 		=> '[color=%s][u]Vergeltung[/u][/color]',
-'APPLY_CHAR_PALPR' 		=> '[color=%s][u]Schutz[/u][/color]',
-
-'APPLY_CHAR_WARRARM' 	=> '[color=%s][u]Waffen/Furor[/u][/color]',
-'APPLY_CHAR_WARRPRO' 	=> '[color=%s][u]Schutz[/u][/color]',
-'APPLY_CHAR_HP' 		=> '[color=%s]Leben : [/color]%s',
-'APPLY_CHAR_ARMOR' 		=> '[color=%s]Rüstung : [/color]%s',
-'APPLY_CHAR_DEF' 		=> '[color=%s]Verteidigung : [/color]%s',
-'APPLY_CHAR_DODGE' 		=> '[color=%s]Ausweichen : [/color]%s %%',
-'APPLY_CHAR_PARRY' 		=> '[color=%s]Parrieren : [/color]%s %%',
-'APPLY_CHAR_BLOCK' 		=> '[color=%s]Blocken : [/color]%s %%',
-
-'APPLY_CHAR_DRUFER' 	=> '[color=%s][u]Wilder Kampf[/u][/color]',
-'APPLY_CHAR_RESTO' 		=> '[color=%s][u]Gleichgewicht/Wiederherstellung[/u][/color]', 
-'APPLY_CHAR_NATCRIT' 	=> '[color=%s]Natur Krit : [/color]%s %%',
-
-'APPLY_CHAR_SHAEN' 		=> '[color=%s][u]Verstärkung[/u][/color]',
-'APPLY_CHAR_SHAEL' 		=> '[color=%s][u]Elementar[/u][/color]',
-'APPLY_CHAR_SHARE' 		=> '[color=%s][u]Wiederherstellung[/u][/color]', 
-
 'APPLY_CHAR_URL' => '[color=%s][/color][url=%s]WoW Armory Link[/url]', 
 'ERROR_NAME'  =>  'Fehler : Name muss alphabetisch (a-zA-ZàäåâÅÂçÇéèëêïÏîÎæŒæÆÅóòÓÒöÖôÔøØüÜ sind erlaubt). ',
 'RETURN_APPLY'  =>  'Gehe zurück zum Fragebogen.',

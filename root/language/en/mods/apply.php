@@ -56,27 +56,15 @@ To help us with your application please answer the questions below. Enter your c
 'APPLY_REQUIRED'  => 'You need to fill in all required fields. ', 
 'MANDATORY'	=> 'Required',	
 'APPLY_REALM' => 'Realm (blank for ',
-'APPLY_REALM1' => 'Realm : ',
 'APPLY_NAME' => ' Character name: ',
 'APPLY_QUESTION'  => 'Question ',
 'APPLY_ANSWER'  => 'Answer ',
-'APPLY_REALM1' => 'Realm : ',
-'APPLY_LEVEL'  => 'Level (1-80): ',
+'APPLY_REALM1' => 'Realm: ',
+'APPLY_LEVEL'  => 'Level: ',
 'APPLY_CLASS'  => 'Class: ',
+'APPLY_RACE'  => 'Race: ',
 'APPLY_TALENT'  => 'Talent: ',
 'APPLY_PROFF'  =>  'Profession: ',
-
-// classes for simplerecruit
-'SR_DK' => 'Death Knight', 
-'SR_DRUID' => 'Druid', 
-'SR_HUNTER' => 'Hunter', 
-'SR_MAGE' => 'Mage', 
-'SR_PALADIN' => 'Paladin', 
-'SR_PRIEST' => 'Priest', 
-'SR_ROGUE' => 'Rogue', 
-'SR_SHAMAN'=> 'Shaman',
-'SR_WARLOCK'=> 'Warlock',
-'SR_WARRIOR'=> 'Warrior',
 
 /***** ACP Privacy settings *****/
 'APPLY_ACP_PRISETTING'		=> 'Privacy Settings',
@@ -95,11 +83,6 @@ To help us with your application please answer the questions below. Enter your c
 /***** ACP Privacy settings *****/
 'APPLY_ACP_CHARNAME' 		=> 'Character name',
 'APPLY_ACP_ARMSETTING'		=> 'Armory Settings',
-'APPLY_ACP_SIMPLERECRUIT'   => 'Simplerecruit or Armorycheck', 
-'APPLY_ACP_SIMPLERECRUIT_EXPLAIN'   => 'Armory check will fetch character information from Blizzard. Simplerecruit will not check the Armory. Use this for other games than Wow', 
-'APPLY_ACP_ARMORYONLINENAME' => 'Character name to check the Armory connection ',
-'APPLY_ACP_ARMORYONLINENAME_EXPLAIN' => 'Put here the name of a random character to test the Armory connection. This char will be checked when Apply loads and Simplerecruit will be activated when Armory is down.', 
-
 'APPLY_ACP_REALM' 			=> 'Realm',
 'APPLY_ACP_REGION' 			=> 'Region',
 'APPLY_ACP_APPTEMPLATEUPD'	=> 'Update Application template', 
@@ -144,6 +127,9 @@ To help us with your application please answer the questions below. Enter your c
 'APPLY_POSTCOLOR_EXPLAIN' 	=> 'Color of texts used in the Form and Recruitment post. If you use a dark Style, you can vary the text color to be used here.',
 
 /** posting template **/
+'APPLY_CHAR_OVERVIEW' 		=> 'Character details',
+'APPLY_CHAR_MOTIVATION' 	=> 'Motivation',
+
 'APPLY_CHAR_NAME' 	=> '[color=%s][b]Character name : [/b][/color]%s',
 'APPLY_CHAR_LEVEL' 	=> '[color=%s]Character level : [/color]%s',  
 'APPLY_CHAR_CLASS' 	=> '[color=%s]Character class : [/color]%s' ,
@@ -151,52 +137,7 @@ To help us with your application please answer the questions below. Enter your c
 %s',
 'APPLY_CHAR_BUILD' 	=> '[color=%s][u]Talent build : [/u][/color]%s',
 
-'APPLY_CHAR_MANA' 	=> '[color=%s]Mana : [/color]%s' ,
-'APPLY_CHAR_SP' 	=> '[color=%s]Spell Power : [/color]%s' ,
-'APPLY_CHAR_ACRIT' 	=> '[color=%s]Arcane Crit : [/color]%s %%',
-'APPLY_CHAR_FCRIT' 	=> '[color=%s]Fire Crit : [/color]%s %%',
-'APPLY_CHAR_FROST' 	=> '[color=%s]Frost Crit : [/color]%s %%',
-'APPLY_CHAR_SPHIT' 	=> '[color=%s]Spell Hit : [/color]%s %%', 
-'APPLY_CHAR_SPHAS' 	=> '[color=%s]Spell Haste : [/color]%s' , 
-'APPLY_CHAR_HCRIT' 	=> '[color=%s]Holy Crit : [/color]%s %%',
-'APPLY_CHAR_SHCRIT' => '[color=%s]Shadow Crit : [/color]%s %%',
-'APPLY_CHAR_MREG' 	=> '[color=%s]Mana Regen (Casting) : [/color]%s ',
-
-'APPLY_CHAR_RANGEDPS' 	=> '[color=%s]DPS : [/color]%s',
-'APPLY_CHAR_RANGEDAP' 	=> '[color=%s]Ranged Attackpower : [/color]%s',
-'APPLY_CHAR_RANGEDCRIT' => '[color=%s]Ranged Crit : [/color]%s %%',
-'APPLY_CHAR_RANGEHIT' 	=> '[color=%s]Ranged Hit : [/color]%s %%',
-'APPLY_CHAR_RANGEHAS' 	=> '[color=%s]Ranged Haste : [/color]%s %%',
-
-'APPLY_CHAR_MELEEDPS' 	=> '[color=%s]DPS Main/Off-Hand : [/color]%s %%',
-'APPLY_CHAR_MELEEAP' 	=> '[color=%s]Melee Attackpower : [/color]%s',
-'APPLY_CHAR_MELEECRIT' 	=> '[color=%s]Melee Crit : [/color]%s %%',
-'APPLY_CHAR_MELEEHIT' 	=> '[color=%s]Melee Hit : [/color]%s %%',
-'APPLY_CHAR_MELEEHAS' 	=> '[color=%s]Melee Haste : [/color]%s %%',
-'APPLY_CHAR_EXPERTISE' 	=> '[color=%s]Expertise : [/color]%s %%',
-
-'APPLY_CHAR_PALHO' 		=> '[color=%s][u]Holy[/u][/color]',
-'APPLY_CHAR_PALRE' 		=> '[color=%s][u]Retribution[/u][/color]',
-'APPLY_CHAR_PALPR' 		=> '[color=%s][u]Protection[/u][/color]',
-
-'APPLY_CHAR_WARRARM' 	=> '[color=%s][u]Arms/Fury[/u][/color]',
-'APPLY_CHAR_WARRPRO' 	=> '[color=%s][u]Protection[/u][/color]',
-'APPLY_CHAR_HP' 		=> '[color=%s]Health : [/color]%s',
-'APPLY_CHAR_ARMOR' 		=> '[color=%s]Armor : [/color]%s',
-'APPLY_CHAR_DEF' 		=> '[color=%s]Defense : [/color]%s',
-'APPLY_CHAR_DODGE' 		=> '[color=%s]Dodge : [/color]%s %%',
-'APPLY_CHAR_PARRY' 		=> '[color=%s]Parry : [/color]%s %%',
-'APPLY_CHAR_BLOCK' 		=> '[color=%s]Block : [/color]%s %%',
-
-'APPLY_CHAR_DRUFER' 	=> '[color=%s][u]Feral[/u][/color]',
-'APPLY_CHAR_RESTO' 		=> '[color=%s][u]Balance/Restoration[/u][/color]', 
-'APPLY_CHAR_NATCRIT' 	=> '[color=%s]Nature Crit : [/color]%s %%',
-
-'APPLY_CHAR_SHAEN' 		=> '[color=%s][u]Enhancement[/u][/color]',
-'APPLY_CHAR_SHAEL' 		=> '[color=%s][u]Elemental[/u][/color]',
-'APPLY_CHAR_SHARE' 		=> '[color=%s][u]Restoration[/u][/color]', 
-
-'APPLY_CHAR_URL' => '[color=%s][/color][url=%s]WoW Armory Link[/url]', 
+'APPLY_CHAR_URL' => '[color=%s][/color][url=%s]Armory Link[/url]', 
 
 'ERROR_NAME'  =>  'Error : Name must be Alphabetic (a-zA-ZàäåâÅÂçÇéèëêïÏîÎæŒæÆÅóòÓÒöÖôÔøØüÜ are allowed). ',
 'RETURN_APPLY'  =>  'Return to Application',
