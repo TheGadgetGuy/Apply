@@ -11,9 +11,9 @@
 		<description lang="en"><![CDATA[This MOD makes a post in a forum specified in the ACP containing answers to ACP userdefined questions. it Supports the HTML tags Textbox, Inputbox, Radiobutton, Selectbox, Checkbox.]]></description>
 		<description lang="fr"><![CDATA[Ce MOD crée un message dans un forum spécifié dans le PCA selon le format des questions déterminées dans le PCA. Il supporte les balises HTML Textbox, Inputbox, Radiobutton, Selectbox, et Checkbox.]]></description>
 		<description lang="de"><![CDATA[Dieser MOD schafft eine Mitteilung in einem Forum, das im PCA nach dem Format der Fragen spezifiert wurde, die im PCA bestimmt sind. Er trägt die Markierungszeichen HTML Textbox, Inputbox, Radiobutton, Selectbox und Checkbox.]]></description>
-		<author-notes lang="en"><![CDATA[Apply 1.3.0 non-WoW version.]]></author-notes>
-		<author-notes lang="de"><![CDATA[Version Apply 1.3.0 ohne WoW]]></author-notes>
-		<author-notes lang="fr"><![CDATA[Version Apply 1.3.0 non-WoW.]]></author-notes>
+		<author-notes lang="en"><![CDATA[Apply 1.3.0 requires bbDKP 1.2.5]]></author-notes>
+		<author-notes lang="de"><![CDATA[Apply 1.3.0 benötigt bbDKP 1.2.5]]></author-notes>
+		<author-notes lang="fr"><![CDATA[Apply 1.3.0 requiert bbDKP 1.2.5]]></author-notes>
 		<author-group>
 			<author>
 				<realname><![CDATA[Kapli]]></realname>
@@ -76,11 +76,15 @@
 		</installation>
 		<history>
 			<entry>
-				<date>2011-10-28</date>
+				<date>2011-11-16</date>
 				<rev-version>1.3.0</rev-version>
 				<changelog lang="en">
+					<change><![CDATA[[NEW] creates a character in bbDKP provided the usergroup posting the app is allowed.]]></change>
+					<change><![CDATA[[CHG] new field comment strings in template]]></change>
+					<change><![CDATA[[CHG] w3c validated apply template, now div based]]></change>
+					<change><![CDATA[[CHG] is compatible with all bbDKP supported games]]></change>					
 					<change><![CDATA[[CHG] now uses standard phpbb table prefix]]></change>
-					<change><![CDATA[[CHG] rewrite, removed wow support. (standard multigame version)]]></change>
+					<change><![CDATA[[CHG] rewrite, removed old armory support, removed subsilver2]]></change>
 				</changelog>
 			</entry>
 			<entry>
