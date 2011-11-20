@@ -84,7 +84,7 @@ fill_application_form($post_data, $submit, $error, $captcha);
  */
 function make_apply_posting($post_data, $current_time)
 {
-	global $config, $db, $user, $phpbb_root_path, $phpEx;
+	global $auth, $config, $db, $user, $phpbb_root_path, $phpEx;
 	
 	$board_url = generate_board_url() . '/';
 	
@@ -184,9 +184,24 @@ function make_apply_posting($post_data, $current_time)
 	unset($row);
 	$db->sql_freeresult($result);
 	
-	
-	
-	$web_path = (defined('PHPBB_USE_BOARD_URL_PATH') && PHPBB_USE_BOARD_URL_PATH) ? $board_url : $phpbb_root_path;
+	// if user belongs to group that can add a character then attempt to register a dkp character
+	// guests should never be able to register characters (i.e user anonymous)
+	if($auth->acl_get('u_dkp_charadd') )
+	{
+		if(!class_exists('dkp_character'))
+		{
+			include($phpbb_root_path . 'includes/bbdkp/apply/dkp_character.' . $phpEx);
+		}
+		$candidate = new dkp_character();
+		$candidate->name = $candidate_name;
+		$candidate->level = $candidate_level;
+		$candidate->realm = $candidate_realm;
+		$candidate->game = $candidate_game;
+		$candidate->genderid = $candidate_genderid;
+		$candidate->raceid = $candidate_raceid;
+		$candidate->classid = $candidate_classid;
+		register_bbdkp($candidate);
+	}
 	
 	// build post
 	$apply_post = '';
@@ -373,6 +388,70 @@ function make_apply_posting($post_data, $current_time)
 
 }
 
+/**
+ * registers a bbDKP character 
+ *
+ * @param dkp_character $candidate
+ */
+function register_bbdkp(dkp_character $candidate)
+{
+	global $db, $auth, $user, $config, $phpbb_root_path, $phpEx;
+	
+	// check if user exceeded allowed character count, to prevent alt spamming
+	$sql = 'SELECT count(*) as charcount
+			FROM ' . MEMBER_LIST_TABLE . '	
+			WHERE phpbb_user_id = ' . (int) $user->data['user_id'];
+	$result = $db->sql_query($sql);
+	$countc = $db->sql_fetchfield('charcount');
+	$db->sql_freeresult($result);
+	if ($countc >= $config['bbdkp_maxchars'])
+	{
+		//do nothing
+		return;
+	}
+	
+	// check if membername exists
+	$sql = 'SELECT count(*) as memberexists 
+			FROM ' . MEMBER_LIST_TABLE . "	
+			WHERE ucase(member_name)= ucase('" . $db->sql_escape($candidate->name) . "')"; 
+	$result = $db->sql_query($sql);
+	$countm = $db->sql_fetchfield('memberexists');
+	$db->sql_freeresult($result);
+	if ($countm != 0)
+	{
+		// give a nice alert and stop right here.
+		 trigger_error($user->lang['ERROR_MEMBEREXIST'], E_USER_WARNING);
+	}
+	
+	$member_comment = 'candidate'; 
+	
+	// add the char
+	if (! class_exists ( 'acp_dkp_mm' ))
+	{
+		include ($phpbb_root_path . 'includes/acp/acp_dkp_mm.' . $phpEx);
+	}
+	$acp_dkp_mm = new acp_dkp_mm ( );
+		
+	$member_id = $acp_dkp_mm->insertnewmember(
+		$candidate->name,
+		 1,
+		$candidate->level,
+		$candidate->raceid,
+		$candidate->classid,
+		99,
+		$member_comment, 
+		time(), 
+		0, 
+		0, 
+		$candidate->genderid, 0, ' ', ' ', 
+		$candidate->realm, 
+		$candidate->game, 
+		$user->data['user_id']
+	);
+	
+	return $member_id;
+	
+}
 
 /**
  *  build Application form 
