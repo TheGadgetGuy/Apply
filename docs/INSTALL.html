@@ -1,0 +1,278 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en" xml:lang="en">
+<head>
+
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="content-style-type" content="text/css" />
+<meta http-equiv="content-language" content="en" />
+<meta http-equiv="imagetoolbar" content="no" />
+<meta name="resource-type" content="document" />
+<meta name="distribution" content="global" />
+<meta name="copyright" content="2009 bbdkp" />
+<meta name="keywords" content="" />
+<meta name="description" content="Apply Installation information" />
+<title>Recruitment Install Readme</title>
+
+<link href="stylesheet.css" rel="stylesheet" type="text/css" media="screen, projection" />
+
+</head>
+
+<body id="phpbb" class="section-docs">
+
+<div id="wrap">
+	<a id="top" name="top" accesskey="t"></a>
+	<div id="page-header">
+		<div class="headerbar">
+			<div class="inner"><span class="corners-top"><span></span></span>
+
+			<div id="doc-description">
+				<img src="logo.png" alt="" />
+				
+				<p style="display: none;"><a href="#start_here">Skip</a></p>
+			</div>
+
+			<span class="corners-bottom"><span></span></span></div>
+		</div>
+	</div>
+
+	<a name="start_here"></a>
+
+	<div id="page-body">
+
+<h1>Description</h1>
+	<hr />
+
+	<div class="paragraph">
+		<div class="inner"><span class="corners-top"><span></span></span></div>
+		
+		<div class="content">
+<p>
+   It makes a post in a forum specified in the ACP with the answers to the questions that can be added in the ACP. Supports Textbox, Inputbox, Radiobuttons, Selectbox, Checkboxes. Posts can either be public or private; this can be set in the ACP.<br />
+   It supports recruitment for all games installed in bbDKP, it picks up class data from bbDKP for the selected game. The Armory check extension and wowchar BBcode support were dropped for release 0.3.0 but will return once Blizzard has a working API. 
+   <br />
+	
+</p>
+		</div>
+		
+		<div class="back2top"><a href="#wrap" class="top">Back to Top</a></div>
+		<div class="inner"><span class="corners-bottom"><span></span></span></div>
+		
+	</div>	
+	
+<h1>Requirements</h1>
+	<hr />
+
+	<div class="paragraph">
+		<div class="inner"><span class="corners-top"><span></span></span></div>
+
+		<div class="content">
+			<ol>
+			<li>phpbb 3.0.9</li>
+			<li>ftp and founder admin access on your phpbb installation. </li>
+			</ol>
+		</div>
+		<div class="back2top"><a href="#wrap" class="top">Back to Top</a></div>
+		<div class="inner"><span class="corners-bottom"><span></span></span></div>
+		
+	</div>	
+
+<h1>Installation</h1>
+	<hr />
+
+	<div class="paragraph">
+		<div class="inner"><span class="corners-top"><span></span></span></div>
+		
+		<div class="content">
+			<h2>Quick install guide</h2>
+			<ol>
+			<li>Preparation : make two forums, one for Silent applications, one for public applications.</li>			<li>Press Install to let Automod copy the files and do the core edits. </li>
+			<li>Browse to install/index.php and run and the apply plugin table installer/updater. </li>
+			</ol>
+		</div>
+		<div class="back2top"><a href="#wrap" class="top">Back to Top</a></div>
+		<div class="inner"><span class="corners-bottom"><span></span></span></div>
+	</div>	
+
+<h1>Support</h1>
+	<hr />
+	<div class="paragraph">
+		<div class="inner"><span class="corners-top"><span></span></span></div>
+		<div class="content">
+			<ol>
+			<li><a href="http://www.bbdkp.com/viewforum.php?f=8">Plugin support</a></li>
+			<li><a href="http://www.bbdkp.com/tracker.php">Bug reports</a></li>
+			<li>IRC channel : visit #bbdkp on Freenode. <a href="http://webchat.freenode.net">webchat</a><br/> </li>
+			</ol>
+		</div>
+		<div class="back2top"><a href="#wrap" class="top">Back to Top</a></div>
+		<div class="inner"><span class="corners-bottom"><span></span></span></div>
+	</div>	
+
+<h1>Apply Plugin Changelog</h1>
+	<hr />
+	<div class="paragraph">
+		<div class="inner"><span class="corners-top"><span></span></span></div>
+		<div class="content">
+
+<ul>
+
+2011-11-16 : 1.3.0<br />
+<li>[CHG] now uses standard phpbb table prefix</li>
+<li>[CHG] rewrite, removed wow armory link. (will return as add-on). </li>
+<li>[CHG] is multigame compatible.</li>
+<br />     
+<br />
+				
+2010-11-18 : 1.2.6<br />
+<li>[FIX] Bug #88 : New global link and language variable for portal in common.php and functions.php</li>
+<li>[FIX] Bug #77 : Apply questionnaire Color wheel fixed</li>
+<br />     
+<br />
+
+2010-09-25 : 1.2.5<br />
+<li>[new] French and German version</li>
+<br />     
+<br />
+
+2010-06-06 : 1.2.4<br />
+<li>[fix] realms with spaces correctly parsed (by Malfate)</li>
+<li>[fix] uninstaller now correctly uninstalls module</li>
+<br />     
+<br />
+
+
+2010-06-06 : 1.2.3<br />
+<li>[chg] removed Armory overlay (moved to bbTips), now posts bbcode to achieve same result, makes posting editable.</li>
+<li>[chg] moved header edits to /dkp/dkpheader.html</li>
+<li>[chg] requires bbDKP 1.1.0 or higher</li>
+<li>[fix] fixed captcha if invalid response given</li>
+<li>[fix] fixed checkbox names, multibyte</li>
+<br />     
+<br />
+2010-04-26 : 1.2.2<br />
+<li>[new] added setting to allow or deny user to choose Private or public forum</li>
+<li>[new] when posting to private forum, apply will redirect to the portal, or else to the public recruitment forum</li>
+<li>[upd] added language entries, redesign of the ACP, split armory setting and privacy settings.</li>
+<li>[fix] Simplepie syntax error</li>
+<li>[fix] fixed Mage Mana display</li>
+<br />		
+<br />		
+2010-04-25 : 1.2.1<br />
+	<li>[new] private or public application option</li>
+	<li>[fix] added jquery changes to Automod, is now futureproof for bbdkp RC4</li>
+	<li>[fix] fix in checking if options are empty</li>
+	<li>[fix] subsilver2 css support</li>
+<br />
+
+2010-04-24 : 1.2.0<br />
+	<li>[NEW] popup with armory 3d model, Gearlist from Armory, Achievements from Armory Feed</li>
+	<li>[NEW] Radioboxes, selectboxes, Check boxes added</li>
+	<li>[NEW] Core apply class added</li>
+	<li>[CHG] hardcoded strings moved to language file, can easily be translated now.</li>		
+	<li>[CHG] writes constants to bbdkp_constants file</li>
+	<li>[NEW] Demo questions added</li>
+	<li>[chg] removed appconfig table, everything is in $config</li>
+	<li>[UPDATED] Now works with bbDKP 1.1 RC3</li>
+	
+<br />
+
+2009-05-26 : 1.1.1<br />
+	<li>[CHANGE] now uses Umil db installer</li>
+<br />
+
+2009-05-17 : 1.1.0<br />
+	<li>[NEW] Added Classbased Templates</li>
+	<li>[NEW] Added Gearsheet</li>
+	<li>[NEW] redesigned gear layout and added glyphs</li>
+	<li>[NEW] Added Level to Title</li>
+	<li>[NEW] Remove Race from Title</li>
+	<li>[NEW] Added Dual Talent Support</li>
+    <li>[NEW] acp module </li>
+	<li>[NEW] Armory online check, new acp $config</li>
+    <li>[FIX] phpbb code-compliant</li>
+<br />
+2009-01-17 1.0.2 Kapli<br />
+	<li>Fixed some bugs, renamed `order` to `qorder` and added fields if the armory is down.</li>
+<br />
+2008-12-20 : 1.0.1 Kapli<br />
+	<li>Added checkbox and radio and checkbox types</li>
+<br />
+2008-12-17 : 1.0.0b1 Dimtauren<<br />
+	<li>Updated Subsilver template</li>
+<br />
+2008-12-15 : 1.0.0 first release Kapli<br />
+	<li>Added loads of checks in the ACP and fixed some bugs</li>
+	<li>Todo: Keep working on functionality<</li>
+<br />
+2008-12-10 : 0.0.4 Kapli <br />
+	<li>Added loads of checks in the ACP and fixed some bugs</li>
+	<li>Todo: Keep working on functionality<</li>
+<br />
+2008-12-06 : 0.0.3 Kapli <br />
+	<li>Rewrote the whole script</li>
+	<li>todo : Application template edit in the ACP<</li>
+<br />
+
+2008-12-06 0.0.2 Kapli  <br />
+	<li>Rewrote the whole script<</li>
+	<li>todo : Application template edit in the ACP</li>
+<br />
+2008-11-08 : 1.0.0 first release Kapli<br />
+	<li>0.0.1 Ok initial commit today, tested and works. Kapli </li>
+<br />
+
+</div>
+		
+	<div class="back2top"><a href="#wrap" class="top">Back to Top</a></div>
+	<div class="inner"><span class="corners-bottom"><span></span></span></div>
+		
+</div>	
+<h1>Copyright and disclaimer</h1>
+	<hr />
+
+	<div class="paragraph">
+		<div class="inner"><span class="corners-top"><span></span></span></div>
+		
+		<div class="content">
+			<p>This application is opensource software released under the <a href="http://opensource.org/licenses/gpl-license.php">GPL</a>. Please see source code and the docs directory for more details. 	
+			
+			 Powered by bbDkp (c) 2009 The bbDkp Project Team <a href="http://www.bbdkp.com/">bbDkp</a><br/>
+			 If you use this software and find it to be useful, we ask that you retain the copyright notice below. 
+			 While not required for free use, it will help build interest in the bbDkp project and is required for obtaining support.
+
+			 bbdkp SVN : <a href="http://code.google.com/p/bbdkp/">http://code.google.com/p/bbdkp/</a><br/>
+			 bbDKP (c) 2008, 2009 Sajaki, Malfate, Kapli, Hroar<br/>
+			 bbDKP (c) 2007 Ippeh, Teksonic, Monkeytech, DWKN<br/>
+			 EQDkp (c) 2003 The EqDkp Project Team 
+			 
+			 <h2>Credits</h2>
+			 Blazeflack and Twizted, for their work and support on the Apply plugin. 
+			 
+			<h2>Donation</h2>
+			
+			bbDkp is freeware, but you can support our development efforts by making a contribution. <br/>
+			 <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+">
+<input type="image" src="https://www.paypal.com/en_US/BE/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+		</div>
+			
+		<div class="back2top"><a href="#wrap" class="top">Back to Top</a></div>
+		<div class="inner"><span class="corners-bottom"><span></span></span></div>
+    </div>
+
+	<div id="page-footer">
+		<div class="version">&nbsp;</div>
+	</div>
+</div></div>
+
+<div>
+	<a id="bottom" name="bottom" accesskey="z"></a>
+</div>
+
+</body>
+</html>
