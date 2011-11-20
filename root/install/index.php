@@ -101,6 +101,7 @@ $versions = array(
 						'COLUMNS'		=> array(
 							'qorder'	=> array('UINT', 0),
 							'question'	=> array('VCHAR:255', ''),
+							'explain'	=> array('VCHAR:255', ''),
 							'type'		=> array('VCHAR:255', ''),
 							'mandatory'	=> array('VCHAR:255', ''),
 							'options'	=> array('MTEXT_UNI', ''),
@@ -112,10 +113,11 @@ $versions = array(
 		'table_row_insert' => array(
 			array($table_prefix . 'bbdkp_apptemplate', 
 				array(
-					//MANDATORY - do not remove	or change		
+					//MANDATORY - profile questions : do not remove	or change		
 					array(
 						'qorder'		=> 1,
 						'question'		=> 'Character name',
+						'explain'		=> ' ',
 						'type'			=> 'Inputbox',
 						'mandatory'		=> 'True',
 						'options'		=> ' ',
@@ -125,73 +127,80 @@ $versions = array(
 					array(
 						'qorder'		=> 2,
 						'question'		=> 'Realm',
+						'explain'		=> ' ',
 						'type'			=> 'Inputbox',
 						'mandatory'		=> 'True',
 						'options'		=> ' ',
 					),
 				
-					
 					//demo questions start from index 3 - feel free to change  
 					array(
 						'qorder'		=> 3,
-						'question'		=> 'Race, Class, Talentsetup. What is your main role and spec and why did you choose this ?',
+						'question'		=> 'Personal Info',
+						'explain'		=> 'Can you tell us abit about yourself please ?',
+						'type'			=> 'Textbox',
+						'mandatory'		=> 'False',
+						'options'		=> ' ',
+					),	
+					
+					array(
+						'qorder'		=> 4,
+						'question'		=> 'Alts',
+						'explain'		=> 'Please list your alts.',
 						'type'			=> 'Textbox',
 						'mandatory'		=> 'True',
 						'options'		=> ' ',
 					),
-	
+
 					array(
-						'qorder'		=>  4,
-						'question'		=> 'Gearing. How have you chosen to itemise (gem, enchant) your gear and why ?',
+						'qorder'		=>  5,
+						'question'		=> 'Reason for leaving your current guild ?',
+						'explain'		=> 'Was it for the lack of cookies ?',
 						'type'			=> 'Textbox',
 						'mandatory'		=> 'True',
 						'options'		=> ' ',
 					),
-	
 					array(
-						'qorder'		=> 5,
-						'question'		=> 'What are your professions and level ? Does your character hold any special patterns or designs ?',
+						'qorder'		=> 6,
+						'question'		=> 'Why should we choose you ?',
+						'explain'		=> 'What can you bring to us and what do you expect ?',
+						'type'			=> 'Textbox',
+						'mandatory'		=> 'True',
+						'options'		=> ' ',
+					),
+
+					array(
+						'qorder'		=> 7,
+						'question'		=> 'Build, Glyphs, Gear',
+						'explain'		=> 'Comment on your build, Glyph set, gear.',
 						'type'			=> 'Inputbox',
 						'mandatory'		=> 'True',
 						'options'		=> ' ',
 					),
-	
-					array(
-						'qorder'		=> 6,
-						'question'		=> 'Do you have any alts and if you do who are they ? Do you play with any characters other than the one you’re applying with ?',
-						'type'			=> 'Textbox',
-						'mandatory'		=> 'True',
-						'options'		=> ' ',
-					),
+
 					
 					array(
-						'qorder'		=> 7,
-						'question'		=> 'Why did you choose our Guild ? Do you know anyone in the guild ? 
-						Why do you think you will fit in with our guild, and what can you bring to us ?',
-						'type'			=> 'Textbox',
-						'mandatory'		=> 'True',
-						'options'		=> ' ',
-					),
-	
-					array(
 						'qorder'		=> 8,
-						'question'		=> 'What are your previous guilds, (name classleader and GM) and why are you no longer a part of them.',
+						'question'		=> 'Raid experience ',
+						'explain'		=> 'Describe your raid experience ',
 						'type'			=> 'Textbox',
 						'mandatory'		=> 'True',
 						'options'		=> ' ',
 					),
-	
+
 					array(
 						'qorder'		=> 9,
-						'question'		=> 'Do you have any raid experience? If yes, what instances and what role did you play ? ',
+						'question'		=> 'Ranks and WOL logs ',
+						'explain'		=> 'link to your raid logs. ',
 						'type'			=> 'Textbox',
 						'mandatory'		=> 'True',
 						'options'		=> ' ',
 					),
-	
+										
 					array(
 						'qorder'		=> 10,
-						'question'		=> 'What days can you play ? ',
+						'question'		=> 'Raid Days. ',
+						'explain'		=> 'Check the days you’re available',
 						'type'			=> 'Checkboxes',
 						'mandatory'		=> 'True',
 						'options'		=> 'monday,tuesday,wednesday,thursday,friday,saturday,sunday',
@@ -199,23 +208,27 @@ $versions = array(
 	
 					array(
 						'qorder'		=> 11,
-						'question'		=> 'We raid from 7:30pm to 11pm Server time (UTC+1). Please describe your evening Raiding availability. ',
+						'question'		=> 'Raid times',
+						'explain'		=> 'Can you agree with our raid times 7:30pm to 11pm Server time (UTC+1) ? ',
 						'type'			=> 'Textbox',
 						'mandatory'		=> 'True',
 						'options'		=> ' ',
 					),	
 	
+
 					array(
 						'qorder'		=> 12,
-						'question'		=> 'Tell us a bit about yourself ',
+						'question'		=> 'Computer/Connection info',
+						'explain'		=> 'Is it good enough to maintain a high FPS? what’s the spec ?',
 						'type'			=> 'Textbox',
-						'mandatory'		=> 'False',
+						'mandatory'		=> 'True',
 						'options'		=> ' ',
-					),	
+					),
 									
 					array(
 						'qorder'		=> 13,
-						'question'		=> 'Are you older than 18 ? ',
+						'question'		=> 'Are you underage ? ',
+						'explain'		=> 'Check yes or no',
 						'type'			=> 'Radiobuttons',
 						'mandatory'		=> 'False',
 						'options'		=> 'Yes,No',
