@@ -101,7 +101,7 @@ $versions = array(
 						'COLUMNS'		=> array(
 							'qorder'	=> array('UINT', 0),
 							'question'	=> array('VCHAR:255', ''),
-							'explain'	=> array('VCHAR:255', ''),
+							'explainstr'	=> array('VCHAR:255', ''),
 							'type'		=> array('VCHAR:255', ''),
 							'mandatory'	=> array('VCHAR:255', ''),
 							'options'	=> array('MTEXT_UNI', ''),
@@ -117,7 +117,7 @@ $versions = array(
 					array(
 						'qorder'		=> 1,
 						'question'		=> 'Character name',
-						'explain'		=> ' ',
+						'explainstr'		=> ' ',
 						'type'			=> 'Inputbox',
 						'mandatory'		=> 'True',
 						'options'		=> ' ',
@@ -127,7 +127,7 @@ $versions = array(
 					array(
 						'qorder'		=> 2,
 						'question'		=> 'Realm',
-						'explain'		=> ' ',
+						'explainstr'		=> ' ',
 						'type'			=> 'Inputbox',
 						'mandatory'		=> 'True',
 						'options'		=> ' ',
@@ -137,7 +137,7 @@ $versions = array(
 					array(
 						'qorder'		=> 3,
 						'question'		=> 'Personal Info',
-						'explain'		=> 'Can you tell us abit about yourself please ?',
+						'explainstr'		=> 'Can you tell us abit about yourself please ?',
 						'type'			=> 'Textbox',
 						'mandatory'		=> 'False',
 						'options'		=> ' ',
@@ -146,7 +146,7 @@ $versions = array(
 					array(
 						'qorder'		=> 4,
 						'question'		=> 'Alts',
-						'explain'		=> 'Please list your alts.',
+						'explainstr'		=> 'Please list your alts.',
 						'type'			=> 'Textbox',
 						'mandatory'		=> 'True',
 						'options'		=> ' ',
@@ -155,7 +155,7 @@ $versions = array(
 					array(
 						'qorder'		=>  5,
 						'question'		=> 'Reason for leaving your current guild ?',
-						'explain'		=> 'Was it for the lack of cookies ?',
+						'explainstr'		=> 'Was it for the lack of cookies ?',
 						'type'			=> 'Textbox',
 						'mandatory'		=> 'True',
 						'options'		=> ' ',
@@ -163,7 +163,7 @@ $versions = array(
 					array(
 						'qorder'		=> 6,
 						'question'		=> 'Why should we choose you ?',
-						'explain'		=> 'What can you bring to us and what do you expect ?',
+						'explainstr'		=> 'What can you bring to us and what do you expect ?',
 						'type'			=> 'Textbox',
 						'mandatory'		=> 'True',
 						'options'		=> ' ',
@@ -172,7 +172,7 @@ $versions = array(
 					array(
 						'qorder'		=> 7,
 						'question'		=> 'Build, Glyphs, Gear',
-						'explain'		=> 'Comment on your build, Glyph set, gear.',
+						'explainstr'		=> 'Comment on your build, Glyph set, gear.',
 						'type'			=> 'Inputbox',
 						'mandatory'		=> 'True',
 						'options'		=> ' ',
@@ -182,7 +182,7 @@ $versions = array(
 					array(
 						'qorder'		=> 8,
 						'question'		=> 'Raid experience ',
-						'explain'		=> 'Describe your raid experience ',
+						'explainstr'		=> 'Describe your raid experience ',
 						'type'			=> 'Textbox',
 						'mandatory'		=> 'True',
 						'options'		=> ' ',
@@ -191,7 +191,7 @@ $versions = array(
 					array(
 						'qorder'		=> 9,
 						'question'		=> 'Ranks and WOL logs ',
-						'explain'		=> 'link to your raid logs. ',
+						'explainstr'		=> 'link to your raid logs. ',
 						'type'			=> 'Textbox',
 						'mandatory'		=> 'True',
 						'options'		=> ' ',
@@ -200,7 +200,7 @@ $versions = array(
 					array(
 						'qorder'		=> 10,
 						'question'		=> 'Raid Days. ',
-						'explain'		=> 'Check the days you’re available',
+						'explainstr'		=> 'Check the days you’re available',
 						'type'			=> 'Checkboxes',
 						'mandatory'		=> 'True',
 						'options'		=> 'monday,tuesday,wednesday,thursday,friday,saturday,sunday',
@@ -209,7 +209,7 @@ $versions = array(
 					array(
 						'qorder'		=> 11,
 						'question'		=> 'Raid times',
-						'explain'		=> 'Can you agree with our raid times 7:30pm to 11pm Server time (UTC+1) ? ',
+						'explainstr'		=> 'Can you agree with our raid times 7:30pm to 11pm Server time (UTC+1) ? ',
 						'type'			=> 'Textbox',
 						'mandatory'		=> 'True',
 						'options'		=> ' ',
@@ -219,7 +219,7 @@ $versions = array(
 					array(
 						'qorder'		=> 12,
 						'question'		=> 'Computer/Connection info',
-						'explain'		=> 'Is it good enough to maintain a high FPS? what’s the spec ?',
+						'explainstr'		=> 'Is it good enough to maintain a high FPS? what’s the spec ?',
 						'type'			=> 'Textbox',
 						'mandatory'		=> 'True',
 						'options'		=> ' ',
@@ -228,7 +228,7 @@ $versions = array(
 					array(
 						'qorder'		=> 13,
 						'question'		=> 'Are you underage ? ',
-						'explain'		=> 'Check yes or no',
+						'explainstr'		=> 'Check yes or no',
 						'type'			=> 'Radiobuttons',
 						'mandatory'		=> 'False',
 						'options'		=> 'Yes,No',

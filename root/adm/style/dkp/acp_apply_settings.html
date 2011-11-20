@@ -91,25 +91,44 @@
 	<dl>
 		<dt style= "width: 100%"><label>{L_APPLY_CHGMAND}</label><br/>{L_APPLY_CHGMAND_EXPLAIN}</dt>
 	</dl>
-	<dl>
-		<dd style= "margin:0 0 0 0;">
-			<!-- BEGIN template -->
-			<input type="checkbox" name="{template.QORDER}mandatory" value="True" {template.DISABLED} {template.CHECKED}>
-			<input type="txt" name="{template.QORDER}" value="{template.QORDER}" size="2" maxlength="2" {template.DISABLED}>
-			<input type="txt" name="{template.QORDER}question" value="{template.QUESTION}" size="45" {template.DISABLED}>
-			<input type="txt" name="{template.QORDER}options" value="{template.OPTIONS}" size="25" {template.DISABLED}>
-			<select name="{template.QORDER}type" class="input" id="app_type" {template.DISABLED}>
+	
+<table cellspacing="1">
+	<thead>
+	<tr>
+	<th align="left">{L_ID}</th>
+    <th align="left">{L_ACP_APPLY_MANDATORY}</th>
+    <th align="left">{L_ACP_APPLY_HEADER}</th>
+    <th align="center">{L_ACP_APPLY_EXPLAIN}</th>
+    <th align="left">{L_ACP_APPLY_CONTENTS}</th>
+    <th align="left">{L_TYPE}</th>
+    <th>{L_ACTION}</th>
+  </tr>
+  </thead>
+  <tbody>
+   <!-- BEGIN apptemplate -->
+	  <!-- IF ranks_row.S_ROW_COUNT is even -->
+	  <tr class="row1">
+	  <!-- ELSE -->
+	  <tr class="row2">
+	  <!-- ENDIF -->
+	    <td><input type="txt" name="{apptemplate.QORDER}" value="{apptemplate.QORDER}" size="2" maxlength="2" {apptemplate.DISABLED}></td>
+	    <td><input type="checkbox" name="{apptemplate.QORDER}mandatory" value="True" {apptemplate.DISABLED} {apptemplate.CHECKED}></td>
+	    <td><input type="txt" name="{apptemplate.QORDER}question" value="{apptemplate.QUESTION}" size="45" {apptemplate.DISABLED}></td>
+	    <td><input type="txt" name="{apptemplate.QORDER}explainstr" value="{apptemplate.EXPLAINSTR}" size="45" {apptemplate.DISABLED}></td>
+	    <td><input type="txt" name="{apptemplate.QORDER}options" value="{apptemplate.OPTIONS}" size="25" {apptemplate.DISABLED}></td>
+	    <td><select name="{apptemplate.QORDER}type" class="input" id="app_type" {apptemplate.DISABLED}>
 				<!-- BEGIN template_type -->
 				<option value="{template_type.TYPE}"{template_type.SELECTED}>{template_type.TYPE}</option>
 				<!-- END template_type -->
 			</select>
-			<input type="submit" name="{template.QORDER}delete" value="Delete" class="button1" {template.DISABLED}><br />
-			<!-- END template -->
-		</dd>
-	</dl>
-
+		</td>
+	    <td><input type="submit" name="{apptemplate.QORDER}delete" value="Delete" class="button1" {apptemplate.DISABLED}></td>
+	  </tr>
+	  <!-- END apptemplate -->
+	  </tbody>
+</table>
 <p class="quick">
-<input type="submit" name="update" value="{L_UPDATE}" class="button1" />
+	<input type="submit" name="update" value="{L_UPDATE}" class="button1" />
 </p>
 
 </fieldset>
@@ -120,26 +139,41 @@
 		<dt style= "width: 100%"><label>{L_APPLY_ACP_NEWQUESTION}</label><br />{L_APPLY_ACP_NEWQUESTION_EXPLAIN}</dt>
 	</dl>
 	
-	<dl>
-		<dd style= "margin:0 0 0 0%;">
-			<input type="checkbox" name="app_add_mandatory" value="True">
-			<input type="txt" name="app_add_order" size="2" maxlength="3">
- 			<input type="txt" name="app_add_question" value="Question" onclick="this.value ='';" onblur="if(this.value == '') { this.value = 'Question' };" size="45">
-         	<input type="txt" name="app_add_options" value="Options i.e. 1,2,3,4,5" onclick="this.value ='';" onblur="if(this.value == '') { this.value = 'Options i.e. 1,2,3,4,5' };" size="25">
-			<select name="app_add_type" class="input" id="app_add_type">
+<table cellspacing="1">
+	<thead>
+	<tr>
+	<th align="left">{L_ID}</th>
+    <th align="left">{L_ACP_APPLY_MANDATORY}</th>
+    <th align="left">{L_ACP_APPLY_HEADER}</th>
+    <th align="center">{L_ACP_APPLY_EXPLAIN}</th>
+    <th align="left">{L_ACP_APPLY_CONTENTS}</th>
+    <th align="left">{L_TYPE}</th>
+  </tr>
+  </thead>
+  <tbody>
+	  <tr class="row1">
+	    <td><input type="txt" name="app_add_order" size="2" maxlength="3"></td>
+	    <td><input type="checkbox" name="app_add_mandatory" value="True"></td>
+	    <td><input type="txt" name="app_add_question" value="Question" onclick="this.value ='';" onblur="if(this.value == '') { this.value = 'Question' };" size="45"></td>
+	    <td><input type="txt" name="app_add_explainstr" value="Explain" onclick="this.value ='';" onblur="if(this.value == '') { this.value = 'Explain' };" size="45"></td>
+	    <td><input type="txt" name="app_add_options" value="Options i.e. 1,2,3,4,5" onclick="this.value ='';" onblur="if(this.value == '') { this.value = 'Options i.e. 1,2,3,4,5' };" size="25"></td>
+	    
+	    <td>
+	    	<select name="app_add_type" class="input" id="app_add_type">
 				<option value="Inputbox">{L_APPLY_ACP_INPUTBOX}</option>
 				<option value="Textbox">{L_APPLY_ACP_TXTBOX}</option>
 				<option value="Selectbox">{L_APPLY_ACP_SELECTBOX}</option>
                 <option value="Radiobuttons">{L_APPLY_ACP_RADIOBOX}</option>
                 <option value="Checkboxes">{L_APPLY_ACP_CHECKBOX}</option>
          	</select>
-	    
-		</dd>
-	</dl>
+	    </td>
+	  </tr>
+	  </tbody>
+</table>
 
-	<p class="quick">
+<p class="quick">
 	<input type="submit" name="add" value="{L_ADD}" class="button1" />
-	</p>
+</p>
 </fieldset>
 
 <script type="text/javascript" charset="utf-8">
@@ -180,4 +214,3 @@
 </form>
 
 <!-- INCLUDE dkp/overall_footer.html -->
-

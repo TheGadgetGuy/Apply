@@ -115,7 +115,8 @@ class acp_dkp_apply extends bbDkp_Admin
                         
                         $queries = array(
                                 "UPDATE " . APPTEMPLATE_TABLE . " SET qorder = '" .  request_var($row['qorder'],0) . "' WHERE qorder = " . (int) $row['qorder'] ,
-                    			"UPDATE " . APPTEMPLATE_TABLE . " SET question = '" . $db->sql_escape( utf8_normalize_nfc(request_var($row['qorder'] . 'question','' , true))) . "' WHERE qorder = " . (int) $row['qorder'] , 
+                    			"UPDATE " . APPTEMPLATE_TABLE . " SET question = '" . $db->sql_escape( utf8_normalize_nfc(request_var($row['qorder'] . 'question','' , true))) . "' WHERE qorder = " . (int) $row['qorder'] ,
+                        		"UPDATE " . APPTEMPLATE_TABLE . " SET explainstr = '" . $db->sql_escape( utf8_normalize_nfc(request_var($row['qorder'] . 'explainstr','' , true))) . "' WHERE qorder = " . (int) $row['qorder'] , 
                 			    "UPDATE " . APPTEMPLATE_TABLE . " SET options = '" . $db->sql_escape( utf8_normalize_nfc(request_var($row['qorder'] . 'options','' , true))) . "' WHERE qorder = " . (int) $row['qorder'] ,
                     			"UPDATE " . APPTEMPLATE_TABLE . " SET type = '" . $db->sql_escape(request_var($row['qorder'] . 'type', '')) . "' WHERE qorder = " . (int) $row['qorder'] ,
                     			"UPDATE " . APPTEMPLATE_TABLE . " SET mandatory = '" . $db->sql_escape($mandatory) . "' WHERE qorder = " . (int) $row['qorder'],
@@ -169,6 +170,7 @@ class acp_dkp_apply extends bbDkp_Admin
                     $sql_ary = array(
                         'qorder'     	=> (int) request_var('app_add_order', 0),
     				 	'question'   	=> utf8_normalize_nfc (request_var('app_add_question', ' ', true )),
+                    	'explainstr'   	=> utf8_normalize_nfc (request_var('app_add_explainstr', ' ', true )),
                         'options'   	=> utf8_normalize_nfc (request_var('app_add_options', ' ', true )),                    
                         'type'       	=> utf8_normalize_nfc (request_var('app_add_type', ' ', true )),
                         'mandatory' 	=> $mandatory
@@ -273,17 +275,6 @@ class acp_dkp_apply extends bbDkp_Admin
                 	'VALUE' 	=> 'False' , 
                 	'SELECTED' 	=> ('False' == $config['bbdkp_apply_guests']) ? ' selected="selected"' : '' , 
                 	'OPTION' 	=> 'False'));
-
-                //simplerecruit                
-                $template->assign_block_vars('simplerecruit', array(
-                	'VALUE' 	=> 'True' , 
-                	'SELECTED' 	=> ('True' == $config['bbdkp_apply_simplerecruit']) ? ' selected="selected"' : '' , 
-                	'OPTION' 	=> 'Simplerecruit'));
-                
-                $template->assign_block_vars('simplerecruit', array(
-                	'VALUE' 	=> 'False' , 
-                	'SELECTED' 	=> ('False' == $config['bbdkp_apply_simplerecruit']) ? ' selected="selected"' : '' , 
-                	'OPTION' 	=> 'Armory'));
                 
                /*
                 * loading questions
@@ -305,9 +296,10 @@ class acp_dkp_apply extends bbDkp_Admin
                         $checked = 'checked="checked"';
                     }
                     
-                    $template->assign_block_vars('template', array(
+                    $template->assign_block_vars('apptemplate', array(
                     	'QORDER'         => $row['qorder'] , 
-                    	'QUESTION'       => $row['question'] , 
+                    	'QUESTION'       => $row['question'] ,
+                    	'EXPLAINSTR'     => $row['explainstr'] , 
                     	'DISABLED'       => $disabled , 
                     	'MANDATORY'      => $row['mandatory'] , 
                         'OPTIONS'        => $row['options'] ,
@@ -316,7 +308,7 @@ class acp_dkp_apply extends bbDkp_Admin
                     $type = array('Inputbox' , 'Textbox', 'Selectbox', 'Radiobuttons', 'Checkboxes');
                     foreach ($type as $t_name => $t_value) 
                     {
-                        $template->assign_block_vars('template.template_type', array(
+                        $template->assign_block_vars('apptemplate.template_type', array(
                         	'TYPE' => $t_value , 
                         	'SELECTED' => ($t_value == $row['type']) ? ' selected="selected"' : '' , 
                         	'DISABLED' => $disabled));
