@@ -56,7 +56,7 @@ To help us with your application please answer the questions below. Enter your c
 'APPLY_REQUIRED'  => 'You need to fill in all required fields. ', 
 'MANDATORY'	=> 'Required',	
 'APPLY_REALM' => 'Realm (blank for ',
-'APPLY_NAME' => ' Character name: ',
+'APPLY_NAME' => 'Character name: ',
 'APPLY_QUESTION'  => 'Question ',
 'APPLY_ANSWER'  => 'Answer ',
 'APPLY_REALM1' => 'Realm: ',

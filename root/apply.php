@@ -206,9 +206,8 @@ function make_apply_posting($post_data, $current_time)
 	// build post
 	$apply_post = '';
 	
-	$apply_post .= '[size=150][b]' .$user->lang['APPLY_CHAR_OVERVIEW'] . '[/b][/size]
-	'; 
-	$apply_post .= '<br />';
+	$apply_post .= '[size=150][b]' .$user->lang['APPLY_CHAR_OVERVIEW'] . '[/b][/size]'; 
+	$apply_post .= '<br /><br />';
 	
 	// name
 	$apply_post .= '[color='. $config['bbdkp_apply_pqcolor'] .']' . $user->lang['APPLY_NAME'] . '[/color]';
@@ -260,14 +259,12 @@ function make_apply_posting($post_data, $current_time)
 	{
 		$apply_post .= $race_name;
 	}
-	$apply_post .= '<br />';
-	$apply_post .= '<br />';
+	$apply_post .= '<br /><br />';
 
 	
 	// Motivation	
 	$apply_post .= '[size=150][b]' .$user->lang['APPLY_CHAR_MOTIVATION'] . '[/b][/size]';
-	$apply_post .= '<br />';
-	$apply_post .= '<br />';
+	$apply_post .= '<br /><br />';
 	
 	//$apply_post .= '[list]';
 	// complete with formatted questions and answers
@@ -285,8 +282,8 @@ function make_apply_posting($post_data, $current_time)
 					 $cb_countis = count( request_var('templatefield_' . $row['qorder'], array(0 => 0)) );  
                      $cb_count = 0;
 						                                           
-                        $apply_post .= '[size=120][color='. $config['bbdkp_apply_pqcolor'] .'][b]' . $row['question'] . ': [/b][/color][/size]
-                        ';
+                        $apply_post .= '[size=120][color='. $config['bbdkp_apply_pqcolor'] .'][b]' . $row['question'] . ': [/b][/color][/size]';
+						$apply_post .= '<br />';
                         
                         $checkboxes = utf8_normalize_nfc( request_var('templatefield_' . $row['qorder'], array(0 => '') , true));
                         foreach($checkboxes as $value) 
@@ -307,8 +304,8 @@ function make_apply_posting($post_data, $current_time)
 				case 'Radiobuttons':			
 					$fieldcontents = utf8_normalize_nfc(request_var('templatefield_' . $row['qorder'], ' ', true));	
 						
-					$apply_post .= '[size=120][color='. $config['bbdkp_apply_pqcolor'] .'][b]' . $row['question'] . ': [/b][/color][/size]
-					';
+					$apply_post .= '[size=120][color='. $config['bbdkp_apply_pqcolor'] .'][b]' . $row['question'] . ': [/b][/color][/size]';
+					$apply_post .= '<br />';
 					 
 					$apply_post .=	$fieldcontents;
 					
