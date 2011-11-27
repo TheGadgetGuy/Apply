@@ -95,13 +95,12 @@
 <table cellspacing="1">
 	<thead>
 	<tr>
-	<th align="left">{L_ID}</th>
-    <th align="left">{L_ACP_APPLY_MANDATORY}</th>
-    <th align="left">{L_ACP_APPLY_HEADER}</th>
-    <th align="center">{L_ACP_APPLY_EXPLAIN}</th>
-    <th align="left">{L_ACP_APPLY_CONTENTS}</th>
-    <th align="left">{L_TYPE}</th>
-    <th>{L_ACTION}</th>
+	<th style="width:8%; text-align:left">{L_ID}</th>
+    <th style="width:17%; text-align:left">{L_TYPE}</th>
+    <th style="width:7%; text-align:center">{L_ACTION}</th>
+    <th style="width:25%; text-align:center">{L_ACP_APPLY_HEADER}</th>
+    <th style="width:25%; text-align:center">{L_ACP_APPLY_EXPLAIN}</th>
+    <th style="width:25%; text-align:center">{L_ACP_APPLY_CONTENTS}</th>
   </tr>
   </thead>
   <tbody>
@@ -111,18 +110,25 @@
 	  <!-- ELSE -->
 	  <tr class="row2">
 	  <!-- ENDIF -->
-	    <td><input type="txt" name="{apptemplate.QORDER}" value="{apptemplate.QORDER}" size="2" maxlength="2" {apptemplate.DISABLED}></td>
-	    <td><input type="checkbox" name="{apptemplate.QORDER}mandatory" value="True" {apptemplate.DISABLED} {apptemplate.CHECKED}></td>
-	    <td><input type="txt" name="{apptemplate.QORDER}question" value="{apptemplate.QUESTION}" size="45" {apptemplate.DISABLED}></td>
-	    <td><input type="txt" name="{apptemplate.QORDER}explainstr" value="{apptemplate.EXPLAINSTR}" size="45" {apptemplate.DISABLED}></td>
-	    <td><input type="txt" name="{apptemplate.QORDER}options" value="{apptemplate.OPTIONS}" size="25" {apptemplate.DISABLED}></td>
-	    <td><select name="{apptemplate.QORDER}type" class="input" id="app_type" {apptemplate.DISABLED}>
+	  
+	    <td style="width:5%; text-align:left">
+	    <!-- IF apptemplate.QORDER < 4 and not PREVIOUS_PAGE -->{ICON_MOVE_UP_DISABLED}<!-- ELSE --><a href="{apptemplate.U_MOVE_UP}">{ICON_MOVE_UP}</a><!-- ENDIF -->&nbsp;
+		<!-- IF apptemplate.QORDER < 3 or ( apptemplate.S_LAST_ROW and not NEXT_PAGE ) -->
+		{ICON_MOVE_DOWN_DISABLED}
+		<!-- ELSE --><a href="{apptemplate.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a>
+		<!-- ENDIF -->
+	    <td style="width:16%; text-align:left"><input type="checkbox" name="{apptemplate.QORDER}mandatory" value="True" {apptemplate.DISABLED} {apptemplate.CHECKED}>
+	    &nbsp;
+	    <select name="{apptemplate.QORDER}type" class="input" id="app_type" {apptemplate.DISABLED}>
 				<!-- BEGIN template_type -->
 				<option value="{template_type.TYPE}"{template_type.SELECTED}>{template_type.TYPE}</option>
 				<!-- END template_type -->
 			</select>
 		</td>
-	    <td><input type="submit" name="{apptemplate.QORDER}delete" value="Delete" class="button1" {apptemplate.DISABLED}></td>
+	    <td style="width:7%; text-align:center"><input type="submit" name="{apptemplate.QORDER}delete" value="Delete" class="button1" {apptemplate.DISABLED}></td>
+	    <td style="width:25%; text-align:center; overflow:hidden"><input style="width:100%" type="txt" name="{apptemplate.QORDER}question" value="{apptemplate.QUESTION}" {apptemplate.DISABLED}></td>
+	    <td style="width:25%; text-align:center; overflow:hidden"><input style="width:100%" type="txt" name="{apptemplate.QORDER}explainstr" value="{apptemplate.EXPLAINSTR}"  {apptemplate.DISABLED}></td>
+	    <td style="width:25%; text-align:center; overflow:hidden"><input style="width:95%" type="txt" name="{apptemplate.QORDER}options" value="{apptemplate.OPTIONS}" {apptemplate.DISABLED}></td>
 	  </tr>
 	  <!-- END apptemplate -->
 	  </tbody>
@@ -142,23 +148,17 @@
 <table cellspacing="1">
 	<thead>
 	<tr>
-	<th align="left">{L_ID}</th>
-    <th align="left">{L_ACP_APPLY_MANDATORY}</th>
+    <th align="left">{L_TYPE}</th>
     <th align="left">{L_ACP_APPLY_HEADER}</th>
     <th align="center">{L_ACP_APPLY_EXPLAIN}</th>
     <th align="left">{L_ACP_APPLY_CONTENTS}</th>
-    <th align="left">{L_TYPE}</th>
   </tr>
   </thead>
   <tbody>
 	  <tr class="row1">
-	    <td><input type="txt" name="app_add_order" size="2" maxlength="3"></td>
-	    <td><input type="checkbox" name="app_add_mandatory" value="True"></td>
-	    <td><input type="txt" name="app_add_question" value="Question" onclick="this.value ='';" onblur="if(this.value == '') { this.value = 'Question' };" size="45"></td>
-	    <td><input type="txt" name="app_add_explainstr" value="Explain" onclick="this.value ='';" onblur="if(this.value == '') { this.value = 'Explain' };" size="45"></td>
-	    <td><input type="txt" name="app_add_options" value="Options i.e. 1,2,3,4,5" onclick="this.value ='';" onblur="if(this.value == '') { this.value = 'Options i.e. 1,2,3,4,5' };" size="25"></td>
-	    
 	    <td>
+	    	<input type="checkbox" name="app_add_mandatory" value="True">
+	    	&nbsp;
 	    	<select name="app_add_type" class="input" id="app_add_type">
 				<option value="Inputbox">{L_APPLY_ACP_INPUTBOX}</option>
 				<option value="Textbox">{L_APPLY_ACP_TXTBOX}</option>
@@ -167,6 +167,10 @@
                 <option value="Checkboxes">{L_APPLY_ACP_CHECKBOX}</option>
          	</select>
 	    </td>
+	    <td><input style="width:100%"  type="txt" name="app_add_question" value="Question" onclick="this.value ='';" onblur="if(this.value == '') { this.value = 'Question' };"></td>
+	    <td><input style="width:100%" type="txt" name="app_add_explainstr" value="Explain" onclick="this.value ='';" onblur="if(this.value == '') { this.value = 'Explain' };"></td>
+	    <td><input style="width:95%" type="txt" name="app_add_options" value="Options i.e. 1,2,3,4,5" onclick="this.value ='';" onblur="if(this.value == '') { this.value = 'Options i.e. 1,2,3,4,5' };" ></td>
+	    
 	  </tr>
 	  </tbody>
 </table>
