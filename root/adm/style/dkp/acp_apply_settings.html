@@ -5,8 +5,8 @@
 
 <p>{L_ACP_DKP_APPLY_EXPLAIN}</p>
 
-<form method="post" action="{F_ADD_CONFIG}" name="post" onsubmit="return check_form(this)">
-
+<form method="post" action="{F_ADD_CONFIG}" id="acp_apply" onsubmit="return check_form(this)">
+	
 <fieldset>
 <legend>{L_APPLY_ACP_PRISETTING}</legend>
 <br />
@@ -14,7 +14,7 @@
  <dl>
     <dt><label>{L_APPLY_ACP_FORUM_PUB}</label></dt>
     <dd>
-    <select name="app_id_pub" class="input" id="app_id_pub">
+    <select name="app_id_pub" class="input" id="app_id_pub" >
 		{APPLY_FORUM_PUB_OPTIONS}
      </select>
      </dd>
@@ -32,16 +32,16 @@
    <dl>
     <dt><label>{L_APPLY_ACP_FORUM_PREF}</label><br />{L_APPLY_ACP_FORUM_PREF_EXPLAIN}</dt>
     <dd>
-    	<input type="radio" name="priv" value="1"{PUBLIC_YES_CHECKED} >&nbsp;{L_APPLY_ACP_PUBLIC}&nbsp;
-    	<input type="radio" name="priv" value="0"{PUBLIC_NO_CHECKED}>&nbsp;{L_APPLY_ACP_PRIVATE}
+    	<input type="radio" name="priv" value="1"{PUBLIC_YES_CHECKED} />&nbsp;{L_APPLY_ACP_PUBLIC}&nbsp;
+    	<input type="radio" name="priv" value="0"{PUBLIC_NO_CHECKED} />&nbsp;{L_APPLY_ACP_PRIVATE}
      </dd>
   </dl>
   
    <dl>
     <dt><label>{L_APPLY_ACP_FORUM_CHOICE}</label><br />{L_APPLY_ACP_FORUM_CHOICE_EXPLAIN}</dt>
     <dd> 
-    	<input type="radio" name="forumchoice" value="1"{FORUM_CHOICE_YES_CHECKED} >&nbsp;{L_YES}&nbsp;
-    	<input type="radio" name="forumchoice" value="0"{FORUM_CHOICE_NO_CHECKED}>&nbsp;{L_NO}
+    	<input type="radio" name="forumchoice" value="1"{FORUM_CHOICE_YES_CHECKED} />&nbsp;{L_YES}&nbsp;
+    	<input type="radio" name="forumchoice" value="0"{FORUM_CHOICE_NO_CHECKED} />&nbsp;{L_NO}
      </dd>
    </dl>
    
@@ -57,6 +57,7 @@
   </dl>
   	
   	<p class="quick">
+  
 	<input type="submit" name="savepri" value="{L_UPDATE}" class="button1" />
 	</p>
 	
@@ -99,7 +100,7 @@
     <th style="width:17%; text-align:left">{L_TYPE}</th>
     <th style="width:7%; text-align:center">{L_ACTION}</th>
     <th style="width:25%; text-align:center">{L_ACP_APPLY_HEADER}</th>
-    <th style="width:25%; text-align:center">{L_ACP_APPLY_EXPLAIN}</th>
+    <th style="width:25%; text-align:center">{L_ACP_APPLY_QUESTION}</th>
     <th style="width:25%; text-align:center">{L_ACP_APPLY_CONTENTS}</th>
   </tr>
   </thead>
@@ -110,25 +111,26 @@
 	  <!-- ELSE -->
 	  <tr class="row2">
 	  <!-- ENDIF -->
-	  
 	    <td style="width:5%; text-align:left">
-	    <!-- IF apptemplate.QORDER < 4 and not PREVIOUS_PAGE -->{ICON_MOVE_UP_DISABLED}<!-- ELSE --><a href="{apptemplate.U_MOVE_UP}">{ICON_MOVE_UP}</a><!-- ENDIF -->&nbsp;
-		<!-- IF apptemplate.QORDER < 3 or ( apptemplate.S_LAST_ROW and not NEXT_PAGE ) -->
-		{ICON_MOVE_DOWN_DISABLED}
+	    
+	    <!-- IF apptemplate.QORDER <= 3 and not PREVIOUS_PAGE -->{ICON_MOVE_UP_DISABLED}<!-- ELSE --><a href="{apptemplate.U_MOVE_UP}">{ICON_MOVE_UP}</a><!-- ENDIF -->&nbsp;
+		<!-- IF apptemplate.QORDER <= 2 or ( apptemplate.S_LAST_ROW and not NEXT_PAGE ) -->{ICON_MOVE_DOWN_DISABLED}
 		<!-- ELSE --><a href="{apptemplate.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a>
 		<!-- ENDIF -->
-	    <td style="width:16%; text-align:left"><input type="checkbox" name="{apptemplate.QORDER}mandatory" value="True" {apptemplate.DISABLED} {apptemplate.CHECKED}>
+		</td>
+	    <td style="width:16%; text-align:left">
+	    <input type="checkbox" name="q_mandatory[{apptemplate.ID}]" value="True" {apptemplate.DISABLED} {apptemplate.CHECKED} />
 	    &nbsp;
-	    <select name="{apptemplate.QORDER}type" class="input" id="app_type" {apptemplate.DISABLED}>
+	    	<select name="q_type[{apptemplate.ID}]" class="input" {apptemplate.DISABLED}>
 				<!-- BEGIN template_type -->
 				<option value="{template_type.TYPE}"{template_type.SELECTED}>{template_type.TYPE}</option>
 				<!-- END template_type -->
 			</select>
 		</td>
-	    <td style="width:7%; text-align:center"><input type="submit" name="{apptemplate.QORDER}delete" value="Delete" class="button1" {apptemplate.DISABLED}></td>
-	    <td style="width:25%; text-align:center; overflow:hidden"><input style="width:100%" type="txt" name="{apptemplate.QORDER}question" value="{apptemplate.QUESTION}" {apptemplate.DISABLED}></td>
-	    <td style="width:25%; text-align:center; overflow:hidden"><input style="width:100%" type="txt" name="{apptemplate.QORDER}explainstr" value="{apptemplate.EXPLAINSTR}"  {apptemplate.DISABLED}></td>
-	    <td style="width:25%; text-align:center; overflow:hidden"><input style="width:95%" type="txt" name="{apptemplate.QORDER}options" value="{apptemplate.OPTIONS}" {apptemplate.DISABLED}></td>
+	    <td style="width:7%; text-align:center"><input type="submit" name="q_delete[{apptemplate.ID}]" value="Delete" class="button1" {apptemplate.DISABLED} /></td>
+	    <td style="width:25%; text-align:center; overflow:hidden"><input style="width:100%" type="text" name="q_header[{apptemplate.ID}]" value="{apptemplate.HEADER}" {apptemplate.DISABLED} /></td>
+	    <td style="width:25%; text-align:center; overflow:hidden"><input style="width:100%" type="text" name="q_question[{apptemplate.ID}]" value="{apptemplate.QUESTION}"  {apptemplate.DISABLED} /></td>
+	    <td style="width:25%; text-align:center; overflow:hidden"><input style="width:95%" type="text" name="q_options[{apptemplate.ID}]" value="{apptemplate.OPTIONS}" {apptemplate.DISABLED} /></td>
 	  </tr>
 	  <!-- END apptemplate -->
 	  </tbody>
@@ -150,14 +152,14 @@
 	<tr>
     <th align="left">{L_TYPE}</th>
     <th align="left">{L_ACP_APPLY_HEADER}</th>
-    <th align="center">{L_ACP_APPLY_EXPLAIN}</th>
+    <th align="center">{L_ACP_APPLY_QUESTION}</th>
     <th align="left">{L_ACP_APPLY_CONTENTS}</th>
   </tr>
   </thead>
   <tbody>
 	  <tr class="row1">
 	    <td>
-	    	<input type="checkbox" name="app_add_mandatory" value="True">
+	    	<input type="checkbox" name="app_add_mandatory" value="True" />
 	    	&nbsp;
 	    	<select name="app_add_type" class="input" id="app_add_type">
 				<option value="Inputbox">{L_APPLY_ACP_INPUTBOX}</option>
@@ -167,9 +169,9 @@
                 <option value="Checkboxes">{L_APPLY_ACP_CHECKBOX}</option>
          	</select>
 	    </td>
-	    <td><input style="width:100%"  type="txt" name="app_add_question" value="Question" onclick="this.value ='';" onblur="if(this.value == '') { this.value = 'Question' };"></td>
-	    <td><input style="width:100%" type="txt" name="app_add_explainstr" value="Explain" onclick="this.value ='';" onblur="if(this.value == '') { this.value = 'Explain' };"></td>
-	    <td><input style="width:95%" type="txt" name="app_add_options" value="Options i.e. 1,2,3,4,5" onclick="this.value ='';" onblur="if(this.value == '') { this.value = 'Options i.e. 1,2,3,4,5' };" ></td>
+	    <td><input style="width:100%"  type="text" name="app_add_title" value="{L_ACP_APPLY_HEADER}" onclick="this.value ='';" onblur="if(this.value == '') { this.value = '{L_ACP_APPLY_HEADER}' };" /></td>
+	    <td><input style="width:100%" type="text" name="app_add_question" value="{L_ACP_APPLY_QUESTION}" onclick="this.value ='';" onblur="if(this.value == '') { this.value = '{L_ACP_APPLY_QUESTION}' };" /></td>
+	    <td><input style="width:95%" type="text" name="app_add_options" value="" /></td>
 	    
 	  </tr>
 	  </tbody>
@@ -213,8 +215,8 @@
     </select>
     <input type="submit" name="updatecolor" value="{L_UPDATE}" class="button1" />
 </p>
+<span>{S_FORM_TOKEN}</span>
 </fieldset>
-
 </form>
 
 <!-- INCLUDE dkp/overall_footer.html -->

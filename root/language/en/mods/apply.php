@@ -89,20 +89,21 @@ To help us with your application please answer the questions below. Enter your c
 
 /***** ACP template settings *****/
 'ACP_APPLY_MANDATORY'  		=> 'Mandatory',
-'ACP_APPLY_HEADER'  		=> 'Header',
-'ACP_APPLY_EXPLAIN'  		=> 'Explain',
-'ACP_APPLY_CONTENTS'  		=> 'Contents',
+'ACP_APPLY_HEADER'  		=> 'Title',
+'ACP_APPLY_QUESTION'  		=> 'Question',
+'ACP_APPLY_CONTENTS'  		=> 'Select Options',
 
 'ACP_DKP_APPLY_EXPLAIN'  	=> 'Here you can set all preferences of the Recruitment Mod',
 'APPLY_ACP_APPTEMPLATENEW'  => 'Application template New item', 
 'APPLY_CHGMAND' 			=> 'Change Questionnaire here. ',
-'APPLY_CHGMAND_EXPLAIN' 	=> 'Change the mandatory check, order, question and type. Separate the selectbox options with a comma "," with no spaces. The two first questions are reserved.',
+'APPLY_CHGMAND_EXPLAIN' 	=> 'Change the type mandatory check, question type, Title and question. The two first questions are reserved. <br /> In case of a Selectbox, radiobutton or checkbox, separate the options with a comma "," with no spaces.(ex. 1,2,3,4,5") ',
 'APPLY_ACP_NEWQUESTION' 	=> 'Enter new questions here.',
-'APPLY_ACP_NEWQUESTION_EXPLAIN' => 'Check if mandatory, enter the order, question and type. Separate the selectbox options with a comma "," with no spaces.', 
+'APPLY_ACP_NEWQUESTION_EXPLAIN' => 'Check if mandatory, select the type, enter the title, question. <br /> Separate the checkbox, radiobutton, or selectbox options with a comma "," with no spaces.', 
 'APPLY_ACP_INPUTBOX' 		=> 'Inputbox',	
 'APPLY_ACP_TXTBOX' 			=> 'Textbox', 
 'APPLY_ACP_SELECTBOX' 		=> 'Selectbox',
 'APPLY_ACP_RADIOBOX' 		=> 'Radiobuttons',
+'APPLY_ACP_CHECKBOX' 		=> 'Checkboxes',
 'APPLY_ACP_CHECKBOX' 		=> 'Checkboxes',
 
 //warnings
@@ -110,9 +111,6 @@ To help us with your application please answer the questions below. Enter your c
 'APPLY_ACP_REALMBLANKWARN' 	=> 'Realm field cannot be blank.', 
 'APPLY_ACP_SETTINGSAVED' 	=> 'Application form general settings saved',
 //upd
-'APPLY_ACP_ORDQU_NOTEMPTY' 	=> 'Order and/or question can not be empty.',
-'APPLY_ACP_ORDQU_NUMB' 		=> 'Order can only be numbers and not zero.',
-'APPLY_ACP_ORDQU_NUMBRES' 	=> 'Reserved. Order can not be 1 or 2.', 
 'APPLY_ACP_TWOREALM' 		=> 'You can not have two of realms or character names.', 
 'APPLY_ACP_QUESTUPD' 		=> 'Apply Questions Updated',
 //addnew

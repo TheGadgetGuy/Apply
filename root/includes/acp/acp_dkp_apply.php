@@ -34,7 +34,10 @@ class acp_dkp_apply extends bbDkp_Admin
 	  $user->add_lang(array('mods/dkp_admin'));
 	  $user->add_lang(array('mods/dkp_common'));
 	  $user->add_lang(array('mods/apply'));
-
+	  
+	  $form_key = md5(uniqid(rand(), true));
+	  add_form_key($form_key);
+	  
 	  switch($mode)
       {
        		/***
@@ -48,7 +51,10 @@ class acp_dkp_apply extends bbDkp_Admin
                 $update = (isset($_POST['update'])) ? true : false;
                 $addnew = (isset($_POST['add'])) ? true : false;
 				$colorsettings = (isset($_POST['updatecolor'])) ? true : false;
-                /*
+				$move_up = (isset($_GET['move_up'])) ? true : false;
+				$move_down = (isset($_GET['move_down'])) ? true : false;  
+
+				/*
                  * privacy settings handler
                  */
                if($prisettings)
@@ -76,110 +82,98 @@ class acp_dkp_apply extends bbDkp_Admin
                     trigger_error($user->lang['APPLY_ACP_SETTINGSAVED'] . $link);
                }
                                
-               if ($update) 
+      		   //user pressed quesion order arrows
+               if ($move_down or $move_up)
+				{
+					//find order of clicked line
+					$sql = 'SELECT qorder FROM ' . APPTEMPLATE_TABLE . ' where id =  ' . request_var('id', 0); 
+					$result = $db->sql_query($sql);
+					$current_order = (int) $db->sql_fetchfield('qorder', 0, $result);
+					$db->sql_freeresult($result);
+	
+					if ($move_down)
+					{
+						$new_order = $current_order + 1; 
+					}
+					else 
+					{
+						$new_order = $current_order - 1;
+					}
+	
+					// find current id with new order and move that one notch, if any
+					$sql = 'UPDATE  ' . APPTEMPLATE_TABLE . ' SET qorder = ' . $current_order . ' WHERE qorder = ' . $new_order;
+					$db->sql_query($sql);
+					
+					// now increase old order
+					$sql = 'UPDATE  ' . APPTEMPLATE_TABLE . ' set qorder = ' . $new_order . ' where id = ' . request_var('id', 0); 
+					$db->sql_query($sql);
+					
+					meta_refresh(1, $this->u_action);			
+				}
+				
+				//user pressed update questions
+				if ($update) 
                 {
-                    /* updating questions */
-                    $sql = "SELECT * FROM " . APPTEMPLATE_TABLE . ' ORDER BY qorder';
+                	
+					$q_types = utf8_normalize_nfc(request_var('q_type', array( 0 => ''), true));   
+					$q_headers = utf8_normalize_nfc(request_var('q_header', array( 0 => ''), true));
+					$q_questions = utf8_normalize_nfc(request_var('q_question', array( 0 => ''), true));
+					$q_options = utf8_normalize_nfc(request_var('q_options', array( 0 => ''), true));
 
-                    // return 100 questions - lol ;)
-                    $result = $db->sql_query_limit($sql, 100, 2);
-                    
-                    while ($row = $db->sql_fetchrow($result)) 
-                    {
-                        if ( !isset($_POST[$row['qorder']]) || !isset($_POST[$row['qorder'] . 'question'])) 
-                        {
-                            trigger_error( $user->lang['APPLY_ACP_ORDQU_NOTEMPTY']  . adm_back_link($this->u_action), E_USER_WARNING);
-                        }
-                        
-                        if (request_var($row['qorder'], 0) == 0 ) 
-                        {
-                            trigger_error( $user->lang['APPLY_ACP_ORDQU_NUMB'] . adm_back_link($this->u_action), E_USER_WARNING);
-                        }
-                        
-                        if (request_var($row['qorder'], 0) == 1 or request_var($row['qorder'], 0) ==2 ) 
-                        {
-                            trigger_error(  $user->lang['APPLY_ACP_ORDQU_NUMBRES'] . adm_back_link($this->u_action), E_USER_WARNING);
-                        }
-                        
-                        if ( request_var($row['qorder'] . 'question', ' ') == $user->lang['APPLY_ACP_REALM'] || request_var($row['qorder'] . 'question', ' ') == $user->lang['APPLY_ACP_CHARNAME']) 
+					foreach ($q_questions as $key => $arrvalues) 
+					{
+						if (  $q_questions[$key] == $user->lang['APPLY_ACP_REALM'] || $q_questions[$key] == $user->lang['APPLY_ACP_CHARNAME']) 
                         {
                             trigger_error($user->lang['APPLY_ACP_TWOREALM'] . adm_back_link($this->u_action), E_USER_WARNING);
                         }
-                        
-                        $mandatory = 'False';
-                        
-                        if ( request_var($row['qorder'] . 'mandatory', ' ') == 'True') 
-                        {
-                            $mandatory = 'True';
-                        }
-                        
-                        $queries = array(
-                                "UPDATE " . APPTEMPLATE_TABLE . " SET qorder = '" .  request_var($row['qorder'],0) . "' WHERE qorder = " . (int) $row['qorder'] ,
-                    			"UPDATE " . APPTEMPLATE_TABLE . " SET question = '" . $db->sql_escape( utf8_normalize_nfc(request_var($row['qorder'] . 'question','' , true))) . "' WHERE qorder = " . (int) $row['qorder'] ,
-                        		"UPDATE " . APPTEMPLATE_TABLE . " SET explainstr = '" . $db->sql_escape( utf8_normalize_nfc(request_var($row['qorder'] . 'explainstr','' , true))) . "' WHERE qorder = " . (int) $row['qorder'] , 
-                			    "UPDATE " . APPTEMPLATE_TABLE . " SET options = '" . $db->sql_escape( utf8_normalize_nfc(request_var($row['qorder'] . 'options','' , true))) . "' WHERE qorder = " . (int) $row['qorder'] ,
-                    			"UPDATE " . APPTEMPLATE_TABLE . " SET type = '" . $db->sql_escape(request_var($row['qorder'] . 'type', '')) . "' WHERE qorder = " . (int) $row['qorder'] ,
-                    			"UPDATE " . APPTEMPLATE_TABLE . " SET mandatory = '" . $db->sql_escape($mandatory) . "' WHERE qorder = " . (int) $row['qorder'],
-                        ); 
-                        foreach ($queries as $sql) 
-                        {
-                            $db->sql_query($sql);
-                        }
-                    }
-                    $db->sql_freeresult($result);
-                    
+						
+						$data = array(
+							'mandatory' => isset ( $_POST ['q_mandatory'][$key] ) ? 1 : 0,		
+						);
+						$sql = 'UPDATE ' . APPTEMPLATE_TABLE . ' SET ' . $db->sql_build_array('UPDATE', $data) . ' WHERE id = '. $key ;
+						$db->sql_query($sql);
+						
+	                   /* updating questions */
+						$data = array(
+								'type' 		=> $q_types[$key],
+								'header' 	=> $q_headers[$key],
+								'question' 	=> $q_questions[$key],
+								'options' 	=> $q_options[$key],
+						);
+						
+						$sql = 'UPDATE ' . APPTEMPLATE_TABLE . ' set ' . $db->sql_build_array('UPDATE', $data) . ' WHERE id = ' . $key;								
+						$db->sql_query($sql);	
+							
+					}
+					
                     trigger_error( $user->lang['APPLY_ACP_QUESTUPD']  . $link);    
                 }
                 
                 if ($addnew) 
                 {
                 	
-                	/* validation */
-                	
-                    /* adding order and question */
-                	if ( request_var('app_add_question', '') == '' ) 
-                    {
-                        trigger_error( $user->lang['APPLY_ACP_ORDQUEST'] . adm_back_link($this->u_action), E_USER_WARNING);
-                    }
-                    
-					if ( request_var('app_add_options', '') == '' )
-					{
-					    trigger_error( $user->lang['APPLY_ACP_ORDQUEST'] . adm_back_link($this->u_action), E_USER_WARNING);
-					}
-                    
-                    /* Order can only be numbers and not zero. */
-                    if ( request_var('app_add_order', 0) == 0 ) 
-                    {
-                        trigger_error(  $user->lang['APPLY_ACP_ORDQU_NUMB']  . adm_back_link($this->u_action), E_USER_WARNING);
-                    }
-                    
-                    /* Reserved. Order can not be 1 or 2. */
-                    if ( request_var('app_add_order',0) == 1 || request_var('app_add_order',0) == 2) 
-                    {
-                        trigger_error( $user->lang['APPLY_ACP_ORDQU_NUMBRES'] . adm_back_link($this->u_action), E_USER_WARNING);
-                    }
-                    
                     /* You can not have two of realms or character names. */
-                    if (request_var('app_add_question','') == $user->lang['APPLY_ACP_REALM'] || request_var('app_add_question','') == $user->lang['APPLY_ACP_CHARNAME']) 
+                    if (request_var('app_add_question','') == $user->lang['APPLY_ACP_REALM'] || 
+                    	request_var('app_add_question','') == $user->lang['APPLY_ACP_CHARNAME']) 
                     {
                         trigger_error($user->lang['APPLY_ACP_TWOREALM']  . adm_back_link($this->u_action), E_USER_WARNING);
                     }
                     
-                    $mandatory = (isset($_POST['app_add_mandatory']) ? 'True': 'False'); 
+                    $sql = 'SELECT max(qorder) + 1 as maxorder  FROM ' . APPTEMPLATE_TABLE; 
+					$result = $db->sql_query($sql);
+					$max_order = (int) $db->sql_fetchfield('maxorder', 0, $result);
+					$db->sql_freeresult($result);
                     
+					
                     $sql_ary = array(
-                        'qorder'     	=> (int) request_var('app_add_order', 0),
-    				 	'question'   	=> utf8_normalize_nfc (request_var('app_add_question', ' ', true )),
-                    	'explainstr'   	=> utf8_normalize_nfc (request_var('app_add_explainstr', ' ', true )),
+                        'qorder'     	=> $max_order, 
+    				 	'header'   		=> utf8_normalize_nfc (request_var('app_add_title', ' ', true )),
+                    	'question'   	=> utf8_normalize_nfc (request_var('app_add_question', ' ', true )),
                         'options'   	=> utf8_normalize_nfc (request_var('app_add_options', ' ', true )),                    
                         'type'       	=> utf8_normalize_nfc (request_var('app_add_type', ' ', true )),
-                        'mandatory' 	=> $mandatory
+                        'mandatory' 	=> (isset($_POST['app_add_mandatory']) ? 'True': 'False')
                     );
                     
-                    //first delete old question with that number if there were one
-                    $sql = 'DELETE FROM ' . APPTEMPLATE_TABLE . ' where qorder = ' . (int) request_var('app_add_order', 0); 
-                    $result = $db->sql_query($sql);
-
                     // insert new question
                     $sql = 'INSERT INTO ' . APPTEMPLATE_TABLE . ' ' . $db->sql_build_array('INSERT', $sql_ary);
                     $result = $db->sql_query($sql);
@@ -285,7 +279,7 @@ class acp_dkp_apply extends bbDkp_Admin
                 while ($row = $db->sql_fetchrow($result)) 
                 {
                     $disabled = '';
-                    if ($row['question'] == $user->lang['APPLY_ACP_CHARNAME'] or $row['question'] == $user->lang['APPLY_ACP_REALM']) 
+                    if ($row['header'] == $user->lang['APPLY_ACP_CHARNAME'] or $row['header'] == $user->lang['APPLY_ACP_REALM']) 
                     {
                         $disabled = 'disabled="disabled"';
                     }
@@ -298,12 +292,16 @@ class acp_dkp_apply extends bbDkp_Admin
                     
                     $template->assign_block_vars('apptemplate', array(
                     	'QORDER'         => $row['qorder'] , 
-                    	'QUESTION'       => $row['question'] ,
-                    	'EXPLAINSTR'     => $row['explainstr'] , 
+                    	'HEADER'      	 => $row['header'] ,
+                    	'QUESTION'       => $row['question'] , 
                     	'DISABLED'       => $disabled , 
                     	'MANDATORY'      => $row['mandatory'] , 
                         'OPTIONS'        => $row['options'] ,
-                    	'CHECKED'        => $checked));
+                    	'CHECKED'        => $checked,
+                    	'ID'			 => $row['id'] ,
+	                    'U_MOVE_UP'		 => append_sid("{$phpbb_admin_path}index.$phpEx", "i=dkp_apply&amp;mode=apply_settings&amp;move_up=1&amp;id={$row['id']}"), 
+						'U_MOVE_DOWN'	 => append_sid("{$phpbb_admin_path}index.$phpEx", "i=dkp_apply&amp;mode=apply_settings&amp;move_down=1&amp;id={$row['id']}"),
+                      ));
                     
                     $type = array('Inputbox' , 'Textbox', 'Selectbox', 'Radiobuttons', 'Checkboxes');
                     foreach ($type as $t_name => $t_value) 

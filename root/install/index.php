@@ -239,6 +239,11 @@ $versions = array(
 		
 		'custom' => array('applyupdater', 'bbdkp_caches'), 
 	),
+	
+	'1.3.1' => array(
+		'custom' => array('fix_table_structure', 'applyupdater', 'bbdkp_caches'), 
+
+	), 
 			
 			
 
@@ -287,6 +292,32 @@ function applyupdater($action, $version)
 			break;
 	
 	}
+}
+
+/**
+ * 1.3.1 function for new pk/order
+ *
+ * @param string $action
+ * @param string $version
+ */
+function fix_table_structure($action, $version)
+{
+   global $umil, $table_prefix;
+   if ( ($action == 'update' || $action == 'install') && $version == '1.3.1')
+   {
+	  $umil->table_column_add($table_prefix . 'bbdkp_apptemplate', 'temp' , array('UINT',  0));
+      $umil->db->sql_query('UPDATE ' . $table_prefix . 'bbdkp_apptemplate' . ' SET temp = qorder');
+	  $umil->table_column_remove($table_prefix . 'bbdkp_apptemplate', 'qorder');
+	  $umil->db->sql_query('ALTER TABLE ' . $table_prefix . 'bbdkp_apptemplate' . ' ADD id int(11) PRIMARY KEY auto_increment not null');				
+	  $umil->db->sql_query('UPDATE ' . $table_prefix . 'bbdkp_apptemplate' . ' SET id = temp');
+	  $umil->table_column_remove($table_prefix . 'bbdkp_apptemplate', 'temp');
+	  $umil->table_column_add($table_prefix . 'bbdkp_apptemplate', 'qorder' , array('UINT',  0));
+	  $umil->db->sql_query('UPDATE ' . $table_prefix . 'bbdkp_apptemplate' . ' SET qorder = id');
+	  $umil->db->sql_query('ALTER TABLE ' . $table_prefix . 'bbdkp_apptemplate' . " CHANGE question header varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '' " );
+	  $umil->db->sql_query('ALTER TABLE ' . $table_prefix . 'bbdkp_apptemplate' . " CHANGE explainstr question varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '' " );
+	  
+   }
+   
 }
 
 /**************************************
