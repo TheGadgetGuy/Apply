@@ -29,6 +29,8 @@ $current_time = $user->time_now;
 
 $user->setup(array('posting', 'mcp', 'viewtopic', 'mods/apply', 'mods/dkp_common', 'mods/dkp_admin'), false);
 
+$form_key = 'make_apply';
+
 // declare captcha class
 if (!class_exists('phpbb_captcha_factory'))
 {
@@ -53,14 +55,10 @@ $submit	= (isset($_POST['post'])) ? true : false;
 
 if ($submit)
 {
-	// first validate captcha 
-	
-	// if "enable visual confirmation for guest postings" is set to "ON"
-	// and mode is set to posting 
-	// and the user is not registered 
-	// then captcha will be validated
+	// anon user and "enable visual confirmation for guest postings" is set to "ON" and post mode ?
 	if ($config['enable_post_confirm'] && in_array('post', array('post')) && !$user->data['is_registered'] )
 	{
+		// first validate captcha 
 		$vc_response = $captcha->validate();
 		if ($vc_response)
 		{
@@ -68,14 +66,14 @@ if ($submit)
 		}
 	}
 	
-	if(!sizeof($error) && check_form_key('applyposting'))
+	if(!sizeof($error) && check_form_key($form_key))
 	{
 		make_apply_posting($post_data, $current_time);
 	}
 	
 }
 
-fill_application_form($post_data, $submit, $error, $captcha);
+fill_application_form($form_key, $post_data, $submit, $error, $captcha);
 
 /**
  * post application on forum
@@ -120,7 +118,7 @@ function make_apply_posting($post_data, $current_time)
 	$db->sql_freeresult($result);
 
 	 
-	$candidate_name = utf8_normalize_nfc(request_var('templatefield_1', ' ', true));
+	$candidate_name = utf8_normalize_nfc(request_var('candidate_name', ' ', true));
 	// check for validate name. name can only be alphanumeric without spaces or special characters
 	//if this preg_match returns true then there is something other than letters
    if (preg_match('/[^a-zA-ZàäåâÅÂçÇéèëËêÊïÏîÎæŒæÆÅóòÓÒöÖôÔøØüÜ\s]+/', $candidate_name  ))
@@ -130,12 +128,13 @@ function make_apply_posting($post_data, $current_time)
    	  trigger_error($message);	
    }
 
-    $candidate_realm = trim(utf8_normalize_nfc(request_var('templatefield_2', $config['bbdkp_apply_realm'], true))); 
+    $candidate_realm = trim(utf8_normalize_nfc(request_var('candidate_realm', $config['bbdkp_apply_realm'], true))); 
 	$candidate_level = utf8_normalize_nfc(request_var('candidate_level', ' ', true));
 	$candidate_game = request_var('game_id', '');
 	$candidate_genderid = request_var('candidate_gender', 0);
 	$candidate_raceid = request_var('candidate_race_id', 0);
-			//character class
+	
+	//character class
 	$sql_array = array(
 		'SELECT'	=>	' r.race_id, r.image_female_small, r.image_male_small, l.name as race_name ', 	 
 		'FROM'		=> array(
@@ -456,7 +455,7 @@ function register_bbdkp(dkp_character $candidate)
  *  build Application form 
  *
  */
-function fill_application_form($post_data, $submit, $error, $captcha)
+function fill_application_form($form_key, $post_data, $submit, $error, $captcha)
 {
 	global $user, $template, $config, $phpbb_root_path, $phpEx, $auth, $db;
 	
@@ -698,13 +697,13 @@ function fill_application_form($post_data, $submit, $error, $captcha)
 			'TYPE'			=> $type,
 			'MANDATORY' 	=> $mandatory)
 		);					
-		
 			
 	}
 	$db->sql_freeresult($result);
 	
 	$form_enctype = (@ini_get('file_uploads') == '0' || strtolower(@ini_get('file_uploads')) == 'off' || !$config['allow_attachments'] || !$auth->acl_get('u_attach') || !$auth->acl_get('f_attach', $post_data['forum_id'])) ? '' : ' enctype="multipart/form-data"';
-	add_form_key(md5(uniqid(rand(), true)));
+	add_form_key($form_key);
+	
 	
 	// assign global template vars to questionnaire
 	$template->assign_vars(array(
