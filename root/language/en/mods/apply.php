@@ -110,6 +110,8 @@ To help us with your application please answer the questions below. Enter your c
 'APPLY_ACP_RETURN' 			=> '<h3>Return to Application config.</h3>',
 'APPLY_ACP_REALMBLANKWARN' 	=> 'Realm field cannot be blank.', 
 'APPLY_ACP_SETTINGSAVED' 	=> 'Application form general settings saved',
+'APPLY_NO_GUILD'			=> 'No Guild', 
+
 //upd
 'APPLY_ACP_TWOREALM' 		=> 'You can not have two of realms or character names.', 
 'APPLY_ACP_QUESTUPD' 		=> 'Apply Questions Updated',
@@ -140,7 +142,9 @@ To help us with your application please answer the questions below. Enter your c
 
 'APPLY_CHAR_URL' => '[color=%s][/color][url=%s]Armory Link[/url]', 
 
-'ERROR_NAME'  =>  'Error : Name must be Alphabetic (a-zA-ZàäåâÅÂçÇéèëêïÏîÎæŒæÆÅóòÓÒöÖôÔøØüÜ are allowed). ',
+'APPLY_ERROR_NAME'  =>  'Error : Name must be Alphabetic (a-zA-ZàäåâÅÂçÇéèëêïÏîÎæŒæÆÅóòÓÒöÖôÔøØüÜ are allowed). ',
+'APPLY_REQUIRED_LEVEL'  => 'Level is required. ', 
+'APPLY_REQUIRED_NAME'	=> 'Name is required. ', 
 'RETURN_APPLY'  =>  'Return to Application',
 
 ));

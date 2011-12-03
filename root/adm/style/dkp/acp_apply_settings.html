@@ -113,8 +113,8 @@
 	  <!-- ENDIF -->
 	    <td style="width:5%; text-align:left">
 	    
-	    <!-- IF apptemplate.QORDER <= 3 and not PREVIOUS_PAGE -->{ICON_MOVE_UP_DISABLED}<!-- ELSE --><a href="{apptemplate.U_MOVE_UP}">{ICON_MOVE_UP}</a><!-- ENDIF -->&nbsp;
-		<!-- IF apptemplate.QORDER <= 2 or ( apptemplate.S_LAST_ROW and not NEXT_PAGE ) -->{ICON_MOVE_DOWN_DISABLED}
+	    <!-- IF apptemplate.QORDER <= 1 and not PREVIOUS_PAGE -->{ICON_MOVE_UP_DISABLED}<!-- ELSE --><a href="{apptemplate.U_MOVE_UP}">{ICON_MOVE_UP}</a><!-- ENDIF -->&nbsp;
+		<!-- IF apptemplate.S_LAST_ROW and not NEXT_PAGE --> {ICON_MOVE_DOWN_DISABLED}
 		<!-- ELSE --><a href="{apptemplate.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a>
 		<!-- ENDIF -->
 		</td>

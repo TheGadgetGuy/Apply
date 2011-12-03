@@ -316,6 +316,8 @@ function fix_table_structure($action, $version)
 	  $umil->db->sql_query('ALTER TABLE ' . $table_prefix . 'bbdkp_apptemplate' . " CHANGE question header varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '' " );
 	  $umil->db->sql_query('ALTER TABLE ' . $table_prefix . 'bbdkp_apptemplate' . " CHANGE explainstr question varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '' " );
 	  
+	  $umil->db->sql_query('DELETE FROM ' . $table_prefix . 'bbdkp_apptemplate WHERE id <= 2 ');
+	  $umil->db->sql_query('UPDATE ' . $table_prefix . 'bbdkp_apptemplate SET id = id - 2, qorder = qorder - 2 '); 
    }
    
 }

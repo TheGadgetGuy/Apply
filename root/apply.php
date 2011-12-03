@@ -2,10 +2,9 @@
 /**
 * Application form created by Kapli (bbDKP developer)
 * 
-* @package bbDkp
+* @package bbDKP
 * @copyright (c) 2009 bbDkp <http://code.google.com/p/bbdkp/>
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
-* @version $Id$
 * @author Kapli, Malfate, Sajaki, Blazeflack, Twizted
 * 
 */
@@ -126,7 +125,7 @@ function make_apply_posting($post_data, $current_time)
 	//if this preg_match returns true then there is something other than letters
    if (preg_match('/[^a-zA-ZàäåâÅÂçÇéèëËêÊïÏîÎæŒæÆÅóòÓÒöÖôÔøØüÜ\s]+/', $candidate_name  ))
    {
-	  $message = $user->lang['ERROR_NAME']. $candidate_name . ' ';  
+	  $message = $user->lang['APPLY_ERROR_NAME']. $candidate_name . ' ';  
 	  $message = $message . '<br /><br />' . sprintf($user->lang['RETURN_APPLY'], '<a href="' . append_sid("{$phpbb_root_path}apply.$phpEx") . '">', '</a>');
    	  trigger_error($message);	
    }
@@ -495,9 +494,9 @@ function fill_application_form($post_data, $submit, $error, $captcha)
 	        GUILD_TABLE => 'a',
 	        MEMBER_LIST_TABLE => 'b'
 	    ),
-	    'WHERE'     =>  'a.id = b.member_guild_id ',
+	    'WHERE'     =>  'a.id = b.member_guild_id and id != 0',
 	    'GROUP_BY'  =>  'a.id, a.name, a.realm, a.region', 
-	    'ORDER_BY'	=>  'a.id DESC'
+	    'ORDER_BY'	=>  'a.id ASC'
 	);
 	$sql = $db->sql_build_query('SELECT', $sql_array);
 	$result = $db->sql_query($sql);
@@ -506,14 +505,40 @@ function fill_application_form($post_data, $submit, $error, $captcha)
 	$guild_id = 0;
 	while ( $row = $db->sql_fetchrow($result) )
 	{
-		if ($i==0)
-		{
-			$guild_id = (int) $row['id']; 
-			break;
-		}
+		$guild_id = (int) $row['id']; 
 		$i+=1;
 	}
 	$db->sql_freeresult($result);
+	
+	if($i==1)
+	{
+		//only one guild, take this one
+		$template->assign_vars(array(
+		'GUILD_ID'				=> $guild_id,
+		'S_SHOW_GUILDSELECT'	=> false,
+		));
+				
+	}
+	elseif($i>1)
+	{
+		//multiple guilds, show a dropdown.
+		$template->assign_var('S_SHOW_GUILDSELECT',true);
+		$result = $db->sql_query($sql);
+		while ( $row = $db->sql_fetchrow($result) )
+		{
+			$template->assign_block_vars('guild_row', array(
+			'VALUE' => $row['id'],
+			'SELECTED' =>  '',
+			'OPTION'   => $row['name'] . ', ' . $row['realm'] . '-' . strtolower($row['region'])
+			));
+		}
+		$db->sql_freeresult($result);
+	}
+	else 
+	{
+		trigger_error($user->lang['APPLY_NO_GUILD']);
+	}
+	
 	
 	//game
 	$games = array(
@@ -610,7 +635,7 @@ function fill_application_form($post_data, $submit, $error, $captcha)
 	
 	// Start assigning vars for main posting page ...
 	// main questionnaire 
-	$sql = "SELECT * FROM " . APPTEMPLATE_TABLE . ' ORDER BY qorder';
+	$sql = "SELECT * FROM " . APPTEMPLATE_TABLE . ' ORDER BY qorder ASC';
 	$result = $db->sql_query($sql);
 					
 	while ( $row = $db->sql_fetchrow($result) )
@@ -618,12 +643,12 @@ function fill_application_form($post_data, $submit, $error, $captcha)
 		switch($row['type'])
 		{
 			case 'Inputbox':
-				$type = '<input class="inputbox" style="width:300px;" 
+				$type = '<input class="text" style="width:300px;" 
 				type="text" name="templatefield_' . $row['qorder'] . '" 
 				size="40" maxlength="60" tabindex="' . $row['qorder'] . '" />';
 				break;
 			case 'Textbox':
-				$type = '<textarea class="inputbox" name="templatefield_' . $row['qorder'] . '" rows="3" cols="76" 
+				$type = '<textarea class="text" name="templatefield_' . $row['qorder'] . '" rows="3" cols="76" 
 				tabindex="' . $row['qorder'] . '" onselect="storeCaret(this);" 
 				onclick="storeCaret(this);" 
 				onkeyup="storeCaret(this);" ></textarea>';
@@ -664,44 +689,29 @@ function fill_application_form($post_data, $submit, $error, $captcha)
 		{
 			$mandatory = '&nbsp;<span style="color:red">' . $user->lang['MANDATORY']. '</span>';
 		}
+
+		$template->assign_block_vars('apptemplate', array(
+			'QORDER'		=> $row['qorder'],
+			'TITLE'			=> $row['header'],
+			'QUESTION'		=> $row['question'],
+			'OPTIONS'   	=> $row['options'],
+			'TYPE'			=> $type,
+			'MANDATORY' 	=> $mandatory)
+		);					
 		
-		if ((int) $row['qorder'] <= 2)
-		{
-			// Character Name and Realm, put on top
-			$template->assign_block_vars('templatestart', array(
-				'QORDER'		=> $row['qorder'],
-				'QUESTION'		=> $row['question'],
-				'EXPLAIN'		=> $row['explainstr'],
-				'OPTIONS'   	=> $row['options'],
-				'TYPE'			=> $type,
-				'MANDATORY' 	=> $mandatory)
-			);					
-			
-		}
-		else 
-		{
-			// main questionnaire put below
-			$template->assign_block_vars('apptemplate', array(
-				'QORDER'		=> $row['qorder'],
-				'QUESTION'		=> $row['question'],
-				'EXPLAINSTR'		=> $row['explainstr'],
-				'OPTIONS'   	=> $row['options'],
-				'TYPE'			=> $type,
-				'MANDATORY' 	=> $mandatory)
-			);					
-		}
 			
 	}
 	$db->sql_freeresult($result);
 	
 	$form_enctype = (@ini_get('file_uploads') == '0' || strtolower(@ini_get('file_uploads')) == 'off' || !$config['allow_attachments'] || !$auth->acl_get('u_attach') || !$auth->acl_get('f_attach', $post_data['forum_id'])) ? '' : ' enctype="multipart/form-data"';
-	add_form_key('applyposting');
+	add_form_key(md5(uniqid(rand(), true)));
 	
 	// assign global template vars to questionnaire
 	$template->assign_vars(array(
 		'S_SHOW_FORUMCHOICE'	=> ( $config['bbdkp_apply_forumchoice'] == '1' ) ? TRUE : FALSE,
 		'PUBLIC_YES_CHECKED' 	=> ( $config['bbdkp_apply_visibilitypref'] == '1' ) ? ' checked="checked"' : '',
 		'PUBLIC_NO_CHECKED'  	=> ( $config['bbdkp_apply_visibilitypref'] == '0' ) ? ' checked="checked"' : '', 
+		'MALE_CHECKED'			=> ' checked="checked"',
 		'L_POST_A'				=> $page_title,
 		'ERROR'					=> (sizeof($error)) ? implode('<br />', $error) : '',
 		'S_POST_ACTION'     	=> $s_action,
@@ -712,8 +722,8 @@ function fill_application_form($post_data, $submit, $error, $captcha)
 		// javascript
 		'LA_ALERT_AJAX'		  => $user->lang['ALERT_AJAX'],
 		'LA_ALERT_OLDBROWSER' => $user->lang['ALERT_OLDBROWSER'],
-		'LA_MSG_NAME_EMPTY'	  => $user->lang['FV_REQUIRED_NAME'],
-		'LA_MSG_LEVEL_EMPTY'  => $user->lang['FV_REQUIRED_LEVEL'],	
+		'LA_MSG_NAME_EMPTY'	  => $user->lang['APPLY_REQUIRED_NAME'],
+		'LA_MSG_LEVEL_EMPTY'  => $user->lang['APPLY_REQUIRED_LEVEL'],	
 		
 		)
 	);
