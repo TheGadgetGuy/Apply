@@ -96,11 +96,10 @@ if ($submit)
 	}
 	$db->sql_freeresult($result);
 
-	 
 	$candidate_name = utf8_normalize_nfc(request_var('candidate_name', ' ', true));
 	// check for validate name. name can only be alphanumeric without spaces or special characters
 	//if this preg_match returns true then there is something other than letters
-   if (preg_match('/[^a-zA-ZàäåâÅÂçÇéèëËêÊïÏîÎæŒæÆÅóòÓÒöÖôÔøØüÜ\s]+/', $candidate_name  ))
+   if (preg_match('/[^a-zA-ZàäåâÅÂçÇéèëËêÊïÏîÎíÍìÌæŒæÆÅóòÓÒöÖôÔøØüÜ\s]+/', $candidate_name  ))
    {
 	  $error[] = $user->lang['APPLY_ERROR_NAME']. $candidate_name . ' ';  
    }
@@ -462,6 +461,20 @@ function fill_application_form($form_key, $post_data, $submit, $error, $captcha)
 	
 	$page_title = $user->lang['APPLY_MENU'];
 
+	// get WELCOME_MSG
+	$sql = 'SELECT announcement_msg, bbcode_uid, bbcode_bitfield, bbcode_options FROM ' . APPHEADER_TABLE;
+	$db->sql_query($sql);
+	$result = $db->sql_query($sql);
+	while ( $row = $db->sql_fetchrow($result) )
+	{
+		$welcome_message = $row['announcement_msg'];
+		$bbcode_uid = $row['bbcode_uid'];
+		$bbcode_bitfield = $row['bbcode_bitfield'];
+		$bbcode_options = $row['bbcode_options'];
+	}
+	$welcome_message = generate_text_for_display($welcome_message, $bbcode_uid, $bbcode_bitfield, $bbcode_options);
+	$db->sql_freeresult($result);
+		
 	if ($config['enable_post_confirm'] && !$user->data['is_registered'] ) 
     {
     	if ((!$submit || !$captcha->is_solved()) )
@@ -705,6 +718,7 @@ function fill_application_form($form_key, $post_data, $submit, $error, $captcha)
 	
 	// assign global template vars to questionnaire
 	$template->assign_vars(array(
+		'WELCOME_MSG'			=> $welcome_message,	
 		'S_SHOW_FORUMCHOICE'	=> ( $config['bbdkp_apply_forumchoice'] == '1' ) ? TRUE : FALSE,
 		'PUBLIC_YES_CHECKED' 	=> ( $config['bbdkp_apply_visibilitypref'] == '1' ) ? ' checked="checked"' : '',
 		'PUBLIC_NO_CHECKED'  	=> ( $config['bbdkp_apply_visibilitypref'] == '0' ) ? ' checked="checked"' : '', 
