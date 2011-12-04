@@ -18,6 +18,7 @@ include($phpbb_root_path . 'common.' . $phpEx);
 $user->session_begin();
 $auth->acl($user->data);
 $user->setup();
+$user->add_lang ( array ('mods/apply'));
 
 if (!file_exists($phpbb_root_path . 'umil/umil_auto.' . $phpEx))
 {
@@ -70,6 +71,7 @@ $options = array(
 * You must use correct version numbering.  Unless you know exactly what you can use, only use X.X.X (replacing X with an integer).
 * The version numbering must otherwise be compatible with the version_compare function - http://php.net/manual/en/function.version-compare.php
 */
+$announce = encode_announcement($user->lang['APPLY_INFO']);
 
 $versions = array(
 		'1.3.0' => array(
@@ -239,6 +241,40 @@ $versions = array(
 		
 		'custom' => array('applyupdater', 'bbdkp_caches'), 
 	),
+	
+	'1.3.1' => array(
+		'table_add' => array(
+              array(
+              		$table_prefix . 'bbdkp_apphdr' , array(
+                    'COLUMNS'        => array(
+                        'announcement_id'    	=> array('INT:8', NULL, 'auto_increment'),
+                        'announcement_title' 	=> array('VCHAR_UNI', ''),
+                        'announcement_msg'   	=> array('TEXT_UNI', ''),
+              			'announcement_timestamp' => array('TIMESTAMP', 0),
+						'bbcode_bitfield' 		=> array('VCHAR:255', ''),
+						'bbcode_uid' 			=> array('VCHAR:8', ''),
+              			'user_id'     			=> array('INT:8', 0),
+              			'bbcode_options'		=> array('UINT', 7),
+                    ),
+                    'PRIMARY_KEY'    => 'announcement_id'), 
+                ),
+		), 
+ 		
+		'table_row_insert'	=> array(
+	        array($table_prefix . 'bbdkp_apphdr' ,
+	           array(
+	                  array(
+	                  	'announcement_title' => 'Apply', 
+	                  	'announcement_timestamp' => (int) time(),
+	                  	'announcement_msg' => $announce['text'],
+	                  	'bbcode_uid' => $announce['uid'],
+	                  	'bbcode_bitfield' => $announce['bitfield'],
+	                  	'user_id' => $user->data['user_id'] ),          
+	           ))),
+			
+		'custom' => array('fix_table_structure', 'applyupdater', 'bbdkp_caches'), 
+	
+	), 
 			
 			
 
@@ -262,7 +298,7 @@ function applyupdater($action, $version)
 	{
 		case 'install' :
 		case 'update' :
-				
+			$umil->db->sql_query('DELETE FROM ' . $table_prefix . "bbdkp_plugins WHERE name = 'apply'");	
 			// We insert new data in the plugin table
 			$umil->table_row_insert($table_prefix . 'bbdkp_plugins',
 			array(
@@ -280,13 +316,60 @@ function applyupdater($action, $version)
 			break;
 		
 		case 'uninstall' :
-		
+			$umil->db->sql_query('DELETE FROM ' . $table_prefix . "bbdkp_plugins WHERE name = 'apply'");
 			return array(
 					'command' => sprintf($user->lang['APPLY_UNINSTALL_MOD'], $version) ,  
 					'result' => 'SUCCESS');
 			break;
 	
 	}
+}
+
+
+/**
+ * encode announcement text
+ *
+ * @param unknown_type $text
+ * @return unknown
+ */
+function encode_announcement($text)
+{
+	$uid = $bitfield = $options = ''; // will be modified by generate_text_for_storage
+	$allow_bbcode = $allow_urls = $allow_smilies = true;
+	generate_text_for_storage($text, $uid, $bitfield, $options, $allow_bbcode, $allow_urls, $allow_smilies);
+	$announce['text']=$text;
+	$announce['uid']=$uid;
+	$announce['bitfield']=$bitfield;
+	return $announce;
+}
+
+
+/**
+ * 1.3.1 function for new pk/order
+ *
+ * @param string $action
+ * @param string $version
+ */
+function fix_table_structure($action, $version)
+{
+   global $umil, $table_prefix;
+   if ( ($action == 'update' || $action == 'install') && $version == '1.3.1')
+   {
+	  $umil->table_column_add($table_prefix . 'bbdkp_apptemplate', 'temp' , array('UINT',  0));
+      $umil->db->sql_query('UPDATE ' . $table_prefix . 'bbdkp_apptemplate' . ' SET temp = qorder');
+	  $umil->table_column_remove($table_prefix . 'bbdkp_apptemplate', 'qorder');
+	  $umil->db->sql_query('ALTER TABLE ' . $table_prefix . 'bbdkp_apptemplate' . ' ADD id int(11) PRIMARY KEY auto_increment not null');				
+	  $umil->db->sql_query('UPDATE ' . $table_prefix . 'bbdkp_apptemplate' . ' SET id = temp');
+	  $umil->table_column_remove($table_prefix . 'bbdkp_apptemplate', 'temp');
+	  $umil->table_column_add($table_prefix . 'bbdkp_apptemplate', 'qorder' , array('UINT',  0));
+	  $umil->db->sql_query('UPDATE ' . $table_prefix . 'bbdkp_apptemplate' . ' SET qorder = id');
+	  $umil->db->sql_query('ALTER TABLE ' . $table_prefix . 'bbdkp_apptemplate' . " CHANGE question header varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '' " );
+	  $umil->db->sql_query('ALTER TABLE ' . $table_prefix . 'bbdkp_apptemplate' . " CHANGE explainstr question varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '' " );
+	  
+	  $umil->db->sql_query('DELETE FROM ' . $table_prefix . 'bbdkp_apptemplate WHERE id <= 2 ');
+	  $umil->db->sql_query('UPDATE ' . $table_prefix . 'bbdkp_apptemplate SET id = id - 2, qorder = qorder - 2 '); 
+   }
+   
 }
 
 /**************************************

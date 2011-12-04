@@ -50,13 +50,13 @@ $lang = array_merge($lang, array(
 /***** Questionnaire ******/
 'APPLY_MENU' => 'Application Form',
 'APPLY_TITLE' => 'Application Form',
-'APPLY_INFO' => 'Welcome and thank you for choosing us as a possible home for your character. 
-To help us with your application please answer the questions below. Enter your character name exactly as it appears in the armory.  ',
+'APPLY_INFO' => '[size=150]Welcome and thank you for choosing us as a possible home for your character. 
+To help us with your application please answer the questions below. Enter your character name exactly as it appears in the armory. [/size] ',
 'APPLY_PUBLICQUESTION' => 'Visible Application ?', 
 'APPLY_REQUIRED'  => 'You need to fill in all required fields. ', 
 'MANDATORY'	=> 'Required',	
 'APPLY_REALM' => 'Realm (blank for ',
-'APPLY_NAME' => ' Character name: ',
+'APPLY_NAME' => 'Character name: ',
 'APPLY_QUESTION'  => 'Question ',
 'APPLY_ANSWER'  => 'Answer ',
 'APPLY_REALM1' => 'Realm: ',
@@ -80,39 +80,41 @@ To help us with your application please answer the questions below. Enter your c
 'APPLY_ACP_GUESTPOST' 		=> 'Can guests posts? :',
 'APPLY_ACP_GUESTPOST_EXPLAIN' 	=> 'If you set Guest posting On, don\'t forget to set "Enable visual confirmation for guest postings:" to "Yes".' ,  
 
-/***** ACP Privacy settings *****/
+/***** ACP Armory settings *****/
+'APPLY_ACP_TEMPLATESETTING'	=> 'Template Settings',
+'APPLY_WELCOME'				=> 'Welcome message',
+'APPLY_WELCOME_EXPLAIN'		=> 'Message shown on top of Apply. supports bbcodes. ',
 'APPLY_ACP_CHARNAME' 		=> 'Character name',
-'APPLY_ACP_ARMSETTING'		=> 'Armory Settings',
 'APPLY_ACP_REALM' 			=> 'Realm',
 'APPLY_ACP_REGION' 			=> 'Region',
 'APPLY_ACP_APPTEMPLATEUPD'	=> 'Update Application template', 
 
 /***** ACP template settings *****/
 'ACP_APPLY_MANDATORY'  		=> 'Mandatory',
-'ACP_APPLY_HEADER'  		=> 'Header',
-'ACP_APPLY_EXPLAIN'  		=> 'Explain',
-'ACP_APPLY_CONTENTS'  		=> 'Contents',
+'ACP_APPLY_HEADER'  		=> 'Title',
+'ACP_APPLY_QUESTION'  		=> 'Question',
+'ACP_APPLY_CONTENTS'  		=> 'Select Options',
 
 'ACP_DKP_APPLY_EXPLAIN'  	=> 'Here you can set all preferences of the Recruitment Mod',
 'APPLY_ACP_APPTEMPLATENEW'  => 'Application template New item', 
 'APPLY_CHGMAND' 			=> 'Change Questionnaire here. ',
-'APPLY_CHGMAND_EXPLAIN' 	=> 'Change the mandatory check, order, question and type. Separate the selectbox options with a comma "," with no spaces. The two first questions are reserved.',
+'APPLY_CHGMAND_EXPLAIN' 	=> 'Change the type mandatory check, question type, Title and question. The two first questions are reserved. <br /> In case of a Selectbox, radiobutton or checkbox, separate the options with a comma "," with no spaces.(ex. 1,2,3,4,5") ',
 'APPLY_ACP_NEWQUESTION' 	=> 'Enter new questions here.',
-'APPLY_ACP_NEWQUESTION_EXPLAIN' => 'Check if mandatory, enter the order, question and type. Separate the selectbox options with a comma "," with no spaces.', 
+'APPLY_ACP_NEWQUESTION_EXPLAIN' => 'Check if mandatory, select the type, enter the title, question. <br /> Separate the checkbox, radiobutton, or selectbox options with a comma "," with no spaces.', 
 'APPLY_ACP_INPUTBOX' 		=> 'Inputbox',	
 'APPLY_ACP_TXTBOX' 			=> 'Textbox', 
 'APPLY_ACP_SELECTBOX' 		=> 'Selectbox',
 'APPLY_ACP_RADIOBOX' 		=> 'Radiobuttons',
+'APPLY_ACP_CHECKBOX' 		=> 'Checkboxes',
 'APPLY_ACP_CHECKBOX' 		=> 'Checkboxes',
 
 //warnings
 'APPLY_ACP_RETURN' 			=> '<h3>Return to Application config.</h3>',
 'APPLY_ACP_REALMBLANKWARN' 	=> 'Realm field cannot be blank.', 
 'APPLY_ACP_SETTINGSAVED' 	=> 'Application form general settings saved',
+'APPLY_NO_GUILD'			=> 'No Guild', 
+
 //upd
-'APPLY_ACP_ORDQU_NOTEMPTY' 	=> 'Order and/or question can not be empty.',
-'APPLY_ACP_ORDQU_NUMB' 		=> 'Order can only be numbers and not zero.',
-'APPLY_ACP_ORDQU_NUMBRES' 	=> 'Reserved. Order can not be 1 or 2.', 
 'APPLY_ACP_TWOREALM' 		=> 'You can not have two of realms or character names.', 
 'APPLY_ACP_QUESTUPD' 		=> 'Apply Questions Updated',
 //addnew
@@ -139,10 +141,10 @@ To help us with your application please answer the questions below. Enter your c
 'APPLY_CHAR_PROFF' 	=> '[color=%s][u]Professions :[/u][/color]
 %s',
 'APPLY_CHAR_BUILD' 	=> '[color=%s][u]Talent build : [/u][/color]%s',
-
 'APPLY_CHAR_URL' => '[color=%s][/color][url=%s]Armory Link[/url]', 
-
-'ERROR_NAME'  =>  'Error : Name must be Alphabetic (a-zA-ZàäåâÅÂçÇéèëêïÏîÎæŒæÆÅóòÓÒöÖôÔøØüÜ are allowed). ',
+'APPLY_ERROR_NAME'  =>  'Error : Name must be Alphabetic (a-zA-ZàäåâÅÂçÇéèëêïÏîÎæŒæÆÅóòÓÒöÖôÔøØüÜ are allowed). ',
+'APPLY_REQUIRED_LEVEL'  => 'Level is required. ', 
+'APPLY_REQUIRED_NAME'	=> 'Name is required. ', 
 'RETURN_APPLY'  =>  'Return to Application',
 
 ));
