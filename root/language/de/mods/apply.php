@@ -80,7 +80,7 @@ Um uns mit deiner Bewerbung zu untersützen, beantworte bitte die unten aufgefü
 'APPLY_ACP_GUESTPOST' 		=> 'Können Gäste schreiben? :',
 'APPLY_ACP_GUESTPOST_EXPLAIN' 	=> 'Wenn die Option aktiviert ist, vergiss nicht die Option "Aktiviere visuelle Bestätigung für Gast Postings:" auf "Ja" zu setzen.' ,  
 
-/***** ACP Armory settings *****/
+/***** ACP template settings *****/
 'APPLY_ACP_TEMPLATESETTING'	=> 'Formular Einstellungen',
 'APPLY_WELCOME'			=> 'Einladungstext',
 'APPLY_WELCOME_EXPLAIN'		=> 'bbcodes werden umgesetzt. ',
@@ -88,6 +88,10 @@ Um uns mit deiner Bewerbung zu untersützen, beantworte bitte die unten aufgefü
 'APPLY_ACP_REALM' 		=> 'Realm',
 'APPLY_ACP_REGION' 			=> 'Region',
 'APPLY_ACP_APPTEMPLATEUPD'	=> 'Aktualisiere Bewerbungsbogen', 
+'ACP_APPLY_WHATGUILD'  		 => 'Wie soll der Bewerber zur Mitgliederdatei zugefügt werden ? ',
+'ACP_APPLY_WHATGUILD_EXPLAIN' => 'Bewerber bekommt der niedrigster Rank falls Addierung zur Gilde.',
+'ACP_APPLY_GNONE'  			 => 'bei Keine',
+'ACP_APPLY_GSEL'  			 => 'bei ausgewähte Gilde',
 
 /***** ACP template settings *****/
 'ACP_APPLY_MANDATORY'  		=> 'erforderlich',

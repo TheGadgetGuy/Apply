@@ -272,10 +272,16 @@ $versions = array(
 	                  	'user_id' => $user->data['user_id'] ),          
 	           ))),
 			
-		'custom' => array('fix_table_structure', 'applyupdater', 'bbdkp_caches'), 
+		'custom' => array('fix_table_structure', ), 
 	
 	), 
-			
+
+	'1.3.2' => array(
+		'config_add' => array(
+	         array('bbdkp_apply_gchoice', '0', true),
+			),	
+		'custom' => array('applyupdater', 'bbdkp_caches'), 
+	),
 			
 
 );

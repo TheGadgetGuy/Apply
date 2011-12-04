@@ -87,7 +87,8 @@ $lang = array_merge($lang, array(
 'APPLY_ACP_REALM' 		=> 'Royaume',
 'APPLY_ACP_REGION' 		=> 'Region',
 'APPLY_ACP_APPTEMPLATEUPD'	=> 'Mise à jour du modèle', 
-/***** ACP template settings *****
+
+/***** ACP template settings ******/
 'ACP_APPLY_MANDATORY'  		=> 'Obligatoire',
 'ACP_APPLY_HEADER'  		=> 'Entête',
 'ACP_APPLY_EXPLAIN'  		=> 'Explanation',
@@ -103,6 +104,10 @@ $lang = array_merge($lang, array(
 'APPLY_ACP_SELECTBOX' 		=> 'Choix',
 'APPLY_ACP_RADIOBOX' 		=> 'Option radio',
 'APPLY_ACP_CHECKBOX' 		=> 'checkbox',
+'ACP_APPLY_WHATGUILD'  		 => 'Comment ajouter candidat à la liste des membres ? ',
+'ACP_APPLY_WHATGUILD_EXPLAIN' => 'Candidat aura le rang le plus bas si àjouté à une guilde.',
+'ACP_APPLY_GNONE'  			 => 'Ajouter à ‘Hors Guilde‘',
+'ACP_APPLY_GSEL'  			 => 'Ajouter à sa guilde selectionnée.',
 
 //warnings
 'APPLY_ACP_RETURN' 		=> '<h3>Retour au formulaire de recrutement</h3>',
