@@ -79,11 +79,11 @@ $lang = array_merge($lang, array(
 'APPLY_ACP_GUESTPOST' 		=> 'Permettre les invités de poster ? :',
 'APPLY_ACP_GUESTPOST_EXPLAIN' 	=> 'Si cette option est activée, n’oublies pas l’option "Activer la confirmation Anti-spam  pour invités" à "oui".' ,  
 
-/***** ACP Privacy settings *****/
+/***** ACP Armory settings *****/
 'APPLY_ACP_CHARNAME' 		=> 'Nom de Caractère',
 'APPLY_ACP_ARMSETTING'		=> 'Règlages Armurerie',
-'APPLY_ACP_REALM' 			=> 'Royaume',
-'APPLY_ACP_REGION' 			=> 'Region',
+'APPLY_ACP_REALM' 		=> 'Royaume',
+'APPLY_ACP_REGION' 		=> 'Region',
 'APPLY_ACP_APPTEMPLATEUPD'	=> 'Mise à jour du modèle', 
 /***** ACP template settings *****
 'ACP_APPLY_MANDATORY'  		=> 'Obligatoire',
@@ -103,13 +103,11 @@ $lang = array_merge($lang, array(
 'APPLY_ACP_CHECKBOX' 		=> 'checkbox',
 
 //warnings
-'APPLY_ACP_RETURN' 			=> '<h3>Retour au formulaire de recrutement</h3>',
+'APPLY_ACP_RETURN' 		=> '<h3>Retour au formulaire de recrutement</h3>',
 'APPLY_ACP_REALMBLANKWARN' 	=> 'Le champ Serveur le peut être vide.', 
 'APPLY_ACP_SETTINGSAVED' 	=> 'Règlages enregistrées',
+'APPLY_NO_GUILD'		=> 'Pas de Guilde trouvé.', 
 //upd
-'APPLY_ACP_ORDQU_NOTEMPTY' 	=> 'Ordre ou/ou question ne peuvent être vides.',
-'APPLY_ACP_ORDQU_NUMB' 		=> 'Ordre doit être plus grand que 2.',
-'APPLY_ACP_ORDQU_NUMBRES' 	=> 'Réservé! Ordre ne peut être 1 ou 2.', 
 'APPLY_ACP_TWOREALM' 		=> 'Seulement un nom de caractère est permis.', 
 'APPLY_ACP_QUESTUPD' 		=> 'questions de formulaire enregistrées',
 //addnew
@@ -122,8 +120,8 @@ $lang = array_merge($lang, array(
 'APPLY_COLORSETTINGS' 		=> 'Règlages Couleurs',
 'APPLY_POST_ANSWERCOLOR' 	=> 'Couleur Réponses',
 'APPLY_POST_QUESTIONCOLOR' 	=> 'Couleur Questions',
-'APPLY_FORMCOLOR'			=> 'Couleur Questions du Formulaire',
-'APPLY_POSTCOLOR'			=> 'Couleurs formulaire et messages de recrutement',
+'APPLY_FORMCOLOR'		=> 'Couleur Questions du Formulaire',
+'APPLY_POSTCOLOR'		=> 'Couleurs formulaire et messages de recrutement',
 'APPLY_POSTCOLOR_EXPLAIN' 	=> 'Couleur des textes utilisées dans le formulaire et dans les messages. Donc si vous utilisez un style sombre, vous pourrez choisir une couleur qui contraste.',
 
 /** posting template **/
@@ -137,6 +135,8 @@ $lang = array_merge($lang, array(
 'APPLY_CHAR_BUILD' 	=> '[color=%s][u]Spécialisation de talents : [/u][/color]%s',
 'APPLY_CHAR_URL' => '[color=%s][/color][url=%s]Lien Armurerie[/url]', 
 'ERROR_NAME'  =>  'Erreur : Nom doit être alphabetique (a-zA-ZàäåâÅÂçÇéèëêïÏîÎæŒæÆÅóòÓÒöÖôÔøØüÜ sont permis). ',
+'APPLY_REQUIRED_LEVEL'  => 'Niveau obligatoire',  
+'APPLY_REQUIRED_NAME'	=> 'Nom obligatoire.', 
 'RETURN_APPLY'  =>  'Retourne au formulaire.',
 ));
 

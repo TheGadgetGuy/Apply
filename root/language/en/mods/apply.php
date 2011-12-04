@@ -80,7 +80,7 @@ To help us with your application please answer the questions below. Enter your c
 'APPLY_ACP_GUESTPOST' 		=> 'Can guests posts? :',
 'APPLY_ACP_GUESTPOST_EXPLAIN' 	=> 'If you set Guest posting On, don\'t forget to set "Enable visual confirmation for guest postings:" to "Yes".' ,  
 
-/***** ACP Privacy settings *****/
+/***** ACP Armory settings *****/
 'APPLY_ACP_CHARNAME' 		=> 'Character name',
 'APPLY_ACP_ARMSETTING'		=> 'Armory Settings',
 'APPLY_ACP_REALM' 			=> 'Realm',
@@ -139,9 +139,7 @@ To help us with your application please answer the questions below. Enter your c
 'APPLY_CHAR_PROFF' 	=> '[color=%s][u]Professions :[/u][/color]
 %s',
 'APPLY_CHAR_BUILD' 	=> '[color=%s][u]Talent build : [/u][/color]%s',
-
 'APPLY_CHAR_URL' => '[color=%s][/color][url=%s]Armory Link[/url]', 
-
 'APPLY_ERROR_NAME'  =>  'Error : Name must be Alphabetic (a-zA-ZàäåâÅÂçÇéèëêïÏîÎæŒæÆÅóòÓÒöÖôÔøØüÜ are allowed). ',
 'APPLY_REQUIRED_LEVEL'  => 'Level is required. ', 
 'APPLY_REQUIRED_NAME'	=> 'Name is required. ', 

@@ -56,11 +56,11 @@ Um uns mit deiner Bewerbung zu untersützen, beantworte bitte die unten aufgefü
 'APPLY_REQUIRED'  => 'Du musst alle Pflichtfelder ausfüllen. ', 
 'MANDATORY'	=> 'Pflichtfeld',	
 'APPLY_REALM' => 'Server (leer für ',
-'APPLY_REALM1' => 'Server : ',
+'APPLY_REALM1' => 'Server: ',
 'APPLY_NAME' => ' Character Name: ',
 'APPLY_QUESTION'  => 'Frage ',
 'APPLY_ANSWER'  => 'Antwort ',
-'APPLY_LEVEL'  => 'Level (1-80): ',
+'APPLY_LEVEL'  => 'Level: ',
 'APPLY_CLASS'  => 'Klasse: ',
 'APPLY_RACE'  => 'Race: ',
 'APPLY_TALENT'  => 'Talente: ',
@@ -106,13 +106,11 @@ Um uns mit deiner Bewerbung zu untersützen, beantworte bitte die unten aufgefü
 'APPLY_ACP_CHECKBOX' 		=> 'Kontrollkästchen (checkbox)',
 
 //warnings
-'APPLY_ACP_RETURN' 			=> '<h3>Zurück zur Bewerbungskonfiguration.</h3>',
+'APPLY_ACP_RETURN' 		=> '<h3>Zurück zur Bewerbungskonfiguration.</h3>',
 'APPLY_ACP_REALMBLANKWARN' 	=> 'Server Feld darf nicht leer sein.', 
 'APPLY_ACP_SETTINGSAVED' 	=> 'allgemeine Bewerbungseinstellungen gespeichert',
+'APPLY_NO_GUILD'		=> 'Gilde ist erforderlich', 
 //upd
-'APPLY_ACP_ORDQU_NOTEMPTY' 	=> 'Ordnungszahl und/oder Frage kann nicht leer sein.',
-'APPLY_ACP_ORDQU_NUMB' 		=> 'Ordnungszahl kann nur eine Zahl größer 2 sein.',
-'APPLY_ACP_ORDQU_NUMBRES' 	=> 'Reserviert! Ordnungszahl kann nicht 1 oder 2 sein.', 
 'APPLY_ACP_TWOREALM' 		=> 'Du kannst keine 2 Server oder Charakternamen einrichten.', 
 'APPLY_ACP_QUESTUPD' 		=> 'Bewerbungsfragen aktualisiert',
 //addnew
@@ -140,8 +138,11 @@ Um uns mit deiner Bewerbung zu untersützen, beantworte bitte die unten aufgefü
 %s',
 'APPLY_CHAR_BUILD' 	=> '[color=%s][u]Talent Verteilungen : [/u][/color]%s',
 'APPLY_CHAR_URL' => '[color=%s][/color][url=%s]WoW Armory Link[/url]', 
-'ERROR_NAME'  =>  'Fehler : Name muss alphabetisch (a-zA-ZàäåâÅÂçÇéèëêïÏîÎæŒæÆÅóòÓÒöÖôÔøØüÜ sind erlaubt). ',
-'RETURN_APPLY'  =>  'Gehe zurück zum Fragebogen.',
+'APPLY_ERROR_NAME'  =>  'Fehler : Name muss alphabetisch (a-zA-ZàäåâÅÂçÇéèëêïÏîÎæŒæÆÅóòÓÒöÖôÔøØüÜ sind erlaubt). ',
+'APPLY_REQUIRED_LEVEL'  => 'Level ist erforderlich. ', 
+'APPLY_REQUIRED_NAME'	=> 'Name ist erforderlich. ', 
+
+'RETURN_APPLY'  =>  'Zurück zum Fragebogen.',
 
 
 ));
