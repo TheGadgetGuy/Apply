@@ -286,6 +286,7 @@
 				<comment lang="de"><![CDATA[Zufügung Dateiname]]></comment>
 				<find><![CDATA[// Additional tables]]></find>
 				<action type="after-add"><![CDATA[	define('APPTEMPLATE_TABLE',			$table_prefix . 'bbdkp_apptemplate');
+				<action type="after-add"><![CDATA[	define('APPHEADER_TABLE',			$table_prefix . 'bbdkp_apphdr');
 	]]></action>
 			</edit>
 		</open>
