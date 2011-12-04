@@ -124,7 +124,23 @@ function make_apply_posting($post_data, $current_time, $candidate_name)
 	global $auth, $config, $db, $user, $phpbb_root_path, $phpEx;
 	
 	$board_url = generate_board_url() . '/';
-
+	
+	switch ($config['bbdkp_apply_gchoice'])
+	{
+		case '1':
+			$candidate_guild_id = request_var('candidate_guild_id', 0);
+			$sql = "SELECT max(rank_id) as rank_id from " . MEMBER_RANKS_TABLE . " WHERE rank_id < 90 and guild_id = " . $candidate_guild_id;
+			$result = $db->sql_query($sql);	
+			$candidate_rank_id = max((int) $db->sql_fetchfield('rank_id'), 0);
+			$db->sql_freeresult($result);
+			break;
+		case '0':
+		default:
+			$candidate_guild_id = 0;
+			$candidate_rank_id = 99;
+			break;
+	}
+	
     $candidate_realm = trim(utf8_normalize_nfc(request_var('candidate_realm', $config['bbdkp_apply_realm'], true))); 
 	$candidate_level = utf8_normalize_nfc(request_var('candidate_level', ' ', true));
 	$candidate_game = request_var('game_id', '');
@@ -188,6 +204,8 @@ function make_apply_posting($post_data, $current_time, $candidate_name)
 			include($phpbb_root_path . 'includes/bbdkp/apply/dkp_character.' . $phpEx);
 		}
 		$candidate = new dkp_character();
+		$candidate->guild = $candidate_guild_id;
+		$candidate->guildrank = $candidate_rank_id;
 		$candidate->name = $candidate_name;
 		$candidate->level = $candidate_level;
 		$candidate->realm = $candidate_realm;
@@ -433,12 +451,15 @@ function register_bbdkp(dkp_character $candidate)
 		$candidate->level,
 		$candidate->raceid,
 		$candidate->classid,
-		99,
+		$candidate->guildrank,
 		$member_comment, 
 		time(), 
 		0, 
+		$candidate->guild, 
+		$candidate->genderid, 
 		0, 
-		$candidate->genderid, 0, ' ', ' ', 
+		' ',
+		' ', 
 		$candidate->realm, 
 		$candidate->game, 
 		$user->data['user_id']
@@ -641,8 +662,6 @@ function fill_application_form($form_key, $post_data, $submit, $error, $captcha)
 	}
 	$db->sql_freeresult($result);
              	
-	
-	
 	// Start assigning vars for main posting page ...
 	// main questionnaire 
 	$sql = "SELECT * FROM " . APPTEMPLATE_TABLE . ' ORDER BY qorder ASC';

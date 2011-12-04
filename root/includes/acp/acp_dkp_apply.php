@@ -91,6 +91,7 @@ class acp_dkp_apply extends bbDkp_Admin
                     }
                     set_config('bbdkp_apply_realm', utf8_normalize_nfc(str_replace(" ", "+", request_var('realm','', true)))  , true );	
                     set_config('bbdkp_apply_region', request_var('region', ''), true );	
+					set_config('bbdkp_apply_gchoice', request_var('guild_choice', ''), true );	
                     $cache->destroy('config');
                     trigger_error($user->lang['APPLY_ACP_SETTINGSAVED'] . $link);
                }
@@ -280,6 +281,7 @@ class acp_dkp_apply extends bbDkp_Admin
                 
                 ));
                 
+
                 //region
                 $template->assign_block_vars('region', array(
                 	'VALUE' 	=> 'EU' , 
@@ -301,6 +303,17 @@ class acp_dkp_apply extends bbDkp_Admin
                 	'VALUE' 	=> 'False' , 
                 	'SELECTED' 	=> ('False' == $config['bbdkp_apply_guests']) ? ' selected="selected"' : '' , 
                 	'OPTION' 	=> 'False'));
+                
+                // where do we put candidate ? 
+                 $template->assign_block_vars('guild', array(
+                	'VALUE' 	=> '0' , 
+                	'SELECTED' 	=> ('0' == $config['bbdkp_apply_gchoice']) ? ' selected="selected"' : '' , 
+                	'OPTION' 	=> $user->lang['ACP_APPLY_GNONE']));
+                
+                $template->assign_block_vars('guild', array(
+                	'VALUE' 	=> '1' , 
+                	'SELECTED' 	=> ('1' == $config['bbdkp_apply_gchoice']) ? ' selected="selected"' : '' , 
+                	'OPTION' 	=> $user->lang['ACP_APPLY_GSEL']));
                 
                /*
                 * loading questions
