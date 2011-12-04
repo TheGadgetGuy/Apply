@@ -46,7 +46,8 @@ class dkp_character
 	public $genderid = 0;
 	public $faction = 0;
 	public $guild = ''; 
-
+	public $guildrank = 0;
+	 
 	public $spellpower = 0; 
 	public $spellhit = 0; 
 	public $firecrit = 0;

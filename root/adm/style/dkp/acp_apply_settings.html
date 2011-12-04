@@ -71,23 +71,35 @@
 		<textarea name="welcome_message" rows="3" cols="60" style=" font-size: 100%; width: 99%" class="input">{WELCOME_MESSAGE}</textarea>
 		</dd>
 	</dl>
-	  <dl>
-	    <dt><label for="realm">{L_APPLY_REALM1}</label></dt>
-	    <dd><input type="text" name="realm" id="realm" size="20" maxlength="30" value="{REALM}" class="input" /></dd>
-	  </dl>
+	<dl>
+	   <dt><label for="realm">{L_APPLY_REALM1}</label></dt>
+	   <dd><input type="text" name="realm" id="realm" size="20" maxlength="30" value="{REALM}" class="input" /></dd>
+	</dl>
+	
+	<dl>
+	 <dt><label>{L_APPLY_ACP_REGION}</label></dt>
+	 <dd>
+	 <select name="region" class="input" id="region">
+	    <!-- BEGIN region -->
+	   <option value="{region.VALUE}"{region.SELECTED}>{region.OPTION}</option>
+	   <!-- END region -->
+	   </select>
+	   </dd>
+	</dl>
 	  
-	   <dl>
-	    <dt><label>{L_APPLY_ACP_REGION}</label></dt>
-	    <dd>
-	    <select name="region" class="input" id="region">
-	       <!-- BEGIN region-->
-	      <option value="{region.VALUE}"{region.SELECTED}>{region.OPTION}</option>
-	      <!-- END region -->
-	     </select>
-	     </dd>
-	  </dl> 
+	<dl>
+	  <dt><label>{L_ACP_APPLY_WHATGUILD}</label><br />{L_ACP_APPLY_WHATGUILD_EXPLAIN}</dt>
+	  <dd>
+	  <select name="guild_choice" class="input" id="guild_choice">
+	    <!-- BEGIN guild -->
+	   <option value="{guild.VALUE}"{guild.SELECTED}>{guild.OPTION}</option>
+	   <!-- END guild -->
+	   </select>
+	   </dd>
+	</dl>
+	   
 	<p class="quick">
-	<input type="submit" name="savearm" value="{L_UPDATE}" class="button1" />
+		<input type="submit" name="savearm" value="{L_UPDATE}" class="button1" />
 	</p>
 
 </fieldset>
