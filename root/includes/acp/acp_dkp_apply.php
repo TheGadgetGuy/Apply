@@ -128,7 +128,7 @@ class acp_dkp_apply extends bbDkp_Admin
                         }
 						
 						$data = array(
-							'mandatory' => isset ( $_POST ['q_mandatory'][$key] ) ? 1 : 0,		
+							'mandatory' => isset ( $_POST ['q_mandatory'][$key] ) ? 'True' : 'False',		
 						);
 						$sql = 'UPDATE ' . APPTEMPLATE_TABLE . ' SET ' . $db->sql_build_array('UPDATE', $data) . ' WHERE id = '. $key ;
 						$db->sql_query($sql);
@@ -217,12 +217,17 @@ class acp_dkp_apply extends bbDkp_Admin
                 $result = $db->sql_query($sql);
                 while ($row = $db->sql_fetchrow($result)) 
                 {
-                    if (isset($_POST[$row['qorder'] . 'delete'])) 
-                    {
-                        $sql = "DELETE FROM " . APPTEMPLATE_TABLE . " WHERE qorder = '" . $row['qorder'] . "'";
-                        $db->sql_query($sql);
-                        trigger_error("Question " . $row['qorder'] . " deleted" . $link, E_USER_WARNING);
-                    }
+                	$arr_del = utf8_normalize_nfc(request_var('q_delete', array( 0 => ''), true));
+                	foreach($arr_del as $key => $value)
+                	{
+                		if($key == $row['qorder'])
+                		{
+	                        $sql = "DELETE FROM " . APPTEMPLATE_TABLE . " WHERE qorder = '" . $row['qorder'] . "'";
+	                        $db->sql_query($sql);
+	                        trigger_error("Question " . $row['header'] . " deleted" . $link, E_USER_WARNING);
+                		}
+                	}
+                	
                 }
                 unset($row); 
                 $db->sql_freeresult($result);
