@@ -302,9 +302,13 @@
 		</open>
 
 		<php-installer><![CDATA[install/index.php]]></php-installer>
-		<diy-instructions lang="en"><![CDATA[Browse to install/index.php and run and the apply plugin table installer/updater.]]></diy-instructions>
+		<diy-instructions lang="en"><![CDATA[Browse to install/index.php and run and the apply plugin table installer/updater.
+After installing, add a link in your overall_header file of your style to link back to the application form :  
+<a href="{U_APPLY}">{L_APPLY}</a>]]></diy-instructions>
 		<diy-instructions lang="de"><![CDATA[Rufe install/index.php auf und führe den Installer aus. Dies macht entweder eine Vollinstallation 
-oder eine Aktualisierung.]]></diy-instructions>
-		<diy-instructions lang="fr"><![CDATA[Surfez vers install/index.php et lancez l’installateur/mise à jour]]></diy-instructions>
+oder eine Aktualisierung.Nachher inseriere diesen link im overall_header vom Style prosilver u.a. :  
+<a href="{U_APPLY}">{L_APPLY}</a>]]></diy-instructions>
+		<diy-instructions lang="fr"><![CDATA[Surfez vers install/index.php et lancez l’installateur/mise à jour. Après installation, ajoutez un lien dans votre template overall_header de votre style prosilver et autres :  
+<a href="{U_APPLY}">{L_APPLY}</a>]]></diy-instructions>
 	</action-group>
 </mod>
