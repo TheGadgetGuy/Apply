@@ -50,8 +50,8 @@ $lang = array_merge($lang, array(
 /***** Questionnaire ******/
 'APPLY_MENU' => 'Application Form',
 'APPLY_TITLE' => 'Application Form',
-'APPLY_INFO' => 'Welcome and thank you for choosing us as a possible home for your character. 
-To help us with your application please answer the questions below. Enter your character name exactly as it appears in the armory.  ',
+'APPLY_INFO' => '[size=150]Welcome and thank you for choosing us as a possible home for your character. 
+To help us with your application please answer the questions below. Enter your character name exactly as it appears in the armory. [/size] ',
 'APPLY_PUBLICQUESTION' => 'Visible Application ?', 
 'APPLY_REQUIRED'  => 'You need to fill in all required fields. ', 
 'MANDATORY'	=> 'Required',	

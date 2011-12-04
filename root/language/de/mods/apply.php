@@ -50,8 +50,8 @@ $lang = array_merge($lang, array(
 /***** Questionnaire ******/
 'APPLY_MENU' => 'Bewerbungen',
 'APPLY_TITLE' => 'Bewerbungs-Formular',
-'APPLY_INFO' => 'Willkommen und schön, dass du dich entschieden hast bei uns ein neues zu Hause für deinen Charakter zu suchen. 
-Um uns mit deiner Bewerbung zu untersützen, beantworte bitte die unten aufgeführten Fragen. Gib deinen Charakternamen exakt so an, wie er im Armory angezeigt wird.  ',
+'APPLY_INFO' => '[size=150]Willkommen und schön, dass du dich entschieden hast bei uns ein neues zu Hause für deinen Charakter zu suchen. 
+Um uns mit deiner Bewerbung zu untersützen, beantworte bitte die unten aufgeführten Fragen. Gib deinen Charakternamen exakt so an, wie er im Armory angezeigt wird.[/size]  ',
 'APPLY_PUBLICQUESTION' => 'Öffentliche Bewerbung ?', 
 'APPLY_REQUIRED'  => 'Du musst alle Pflichtfelder ausfüllen. ', 
 'MANDATORY'	=> 'Pflichtfeld',	

@@ -50,7 +50,7 @@ $lang = array_merge($lang, array(
 /***** Questionnaire ******/
 'APPLY_MENU' => 'Candidatures',
 'APPLY_TITLE' => 'Formulaire de recrutement',
-'APPLY_INFO' => 'Bienvenu à et merci de ton intérêt porté à notre Guilde. Afin de nous aider à mieux évaluer ta candidature, merci de remplir ce petit formulaire. Entre le nom de caractère exactement comme renseigné dans l’Armurerie.  ',
+'APPLY_INFO' => '[size=150]Bienvenu à et merci de ton intérêt porté à notre Guilde. Afin de nous aider à mieux évaluer ta candidature, merci de remplir ce petit formulaire. Entre le nom de caractère exactement comme renseigné dans l’Armurerie.[/size]  ',
 'APPLY_PUBLICQUESTION' => 'Candidature publique ?', 
 'APPLY_REQUIRED'  => 'Les champs marqués ’*’ ne sont pas optionnels. ', 
 'MANDATORY'	=> '*',	
