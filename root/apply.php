@@ -2,10 +2,9 @@
 /**
 * Application form created by Kapli (bbDKP developer)
 * 
-* @package bbDkp
+* @package bbDKP
 * @copyright (c) 2009 bbDkp <http://code.google.com/p/bbdkp/>
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
-* @version $Id$
 * @author Kapli, Malfate, Sajaki, Blazeflack, Twizted
 * 
 */
@@ -29,6 +28,8 @@ $error = array();
 $current_time = $user->time_now; 
 
 $user->setup(array('posting', 'mcp', 'viewtopic', 'mods/apply', 'mods/dkp_common', 'mods/dkp_admin'), false);
+
+$form_key = 'make_apply';
 
 // declare captcha class
 if (!class_exists('phpbb_captcha_factory'))
@@ -54,14 +55,10 @@ $submit	= (isset($_POST['post'])) ? true : false;
 
 if ($submit)
 {
-	// first validate captcha 
-	
-	// if "enable visual confirmation for guest postings" is set to "ON"
-	// and mode is set to posting 
-	// and the user is not registered 
-	// then captcha will be validated
+	// anon user and "enable visual confirmation for guest postings" is set to "ON" and post mode ?
 	if ($config['enable_post_confirm'] && in_array('post', array('post')) && !$user->data['is_registered'] )
 	{
+		// first validate captcha 
 		$vc_response = $captcha->validate();
 		if ($vc_response)
 		{
@@ -69,24 +66,10 @@ if ($submit)
 		}
 	}
 	
-	if(!sizeof($error) && check_form_key('applyposting'))
+	if (!check_form_key($form_key))
 	{
-		make_apply_posting($post_data, $current_time);
+		$error[] = $user->lang['FORM_INVALID'];
 	}
-	
-}
-
-fill_application_form($post_data, $submit, $error, $captcha);
-
-/**
- * post application on forum
- *
- */
-function make_apply_posting($post_data, $current_time)
-{
-	global $auth, $config, $db, $user, $phpbb_root_path, $phpEx;
-	
-	$board_url = generate_board_url() . '/';
 	
 	//check if user forgot to enter a required field other than those covered with js
 	$sql = "SELECT * FROM " . APPTEMPLATE_TABLE . " where mandatory = 'True' ORDER BY qorder   ";
@@ -97,11 +80,7 @@ function make_apply_posting($post_data, $current_time)
 		{
 			if ( request_var('templatefield_' .$row['qorder'],  array('' => '')) == '') 
 			{
-				// return user to index
-				$message = $user->lang['APPLY_REQUIRED'];
-				$message = $message . '<br /><br />' . sprintf($user->lang['RETURN_APPLY'], '<a href="' . append_sid("{$phpbb_root_path}apply.$phpEx") . '">', '</a>');
-				$db->sql_freeresult($result);
-				trigger_error($message);		 
+				$error[] = $user->lang['APPLY_REQUIRED'];
 			}
 		}
 		else 
@@ -109,10 +88,7 @@ function make_apply_posting($post_data, $current_time)
 			if ( request_var('templatefield_' . $row['qorder'], '') == '') 
 			{
 				// return user to index
-				$message = $user->lang['APPLY_REQUIRED'];
-				$message = $message . '<br /><br />' . sprintf($user->lang['RETURN_APPLY'], '<a href="' . append_sid("{$phpbb_root_path}apply.$phpEx") . '">', '</a>');
-				$db->sql_freeresult($result);
-				trigger_error($message);		 
+				$error[] = $user->lang['APPLY_REQUIRED'];
 			}
 		
 		}
@@ -120,23 +96,42 @@ function make_apply_posting($post_data, $current_time)
 	}
 	$db->sql_freeresult($result);
 
-	 
-	$candidate_name = utf8_normalize_nfc(request_var('templatefield_1', ' ', true));
+	$candidate_name = utf8_normalize_nfc(request_var('candidate_name', ' ', true));
 	// check for validate name. name can only be alphanumeric without spaces or special characters
 	//if this preg_match returns true then there is something other than letters
-   if (preg_match('/[^a-zA-ZàäåâÅÂçÇéèëËêÊïÏîÎæŒæÆÅóòÓÒöÖôÔøØüÜ\s]+/', $candidate_name  ))
+   if (preg_match('/[^a-zA-ZàäåâÅÂçÇéèëËêÊïÏîÎíÍìÌæŒæÆÅóòÓÒöÖôÔøØüÜ\s]+/', $candidate_name  ))
    {
-	  $message = $user->lang['ERROR_NAME']. $candidate_name . ' ';  
-	  $message = $message . '<br /><br />' . sprintf($user->lang['RETURN_APPLY'], '<a href="' . append_sid("{$phpbb_root_path}apply.$phpEx") . '">', '</a>');
-   	  trigger_error($message);	
+	  $error[] = $user->lang['APPLY_ERROR_NAME']. $candidate_name . ' ';  
    }
+	 
+	if (!sizeof($error))
+	{
+		// continue to posting
+		make_apply_posting($post_data, $current_time, $candidate_name);
+	}
+	
+	
+}
 
-    $candidate_realm = trim(utf8_normalize_nfc(request_var('templatefield_2', $config['bbdkp_apply_realm'], true))); 
+fill_application_form($form_key, $post_data, $submit, $error, $captcha);
+
+/**
+ * post application on forum
+ *
+ */
+function make_apply_posting($post_data, $current_time, $candidate_name)
+{
+	global $auth, $config, $db, $user, $phpbb_root_path, $phpEx;
+	
+	$board_url = generate_board_url() . '/';
+
+    $candidate_realm = trim(utf8_normalize_nfc(request_var('candidate_realm', $config['bbdkp_apply_realm'], true))); 
 	$candidate_level = utf8_normalize_nfc(request_var('candidate_level', ' ', true));
 	$candidate_game = request_var('game_id', '');
 	$candidate_genderid = request_var('candidate_gender', 0);
 	$candidate_raceid = request_var('candidate_race_id', 0);
-			//character class
+	
+	//character class
 	$sql_array = array(
 		'SELECT'	=>	' r.race_id, r.image_female_small, r.image_male_small, l.name as race_name ', 	 
 		'FROM'		=> array(
@@ -206,9 +201,8 @@ function make_apply_posting($post_data, $current_time)
 	// build post
 	$apply_post = '';
 	
-	$apply_post .= '[size=150][b]' .$user->lang['APPLY_CHAR_OVERVIEW'] . '[/b][/size]
-	'; 
-	$apply_post .= '<br />';
+	$apply_post .= '[size=150][b]' .$user->lang['APPLY_CHAR_OVERVIEW'] . '[/b][/size]'; 
+	$apply_post .= '<br /><br />';
 	
 	// name
 	$apply_post .= '[color='. $config['bbdkp_apply_pqcolor'] .']' . $user->lang['APPLY_NAME'] . '[/color]';
@@ -260,19 +254,17 @@ function make_apply_posting($post_data, $current_time)
 	{
 		$apply_post .= $race_name;
 	}
-	$apply_post .= '<br />';
-	$apply_post .= '<br />';
+	$apply_post .= '<br /><br />';
 
 	
 	// Motivation	
 	$apply_post .= '[size=150][b]' .$user->lang['APPLY_CHAR_MOTIVATION'] . '[/b][/size]';
-	$apply_post .= '<br />';
-	$apply_post .= '<br />';
+	$apply_post .= '<br /><br />';
 	
 	//$apply_post .= '[list]';
 	// complete with formatted questions and answers
 	$sql = "SELECT * FROM " . APPTEMPLATE_TABLE . ' ORDER BY qorder' ;
-	$result = $db->sql_query_limit($sql, 100, 2);
+	$result = $db->sql_query_limit($sql, 100, 0);
 	while ( $row = $db->sql_fetchrow($result) )
 	{
 		if ( isset($_POST['templatefield_' . $row['qorder']]) )
@@ -285,8 +277,8 @@ function make_apply_posting($post_data, $current_time)
 					 $cb_countis = count( request_var('templatefield_' . $row['qorder'], array(0 => 0)) );  
                      $cb_count = 0;
 						                                           
-                        $apply_post .= '[size=120][color='. $config['bbdkp_apply_pqcolor'] .'][b]' . $row['question'] . ': [/b][/color][/size]
-                        ';
+                        $apply_post .= '[size=120][color='. $config['bbdkp_apply_pqcolor'] .'][b]' . $row['question'] . ': [/b][/color][/size]';
+						$apply_post .= '<br />';
                         
                         $checkboxes = utf8_normalize_nfc( request_var('templatefield_' . $row['qorder'], array(0 => '') , true));
                         foreach($checkboxes as $value) 
@@ -307,8 +299,8 @@ function make_apply_posting($post_data, $current_time)
 				case 'Radiobuttons':			
 					$fieldcontents = utf8_normalize_nfc(request_var('templatefield_' . $row['qorder'], ' ', true));	
 						
-					$apply_post .= '[size=120][color='. $config['bbdkp_apply_pqcolor'] .'][b]' . $row['question'] . ': [/b][/color][/size]
-					';
+					$apply_post .= '[size=120][color='. $config['bbdkp_apply_pqcolor'] .'][b]' . $row['question'] . ': [/b][/color][/size]';
+					$apply_post .= '<br />';
 					 
 					$apply_post .=	$fieldcontents;
 					
@@ -460,7 +452,7 @@ function register_bbdkp(dkp_character $candidate)
  *  build Application form 
  *
  */
-function fill_application_form($post_data, $submit, $error, $captcha)
+function fill_application_form($form_key, $post_data, $submit, $error, $captcha)
 {
 	global $user, $template, $config, $phpbb_root_path, $phpEx, $auth, $db;
 	
@@ -469,6 +461,20 @@ function fill_application_form($post_data, $submit, $error, $captcha)
 	
 	$page_title = $user->lang['APPLY_MENU'];
 
+	// get WELCOME_MSG
+	$sql = 'SELECT announcement_msg, bbcode_uid, bbcode_bitfield, bbcode_options FROM ' . APPHEADER_TABLE;
+	$db->sql_query($sql);
+	$result = $db->sql_query($sql);
+	while ( $row = $db->sql_fetchrow($result) )
+	{
+		$welcome_message = $row['announcement_msg'];
+		$bbcode_uid = $row['bbcode_uid'];
+		$bbcode_bitfield = $row['bbcode_bitfield'];
+		$bbcode_options = $row['bbcode_options'];
+	}
+	$welcome_message = generate_text_for_display($welcome_message, $bbcode_uid, $bbcode_bitfield, $bbcode_options);
+	$db->sql_freeresult($result);
+		
 	if ($config['enable_post_confirm'] && !$user->data['is_registered'] ) 
     {
     	if ((!$submit || !$captcha->is_solved()) )
@@ -498,9 +504,9 @@ function fill_application_form($post_data, $submit, $error, $captcha)
 	        GUILD_TABLE => 'a',
 	        MEMBER_LIST_TABLE => 'b'
 	    ),
-	    'WHERE'     =>  'a.id = b.member_guild_id ',
+	    'WHERE'     =>  'a.id = b.member_guild_id and id != 0',
 	    'GROUP_BY'  =>  'a.id, a.name, a.realm, a.region', 
-	    'ORDER_BY'	=>  'a.id DESC'
+	    'ORDER_BY'	=>  'a.id ASC'
 	);
 	$sql = $db->sql_build_query('SELECT', $sql_array);
 	$result = $db->sql_query($sql);
@@ -509,14 +515,40 @@ function fill_application_form($post_data, $submit, $error, $captcha)
 	$guild_id = 0;
 	while ( $row = $db->sql_fetchrow($result) )
 	{
-		if ($i==0)
-		{
-			$guild_id = (int) $row['id']; 
-			break;
-		}
+		$guild_id = (int) $row['id']; 
 		$i+=1;
 	}
 	$db->sql_freeresult($result);
+	
+	if($i==1)
+	{
+		//only one guild, take this one
+		$template->assign_vars(array(
+		'GUILD_ID'				=> $guild_id,
+		'S_SHOW_GUILDSELECT'	=> false,
+		));
+				
+	}
+	elseif($i>1)
+	{
+		//multiple guilds, show a dropdown.
+		$template->assign_var('S_SHOW_GUILDSELECT',true);
+		$result = $db->sql_query($sql);
+		while ( $row = $db->sql_fetchrow($result) )
+		{
+			$template->assign_block_vars('guild_row', array(
+			'VALUE' => $row['id'],
+			'SELECTED' =>  '',
+			'OPTION'   => $row['name'] . ', ' . $row['realm'] . '-' . strtolower($row['region'])
+			));
+		}
+		$db->sql_freeresult($result);
+	}
+	else 
+	{
+		trigger_error($user->lang['APPLY_NO_GUILD']);
+	}
+	
 	
 	//game
 	$games = array(
@@ -613,7 +645,7 @@ function fill_application_form($post_data, $submit, $error, $captcha)
 	
 	// Start assigning vars for main posting page ...
 	// main questionnaire 
-	$sql = "SELECT * FROM " . APPTEMPLATE_TABLE . ' ORDER BY qorder';
+	$sql = "SELECT * FROM " . APPTEMPLATE_TABLE . ' ORDER BY qorder ASC';
 	$result = $db->sql_query($sql);
 					
 	while ( $row = $db->sql_fetchrow($result) )
@@ -621,12 +653,12 @@ function fill_application_form($post_data, $submit, $error, $captcha)
 		switch($row['type'])
 		{
 			case 'Inputbox':
-				$type = '<input class="inputbox" style="width:300px;" 
+				$type = '<input class="text" style="width:300px;" 
 				type="text" name="templatefield_' . $row['qorder'] . '" 
 				size="40" maxlength="60" tabindex="' . $row['qorder'] . '" />';
 				break;
 			case 'Textbox':
-				$type = '<textarea class="inputbox" name="templatefield_' . $row['qorder'] . '" rows="3" cols="76" 
+				$type = '<textarea class="text" name="templatefield_' . $row['qorder'] . '" rows="3" cols="76" 
 				tabindex="' . $row['qorder'] . '" onselect="storeCaret(this);" 
 				onclick="storeCaret(this);" 
 				onkeyup="storeCaret(this);" ></textarea>';
@@ -667,44 +699,30 @@ function fill_application_form($post_data, $submit, $error, $captcha)
 		{
 			$mandatory = '&nbsp;<span style="color:red">' . $user->lang['MANDATORY']. '</span>';
 		}
-		
-		if ((int) $row['qorder'] <= 2)
-		{
-			// Character Name and Realm, put on top
-			$template->assign_block_vars('templatestart', array(
-				'QORDER'		=> $row['qorder'],
-				'QUESTION'		=> $row['question'],
-				'EXPLAIN'		=> $row['explainstr'],
-				'OPTIONS'   	=> $row['options'],
-				'TYPE'			=> $type,
-				'MANDATORY' 	=> $mandatory)
-			);					
-			
-		}
-		else 
-		{
-			// main questionnaire put below
-			$template->assign_block_vars('apptemplate', array(
-				'QORDER'		=> $row['qorder'],
-				'QUESTION'		=> $row['question'],
-				'EXPLAINSTR'		=> $row['explainstr'],
-				'OPTIONS'   	=> $row['options'],
-				'TYPE'			=> $type,
-				'MANDATORY' 	=> $mandatory)
-			);					
-		}
+
+		$template->assign_block_vars('apptemplate', array(
+			'QORDER'		=> $row['qorder'],
+			'TITLE'			=> $row['header'],
+			'QUESTION'		=> $row['question'],
+			'OPTIONS'   	=> $row['options'],
+			'TYPE'			=> $type,
+			'MANDATORY' 	=> $mandatory)
+		);					
 			
 	}
 	$db->sql_freeresult($result);
 	
 	$form_enctype = (@ini_get('file_uploads') == '0' || strtolower(@ini_get('file_uploads')) == 'off' || !$config['allow_attachments'] || !$auth->acl_get('u_attach') || !$auth->acl_get('f_attach', $post_data['forum_id'])) ? '' : ' enctype="multipart/form-data"';
-	add_form_key('applyposting');
+	add_form_key($form_key);
+	
 	
 	// assign global template vars to questionnaire
 	$template->assign_vars(array(
+		'WELCOME_MSG'			=> $welcome_message,	
 		'S_SHOW_FORUMCHOICE'	=> ( $config['bbdkp_apply_forumchoice'] == '1' ) ? TRUE : FALSE,
 		'PUBLIC_YES_CHECKED' 	=> ( $config['bbdkp_apply_visibilitypref'] == '1' ) ? ' checked="checked"' : '',
 		'PUBLIC_NO_CHECKED'  	=> ( $config['bbdkp_apply_visibilitypref'] == '0' ) ? ' checked="checked"' : '', 
+		'MALE_CHECKED'			=> ' checked="checked"',
 		'L_POST_A'				=> $page_title,
 		'ERROR'					=> (sizeof($error)) ? implode('<br />', $error) : '',
 		'S_POST_ACTION'     	=> $s_action,
@@ -715,8 +733,8 @@ function fill_application_form($post_data, $submit, $error, $captcha)
 		// javascript
 		'LA_ALERT_AJAX'		  => $user->lang['ALERT_AJAX'],
 		'LA_ALERT_OLDBROWSER' => $user->lang['ALERT_OLDBROWSER'],
-		'LA_MSG_NAME_EMPTY'	  => $user->lang['FV_REQUIRED_NAME'],
-		'LA_MSG_LEVEL_EMPTY'  => $user->lang['FV_REQUIRED_LEVEL'],	
+		'LA_MSG_NAME_EMPTY'	  => $user->lang['APPLY_REQUIRED_NAME'],
+		'LA_MSG_LEVEL_EMPTY'  => $user->lang['APPLY_REQUIRED_LEVEL'],	
 		
 		)
 	);

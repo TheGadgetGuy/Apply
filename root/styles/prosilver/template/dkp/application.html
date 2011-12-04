@@ -4,9 +4,7 @@
 <div class="panel bg1" >
 <div class="inner"  >
 <span class="corners-top"><span></span></span>
-
-<h2>{L_APPLY_INFO}</h2>
-
+{WELCOME_MSG}
 <!-- IF ERROR -->
 <fieldset class="fields1">
 <center><span class="genmed1 error">{ERROR}</span></center><br/>
@@ -19,17 +17,17 @@
 
 <form action="{S_POST_ACTION}" method="post" id="applyform" onsubmit="return check_form(this)" {S_FORM_ENCTYPE}>
 <!-- IF S_SHOW_FORUMCHOICE -->
-<div class="panel bg2" >
+<div class="post bg2" >
 <div class="inner"  >
 <span class="corners-top"><span></span></span>
-<fieldset class="fields3">		
+<fieldset class="fields2">		
 <dl>
-	<dt>{L_APPLY_PUBLICQUESTION}</dt>
-    		<dd>
-    			<input type="radio" name="publ" value="1"{PUBLIC_YES_CHECKED} />&nbsp;{L_APPLY_ACP_PUBLIC}&nbsp;
-    			<input type="radio" name="publ" value="0"{PUBLIC_NO_CHECKED} />&nbsp;{L_APPLY_ACP_PRIVATE}
-    			<span style="color:red">{L_MANDATORY}</span>
-    		</dd>
+	<dt><p><strong>{L_APPLY_PUBLICQUESTION}</strong></p></dt>
+    <dd>
+    	<input type="radio" name="publ" value="1"{PUBLIC_YES_CHECKED} />&nbsp;{L_APPLY_ACP_PUBLIC}&nbsp;
+    	<input type="radio" name="publ" value="0"{PUBLIC_NO_CHECKED} />&nbsp;{L_APPLY_ACP_PRIVATE}
+    	<span style="color:red">{L_MANDATORY}</span>
+    </dd>
 </dl>
 </fieldset>
 	
@@ -44,15 +42,38 @@
 
 <fieldset class="fields2">	
 
-<!-- BEGIN templatestart -->
-<dl>
-	<dt><p><strong>{templatestart.QUESTION}</strong></p></dt>
-	<dd>{templatestart.TYPE}{templatestart.MANDATORY}</dd>
-</dl>
-<!-- END templatestart -->
+
 
 <dl>
-    <dt><p><strong>{L_APPLY_LEVEL}</strong></p></dt>
+	<dt><p><strong>{L_APPLY_ACP_CHARNAME}</strong></p></dt>
+	<dd><input type="text" name="candidate_name" size="25" maxlength="25" class="input" /> <span style="color:red">{L_MANDATORY}</span> </dd>
+</dl>
+<dl>
+	<dt><p><strong>{L_APPLY_ACP_REALM}</strong></p></dt>
+	<dd><input type="text" name="candidate_realm" size="25" maxlength="25" class="input" /> <span style="color:red">{L_MANDATORY}</span> </dd>
+</dl>
+
+
+
+<!-- IF S_SHOW_GUILDSELECT -->
+<dl>
+	<dt><p><strong>{L_GUILD}:</strong></p></dt>
+  	<dd>
+  	  <div>
+  	  <select id="candidate_guild_id" name="candidate_guild_id" class="input">
+       <!-- BEGIN guild_row -->
+       <option value="{guild_row.VALUE}"{guild_row.SELECTED}>{guild_row.OPTION}</option>
+        <!-- END guild_row -->
+    </select>
+    </div>
+    </dd>
+</dl>
+<!-- ELSE -->
+	<input type="hidden" name="candidate_guild_id" value="{GUILD_ID}" class="input" />
+<!-- ENDIF -->
+
+<dl>
+    <dt><strong>{L_APPLY_LEVEL}</strong></dt>
 	<dd><input type="text" name="candidate_level" size="3" maxlength="3" value="{MEMBER_LEVEL}" class="input" /> <span style="color:red">{L_MANDATORY}</span> </dd>
 </dl> 
  
@@ -98,16 +119,16 @@
 
 <hr />
 
-<div class="post bg2" >
+<div class="post bg1" >
 <div class="inner"  >
 <span class="corners-top"><span></span></span>
 
 <fieldset class="fields2">	
 <!-- BEGIN apptemplate -->
 <dl>
-	<dt><p><strong>{apptemplate.QUESTION}</strong></p></dt>
+	<dt><p><strong>{apptemplate.TITLE}</strong></p></dt>
 		
-	<dd>{apptemplate.EXPLAINSTR}
+	<dd>{apptemplate.QUESTION}
 	<br/>{apptemplate.TYPE}{apptemplate.MANDATORY}</dd>
 </dl>
 <!-- END apptemplate -->
