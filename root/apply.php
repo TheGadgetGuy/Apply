@@ -66,24 +66,10 @@ if ($submit)
 		}
 	}
 	
-	if(!sizeof($error) && check_form_key($form_key))
+	if (!check_form_key($form_key))
 	{
-		make_apply_posting($post_data, $current_time);
+		$error[] = $user->lang['FORM_INVALID'];
 	}
-	
-}
-
-fill_application_form($form_key, $post_data, $submit, $error, $captcha);
-
-/**
- * post application on forum
- *
- */
-function make_apply_posting($post_data, $current_time)
-{
-	global $auth, $config, $db, $user, $phpbb_root_path, $phpEx;
-	
-	$board_url = generate_board_url() . '/';
 	
 	//check if user forgot to enter a required field other than those covered with js
 	$sql = "SELECT * FROM " . APPTEMPLATE_TABLE . " where mandatory = 'True' ORDER BY qorder   ";
@@ -94,11 +80,7 @@ function make_apply_posting($post_data, $current_time)
 		{
 			if ( request_var('templatefield_' .$row['qorder'],  array('' => '')) == '') 
 			{
-				// return user to index
-				$message = $user->lang['APPLY_REQUIRED'];
-				$message = $message . '<br /><br />' . sprintf($user->lang['RETURN_APPLY'], '<a href="' . append_sid("{$phpbb_root_path}apply.$phpEx") . '">', '</a>');
-				$db->sql_freeresult($result);
-				trigger_error($message);		 
+				$error[] = $user->lang['APPLY_REQUIRED'];
 			}
 		}
 		else 
@@ -106,10 +88,7 @@ function make_apply_posting($post_data, $current_time)
 			if ( request_var('templatefield_' . $row['qorder'], '') == '') 
 			{
 				// return user to index
-				$message = $user->lang['APPLY_REQUIRED'];
-				$message = $message . '<br /><br />' . sprintf($user->lang['RETURN_APPLY'], '<a href="' . append_sid("{$phpbb_root_path}apply.$phpEx") . '">', '</a>');
-				$db->sql_freeresult($result);
-				trigger_error($message);		 
+				$error[] = $user->lang['APPLY_REQUIRED'];
 			}
 		
 		}
@@ -123,10 +102,29 @@ function make_apply_posting($post_data, $current_time)
 	//if this preg_match returns true then there is something other than letters
    if (preg_match('/[^a-zA-ZàäåâÅÂçÇéèëËêÊïÏîÎæŒæÆÅóòÓÒöÖôÔøØüÜ\s]+/', $candidate_name  ))
    {
-	  $message = $user->lang['APPLY_ERROR_NAME']. $candidate_name . ' ';  
-	  $message = $message . '<br /><br />' . sprintf($user->lang['RETURN_APPLY'], '<a href="' . append_sid("{$phpbb_root_path}apply.$phpEx") . '">', '</a>');
-   	  trigger_error($message);	
+	  $error[] = $user->lang['APPLY_ERROR_NAME']. $candidate_name . ' ';  
    }
+	 
+	if (!sizeof($error))
+	{
+		// continue to posting
+		make_apply_posting($post_data, $current_time, $candidate_name);
+	}
+	
+	
+}
+
+fill_application_form($form_key, $post_data, $submit, $error, $captcha);
+
+/**
+ * post application on forum
+ *
+ */
+function make_apply_posting($post_data, $current_time, $candidate_name)
+{
+	global $auth, $config, $db, $user, $phpbb_root_path, $phpEx;
+	
+	$board_url = generate_board_url() . '/';
 
     $candidate_realm = trim(utf8_normalize_nfc(request_var('candidate_realm', $config['bbdkp_apply_realm'], true))); 
 	$candidate_level = utf8_normalize_nfc(request_var('candidate_level', ' ', true));

@@ -19,17 +19,17 @@
 
 <form action="{S_POST_ACTION}" method="post" id="applyform" onsubmit="return check_form(this)" {S_FORM_ENCTYPE}>
 <!-- IF S_SHOW_FORUMCHOICE -->
-<div class="panel bg2" >
+<div class="post bg2" >
 <div class="inner"  >
 <span class="corners-top"><span></span></span>
-<fieldset class="fields3">		
+<fieldset class="fields2">		
 <dl>
-	<dt>{L_APPLY_PUBLICQUESTION}</dt>
-    		<dd>
-    			<input type="radio" name="publ" value="1"{PUBLIC_YES_CHECKED} />&nbsp;{L_APPLY_ACP_PUBLIC}&nbsp;
-    			<input type="radio" name="publ" value="0"{PUBLIC_NO_CHECKED} />&nbsp;{L_APPLY_ACP_PRIVATE}
-    			<span style="color:red">{L_MANDATORY}</span>
-    		</dd>
+	<dt><p><strong>{L_APPLY_PUBLICQUESTION}</strong></p></dt>
+    <dd>
+    	<input type="radio" name="publ" value="1"{PUBLIC_YES_CHECKED} />&nbsp;{L_APPLY_ACP_PUBLIC}&nbsp;
+    	<input type="radio" name="publ" value="0"{PUBLIC_NO_CHECKED} />&nbsp;{L_APPLY_ACP_PRIVATE}
+    	<span style="color:red">{L_MANDATORY}</span>
+    </dd>
 </dl>
 </fieldset>
 	
@@ -121,7 +121,7 @@
 
 <hr />
 
-<div class="post bg2" >
+<div class="post bg1" >
 <div class="inner"  >
 <span class="corners-top"><span></span></span>
 
