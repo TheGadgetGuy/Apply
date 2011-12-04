@@ -80,8 +80,10 @@ $lang = array_merge($lang, array(
 'APPLY_ACP_GUESTPOST_EXPLAIN' 	=> 'Si cette option est activée, n’oublies pas l’option "Activer la confirmation Anti-spam  pour invités" à "oui".' ,  
 
 /***** ACP Armory settings *****/
+'APPLY_ACP_TEMPLATESETTING'	=> 'Règlages gabarit',
+'APPLY_WELCOME'				=> 'Message d’acceuil',
+'APPLY_WELCOME_EXPLAIN'		=> 'bbcodes sont supportés.',
 'APPLY_ACP_CHARNAME' 		=> 'Nom de Caractère',
-'APPLY_ACP_ARMSETTING'		=> 'Règlages Armurerie',
 'APPLY_ACP_REALM' 		=> 'Royaume',
 'APPLY_ACP_REGION' 		=> 'Region',
 'APPLY_ACP_APPTEMPLATEUPD'	=> 'Mise à jour du modèle', 

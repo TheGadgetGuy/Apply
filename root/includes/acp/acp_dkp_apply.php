@@ -72,6 +72,19 @@ class acp_dkp_apply extends bbDkp_Admin
                  */
                if($armsettings)
                {
+               		$text = utf8_normalize_nfc(request_var('welcome_message', '', true));
+					
+					$uid = $bitfield = $options = ''; // will be modified by generate_text_for_storage
+					$allow_bbcode = $allow_urls = $allow_smilies = true;
+					generate_text_for_storage($text, $uid, $bitfield, $options, $allow_bbcode, $allow_urls, $allow_smilies);
+					$sql = 'UPDATE ' . APPHEADER_TABLE . " SET 
+							announcement_msg = '" . (string) $db->sql_escape($text) . "' , 
+							announcement_timestamp = ".  (int) time() ." , 
+							bbcode_bitfield = 	'".  (string) $bitfield ."' , 
+							bbcode_uid = 		'".  (string) $uid ."'  
+							WHERE announcement_id = 1";
+					$db->sql_query($sql);
+					
                     if (!isset($_POST['realm']) or request_var('realm', '') == '') 
                     {
                         trigger_error( $user->lang['APPLY_ACP_REALMBLANKWARN'] . adm_back_link($this->u_action), E_USER_WARNING);
@@ -236,8 +249,22 @@ class acp_dkp_apply extends bbDkp_Admin
                 /*
 				 * loading config
 				 */
-
+                
+				// get welcome msg
+				$sql = 'SELECT announcement_msg, bbcode_bitfield, bbcode_uid FROM ' . APPHEADER_TABLE;
+				$db->sql_query($sql);
+				$result = $db->sql_query($sql);
+				while ( $row = $db->sql_fetchrow($result) )
+				{
+					$text = $row['announcement_msg'];
+					$bitfield = $row['bbcode_bitfield'];
+					$uid = $row['bbcode_uid'];
+				}
+				$textarr = generate_text_for_edit($text, $uid, $bitfield, 7);
+				
+				
                 $template->assign_vars(array(
+                	'WELCOME_MESSAGE' 		=> $textarr['text'],
                 	'REALM'        			=> str_replace("+", " ", $config['bbdkp_apply_realm']), 
                 	'PUBLIC_YES_CHECKED' 	=> ( $config['bbdkp_apply_visibilitypref'] == '1' ) ? ' checked="checked"' : '',
     				'PUBLIC_NO_CHECKED'  	=> ( $config['bbdkp_apply_visibilitypref'] == '0' ) ? ' checked="checked"' : '', 

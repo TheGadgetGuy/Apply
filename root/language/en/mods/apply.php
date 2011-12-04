@@ -81,8 +81,10 @@ To help us with your application please answer the questions below. Enter your c
 'APPLY_ACP_GUESTPOST_EXPLAIN' 	=> 'If you set Guest posting On, don\'t forget to set "Enable visual confirmation for guest postings:" to "Yes".' ,  
 
 /***** ACP Armory settings *****/
+'APPLY_ACP_TEMPLATESETTING'	=> 'Template Settings',
+'APPLY_WELCOME'				=> 'Welcome message',
+'APPLY_WELCOME_EXPLAIN'		=> 'Message shown on top of Apply. supports bbcodes. ',
 'APPLY_ACP_CHARNAME' 		=> 'Character name',
-'APPLY_ACP_ARMSETTING'		=> 'Armory Settings',
 'APPLY_ACP_REALM' 			=> 'Realm',
 'APPLY_ACP_REGION' 			=> 'Region',
 'APPLY_ACP_APPTEMPLATEUPD'	=> 'Update Application template', 

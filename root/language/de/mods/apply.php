@@ -81,10 +81,11 @@ Um uns mit deiner Bewerbung zu untersützen, beantworte bitte die unten aufgefü
 'APPLY_ACP_GUESTPOST_EXPLAIN' 	=> 'Wenn die Option aktiviert ist, vergiss nicht die Option "Aktiviere visuelle Bestätigung für Gast Postings:" auf "Ja" zu setzen.' ,  
 
 /***** ACP Armory settings *****/
+'APPLY_ACP_TEMPLATESETTING'	=> 'Formular Einstellungen',
+'APPLY_WELCOME'			=> 'Einladungstext',
+'APPLY_WELCOME_EXPLAIN'		=> 'bbcodes werden umgesetzt. ',
 'APPLY_ACP_CHARNAME' 		=> 'Charakter Name',
-'APPLY_ACP_ARMSETTING'		=> 'Arsenal Einstellung',
-
-'APPLY_ACP_REALM' 			=> 'Realm',
+'APPLY_ACP_REALM' 		=> 'Realm',
 'APPLY_ACP_REGION' 			=> 'Region',
 'APPLY_ACP_APPTEMPLATEUPD'	=> 'Aktualisiere Bewerbungsbogen', 
 
