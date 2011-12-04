@@ -265,7 +265,7 @@ function make_apply_posting($post_data, $current_time, $candidate_name)
 	//$apply_post .= '[list]';
 	// complete with formatted questions and answers
 	$sql = "SELECT * FROM " . APPTEMPLATE_TABLE . ' ORDER BY qorder' ;
-	$result = $db->sql_query_limit($sql, 100, 2);
+	$result = $db->sql_query_limit($sql, 100, 0);
 	while ( $row = $db->sql_fetchrow($result) )
 	{
 		if ( isset($_POST['templatefield_' . $row['qorder']]) )
