@@ -676,12 +676,17 @@ function fill_application_form($form_key, $post_data, $submit, $error, $captcha)
 				type="text" name="templatefield_' . $row['qorder'] . '" 
 				size="40" maxlength="60" tabindex="' . $row['qorder'] . '" />';
 				break;
+				
 			case 'Textbox':
-				$type = '<textarea class="text" name="templatefield_' . $row['qorder'] . '" rows="3" cols="76" 
+				$onfocus =  ' onfocus="' . "this.value=''; setbg('#e5fff3');" . '"';
+				$onblur = ' onblur="setbg(' . "white)". '" ' ; 
+				
+				$type = '<textarea class="apply" '. $onfocus . $onblur. 'name="templatefield_' . $row['qorder'] . '" rows="3" cols="76" 
 				tabindex="' . $row['qorder'] . '" onselect="storeCaret(this);" 
 				onclick="storeCaret(this);" 
 				onkeyup="storeCaret(this);" ></textarea>';
 				break;
+				
 			case 'Selectbox':
 			    $type = '<select class="inputbox" name="templatefield_' . $row['qorder'] . '" tabindex="' . $row['qorder'] . '">';
 			    $type .= '<option value="">----------------</option>';
@@ -692,6 +697,7 @@ function fill_application_form($form_key, $post_data, $submit, $error, $captcha)
 			         }           
 			    $type .= '</select>';             
 				break;
+				
 			case 'Radiobuttons':
 			    $radio_option = explode(',', $row['options']);
 			  
@@ -701,6 +707,7 @@ function fill_application_form($form_key, $post_data, $submit, $error, $captcha)
 			       $type .='<input type="radio" name="templatefield_'. $row['qorder'] .'" value="'. $value .'"/>&nbsp;'. $value .'&nbsp;&nbsp;';
 			    }           
 				break;
+				
 			case 'Checkboxes':
 		        $check_option = explode(',', $row['options']);
 		         
@@ -831,10 +838,10 @@ function check_apply_form_access()
 	}
 	else
 	{
-		//user has no posting rights in the requested forum
+		//user has no posting rights in the requested forum (template lang from mcp)
 		if ($user->data['is_registered'])
 		{
-			trigger_error('USER_CANNOT_' . strtoupper($check_auth));
+			trigger_error('USER_CANNOT_POST');
 		}
 		
 		//it's a guest and theres no guest access for the forum so ask for a valid login

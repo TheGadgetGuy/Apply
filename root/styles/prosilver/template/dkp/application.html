@@ -1,5 +1,4 @@
 <!-- INCLUDE overall_header.html -->
-
 <h2>{L_APPLY_TITLE}</h2>
 <div class="panel bg1" >
 <div class="inner"  >
@@ -22,7 +21,7 @@
 <span class="corners-top"><span></span></span>
 <fieldset class="fields2">		
 <dl>
-	<dt><p><strong>{L_APPLY_PUBLICQUESTION}</strong></p></dt>
+	<dt><strong>{L_APPLY_PUBLICQUESTION}</strong></dt>
     <dd>
     	<input type="radio" name="publ" value="1"{PUBLIC_YES_CHECKED} />&nbsp;{L_APPLY_ACP_PUBLIC}&nbsp;
     	<input type="radio" name="publ" value="0"{PUBLIC_NO_CHECKED} />&nbsp;{L_APPLY_ACP_PRIVATE}
@@ -30,7 +29,6 @@
     </dd>
 </dl>
 </fieldset>
-	
 <span class="corners-bottom"><span></span></span>
 </div>
 </div>	
@@ -45,11 +43,11 @@
 
 
 <dl>
-	<dt><p><strong>{L_APPLY_ACP_CHARNAME}</strong></p></dt>
+	<dt><strong>{L_APPLY_ACP_CHARNAME}</strong></dt>
 	<dd><input type="text" name="candidate_name" size="25" maxlength="25" class="input" /> <span style="color:red">{L_MANDATORY}</span> </dd>
 </dl>
 <dl>
-	<dt><p><strong>{L_APPLY_ACP_REALM}</strong></p></dt>
+	<dt><strong>{L_APPLY_ACP_REALM}</strong></dt>
 	<dd><input type="text" name="candidate_realm" size="25" maxlength="25" class="input" /> <span style="color:red">{L_MANDATORY}</span> </dd>
 </dl>
 
@@ -57,7 +55,7 @@
 
 <!-- IF S_SHOW_GUILDSELECT -->
 <dl>
-	<dt><p><strong>{L_GUILD}:</strong></p></dt>
+	<dt><strong>{L_GUILD}:</strong></dt>
   	<dd>
   	  <div>
   	  <select id="candidate_guild_id" name="candidate_guild_id" class="input">
@@ -78,7 +76,7 @@
 </dl> 
  
 <dl>
-    <dt><p><strong>{L_GAME}:</strong></p></dt>
+    <dt><strong>{L_GAME}:</strong></dt>
   	 <dd>
   	  <div>
   		<select name="game_id" class="input" onchange="return GetClassRace(this.value)">
@@ -126,8 +124,7 @@
 <fieldset class="fields2">	
 <!-- BEGIN apptemplate -->
 <dl>
-	<dt><p><strong>{apptemplate.TITLE}</strong></p></dt>
-		
+	<dt><strong>{apptemplate.TITLE}</strong></dt>
 	<dd>{apptemplate.QUESTION}
 	<br/>{apptemplate.TYPE}{apptemplate.MANDATORY}</dd>
 </dl>
@@ -163,6 +160,7 @@
 
 <script type="text/javascript">
 // <![CDATA[
+
 function check_form()
 {
     if (document.applyform.member_name.value.length < 3)
