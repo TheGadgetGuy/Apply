@@ -280,9 +280,12 @@ $versions = array(
 		'config_add' => array(
 	         array('bbdkp_apply_gchoice', '0', true),
 			),	
+	),
+	
+	'1.3.3' => array(
+		// no db changes only php/html fixes
 		'custom' => array('applyupdater', 'bbdkp_caches'), 
 	),
-			
 
 );
 

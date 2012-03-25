@@ -115,7 +115,6 @@
 	<tr>
 	<th style="width:8%; text-align:left">{L_ID}</th>
     <th style="width:17%; text-align:left">{L_TYPE}</th>
-    <th style="width:7%; text-align:center">{L_ACTION}</th>
     <th style="width:25%; text-align:center">{L_ACP_APPLY_HEADER}</th>
     <th style="width:25%; text-align:center">{L_ACP_APPLY_QUESTION}</th>
     <th style="width:25%; text-align:center">{L_ACP_APPLY_CONTENTS}</th>
@@ -134,20 +133,27 @@
 		<!-- IF apptemplate.S_LAST_ROW and not NEXT_PAGE --> {ICON_MOVE_DOWN_DISABLED}
 		<!-- ELSE --><a href="{apptemplate.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a>
 		<!-- ENDIF -->
+		<a href="{apptemplate.U_DELETE}">{ICON_DELETE}</a>
 		</td>
 	    <td style="width:16%; text-align:left">
-	    <input type="checkbox" name="q_mandatory[{apptemplate.ID}]" value="True" {apptemplate.DISABLED} {apptemplate.CHECKED} />
-	    &nbsp;
+	    <input type="checkbox" name="q_mandatory[{apptemplate.ID}]" value="True" {apptemplate.DISABLED} {apptemplate.CHECKED} />&nbsp;
 	    	<select name="q_type[{apptemplate.ID}]" class="input" {apptemplate.DISABLED}>
 				<!-- BEGIN template_type -->
 				<option value="{template_type.TYPE}"{template_type.SELECTED}>{template_type.TYPE}</option>
 				<!-- END template_type -->
 			</select>
 		</td>
-	    <td style="width:7%; text-align:center"><input type="submit" name="q_delete[{apptemplate.ID}]" value="Delete" class="button1" {apptemplate.DISABLED} /></td>
-	    <td style="width:25%; text-align:center; overflow:hidden"><input style="width:100%" type="text" name="q_header[{apptemplate.ID}]" value="{apptemplate.HEADER}" {apptemplate.DISABLED} /></td>
-	    <td style="width:25%; text-align:center; overflow:hidden"><input style="width:100%" type="text" name="q_question[{apptemplate.ID}]" value="{apptemplate.QUESTION}"  {apptemplate.DISABLED} /></td>
-	    <td style="width:25%; text-align:center; overflow:hidden"><input style="width:95%" type="text" name="q_options[{apptemplate.ID}]" value="{apptemplate.OPTIONS}" {apptemplate.DISABLED} /></td>
+	    <td style="width:25%; text-align:center; overflow:ellipsis">
+	    <textarea style="width:100%; resize:none;" rows="2" cols="10"  
+	    class="text" name="q_header[{apptemplate.ID}]">{apptemplate.HEADER}</textarea></td>
+	    
+	    <td style="width:25%; text-align:center; overflow:ellipsis">
+	    <textarea style="width:100%; resize:none;" rows="2" cols="10"
+	    class="text" name="q_question[{apptemplate.ID}]" >{apptemplate.QUESTION}</textarea></td>
+	    
+	    <td style="width:25%; text-align:center; overflow:ellipsis">
+	    <textarea style="width:95%; resize:none;" rows="2" cols="10"
+	    class="text" name="q_options[{apptemplate.ID}]" >{apptemplate.OPTIONS}</textarea></td>
 	  </tr>
 	  <!-- END apptemplate -->
 	  </tbody>
@@ -176,8 +182,7 @@
   <tbody>
 	  <tr class="row1">
 	    <td>
-	    	<input type="checkbox" name="app_add_mandatory" value="True" />
-	    	&nbsp;
+	    	<input type="checkbox" name="app_add_mandatory" value="True" />&nbsp;
 	    	<select name="app_add_type" class="input" id="app_add_type">
 				<option value="Inputbox">{L_APPLY_ACP_INPUTBOX}</option>
 				<option value="Textbox">{L_APPLY_ACP_TXTBOX}</option>
@@ -186,9 +191,19 @@
                 <option value="Checkboxes">{L_APPLY_ACP_CHECKBOX}</option>
          	</select>
 	    </td>
-	    <td><input style="width:100%"  type="text" name="app_add_title" value="{L_ACP_APPLY_HEADER}" onclick="this.value ='';" onblur="if(this.value == '') { this.value = '{L_ACP_APPLY_HEADER}' };" /></td>
-	    <td><input style="width:100%" type="text" name="app_add_question" value="{L_ACP_APPLY_QUESTION}" onclick="this.value ='';" onblur="if(this.value == '') { this.value = '{L_ACP_APPLY_QUESTION}' };" /></td>
-	    <td><input style="width:95%" type="text" name="app_add_options" value="" /></td>
+	    
+	    <td>
+	      <textarea style="width:95%; resize:none;" rows="2" cols="10"
+	    	class="text" name="app_add_title" onclick="this.value ='';" onblur="if(this.value == '') { this.value = '{L_ACP_APPLY_HEADER}' };" >{L_ACP_APPLY_HEADER}</textarea>
+	    </td>
+	    <td>
+	      <textarea style="width:95%; resize:none;" rows="2" cols="10"
+	    	class="text" name="app_add_question" onclick="this.value ='';" onblur="if(this.value == '') { this.value = '{L_ACP_APPLY_QUESTION}' };" >{L_ACP_APPLY_QUESTION}</textarea>
+	    </td>
+	    <td>
+	   	      <textarea style="width:95%; resize:none;" rows="2" cols="10"
+	    	class="text" name="app_add_options" ></textarea>
+	    </td>
 	    
 	  </tr>
 	  </tbody>

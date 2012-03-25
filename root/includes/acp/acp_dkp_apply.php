@@ -25,17 +25,19 @@ if (! defined('EMED_BBDKP'))
 
 class acp_dkp_apply extends bbDkp_Admin
 {
-   var $u_action;
+   public $u_action;
+   
    function main($id, $mode)
    {
-      global $db, $user, $auth, $template,  $sid, $cache;
+      global $db, $user, $template, $cache;
       global $config, $phpbb_root_path, $phpbb_admin_path, $phpEx; 
+      
       $user->add_lang(array('common'));
 	  $user->add_lang(array('mods/dkp_admin'));
 	  $user->add_lang(array('mods/dkp_common'));
 	  $user->add_lang(array('mods/apply'));
 	  
-	  $form_key = md5(uniqid(rand(), true));
+	  $form_key = 'dkp_apply';
 	  add_form_key($form_key);
 	  
 	  switch($mode)
@@ -52,13 +54,19 @@ class acp_dkp_apply extends bbDkp_Admin
                 $addnew = (isset($_POST['add'])) ? true : false;
 				$colorsettings = (isset($_POST['updatecolor'])) ? true : false;
 				$move_up = (isset($_GET['move_up'])) ? true : false;
-				$move_down = (isset($_GET['move_down'])) ? true : false;  
-
+				$move_down = (isset($_GET['move_down'])) ? true : false;
+				$delete = (isset($_GET['delete'])) ? true : false;  
+				
+				
 				/*
                  * privacy settings handler
                  */
                if($prisettings)
                {
+               		if (!check_form_key($form_key))
+					{
+						trigger_error($user->lang['FORM_INVALID'] . adm_back_link($this->u_action), E_USER_WARNING);
+					}
                     set_config('bbdkp_apply_forum_id_public', request_var('app_id_pub', 0), true );	
                     set_config('bbdkp_apply_forum_id_private', request_var('app_id_pri', 0), true );	
                     set_config('bbdkp_apply_visibilitypref', request_var('priv', 0), true );
@@ -72,8 +80,11 @@ class acp_dkp_apply extends bbDkp_Admin
                  */
                if($armsettings)
                {
+                    if (!check_form_key($form_key))
+					{
+						trigger_error($user->lang['FORM_INVALID'] . adm_back_link($this->u_action), E_USER_WARNING);
+					}               	
                		$text = utf8_normalize_nfc(request_var('welcome_message', '', true));
-					
 					$uid = $bitfield = $options = ''; // will be modified by generate_text_for_storage
 					$allow_bbcode = $allow_urls = $allow_smilies = true;
 					generate_text_for_storage($text, $uid, $bitfield, $options, $allow_bbcode, $allow_urls, $allow_smilies);
@@ -95,12 +106,18 @@ class acp_dkp_apply extends bbDkp_Admin
                     $cache->destroy('config');
                     trigger_error($user->lang['APPLY_ACP_SETTINGSAVED'] . $link);
                }
-                               
+               
+               $qid = request_var('id', 0);
       		   //user pressed quesion order arrows
                if ($move_down or $move_up)
 				{
+					if (!check_form_key($form_key))
+					{
+						trigger_error($user->lang['FORM_INVALID'] . adm_back_link($this->u_action), E_USER_WARNING);
+					}               	
+					
 					//find order of clicked line
-					$sql = 'SELECT qorder FROM ' . APPTEMPLATE_TABLE . ' where id =  ' . request_var('id', 0); 
+					$sql = 'SELECT qorder FROM ' . APPTEMPLATE_TABLE . ' where id =  ' . $qid; 
 					$result = $db->sql_query($sql);
 					$current_order = (int) $db->sql_fetchfield('qorder', 0, $result);
 					$db->sql_freeresult($result);
@@ -109,7 +126,7 @@ class acp_dkp_apply extends bbDkp_Admin
 					{
 						$new_order = $current_order + 1; 
 					}
-					else 
+					elseif($move_up) 
 					{
 						$new_order = $current_order - 1;
 					}
@@ -119,15 +136,32 @@ class acp_dkp_apply extends bbDkp_Admin
 					$db->sql_query($sql);
 					
 					// now increase old order
-					$sql = 'UPDATE  ' . APPTEMPLATE_TABLE . ' set qorder = ' . $new_order . ' where id = ' . request_var('id', 0); 
+					$sql = 'UPDATE  ' . APPTEMPLATE_TABLE . ' set qorder = ' . $new_order . ' where id = ' . $qid; 
 					$db->sql_query($sql);
 					
 					meta_refresh(1, $this->u_action);			
 				}
-				
+
+                      
+               if($delete)
+               {
+					if (!check_form_key($form_key))
+					{
+						trigger_error($user->lang['FORM_INVALID'] . adm_back_link($this->u_action), E_USER_WARNING);
+					}        
+					//delete question handler
+					$sql = "DELETE FROM " . APPTEMPLATE_TABLE . " WHERE id = '" . $qid . "'";
+		            $db->sql_query($sql);
+		            trigger_error("Question " . $qid . " deleted" . $link, E_USER_WARNING);
+               }
+               				
 				//user pressed update questions
 				if ($update) 
                 {
+					if (!check_form_key($form_key))
+					{
+						trigger_error($user->lang['FORM_INVALID'] . adm_back_link($this->u_action), E_USER_WARNING);
+					}        
                 	
 					$q_types = utf8_normalize_nfc(request_var('q_type', array( 0 => ''), true));   
 					$q_headers = utf8_normalize_nfc(request_var('q_header', array( 0 => ''), true));
@@ -163,9 +197,13 @@ class acp_dkp_apply extends bbDkp_Admin
                     trigger_error( $user->lang['APPLY_ACP_QUESTUPD']  . $link);    
                 }
                 
+
                 if ($addnew) 
                 {
-                	
+					if (!check_form_key($form_key))
+					{
+						trigger_error($user->lang['FORM_INVALID'] . adm_back_link($this->u_action), E_USER_WARNING);
+					}        
                     /* You can not have two of realms or character names. */
                     if (request_var('app_add_question','') == $user->lang['APPLY_ACP_REALM'] || 
                     	request_var('app_add_question','') == $user->lang['APPLY_ACP_CHARNAME']) 
@@ -198,7 +236,7 @@ class acp_dkp_apply extends bbDkp_Admin
                     }
                     else 
                     {
-                        trigger_error( $user->lang['APPLY_ACP_QUESTNADD']  .  $link);    
+                        trigger_error( $user->lang['APPLY_ACP_QUESTNADD']  .  $link, E_USER_WARNING);    
                     }
                         
                     
@@ -209,6 +247,10 @@ class acp_dkp_apply extends bbDkp_Admin
                  */
                if($colorsettings)
                {
+					if (!check_form_key($form_key))
+					{
+						trigger_error($user->lang['FORM_INVALID'] . adm_back_link($this->u_action), E_USER_WARNING);
+					}        
 					$colorid = request_var('app_textcolors', ''); 
 					$newcolor = request_var('applyquestioncolor', '');
 					switch 	($colorid)
@@ -225,26 +267,6 @@ class acp_dkp_apply extends bbDkp_Admin
 					}
                     $cache->destroy('config');
                }
-                
-                /* delete question handler */
-                $sql = "SELECT * FROM " . APPTEMPLATE_TABLE . ' ORDER BY qorder';
-                $result = $db->sql_query($sql);
-                while ($row = $db->sql_fetchrow($result)) 
-                {
-                	$arr_del = utf8_normalize_nfc(request_var('q_delete', array( 0 => ''), true));
-                	foreach($arr_del as $key => $value)
-                	{
-                		if($key == $row['qorder'])
-                		{
-	                        $sql = "DELETE FROM " . APPTEMPLATE_TABLE . " WHERE qorder = '" . $row['qorder'] . "'";
-	                        $db->sql_query($sql);
-	                        trigger_error("Question " . $row['header'] . " deleted" . $link, E_USER_WARNING);
-                		}
-                	}
-                	
-                }
-                unset($row); 
-                $db->sql_freeresult($result);
 
                 
                 /*
@@ -323,12 +345,6 @@ class acp_dkp_apply extends bbDkp_Admin
                 $result = $db->sql_query($sql);
                 while ($row = $db->sql_fetchrow($result)) 
                 {
-                    $disabled = '';
-                    if ($row['header'] == $user->lang['APPLY_ACP_CHARNAME'] or $row['header'] == $user->lang['APPLY_ACP_REALM']) 
-                    {
-                        $disabled = 'disabled="disabled"';
-                    }
-                    
                     $checked = '';
                     if ($row['mandatory'] == 'True') 
                     {
@@ -339,13 +355,13 @@ class acp_dkp_apply extends bbDkp_Admin
                     	'QORDER'         => $row['qorder'] , 
                     	'HEADER'      	 => $row['header'] ,
                     	'QUESTION'       => $row['question'] , 
-                    	'DISABLED'       => $disabled , 
                     	'MANDATORY'      => $row['mandatory'] , 
                         'OPTIONS'        => $row['options'] ,
                     	'CHECKED'        => $checked,
                     	'ID'			 => $row['id'] ,
 	                    'U_MOVE_UP'		 => append_sid("{$phpbb_admin_path}index.$phpEx", "i=dkp_apply&amp;mode=apply_settings&amp;move_up=1&amp;id={$row['id']}"), 
 						'U_MOVE_DOWN'	 => append_sid("{$phpbb_admin_path}index.$phpEx", "i=dkp_apply&amp;mode=apply_settings&amp;move_down=1&amp;id={$row['id']}"),
+                    	'U_DELETE'		 => append_sid("{$phpbb_admin_path}index.$phpEx", "i=dkp_apply&amp;mode=apply_settings&amp;delete=1&amp;id={$row['id']}"),
                       ));
                     
                     $type = array('Inputbox' , 'Textbox', 'Selectbox', 'Radiobuttons', 'Checkboxes');
@@ -354,7 +370,7 @@ class acp_dkp_apply extends bbDkp_Admin
                         $template->assign_block_vars('apptemplate.template_type', array(
                         	'TYPE' => $t_value , 
                         	'SELECTED' => ($t_value == $row['type']) ? ' selected="selected"' : '' , 
-                        	'DISABLED' => $disabled));
+                        	));
                     }
                 }
                 $db->sql_freeresult($result);
