@@ -6,7 +6,7 @@ Recruitment form plugin for bbDKP
 
 ## CURRENT RELEASE
 
-v1.3.0 
+v1.3.3 (non-WoW)
 
 ## COMMUNITY
 
@@ -22,3 +22,8 @@ Find support and more on [bbDKP.com](http://www.bbdkp.com)!
 ## LICENSE
 
 [GNU General Public License v2](http://opensource.org/licenses/gpl-2.0.php)
+
+## TODO
+
+* Wow version
+* Standalone version
