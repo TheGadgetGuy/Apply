@@ -127,13 +127,11 @@
 	  <!-- ELSE -->
 	  <tr class="row2">
 	  <!-- ENDIF -->
-	    <td style="width:5%; text-align:left">
-	    
-	    <!-- IF apptemplate.QORDER <= 1 and not PREVIOUS_PAGE -->{ICON_MOVE_UP_DISABLED}<!-- ELSE --><a href="{apptemplate.U_MOVE_UP}">{ICON_MOVE_UP}</a><!-- ENDIF -->&nbsp;
+	    <td style="width:5%; text-align:center">
+	    <!-- IF apptemplate.QORDER <= 1 and not PREVIOUS_PAGE -->{ICON_MOVE_UP_DISABLED}<!-- ELSE --><a href="{apptemplate.U_MOVE_UP}">{ICON_MOVE_UP}</a><!-- ENDIF -->
 		<!-- IF apptemplate.S_LAST_ROW and not NEXT_PAGE --> {ICON_MOVE_DOWN_DISABLED}
 		<!-- ELSE --><a href="{apptemplate.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a>
-		<!-- ENDIF -->
-		<a href="{apptemplate.U_DELETE}">{ICON_DELETE}</a>
+		<!-- ENDIF --><a href="{apptemplate.U_DELETE}">{ICON_DELETE}</a>
 		</td>
 	    <td style="width:16%; text-align:left">
 	    <input type="checkbox" name="q_mandatory[{apptemplate.ID}]" value="True" {apptemplate.DISABLED} {apptemplate.CHECKED} />&nbsp;

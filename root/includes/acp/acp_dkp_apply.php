@@ -108,14 +108,9 @@ class acp_dkp_apply extends bbDkp_Admin
                }
                
                $qid = request_var('id', 0);
-      		   //user pressed quesion order arrows
+      		   //user pressed question order arrows
                if ($move_down or $move_up)
 				{
-					if (!check_form_key($form_key))
-					{
-						trigger_error($user->lang['FORM_INVALID'] . adm_back_link($this->u_action), E_USER_WARNING);
-					}               	
-					
 					//find order of clicked line
 					$sql = 'SELECT qorder FROM ' . APPTEMPLATE_TABLE . ' where id =  ' . $qid; 
 					$result = $db->sql_query($sql);
@@ -145,10 +140,6 @@ class acp_dkp_apply extends bbDkp_Admin
                       
                if($delete)
                {
-					if (!check_form_key($form_key))
-					{
-						trigger_error($user->lang['FORM_INVALID'] . adm_back_link($this->u_action), E_USER_WARNING);
-					}        
 					//delete question handler
 					$sql = "DELETE FROM " . APPTEMPLATE_TABLE . " WHERE id = '" . $qid . "'";
 		            $db->sql_query($sql);
