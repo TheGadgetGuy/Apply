@@ -287,6 +287,11 @@ $versions = array(
 		'custom' => array('applyupdater', 'bbdkp_caches'), 
 	),
 
+	'1.3.3.1' => array(
+		// no db changes only php/html fixes
+		'custom' => array('applyupdater', 'bbdkp_caches'), 
+	),
+
 );
 
 // We include the UMIF Auto file and everything else will be handled automatically.
